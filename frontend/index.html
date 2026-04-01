@@ -20,6 +20,7 @@
   <!-- MapLibre GL JS via CDN -->
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
   <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf/turf.min.js"></script>
 
   <style>
     /* ── Reset ─────────────────────────────────────── */
@@ -327,11 +328,34 @@
       document.getElementById('results').style.display = 'none';
 
       map.flyTo({ center: [lon, lat], zoom: 15 });
+      // set map field of view to the selected location +/- 0.0072 degrees (roughly 800m) to give some context around the point
+      map.fitBounds([[lon - 0.0072, lat - 0.0072], [lon + 0.0072, lat + 0.0072]], { padding: 20 });
+      // Draw circle with 800m radius around the selected point to represent the 20-minute walking distance
 
       if (marker) marker.remove();
+
       marker = new maplibregl.Marker({ color: '#c0392b' })
         .setLngLat([lon, lat])
         .addTo(map);
+      
+      // Use Turf.js to create a GeoJSON circle with an 800m radius around the selected point
+      const circle = turf.circle([lon, lat], 800, { steps: 64, units: 'meters' });
+
+      map.addSource('radius-circle', {
+        type: 'geojson',
+        data: circle
+      });
+
+      map.addLayer({
+        id: 'radius-circle-fill',
+        type: 'fill',
+        source: 'radius-circle',
+        paint: {
+          'fill-color': '#4A90E2',
+          'fill-opacity': 0.15
+        }
+      });
+
 
     }
   </script>

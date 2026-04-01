@@ -15,6 +15,18 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+// Mapping of full state names to their abbreviations for cleaner display in search results
+const stateMap = {
+  'Victoria': 'VIC',
+  'New South Wales': 'NSW',
+  'Queensland': 'QLD',
+  'Western Australia': 'WA',
+  'South Australia': 'SA',
+  'Tasmania': 'TAS',
+  'Australian Capital Territory': 'ACT',
+  'Northern Territory': 'NT'
+};
+
 // Mount CORS middleware and serve static files from the frontend directory
 // so we can load our React app when we visit the root URL.
 app.use(cors());
@@ -65,9 +77,14 @@ app.get('/api/search', async (req, res) => {
     const mapped = response.data.features.map(f => {
       const p = f.properties;
       // Compile a nice display name from available data pieces
-      const nameParts = [p.housenumber, p.street, p.district, p.state, p.postcode].filter(Boolean);
-      // TODO: Capitalise district (suburb)
-      // TODO: Abbreviate state (e.g., "Victoria" → "VIC")
+      const nameParts = [
+        p.housenumber, 
+        p.street, 
+        p.district.toUpperCase(), 
+        stateMap[p.state] || p.state, 
+        p.postcode
+      ].filter(Boolean);
+
       // Remove duplicates (e.g., "Melbourne, Melbourne")
       const uniqueParts = [...new Set(nameParts)];
       
