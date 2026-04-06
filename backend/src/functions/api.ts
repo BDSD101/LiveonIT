@@ -13,7 +13,8 @@ function getPool(): Pool {
       database: process.env.DB_NAME || 'app_db',
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      ssl: { rejectUnauthorized: false },
+      // ssl: { rejectUnauthorized: false },
+      ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
       max: 1,
       idleTimeoutMillis: 120000,
       connectionTimeoutMillis: 5000,
@@ -33,7 +34,8 @@ async function runMigrations(): Promise<void> {
     database: 'postgres',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
+    ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
   });
 
   await adminClient.connect();
@@ -55,7 +57,9 @@ async function runMigrations(): Promise<void> {
     database: 'app_db',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
+    ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
+
   });
 
   await appClient.connect();

@@ -12,10 +12,13 @@ const event = {
 } as any;
 
 async function run() {
-	// require('dotenv').config(); -- imported at the top to ensure it's loaded before accessing environment variables
+	// require('dotenv').config(); // imported at the top to ensure it's loaded before accessing environment variables
 	const result = await handler(event);
 	console.log('Status:', result.statusCode);
 	console.log('Body:', JSON.parse(result.body as string));
 }
 
-run().catch(console.error);
+// run().catch(console.error);
+run().catch((err) => {
+	console.error('Error:', err.message);
+});

@@ -8,7 +8,8 @@ export async function runMigrations(): Promise<void> {
     database: 'postgres',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
+    ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
   });
 
   await adminClient.connect();
@@ -31,7 +32,8 @@ export async function runMigrations(): Promise<void> {
     database: 'app_db',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
+    ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
   });
 
   await appClient.connect();

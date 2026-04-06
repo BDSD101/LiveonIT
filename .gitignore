@@ -1,4 +1,5 @@
 node_modules/
 .DS_Store
 .env
+backend/.env
 npm-debug.log
