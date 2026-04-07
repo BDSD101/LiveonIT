@@ -292,7 +292,12 @@
       list.innerHTML = '<li><span style="color:var(--text-muted)">Searching...</span></li>';
 
       try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+        // Chris's original line
+        // const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+        // local testing which points to aws api gateway endpoint
+        const res = await fetch(`https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod/api/search?q=${encodeURIComponent(q)}`);
+        // local testing which points a modified lamda function (and different endpoint)
+        // const res = await fetch(`https://9yus777fvh.execute-api.ap-southeast-2.amazonaws.com/prod/api/search?q=${encodeURIComponent(q)}`);
         const data = await res.json();
 
         currentResults = data;

@@ -1,6 +1,18 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { Pool, Client } from 'pg';
 
+// ─── State Abbreviations Map ───────────────────────────────────────────────
+// const stateMap = {
+//   'Victoria': 'VIC',
+//   'New South Wales': 'NSW',
+//   'Queensland': 'QLD',
+//   'Western Australia': 'WA',
+//   'South Australia': 'SA',
+//   'Tasmania': 'TAS',
+//   'Australian Capital Territory': 'ACT',
+//   'Northern Territory': 'NT'
+// };
+
 // ─── DB Pool ────────────────────────────────────────────────────────────────
 
 let pool: Pool | null = null;
@@ -13,7 +25,8 @@ function getPool(): Pool {
       database: process.env.DB_NAME || 'app_db',
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      ssl: { rejectUnauthorized: false },
+      // ssl: { rejectUnauthorized: false },
+      ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
       max: 1,
       idleTimeoutMillis: 120000,
       connectionTimeoutMillis: 5000,
@@ -33,7 +46,8 @@ async function runMigrations(): Promise<void> {
     database: 'postgres',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
+    ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
   });
 
   await adminClient.connect();
@@ -55,7 +69,9 @@ async function runMigrations(): Promise<void> {
     database: 'app_db',
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    ssl: { rejectUnauthorized: false },
+    // ssl: { rejectUnauthorized: false },
+    ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
+
   });
 
   await appClient.connect();
@@ -159,6 +175,15 @@ export const handler = async (
       const mapped = data.features.map((f: any) => {
         const p = f.properties;
         const nameParts = [p.name, p.street, p.city, p.state].filter(Boolean);
+      //   const nameParts = [
+      //   p.housenumber, 
+      //   p.street, 
+      //   p.district?.toUpperCase(), 
+      //   // stateMap[p.state] || p.state, 
+      //   p.state?.toUpperCase(),
+      //   p.postcode
+      // ].filter(Boolean);
+
         const uniqueParts = [...new Set(nameParts)];
         return {
           display_name: uniqueParts.join(', '),

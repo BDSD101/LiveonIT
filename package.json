@@ -10,13 +10,5 @@
     "axios": "1.14.0",
     "cors": "^2.8.5",
     "express": "^4.18.2"
-  },
-  "scripts": {
-	  "build": "./build.sh",
-	  "local": "ts-node src/local.ts",
-	  "local:users": "PATH_OVERRIDE=/users ts-node src/local.ts",
-	  "local:search": "PATH_OVERRIDE=/api/search QUERY='{\"q\":\"melbourne\"}' ts-node src/local.ts",
-	  "local:post": "METHOD=POST PATH_OVERRIDE=/users BODY='{\"email\":\"test@test.com\"}' ts-node src/local.ts"
   }
-
 }

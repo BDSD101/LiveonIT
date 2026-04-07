@@ -10,7 +10,8 @@ export function getPool(): Pool {
       database: process.env.DB_NAME || 'app_db',
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      ssl: { rejectUnauthorized: false },
+      // ssl: { rejectUnauthorized: false },
+      ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
       max: 1,            // Lambda: keep pool size at 1
       idleTimeoutMillis: 120000,
       connectionTimeoutMillis: 5000,
