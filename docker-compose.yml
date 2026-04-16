@@ -22,16 +22,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - ./victoria-260414.osm.pbf:/data.osm.pbf
-    environment:
-      PGPASSWORD: password
     command: >
-      sh -c " export DEBIAN_FRONTEND=noninteractive && apt-get update &&  apt-get install -y tzdata osm2pgsql postgresql-client &&  echo 'Checking if database is already populated...' &&  if ! psql -h db -U postgres -d app_db -c 'SELECT 1 FROM planet_osm_point LIMIT 1' 2>/dev/null; then
+      sh -c " export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y tzdata osm2pgsql postgresql-client wget ca-certificates && echo 'Checking if database is already populated...' && if ! psql -h db -U postgres -d app_db -c 'SELECT 1 FROM planet_osm_point LIMIT 1' 2>/dev/null; then
+        echo 'Downloading OSM data for Victoria from Geofabrik...' &&
+        wget -q -O /tmp/data.osm.pbf https://download.geofabrik.de/australia-oceania/australia/victoria-latest.osm.pbf &&
         echo 'Enabling hstore extension...' &&
         psql -h db -U postgres -d app_db -c 'CREATE EXTENSION IF NOT EXISTS hstore;' &&
         echo 'Importing OSM data using osm2pgsql. This will take a few minutes...' &&
-        osm2pgsql -d app_db -H db -U postgres -c --hstore /data.osm.pbf &&
+        osm2pgsql -d app_db -H db -U postgres -c --hstore /tmp/data.osm.pbf &&
+        rm /tmp/data.osm.pbf &&
         echo 'Import completed successfully!'
       else
         echo 'OSM data already exists in the database. Skipping import.'
