@@ -204,6 +204,40 @@ export const handler = async (
       });
 
       try {
+        // const result = await osmPool.query(`
+        //   SELECT
+        //     osm_id,
+        //     name,
+        //     CASE
+        //       WHEN shop = 'supermarket'            THEN 'supermarket'
+        //       WHEN amenity = 'pharmacy'            THEN 'pharmacy'
+        //       WHEN amenity IN ('clinic','doctors') THEN 'clinic'
+        //       WHEN highway = 'bus_stop'            THEN 'bus_stop'
+        //       WHEN railway = 'station'             THEN 'train_station'
+        //       WHEN amenity = 'post_office'         THEN 'post_office'
+        //     END AS category,
+        //     ST_X(ST_Transform(way, 4326)) AS lon,
+        //     ST_Y(ST_Transform(way, 4326)) AS lat
+        //   FROM planet_osm_point
+        //   WHERE ST_DWithin(
+        //     way::geography,
+        //     ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography,
+        //     800
+        //   )
+        //   AND (
+        //     shop = 'supermarket' OR
+        //     amenity IN ('pharmacy', 'clinic', 'doctors', 'post_office') OR
+        //     highway = 'bus_stop' OR
+        //     railway = 'station'
+        //   )
+        //   AND name IS NOT NULL
+        //   ORDER BY ST_Distance(
+        //     way::geography,
+        //     ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography
+        //   )
+        //   LIMIT 30;
+        // `, [lon, lat]);
+
         const result = await osmPool.query(`
           SELECT
             osm_id,
@@ -220,7 +254,7 @@ export const handler = async (
             ST_Y(ST_Transform(way, 4326)) AS lat
           FROM planet_osm_point
           WHERE ST_DWithin(
-            way::geography,
+            ST_Transform(way, 4326)::geography,
             ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography,
             800
           )
@@ -232,7 +266,7 @@ export const handler = async (
           )
           AND name IS NOT NULL
           ORDER BY ST_Distance(
-            way::geography,
+            ST_Transform(way, 4326)::geography,
             ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography
           )
           LIMIT 30;

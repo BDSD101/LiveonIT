@@ -554,7 +554,7 @@ async function loadNearbyServices(lat, lon) {
     // AWS Hosted PostGIS for OSM data
     try {
         // Fetch nearby services from our own backend (backed by Aurora PostGIS)
-        const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}`, { signal });
+        const res = await fetch(`http://localhost:4000/api/nearby-services?lat=${lat}&lon=${lon}`, { signal });
         const rows = await res.json();
 
         // Create a Turf.js point for the user's address — used to calculate straight-line distances to each service
