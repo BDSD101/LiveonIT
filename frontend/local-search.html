@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>20-Minute Map | Local Search</title>
-  
+
   <!-- Tailwind CSS v4 -->
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  
+
   <!-- React & Babel -->
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Public+Sans:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Public+Sans:wght@400;600;700;900&display=swap"
+    rel="stylesheet">
 
   <!-- MapLibre & Turf -->
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
@@ -38,16 +41,48 @@
     }
   </style>
   <style>
-    body { background-color: #F8F9FA; color: #1A1A2E; font-family: 'Public Sans', sans-serif; }
-    h1, h2, h3, h4, h5, h6 { font-family: 'Public Sans', sans-serif; }
-    .font-label { font-family: 'Inter', sans-serif; }
-    .map-height { height: 600px; }
-    .custom-scroll::-webkit-scrollbar { width: 6px; }
-    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
-    .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    body {
+      background-color: #F8F9FA;
+      color: #1A1A2E;
+      font-family: 'Public Sans', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Public Sans', sans-serif;
+    }
+
+    .font-label {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .map-height {
+      height: 600px;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
   </style>
 </head>
+
 <body>
   <div id="root"></div>
 
@@ -69,7 +104,7 @@
       const [toggles, setToggles] = useState({
         'Supermarket': true, 'GP Service': true, 'Pharmacy': true, 'Post Office': true, 'Transport': true
       });
-      
+
       const mapRef = useRef(null);
       const markerRef = useRef(null);
       const serviceMarkers = useRef([]);
@@ -96,7 +131,7 @@
           center: [144.9631, -37.8136],
           zoom: 12
         });
-        
+
         mapRef.current.on('load', () => {
           lucide.createIcons();
           mapRef.current.resize();
@@ -135,18 +170,18 @@
         // Remove Layers and Sources
         const style = mapRef.current.getStyle();
         if (style && style.layers) {
-            style.layers.forEach(layer => {
-                if (layer.id.startsWith('path-') || layer.id === 'radius-circle-fill') {
-                    mapRef.current.removeLayer(layer.id);
-                }
-            });
+          style.layers.forEach(layer => {
+            if (layer.id.startsWith('path-') || layer.id === 'radius-circle-fill') {
+              mapRef.current.removeLayer(layer.id);
+            }
+          });
         }
         if (style && style.sources) {
-            Object.keys(style.sources).forEach(sourceId => {
-                if (sourceId.endsWith('-source') || sourceId === 'radius-circle') {
-                    mapRef.current.removeSource(sourceId);
-                }
-            });
+          Object.keys(style.sources).forEach(sourceId => {
+            if (sourceId.endsWith('-source') || sourceId === 'radius-circle') {
+              mapRef.current.removeSource(sourceId);
+            }
+          });
         }
       };
 
@@ -154,7 +189,7 @@
         const lat = parseFloat(item.lat), lon = parseFloat(item.lon);
         setQuery(item.display_name);
         setResults([]);
-        
+
         mapRef.current.flyTo({ center: [lon, lat], zoom: 14.5 });
 
         // Add Main Marker
@@ -174,13 +209,13 @@
 
           data.forEach((s, i) => {
             const id = `path-${i}`;
-            
+
             // Marker
             const m = new maplibregl.Marker({ color: s.color, scale: 0.7 })
               .setLngLat([s.lon, s.lat])
               .setPopup(new maplibregl.Popup().setHTML(`<strong>${s.category}</strong><br>${s.name || ''}`))
               .addTo(mapRef.current);
-            
+
             if (!toggles[s.category]) m.getElement().style.display = 'none';
             serviceMarkers.current.push({ category: s.category, marker: m });
 
@@ -197,18 +232,18 @@
         const geojson = { type: 'Feature', geometry: { type: 'LineString', coordinates: [coordinates[0]] } };
 
         if (!mapRef.current.getSource(sourceId)) {
-            mapRef.current.addSource(sourceId, { type: 'geojson', data: geojson });
-            mapRef.current.addLayer({
-                id: id, type: 'line', source: sourceId,
-                layout: { 'line-cap': 'round', 'line-join': 'round', 'visibility': toggles[category] ? 'visible' : 'none' },
-                paint: { 'line-color': color, 'line-width': 4, 'line-opacity': 0.7 }
-            });
+          mapRef.current.addSource(sourceId, { type: 'geojson', data: geojson });
+          mapRef.current.addLayer({
+            id: id, type: 'line', source: sourceId,
+            layout: { 'line-cap': 'round', 'line-join': 'round', 'visibility': toggles[category] ? 'visible' : 'none' },
+            paint: { 'line-color': color, 'line-width': 4, 'line-opacity': 0.7 }
+          });
         }
 
         let progress = 0;
         const duration = 2000;
         const startTime = performance.now();
-        
+
         function frame(now) {
           const elapsed = now - startTime;
           progress = Math.min(elapsed / duration, 1);
@@ -216,19 +251,19 @@
           const exactIdx = progress * pathLen;
           const segmentIdx = Math.floor(exactIdx);
           const segmentProgress = exactIdx - segmentIdx;
-          
+
           const curCoords = [];
-          for(let j=0; j<=segmentIdx; j++) curCoords.push(coordinates[j]);
+          for (let j = 0; j <= segmentIdx; j++) curCoords.push(coordinates[j]);
           if (segmentIdx < pathLen) {
             const start = coordinates[segmentIdx], end = coordinates[segmentIdx + 1];
             curCoords.push([start[0] + (end[0] - start[0]) * segmentProgress, start[1] + (end[1] - start[1]) * segmentProgress]);
           }
-          
+
           if (mapRef.current && mapRef.current.getSource(sourceId)) {
             mapRef.current.getSource(sourceId).setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: curCoords } });
             if (progress < 1) {
-                const animId = requestAnimationFrame(frame);
-                activeAnimations.current.push(animId);
+              const animId = requestAnimationFrame(frame);
+              activeAnimations.current.push(animId);
             }
           }
         }
@@ -239,11 +274,11 @@
       const toggleService = (category) => {
         const newState = !toggles[category];
         setToggles(prev => ({ ...prev, [category]: newState }));
-        
+
         serviceMarkers.current.forEach(item => {
           if (item.category === category) item.marker.getElement().style.display = newState ? 'block' : 'none';
         });
-        
+
         services.forEach((s, i) => {
           if (s.category === category && mapRef.current.getLayer(`path-${i}`)) {
             mapRef.current.setLayoutProperty(`path-${i}`, 'visibility', newState ? 'visible' : 'none');
@@ -262,57 +297,56 @@
               <h1 className="text-white text-xl font-bold tracking-tight">20-Minute Map</h1>
             </div>
             <div className="hidden md:block text-white/80 text-xs font-semibold tracking-widest font-label uppercase">
-                Melbourne • PostGIS Local
             </div>
           </header>
 
           <main className="flex-1 max-w-7xl w-full mx-auto p-6 flex flex-col gap-6">
-            
+
             {/* Search Bar - CENTERED TOP */}
             <div className="w-full max-w-2xl mx-auto self-center relative z-30 flex flex-col items-center justify-center p-6 bg-white rounded-md shadow-sm border border-gray-200">
-                <div className="text-center mb-4">
-                  <h2 className="text-xl font-bold text-primary mb-1">Find Local Services</h2>
-                  <p className="text-sm text-secondary font-label">Search for any Melbourne address to discover what's within a 20-minute walk.</p>
+              <div className="text-center mb-4">
+                <h2 className="text-xl font-bold text-primary mb-1">Find Local Services</h2>
+                <p className="text-sm text-secondary font-label">Search for any Melbourne address to discover what's within a 20-minute walk.</p>
+              </div>
+              <div className="w-full relative" ref={searchRef}>
+                <div className="bg-white p-2 rounded-md border border-gray-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary flex items-center shadow-sm transition-all text-base">
+                  <div className="px-3 text-secondary">
+                    <i data-lucide="search" className="w-5 h-5"></i>
+                  </div>
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      if (e.target.value.length < 3) setResults([]);
+                    }}
+                    placeholder="Example: Melbourne Central..."
+                    className="flex-1 py-1.5 bg-transparent outline-none text-gray-900 font-label placeholder:text-gray-400"
+                  />
+                  {query && (
+                    <button onClick={() => { setQuery(''); setResults([]); }} className="px-3 text-gray-400 hover:text-gray-600 transition-colors">
+                      <i data-lucide="x" className="w-4 h-4"></i>
+                    </button>
+                  )}
                 </div>
-                <div className="w-full relative" ref={searchRef}>
-                    <div className="bg-white p-2 rounded-md border border-gray-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary flex items-center shadow-sm transition-all text-base">
-                        <div className="px-3 text-secondary">
-                            <i data-lucide="search" className="w-5 h-5"></i>
-                        </div>
-                        <input 
-                          type="text" 
-                          value={query}
-                          onChange={(e) => {
-                            setQuery(e.target.value);
-                            if (e.target.value.length < 3) setResults([]);
-                          }}
-                          placeholder="Example: Melbourne Central..." 
-                          className="flex-1 py-1.5 bg-transparent outline-none text-gray-900 font-label placeholder:text-gray-400"
-                        />
-                        {query && (
-                          <button onClick={() => {setQuery(''); setResults([]);}} className="px-3 text-gray-400 hover:text-gray-600 transition-colors">
-                            <i data-lucide="x" className="w-4 h-4"></i>
-                          </button>
-                        )}
-                    </div>
-                    {results.length > 0 && (
-                      <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-80 overflow-y-auto custom-scroll p-1 font-label">
-                        {results.map((r, i) => (
-                          <li 
-                            key={i} 
-                            onClick={() => handleSelect(r)}
-                            className="px-4 py-2.5 hover:bg-gray-50 rounded md:rounded-sm cursor-pointer text-sm font-medium text-gray-800 border-b border-gray-50 last:border-0 transition-colors"
-                          >
-                            {r.display_name}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                </div>
+                {results.length > 0 && (
+                  <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-80 overflow-y-auto custom-scroll p-1 font-label">
+                    {results.map((r, i) => (
+                      <li
+                        key={i}
+                        onClick={() => handleSelect(r)}
+                        className="px-4 py-2.5 hover:bg-gray-50 rounded md:rounded-sm cursor-pointer text-sm font-medium text-gray-800 border-b border-gray-50 last:border-0 transition-colors"
+                      >
+                        {r.display_name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-6">
-              
+
               {/* Sidebar Toggles */}
               <aside className="w-full lg:w-80 flex flex-col">
                 <div className="bg-white p-5 rounded-md border border-gray-200 shadow-sm">
@@ -320,19 +354,19 @@
                     <i data-lucide="sliders-horizontal" className="w-4 h-4 text-primary"></i>
                     <h2 className="text-sm font-bold text-gray-800 uppercase tracking-widest font-label">Filter Services</h2>
                   </div>
-                  
+
                   <div className="space-y-3">
                     {Object.keys(SERVICE_CONFIG).map(cat => {
                       const sInfo = services.find(s => s.category === cat);
                       return (
-                        <div 
-                          key={cat} 
+                        <div
+                          key={cat}
                           onClick={() => toggleService(cat)}
                           className={`flex items-center justify-between p-3 rounded-md cursor-pointer transition-all border ${toggles[cat] ? 'bg-white border-primary/20 shadow-sm' : 'bg-gray-50 border-gray-100 opacity-60'}`}
                         >
                           <div className="flex items-center gap-3 min-w-0 pr-2">
-                            <div className="w-8 h-8 rounded shrink-0 flex items-center justify-center border" style={{backgroundColor: `${SERVICE_CONFIG[cat].color}15`, borderColor: `${SERVICE_CONFIG[cat].color}30`}}>
-                              <i data-lucide={SERVICE_CONFIG[cat].icon} className="w-4 h-4" style={{color: SERVICE_CONFIG[cat].color}}></i>
+                            <div className="w-8 h-8 rounded shrink-0 flex items-center justify-center border" style={{ backgroundColor: `${SERVICE_CONFIG[cat].color}15`, borderColor: `${SERVICE_CONFIG[cat].color}30` }}>
+                              <i data-lucide={SERVICE_CONFIG[cat].icon} className="w-4 h-4" style={{ color: SERVICE_CONFIG[cat].color }}></i>
                             </div>
                             <div className="min-w-0">
                               <div className="text-sm font-semibold text-gray-900 leading-tight truncate">{cat}</div>
@@ -368,4 +402,5 @@
     root.render(<App />);
   </script>
 </body>
+
 </html>
