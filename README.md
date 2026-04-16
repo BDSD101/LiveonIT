@@ -26,13 +26,13 @@ npm install
 ### 3. Setup PostgreSQL / PostGIS Database (Docker)
 The application relies heavily on detailed spatial routing and local amenity calculations powered by OpenStreetMap and PostGIS. We bundle a `docker-compose.yml` to automatically provision this setup.
 
-To start the database and automatically import the embedded Victoria `.osm.pbf` data file:
+To start the database and automatically download and import the Victoria `.osm.pbf` data file:
 ```bash
 docker-compose up -d
 ```
 
 **Note on Database Import**:
-- The `osm_importer` container will automatically read `victoria-260414.osm.pbf` and run `osm2pgsql`. 
+- The `osm_importer` container will automatically download `victoria-latest.osm.pbf` from Geofabrik and run `osm2pgsql`. 
 - This process requires computational power and **may take a few minutes** to complete. You can verify the importer's progress by running:
   ```bash
   docker logs -f osm_importer
