@@ -282,6 +282,32 @@ export const handler = async (
       }
     }
 
+
+    // ── GET /api/route ──────────────────────────────────────────────────────
+    if (routePath === '/api/route' && httpMethod === 'GET') {
+      const { fromLon, fromLat, toLon, toLat } = event.queryStringParameters || {};
+
+      if (!fromLon || !fromLat || !toLon || !toLat) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ error: 'Missing fromLon, fromLat, toLon, toLat params' }),
+        };
+      }
+
+      const osrmUrl = `http://10.0.0.47:5000/route/v1/foot/${fromLon},${fromLat};${toLon},${toLat}?overview=full&geometries=geojson`;
+
+      const osrmRes = await fetch(osrmUrl);
+      const osrmData = await osrmRes.json();
+
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify(osrmData),
+      };
+    }
+
+
     // ── GET /users ───────────────────────────────────────────────────────────
     if (routePath === '/users' && httpMethod === 'GET') {
       const result = await pool.query(

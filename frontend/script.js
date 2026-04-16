@@ -189,27 +189,144 @@ const ROUTE_DETOUR_FACTOR = 1.3; // Assumes walking distance is 30% longer than 
 // Function to get the walking route and time to each service through Valhalla
 // Retries up to 2 times if server returns error
 // Accepts an 'AbortSignal' so in-flight requests can be cancelled when the user picks a new address
+// async function getWalkingRouteAndTime(fromLat, fromLon, toLat, toLon, retries = 2, signal = null) {
+//     // Build the Valhalla request - two locations, pedestrian for walking route, and meters unit
+//     const body = {
+//         locations: [
+//             { lon: fromLon, lat: fromLat },
+//             { lon: toLon,   lat: toLat   }
+//         ],
+//         costing: "pedestrian",
+//         directions_options: { units: "meters" }
+//     };
+
+//     // Try up to (retries + 1) times — so with 2 retries, that's 3 attempts max
+//     for (let attempt = 0; attempt <= retries; attempt++) {
+//         try {
+//             // Sends routing request to Valhalla server - 'signal' var is an AbortSignal if new address is selected
+//             const res = await fetch("https://valhalla1.openstreetmap.de/route", {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify(body),
+//                 signal
+//             });
+
+//             // If rate-limited (429) or server error (5**), retry after backoff
+//             // The delay doubles each time - first retry waits 300ms, second waits 600ms - "exponential backoff"
+//             if (res.status === 429 || res.status >= 500) {
+//                 if (attempt < retries) {
+//                     await sleep(300 * Math.pow(2, attempt)); // 300ms, 600ms
+//                     continue;
+//                 }
+//                 // If we've exhausted all retries, give up with an error
+//                 throw new Error(`Valhalla returned ${res.status} after ${retries + 1} attempts`);
+//             }
+
+//             // Parse the JSON response from Valhalla
+//             const data = await res.json();
+
+//             // Safety check — if the response doesn't contain a valid route, bail out
+//             if (!data.trip?.legs?.length) throw new Error("No walking route found");
+
+//             // Extract the first (and only) leg of the route - a leg is from A to B
+//             const leg = data.trip.legs[0];
+//             // Valhalla returns distance in km - convert to meters and round
+//             const distanceMeters = Math.round(leg.summary.length * 1000); // km -> m
+//             // Valhalla returns time in seconds — convert to minutes, minimum 1 minute, so never "0" minutes
+//             const durationMinutes = Math.max(1, Math.round(leg.summary.time / 60));
+
+//             // Decode the route which comes as an encoded polyline shape
+//             const geometry = {
+//                 type: "LineString",
+//                 coordinates: decodePolyline(leg.shape)
+//             };
+
+//             // Return all three pieces of info that we need
+//             return { durationMinutes, distanceMeters, geometry };
+//         } catch (e) {
+//             // If the request was intentionally aborted (user picked a new address), stop immediately
+//             if (e.name === 'AbortError') throw e;
+//             // For any other error, retry if we have attempts still remaining
+//             if (attempt < retries) {
+//                 await sleep(300 * Math.pow(2, attempt));
+//                 continue;
+//             }
+//             throw e;
+//         }
+//     }
+// }
+
+// // Updated getWalkingRouteAndTime function with AWS OSRM
+// async function getWalkingRouteAndTime(fromLat, fromLon, toLat, toLon, retries = 2, signal = null) {
+//     // Build the Valhalla request - two locations, pedestrian for walking route, and meters unit
+//     // Build OSRM request URL - coordinates in lon,lat order
+//     const osrmBase = window.location.hostname === 'localhost'
+//         ? 'http://localhost:5000'
+//         : 'http://10.0.0.47:5000';
+
+//     const osrmUrl = `${osrmBase}/route/v1/foot/${fromLon},${fromLat};${toLon},${toLat}?overview=full&geometries=geojson`;
+
+//     // Try up to (retries + 1) times — so with 2 retries, that's 3 attempts max
+//     for (let attempt = 0; attempt <= retries; attempt++) {
+//         try {
+//             // Sends routing request to OSRM server - 'signal' var is an AbortSignal if new address is selected
+//             const res = await fetch(osrmUrl, { signal });
+
+//             // If rate-limited (429) or server error (5**), retry after backoff
+//             // The delay doubles each time - first retry waits 300ms, second waits 600ms - "exponential backoff"
+//             if (res.status === 429 || res.status >= 500) {
+//                 if (attempt < retries) {
+//                     await sleep(300 * Math.pow(2, attempt)); // 300ms, 600ms
+//                     continue;
+//                 }
+//                 // If we've exhausted all retries, give up with an error
+//                 throw new Error(`OSRM returned ${res.status} after ${retries + 1} attempts`);
+//             }
+
+//             // Parse the JSON response from OSRM
+//             const data = await res.json();
+
+//             // Safety check — if the response doesn't contain a valid route, bail out
+//             if (!data.routes?.length) throw new Error("No walking route found");
+
+//             // Extract the first route
+//             const route = data.routes[0];
+//             // OSRM returns distance in meters directly
+//             const distanceMeters = Math.round(route.distance);
+//             // OSRM returns duration in seconds — convert to minutes, minimum 1 minute
+//             const durationMinutes = Math.max(1, Math.round(route.duration / 60));
+
+//             // OSRM returns GeoJSON geometry directly when geometries=geojson
+//             const geometry = route.geometry;
+
+//             // Return all three pieces of info that we need
+//             return { durationMinutes, distanceMeters, geometry };
+
+//         } catch (e) {
+//             // If the request was intentionally aborted (user picked a new address), stop immediately
+//             if (e.name === 'AbortError') throw e;
+//             // For any other error, retry if we have attempts still remaining
+//             if (attempt < retries) {
+//                 await sleep(300 * Math.pow(2, attempt));
+//                 continue;
+//             }
+//             throw e;
+//         }
+//     }
+// }
+
 async function getWalkingRouteAndTime(fromLat, fromLon, toLat, toLon, retries = 2, signal = null) {
-    // Build the Valhalla request - two locations, pedestrian for walking route, and meters unit
-    const body = {
-        locations: [
-            { lon: fromLon, lat: fromLat },
-            { lon: toLon,   lat: toLat   }
-        ],
-        costing: "pedestrian",
-        directions_options: { units: "meters" }
-    };
+    // Build OSRM request URL - locally hit OSRM directly, in production go via Lambda proxy
+    const isLocal = window.location.hostname === 'localhost';
+    const fetchUrl = isLocal
+        ? `http://localhost:5000/route/v1/foot/${fromLon},${fromLat};${toLon},${toLat}?overview=full&geometries=geojson`
+        : `https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod/api/route?fromLon=${fromLon}&fromLat=${fromLat}&toLon=${toLon}&toLat=${toLat}`;
 
     // Try up to (retries + 1) times — so with 2 retries, that's 3 attempts max
     for (let attempt = 0; attempt <= retries; attempt++) {
         try {
-            // Sends routing request to Valhalla server - 'signal' var is an AbortSignal if new address is selected
-            const res = await fetch("https://valhalla1.openstreetmap.de/route", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-                signal
-            });
+            // Sends routing request - 'signal' var is an AbortSignal if new address is selected
+            const res = await fetch(fetchUrl, { signal });
 
             // If rate-limited (429) or server error (5**), retry after backoff
             // The delay doubles each time - first retry waits 300ms, second waits 600ms - "exponential backoff"
@@ -219,30 +336,28 @@ async function getWalkingRouteAndTime(fromLat, fromLon, toLat, toLon, retries = 
                     continue;
                 }
                 // If we've exhausted all retries, give up with an error
-                throw new Error(`Valhalla returned ${res.status} after ${retries + 1} attempts`);
+                throw new Error(`OSRM returned ${res.status} after ${retries + 1} attempts`);
             }
 
-            // Parse the JSON response from Valhalla
+            // Parse the JSON response from OSRM
             const data = await res.json();
 
             // Safety check — if the response doesn't contain a valid route, bail out
-            if (!data.trip?.legs?.length) throw new Error("No walking route found");
+            if (!data.routes?.length) throw new Error("No walking route found");
 
-            // Extract the first (and only) leg of the route - a leg is from A to B
-            const leg = data.trip.legs[0];
-            // Valhalla returns distance in km - convert to meters and round
-            const distanceMeters = Math.round(leg.summary.length * 1000); // km -> m
-            // Valhalla returns time in seconds — convert to minutes, minimum 1 minute, so never "0" minutes
-            const durationMinutes = Math.max(1, Math.round(leg.summary.time / 60));
+            // Extract the first route
+            const route = data.routes[0];
+            // OSRM returns distance in meters directly
+            const distanceMeters = Math.round(route.distance);
+            // OSRM returns duration in seconds — convert to minutes, minimum 1 minute
+            const durationMinutes = Math.max(1, Math.round(route.duration / 60));
 
-            // Decode the route which comes as an encoded polyline shape
-            const geometry = {
-                type: "LineString",
-                coordinates: decodePolyline(leg.shape)
-            };
+            // OSRM returns GeoJSON geometry directly when geometries=geojson
+            const geometry = route.geometry;
 
             // Return all three pieces of info that we need
             return { durationMinutes, distanceMeters, geometry };
+
         } catch (e) {
             // If the request was intentionally aborted (user picked a new address), stop immediately
             if (e.name === 'AbortError') throw e;
@@ -268,34 +383,34 @@ function estimateWalkingResult(fromLat, fromLon, toLat, toLon, straightLineMeter
 }
 
 // Decodes Valhalla's encoded polyline string into an array of [lng, lat] coordinates
-function decodePolyline(encoded) {
-    const coords = []; // Will hold the decoded [lng, lat] pairs
-    let index = 0; // Current position in the encoded string
-    let lat = 0; // Running latitude total (values are deltas, not absolute)
-    let lng = 0; // Running longitude total
+// function decodePolyline(encoded) {
+//     const coords = []; // Will hold the decoded [lng, lat] pairs
+//     let index = 0; // Current position in the encoded string
+//     let lat = 0; // Running latitude total (values are deltas, not absolute)
+//     let lng = 0; // Running longitude total
 
-    // Each iteration of this loop decodes one coordinate pair (lat + lng)
-    while (index < encoded.length) {
+//     // Each iteration of this loop decodes one coordinate pair (lat + lng)
+//     while (index < encoded.length) {
 
-        // Read characters one at a time, extract 5 bits from each, and assemble them into a single integer
-        // The loop continues until a character signals "end of this number" (< 0x20) (32 hexadecimal - 5 bits - below 32 is last character)
-        let b, shift = 0, result = 0;
-        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-        // If the last bit is 1, the number is negative — apply two's complement
-        lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+//         // Read characters one at a time, extract 5 bits from each, and assemble them into a single integer
+//         // The loop continues until a character signals "end of this number" (< 0x20) (32 hexadecimal - 5 bits - below 32 is last character)
+//         let b, shift = 0, result = 0;
+//         do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+//         // If the last bit is 1, the number is negative — apply two's complement
+//         lat += (result & 1) ? ~(result >> 1) : (result >> 1);
 
-        // Decode longitude (same process) 
-        shift = 0; result = 0;
-        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-        lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+//         // Decode longitude (same process) 
+//         shift = 0; result = 0;
+//         do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+//         lng += (result & 1) ? ~(result >> 1) : (result >> 1);
 
-        // Divide by 1,000,000 to convert back to decimal degrees
-        // Push as [lng, lat] since that's what GeoJSON/MapLibre expects
-        coords.push([lng / 1e6, lat / 1e6]);
-    }
+//         // Divide by 1,000,000 to convert back to decimal degrees
+//         // Push as [lng, lat] since that's what GeoJSON/MapLibre expects
+//         coords.push([lng / 1e6, lat / 1e6]);
+//     }
 
-    return coords;
-}
+//     return coords;
+// }
 
 // Creates line from address pin to service marker
 function drawServiceRoute(geometry, routeId) {
@@ -554,7 +669,15 @@ async function loadNearbyServices(lat, lon) {
     // AWS Hosted PostGIS for OSM data
     try {
         // Fetch nearby services from our own backend (backed by Aurora PostGIS)
-        const res = await fetch(`http://localhost:4000/api/nearby-services?lat=${lat}&lon=${lon}`, { signal });
+        // const res = await fetch(`http://localhost:4000/api/nearby-services?lat=${lat}&lon=${lon}`, { signal });
+        const API_BASE = window.location.hostname === 'localhost'
+            ? 'http://localhost:4000'
+            : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
+
+        const res = await fetch(`${API_BASE}/api/nearby-services?lat=${lat}&lon=${lon}`, { signal });
+
+
+
         const rows = await res.json();
 
         // Create a Turf.js point for the user's address — used to calculate straight-line distances to each service
