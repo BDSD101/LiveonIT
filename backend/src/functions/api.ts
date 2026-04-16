@@ -87,6 +87,12 @@ function corsResponse(): APIGatewayProxyResult {
 // ─── In-memory cache (per warm instance) ────────────────────────────────────
 
 const searchCache = new Map<string, unknown>();
+const MELBOURNE_BBOX = {
+  west: 144.40,
+  south: -38.50,
+  east: 145.55,
+  north: -37.40,
+};
 
 // ─── Handler ────────────────────────────────────────────────────────────────
 
@@ -175,6 +181,131 @@ export const handler = async (
         headers: corsHeaders,
         body: JSON.stringify(mapped),
       };
+    }
+
+    // ── GET /api/local-search (Using Postgres/OSM) ───────────────────────────
+    if (routePath === '/api/local-search' && httpMethod === 'GET') {
+      const raw = event.queryStringParameters?.q || '';
+      const q = raw.trim();
+      const cacheKey = `local_melbourne_${q.toLowerCase()}`;
+
+      if (!q || q.length < 3) {
+        return {
+          statusCode: 400,
+          headers: corsHeaders,
+          body: JSON.stringify({ error: 'Missing or short query param q' }),
+        };
+      }
+      if (searchCache.has(cacheKey)) {
+        return {
+          statusCode: 200,
+          headers: corsHeaders,
+          body: JSON.stringify(searchCache.get(cacheKey)),
+        };
+      }
+
+      // Local-only lookup against imported OSM tables in the Melbourne metro bounding box.
+      // Way column is in EPSG:3857, so we transform to EPSG:4326 for output coordinates.
+      const sql = `
+        WITH melbourne AS (
+          SELECT ST_Transform(ST_MakeEnvelope($1, $2, $3, $4, 4326), 3857) AS geom
+        ),
+        point_matches AS (
+          SELECT
+            p.name,
+            p.tags->'addr:housenumber' AS house_number,
+            p.tags->'addr:street' AS street,
+            COALESCE(p.tags->'addr:suburb', p.tags->'addr:city') AS suburb,
+            ST_Y(ST_Transform(p.way, 4326)) AS lat,
+            ST_X(ST_Transform(p.way, 4326)) AS lon,
+            CASE
+              WHEN CONCAT_WS(' ', p.tags->'addr:housenumber', p.tags->'addr:street') ILIKE $6 THEN 0
+              WHEN p.tags->'addr:street' ILIKE $6 THEN 1
+              WHEN p.name ILIKE $6 THEN 2
+              ELSE 3
+            END AS rank
+          FROM planet_osm_point p, melbourne m
+          WHERE p.way && m.geom
+            AND (
+              p.name ILIKE $5
+              OR p.tags->'addr:street' ILIKE $5
+              OR CONCAT_WS(' ', p.tags->'addr:housenumber', p.tags->'addr:street') ILIKE $5
+            )
+          ORDER BY rank, p.name NULLS LAST
+          LIMIT 30
+        ),
+        polygon_matches AS (
+          SELECT
+            p.name,
+            p.tags->'addr:housenumber' AS house_number,
+            p.tags->'addr:street' AS street,
+            COALESCE(p.tags->'addr:suburb', p.tags->'addr:city') AS suburb,
+            ST_Y(ST_Transform(ST_Centroid(p.way), 4326)) AS lat,
+            ST_X(ST_Transform(ST_Centroid(p.way), 4326)) AS lon,
+            CASE
+              WHEN CONCAT_WS(' ', p.tags->'addr:housenumber', p.tags->'addr:street') ILIKE $6 THEN 0
+              WHEN p.tags->'addr:street' ILIKE $6 THEN 1
+              WHEN p.name ILIKE $6 THEN 2
+              ELSE 3
+            END AS rank
+          FROM planet_osm_polygon p, melbourne m
+          WHERE p.way && m.geom
+            AND (
+              p.name ILIKE $5
+              OR p.tags->'addr:street' ILIKE $5
+              OR CONCAT_WS(' ', p.tags->'addr:housenumber', p.tags->'addr:street') ILIKE $5
+            )
+          ORDER BY rank, p.name NULLS LAST
+          LIMIT 30
+        )
+        SELECT *
+        FROM (
+          SELECT * FROM point_matches
+          UNION ALL
+          SELECT * FROM polygon_matches
+        ) combined
+        ORDER BY rank, street NULLS LAST, name NULLS LAST
+        LIMIT 10;
+      `;
+
+      try {
+        const containsMatch = `%${q}%`;
+        const startsWithMatch = `${q}%`;
+        const result = await pool.query(sql, [
+          MELBOURNE_BBOX.west,
+          MELBOURNE_BBOX.south,
+          MELBOURNE_BBOX.east,
+          MELBOURNE_BBOX.north,
+          containsMatch,
+          startsWithMatch,
+        ]);
+        const mapped = result.rows.map(r => {
+          const addressLine = [r.house_number, r.street].filter(Boolean).join(' ').trim();
+          const locality = [r.suburb, 'Melbourne'].filter(Boolean).join(', ');
+          const parts = [addressLine || r.name, r.name, locality].filter(Boolean);
+          return {
+            display_name: [...new Set(parts)].join(', '),
+            lat: String(r.lat),
+            lon: String(r.lon),
+          };
+        });
+
+        if (searchCache.size > 1000) searchCache.clear();
+        searchCache.set(cacheKey, mapped);
+
+        return {
+          statusCode: 200,
+          headers: corsHeaders,
+          body: JSON.stringify(mapped),
+        };
+      } catch (err: any) {
+        console.error('Local search error (probably importing):', err.message);
+        return {
+          statusCode: 503,
+          headers: corsHeaders,
+          body: JSON.stringify({ error: 'Database map search failed or still importing.' }),
+        };
+      }
     }
 
     // ── GET /users ───────────────────────────────────────────────────────────
