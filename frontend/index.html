@@ -4,84 +4,232 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>20-Minute Map – Address Search</title>
-
-  <!-- Preconnect to external domains to speed up DNS/TLS handshakes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://unpkg.com">
-  <link rel="preconnect" href="https://tiles.openfreemap.org">
-
-  <!-- Fonts: Public Sans (headlines + body) & Inter (labels) -->
+  <title>LiveonIT | 20-Min Neighbourhood</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Inter:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
-
-  <!-- MapLibre GL JS via CDN -->
-  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
-  <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@turf/turf/turf.min.js"></script>
-
-  <link rel="stylesheet" href="styles.css"/>
-  <script src="script.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-  <!-- Header -->
-  <header>
-    <span class="logo">20-Minute Map</span>
+  <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <i data-lucide="map-pin" class="w-6 h-6"></i>
+      <h1 class="text-xl font-bold tracking-tight">LiveonIT</h1>
+    </div>
+    <nav class="flex gap-6 text-sm font-bold font-inter uppercase tracking-widest">
+      <button onclick="showView('home')" class="hover:text-blue-200 transition-colors">Dashboard</button>
+      <button onclick="showView('about')" class="hover:text-blue-200 transition-colors">About the Project</button>
+    </nav>
   </header>
 
-  <!-- Main -->
-  <main>
-    <h1 class="page-title">20-Minute Neighbourhood Map</h1>
-    <!-- Search -->
-    <div class="search-card">
-      <p class="search-label">Address Search</p>
-      <div class="search-row">
-        <input id="query" type="text" placeholder="Start typing a Melbourne address…" autocomplete="off" />
+  <!-- HOME VIEW -->
+  <div id="view-home" class="flex-1 flex justify-center gap-8 px-8 py-10 max-w-[1600px] mx-auto w-full overflow-hidden">
+
+    <!-- Left Sidebar: Filters -->
+    <aside class="w-72 flex-shrink-0 space-y-6 overflow-y-auto pr-2">
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
+        <div
+          class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+          <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+          Service Filters
+        </div>
+        <div id="filter-container" class="space-y-1"></div>
+      </div>
+    </aside>
+
+    <!-- Center Column -->
+    <main class="max-w-[800px] w-full flex flex-col gap-6 px-1">
+      <!-- Search -->
+      <div class="bg-white rounded-xl border border-slate-200 p-6 custom-shadow relative">
+        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest font-inter mb-3">Address
+          Search</label>
+        <div class="relative">
+          <input id="query" type="text" placeholder="Start typing a Melbourne address..."
+            class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#004071] focus:border-[#004071] transition-all outline-none font-inter text-sm" />
+          <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+        </div>
+        <ul id="results"
+          class="hidden absolute left-6 right-6 z-[100] mt-1 border border-slate-200 rounded-lg shadow-2xl divide-y divide-slate-50 overflow-hidden bg-white max-h-60 overflow-y-auto">
+        </ul>
+      </div>
+
+      <!-- Map Container -->
+      <div
+        class="relative bg-white rounded-xl border border-slate-200 custom-shadow overflow-hidden h-[600px] flex-shrink-0">
+        <div id="progress-bar"
+          class="absolute top-0 left-0 h-1 bg-blue-500 z-50 transition-all duration-300 opacity-0 w-0"></div>
+
+        <!-- Map Notifications -->
+        <div id="alert-container" class="absolute top-4 right-4 z-[100] flex flex-col gap-2 w-64 pointer-events-none">
+        </div>
+
+        <div id="map"></div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="w-72 flex-shrink-0 space-y-6 overflow-y-auto pl-2">
+      <!-- History -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
+        <div
+          class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+          <i data-lucide="history" class="w-3.5 h-3.5"></i>
+          Recent Searches
+        </div>
+        <div id="history-list" class="space-y-2">
+          <p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>
+        </div>
+      </div>
+
+      <!-- Index Score -->
+      <div class="bg-white rounded-xl border border-slate-200 p-6 custom-shadow">
+        <div
+          class="flex items-center gap-2 mb-5 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+          <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+          Liveability Index
+        </div>
+        <div class="text-center">
+          <div id="score-value" class="text-6xl font-black text-[#004071] mb-2">--</div>
+          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] mb-4 uppercase font-inter">Score out of 10.0
+          </div>
+          <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-4">
+            <div id="score-bar" class="h-full bg-emerald-500 w-0 transition-all duration-1000"></div>
+          </div>
+          <p id="score-desc" class="text-xs text-slate-500 font-medium leading-relaxed italic">Search an address to
+            analyze liveability.</p>
+        </div>
+        <div class="mt-5 pt-4 border-t border-slate-100">
+          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase font-inter mb-3 text-center">Why
+            this score?</div>
+          <div id="score-breakdown" class="space-y-2">
+            <p class="text-xs text-slate-400 text-center">Search an address to see core service coverage.</p>
+          </div>
+          <p id="score-threshold-note" class="mt-3 text-[11px] text-slate-400 text-center font-inter">Threshold: 800m
+            walking distance</p>
+        </div>
+      </div>
+
+      <!-- Suburb Leaderboard -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
+        <div class="flex items-center justify-between mb-4">
+          <div
+            class="flex items-center gap-2 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+            <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+            Leaderboards
+          </div>
+        </div>
+
+        <!-- Leaderboard Tabs -->
+        <div class="flex border-b border-slate-100 mb-4 overflow-x-auto no-scrollbar">
+          <button onclick="switchLeaderboard('inner')" id="tab-inner"
+            class="px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-[#004071] text-[#004071] whitespace-nowrap">Inner</button>
+          <button onclick="switchLeaderboard('middle')" id="tab-middle"
+            class="px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-transparent text-slate-400 hover:text-slate-600 whitespace-nowrap">Middle</button>
+          <button onclick="switchLeaderboard('outer')" id="tab-outer"
+            class="px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-transparent text-slate-400 hover:text-slate-600 whitespace-nowrap">Outer</button>
+        </div>
+
+        <div id="leaderboard-list" class="space-y-3">
+          <p class="text-center py-4 text-slate-400 text-xs font-inter">Loading rankings...</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ABOUT VIEW -->
+  <div id="view-about" class="hidden-view flex-1 overflow-y-auto bg-slate-50">
+    <div class="max-w-4xl mx-auto py-16 px-8">
+      <div class="bg-white rounded-2xl border border-slate-200 p-12 custom-shadow">
+        <h2 class="text-4xl font-black text-[#004071] mb-6">About the 20-Min Index</h2>
+
+        <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-8">
+          <section>
+            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+              <i data-lucide="map" class="text-blue-500"></i>
+              What is a 20-Minute Neighbourhood?
+            </h3>
+            <p class="mt-3">
+              The <a
+                href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods"
+                target="_blank" class="text-blue-600 font-bold underline">Melbourne 20-Minute Neighbourhood</a>
+              initiative is a planning vision for a more liveable city. The goal is simple: ensure that all Melburnians
+              can access most of their daily needs within a 20-minute return walk from home. This represents an
+              <strong>800-metre radius</strong>.
+            </p>
+          </section>
+
+          <section class="grid md:grid-cols-2 gap-8 bg-slate-50 p-8 rounded-xl border border-slate-100">
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2">Why it matters</h3>
+              <ul class="list-disc pl-5 space-y-2 text-sm">
+                <li>Reduced car dependency and traffic congestion.</li>
+                <li>Increased physical activity and better health outcomes.</li>
+                <li>Stronger, more connected local communities.</li>
+                <li>Lower environmental impact and carbon footprint.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2">The Calculation Engine</h3>
+              <p class="text-sm">
+                Our <strong>Weighted Multi-Source Engine</strong> analyzes live data from Google Maps to calculate an
+                address score. We don't just count services; we evaluate their variety and importance.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <i data-lucide="database" class="text-emerald-500"></i>
+              How is the rating calculated?
+            </h3>
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center font-bold text-blue-600">
+                  1</div>
+                <div>
+                  <h4 class="font-bold text-slate-800">Diversity Check</h4>
+                  <p class="text-sm">Access to different categories (Food, Health, Parks, Connectivity) is critical.
+                    Having 10 cafes but no grocery store results in a lower score than having one of each.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center font-bold text-emerald-600">
+                  2</div>
+                <div>
+                  <h4 class="font-bold text-slate-800">Proximity & Routing</h4>
+                  <p class="text-sm">We use precise pedestrian routing. A service that is 200m away via walking paths
+                    contributes significantly more to the index than one at the 800m limit.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-purple-100 flex-shrink-0 flex items-center justify-center font-bold text-purple-600">
+                  3</div>
+                <div>
+                  <h4 class="font-bold text-slate-800">Weighted Priority</h4>
+                  <p class="text-sm">Not all services are equal. Essentials like Supermarkets and GP Services are
+                    assigned higher weights (3x) compared to lifestyle services like Cafes (1x).</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <button onclick="showView('home')"
+          class="mt-12 w-full bg-[#004071] text-white py-4 rounded-xl font-bold hover:bg-blue-800 transition-all shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Dashboard
+        </button>
       </div>
     </div>
+  </div>
 
-    <ul id="results"></ul>
-
-    <!-- Map -->
-    <div class="map-wrapper">
-      <!-- Progress bar: animates left-to-right along the top of the map while services load -->
-      <div id="progress-bar"></div>
-      <div id="map"></div>
-      <!-- Fullscreen toggle button — sits in the top-right corner of the map -->
-      <button id="fullscreen-btn" title="Toggle fullscreen" onclick="toggleFullscreen()">
-        <svg id="fs-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 3 21 3 21 9"></polyline>
-          <polyline points="9 21 3 21 3 15"></polyline>
-          <line x1="21" y1="3" x2="14" y2="10"></line>
-          <line x1="3" y1="21" x2="10" y2="14"></line>
-        </svg>
-        <svg id="fs-collapse-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-          <polyline points="4 14 10 14 10 20"></polyline>
-          <polyline points="20 10 14 10 14 4"></polyline>
-          <line x1="10" y1="14" x2="3" y2="21"></line>
-          <line x1="21" y1="3" x2="14" y2="10"></line>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Legend -->
-    <div class="legend">
-      <p class="legend-title">Services shown</p>
-      <div class="legend-items">
-        <span>🛒 Supermarket</span>
-        <span>💊 Pharmacy</span>
-        <span>🏥 Health Clinic</span>
-        <span>🚌 Bus Stop</span>
-        <span>🚆 Train Station</span>
-        <span>📮 Post Office</span>
-      </div>
-    </div>
-  </main>
-
+  <script src="script.js" defer></script>
 </body>
 
 </html>

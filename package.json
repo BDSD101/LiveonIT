@@ -1,22 +1,22 @@
 {
   "name": "liveonit",
   "version": "1.0.0",
-  "description": "LiveonIT - Address search and map",
-  "main": "backend/server.js",
+  "description": "Google Maps Powered 20-Minute Neighbourhood Tool",
+  "main": "src/functions/api.ts",
   "scripts": {
-    "start": "node backend/server.js"
+    "dev": "ts-node -r dotenv/config src/server.ts",
+    "build": "npx esbuild src/server.ts --bundle --platform=node --target=node20 --outfile=dist/server.js --minify",
+    "start": "node dist/server.js"
   },
   "dependencies": {
-    "axios": "1.14.0",
-    "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "axios": "^1.6.0"
   },
-  "scripts": {
-	  "build": "./build.sh",
-	  "local": "ts-node src/local.ts",
-	  "local:users": "PATH_OVERRIDE=/users ts-node src/local.ts",
-	  "local:search": "PATH_OVERRIDE=/api/search QUERY='{\"q\":\"melbourne\"}' ts-node src/local.ts",
-	  "local:post": "METHOD=POST PATH_OVERRIDE=/users BODY='{\"email\":\"test@test.com\"}' ts-node src/local.ts"
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.161",
+    "@types/node": "^25.5.0",
+    "dotenv": "^16.6.1",
+    "esbuild": "^0.27.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
   }
-
 }
