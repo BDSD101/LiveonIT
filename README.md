@@ -1,82 +1,60 @@
-# LiveonIT
+# LiveonIT | 20-Min Neighbourhood Tool
 
-A web-based liveability assessment tool that helps users evaluate how well a Melbourne address supports a 20-minute neighbourhood lifestyle — where essential services are accessible within an 800 m walk.
+A high-performance liveability assessment tool that evaluates how well a Melbourne address supports a 20-minute neighbourhood lifestyle — where essential services are accessible within an 800m walk.
 
-## Prerequisites
+## Architecture
 
-Before setting up the project, ensure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (v16+)
-- [Docker & Docker Compose](https://www.docker.com/) (required to run the local PostGIS spatial database)
+This application is now **fully powered by the Google Maps Platform**, eliminating the need for local OSM databases or complex spatial infrastructure:
+- **Geocoding API**: Address to coordinate translation.
+- **Places API**: Real-time discovery of nearby services.
+- **Directions API**: Precise pedestrian routing and time estimation.
 
-## Getting Started Locally
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/BDSD101/LiveonIT.git
-cd LiveonIT
-```
-
-### 2. Install Dependencies
-Install the required Node.js packages:
-```bash
-npm install
-```
-*(If you plan to run local Typescript tools, install the local dev tools specified in `local.txt`: `npm install -D dotenv ts-node`)*
-
-### 3. Setup PostgreSQL / PostGIS Database (Docker)
-The application relies heavily on detailed spatial routing and local amenity calculations powered by OpenStreetMap and PostGIS. We bundle a `docker-compose.yml` to automatically provision this setup.
-
-To start the database and automatically download and import the Victoria `.osm.pbf` data file:
-```bash
-docker-compose up -d
-```
-
-**Note on Database Import**:
-- The `osm_importer` container will automatically download `victoria-latest.osm.pbf` from Geofabrik and run `osm2pgsql`. 
-- This process requires computational power and **may take a few minutes** to complete. You can verify the importer's progress by running:
-  ```bash
-  docker logs -f osm_importer
-  ```
-- The database is purposefully exposed on port **5435** locally to avoid interference with any pre-existing Postgres instances you might be running on port 5432.
-
-### 4. Configure Environment (Optional for local)
-By default, the server is configured to connect to your local Docker `app_db` instance on port 5435 without needing a `.env` file. However, if you wish to connect to an external RDS or override the connection details, create a `.env` file in the root based on `.env.example`:
-```bash
-cp .env.example .env
-```
-
-### 5. Running the Local Server
-Start the backend server (which also serves the frontend):
-```bash
-npm start
-```
-*(Alternatively: `node backend/server.js`)*
-
-### 6. View the Application
-Open your browser and navigate to:
-[http://localhost:3000](http://localhost:3000)
+The backend acts as a stateless secure proxy to protect API keys and provide a unified scoring engine for the frontend.
 
 ---
 
-## Useful Development Commands
+## Prerequisites
 
-We provide a `src/local.ts` testing harness. You can run various diagnostic scripts:
+- [Node.js](https://nodejs.org/) (v18+)
+- A **Google Maps API Key** (with Places, Geocoding, and Directions enabled).
 
+## Getting Started Locally
+
+### 1. Setup
 ```bash
-# General health check
-npm run local
-
-# Get user records
-npm run local:users
-
-# Local Search simulation 
-npm run local:search
-
-# Create a test user via POST
-npm run local:post
+git clone https://github.com/BDSD101/LiveonIT.git
+cd LiveonIT
+npm install
 ```
 
-To stop the database instances, simply run:
+### 2. Configure Environment
+Create a `.env` file in the root directory:
 ```bash
-docker-compose down
+cp .env.example .env
 ```
+Add your API key:
+```
+GOOGLE_MAPS_API_KEY=AIza...
+```
+
+### 3. Run Development Server
+```bash
+npm run dev
+```
+
+### 4. View App
+Open [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Security Warning
+
+> [!CAUTION]
+> The `GOOGLE_MAPS_API_KEY` is fetched by the browser to initialize the map. You **must** restrict your API key to your specific domain (HTTP Referrer) in the [Google Cloud Console](https://console.cloud.google.com/google/maps-apis/credentials) before deploying to production.
+
+## Scoring Methodology
+
+The tool uses a **Weighted Proximity Model**:
+1. **Diversity**: Services are grouped into core categories (Health, Food, Parks, etc.).
+2. **Proximity**: Walking distance is calculated; points decay as distance increases from 800m.
+3. **Density**: Access to multiple options within the same category provides a small density bonus to the score.
