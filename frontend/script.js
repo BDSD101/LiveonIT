@@ -150,7 +150,7 @@ function showServiceBanner(message, isError) {
     clearServiceBanner();
     const banner = document.createElement('div');
     banner.id = 'service-banner';
-    banner.style.fontFamily = 'Inter, sans-serif';
+    banner.style.fontFamily = "'DM Sans', sans-serif";
     banner.style.fontSize = '13px';
     banner.style.padding = '10px 16px';
     banner.style.marginTop = '12px';
@@ -644,7 +644,7 @@ async function loadNearbyServices(lat, lon) {
             // The walk time badge — a small pill showing for example "5m" next to the icon
             const badgeEl = document.createElement('div');
             badgeEl.textContent = ` ${routeInfo.durationMinutes}m `;
-            badgeEl.style.fontFamily = 'Inter, sans-serif';
+            badgeEl.style.fontFamily = "'DM Sans', sans-serif";
             badgeEl.style.fontSize = '11px';
             badgeEl.style.fontWeight = '600';
             badgeEl.style.background = 'white';
@@ -727,7 +727,7 @@ async function search(q) {
     // For visibility of the dropdown
     list.style.display = 'block';
     // Shows a temporary loading message for the user
-    list.innerHTML = '<li><span style="color:var(--text-muted)">Searching...</span></li>';
+    list.innerHTML = '<li><span style="color:var(--ink-light)">Searching...</span></li>';
 
     try {
         // If the last word looks incomplete (no space after it), also try without it
@@ -790,7 +790,7 @@ async function search(q) {
 
         // If no usable results, we show a friendly message and stop
         if (!data || !data.length) {
-            list.innerHTML = '<li><span style="color:var(--text-muted)">No results found.</span></li>';
+            list.innerHTML = '<li><span style="color:var(--ink-light)">No results found.</span></li>';
             return;
         }
 
