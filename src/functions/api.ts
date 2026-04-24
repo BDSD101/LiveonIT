@@ -36,6 +36,20 @@ const corsHeaders = {
 // --- In-memory cache (TTL + bounded size) ---
 const cache = new Map<string, CacheEntry<any>>();
 
+// --- API Call Tracking (for monitoring usage and debugging) ---
+const apiCallCounts: Record<string, number> = {
+  places: 0,
+  distanceMatrix: 0,
+  geocoding: 0,
+  directions: 0,
+};
+
+function trackApiCall(type: keyof typeof apiCallCounts) {
+  apiCallCounts[type]++;
+  console.log(`[API Call] ${type} | totals:`, apiCallCounts);
+}
+
+
 function getGoogleMapsApiKey(): string {
   const key = process.env.GOOGLE_MAPS_API_KEY?.trim();
   if (!key) throw new Error('Missing GOOGLE_MAPS_API_KEY');
@@ -135,6 +149,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
   if (cached !== undefined) return cached;
 
   try {
+    trackApiCall('places');  // for monitoring usage
     const response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
       params: {
         location: `${originLat},${originLon}`,
@@ -202,14 +217,25 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     };
   });
 
-  // 2. Attempt to upgrade with real Google Matrix API data
+
+  // 2. Reduce wasted API calls by only upgrading candidates that are within a reasonable range of the threshold (e.g. 1.5x)
+  // Filter before hitting Distance Matrix API
+  const worthUpgrading = results.filter(c => 
+    (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 1.5
+  );
+  // If nothing is worth upgrading, return Haversine estimates as-is
+  if (!worthUpgrading.length) return results;
+
+
+  // 3. Attempt to upgrade with real Google Matrix API data
   const BATCH_SIZE = 25;
-  for (let i = 0; i < candidates.length; i += BATCH_SIZE) {
-    const batchIndices = Array.from({ length: Math.min(BATCH_SIZE, candidates.length - i) }, (_, k) => i + k);
-    const batch = batchIndices.map(idx => candidates[idx]);
+  for (let i = 0; i < worthUpgrading.length; i += BATCH_SIZE) {
+    const batchIndices = Array.from({ length: Math.min(BATCH_SIZE, worthUpgrading.length - i) }, (_, k) => i + k);
+    const batch = batchIndices.map(idx => worthUpgrading[idx]);
     const destinations = batch.map((c) => `${c.lat},${c.lon}`).join('|');
     
     try {
+      trackApiCall('distanceMatrix');  // for monitoring usage
       const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
         params: {
           origins: `${originLat},${originLon}`,
@@ -221,18 +247,39 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
 
       if (response.data?.status === 'OK') {
         const elements: any[] = response.data?.rows?.[0]?.elements || [];
+        // batchIndices.forEach((origIdx, batchIdx) => {
+        //   const element = elements[batchIdx];
+        //   if (element?.status === 'OK') {
+        //     const meters = Number(element.distance?.value);
+        //     const seconds = Number(element.duration?.value);
+        //     if (Number.isFinite(meters) && Number.isFinite(seconds)) {
+        //       results[origIdx] = {
+        //         ...results[origIdx],
+        //         walkingDistanceMeters: meters,
+        //         walkingDurationMinutes: Math.ceil(seconds / 60),
+        //         withinThreshold: meters <= WALKABLE_THRESHOLD_METERS,
+        //       };
+        //     }
+        //   }
+        // });
+
+        // Fix when changing to worthUpgrading from all candidates
         batchIndices.forEach((origIdx, batchIdx) => {
           const element = elements[batchIdx];
           if (element?.status === 'OK') {
             const meters = Number(element.distance?.value);
             const seconds = Number(element.duration?.value);
             if (Number.isFinite(meters) && Number.isFinite(seconds)) {
-              results[origIdx] = {
-                ...results[origIdx],
-                walkingDistanceMeters: meters,
-                walkingDurationMinutes: Math.ceil(seconds / 60),
-                withinThreshold: meters <= WALKABLE_THRESHOLD_METERS,
-              };
+              const candidate = worthUpgrading[origIdx];
+              const resultsIdx = results.indexOf(candidate); // ← find its position in results
+              if (resultsIdx !== -1) {
+                results[resultsIdx] = {
+                  ...results[resultsIdx],
+                  walkingDistanceMeters: meters,
+                  walkingDurationMinutes: Math.ceil(seconds / 60),
+                  withinThreshold: meters <= WALKABLE_THRESHOLD_METERS,
+                };
+              }
             }
           }
         });
@@ -298,6 +345,14 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   if (httpMethod === 'OPTIONS') return { statusCode: 200, headers: corsHeaders, body: '' };
 
   try {
+    // 0. Debug: API call stats
+    if (routePath === '/api/debug/stats' && httpMethod === 'GET') {
+      return jsonResponse(200, {
+        apiCallCounts,
+        cacheSize: cache.size,
+      });
+    }
+
     // 1. Health Check
     if (routePath === '/health' && httpMethod === 'GET') {
       return jsonResponse(200, { status: 'ok' });
@@ -341,6 +396,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const cached = getCached<any[]>(cacheKey);
       if (cached) return jsonResponse(200, cached);
 
+      trackApiCall('geocoding'); // for monitoring usage
       const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: `${q}, Victoria, Australia`,
@@ -399,6 +455,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
       const cached = getCached<any>(routeCacheKey);
       if (cached) return jsonResponse(200, cached);
+      trackApiCall('directions'); // for monitoring usage
       const response = await axios.get('https://maps.googleapis.com/maps/api/directions/json', {
         params: {
           origin: `${sLat},${sLon}`,
