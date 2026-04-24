@@ -26,7 +26,7 @@ const CONFIG = {
         { id: 'supermarket', label: 'Supermarket', type: 'supermarket', icon: 'shopping-cart' },
         { id: 'bakery', label: 'Bakery', type: 'bakery', icon: 'croissant' },
         { id: 'convenience', label: 'Convenience', type: 'convenience_store', icon: 'store' },
-        { id: 'shopping', label: 'General Shopping', type: 'shopping_mall', icon: 'bag-shopping' }
+        { id: 'shopping', label: 'General Shopping', type: 'shopping_mall', icon: 'shopping-bag' } // replaced bag-shopping to shopping-bag
       ]
     },
     {
@@ -63,8 +63,13 @@ async function loadGoogleMaps() {
     const { key } = await res.json();
     if (!key) throw new Error('Google Maps key missing');
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization`;
-    script.onload = initApp;
+
+    // script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization`;
+    // script.onload = initApp;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
+    script.async = true;
+    script.defer = true;
+
     document.head.appendChild(script);
   } catch (e) {
     console.error('Failed to load config', e);
@@ -368,7 +373,12 @@ async function loadServices(lat, lon) {
         if (!rData.polyline) return;
 
         const path = google.maps.geometry.encoding.decodePath(rData.polyline);
+        // Debugging logs for route decoding
+        console.log('path length:', path.length);
+        console.log('decoded path:', path);
         const polyline = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: svcConf.catColor, strokeOpacity: 0.7, strokeWeight: 4, map: map });
+        // testing a fixed color for all routes to rule out styling issues
+        // const polyline = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 4, map: map });
         servicePolylines.push(polyline);
         let step = 0; const numSteps = 40;
         const interval = setInterval(() => { step++; const fraction = step / numSteps; polyline.setPath(path.slice(0, Math.ceil(fraction * path.length))); if (step >= numSteps) clearInterval(interval); }, 25);
