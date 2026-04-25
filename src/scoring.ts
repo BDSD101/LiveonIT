@@ -1,9 +1,9 @@
 // --- Scoring Configuration & Types ---
-
 export type RequestedItem = {
   key: string;
   catId: string;
   type: string;
+  filter?: (result: any) => boolean;  // ← add this line
 };
 
 export type CandidateService = {
@@ -73,17 +73,62 @@ export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> 
 };
 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy', 'hospital'],
+  health: ['doctor', 'pharmacy'], // hospital removed for now as creates too much noise
   food: ['supermarket', 'convenience_store'],
-  connectivity: ['bus_station', 'train_station', 'transit_station'],
-  parks: ['park', 'playground'],
+  connectivity: ['train_station', 'transit_station'], // bus_station and bus_stops removed because too noisy
+  parks: ['park'], // playground removed for now as creates too much noise
   dining: ['cafe', 'restaurant', 'bar'],
-  education: ['school', 'library', 'kindergarten'],
-  fitness: ['gym', 'sports_complex'],
+  education: ['library'], // kindergarten and school removed for now as creates too much noise
+  fitness: ['gym'], // 'sports_complex' removed too much noise
 };
 
+// Blocklist for certain pinlet icons that are misleading for specific categories (e.g., 'school_pinlet' for gyms)
+export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
+  gym: ['school_pinlet'],
+};
+
+export const PLACE_TYPE_NAME_BLOCKLIST: Record<string, string[]> = {
+  gym: ['physio', 'physiotherapy', 'spinal', 'coaching', 'chiropractic'],
+  doctor: ['pathology', 'radiology', 'audiology', 'podiatry', 'dust mite', 'fun time', 'hearing', 'foot', 'allergy', 'skin', 'dental', 'optometrist', 'eye', 'vet', 'veterinary'],
+  school: ['scuba', 'guitar', 'music', 'tennis', 'dance', 'yoga', 'pilates', 'flow with'],
+  supermarket: ['spices', 'convenience', 'haiku', 'ninja', 'market'],
+  cafe: ['health', 'nutrition', 'office', 'crew'],
+};
+
+export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
+  doctor: [
+    'medical', 'clinic', 'gp', 'general practice', 'family', 
+    'health centre', 'health center', 'medicare', 'bulk bill',
+    'medical centre', 'doctors'
+  ],
+};
+
+export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefined {
+  const iconBlocklist = PLACE_TYPE_ICON_BLOCKLIST[type] ?? [];
+  const nameBlocklist = PLACE_TYPE_NAME_BLOCKLIST[type] ?? [];
+  const nameAllowlist = PLACE_TYPE_NAME_ALLOWLIST[type] ?? [];
+
+  // if (iconBlocklist.length === 0 && nameBlocklist.length === 0) return undefined;
+  if (iconBlocklist.length === 0 && nameBlocklist.length === 0 && nameAllowlist.length === 0) return undefined;
+
+  return (r: any) => {
+    const pinlet = r.icon_mask_base_uri ?? '';
+    const name = (r.name ?? '').toLowerCase();
+
+    if (iconBlocklist.some(icon => pinlet.includes(icon))) return false;
+    if (nameBlocklist.some(word => name.includes(word))) return false;
+    if (nameAllowlist.length > 0 && !nameAllowlist.some(word => name.includes(word))) return false;
+    return true;
+  };
+}
+
 export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY_TYPES).flatMap(([catId, types]) =>
-  types.map((type) => ({ key: `${catId}:${type}`, catId, type }))
+  types.map((type) => ({
+    key: `${catId}:${type}`,
+    catId,
+    type,
+    filter: buildPlaceFilter(type),  // ← add this line
+  }))
 );
 
 export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [

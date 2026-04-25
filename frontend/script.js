@@ -32,8 +32,8 @@ const CONFIG = {
     {
       id: 'connectivity', label: 'Connectivity', color: '#f07f9d', icon: 'bus-front', services: [
         { id: 'train', label: 'Train Station', type: 'train_station', icon: 'train-front' },
-        { id: 'bus', label: 'Bus Station', type: 'bus_station', icon: 'bus-front' },
-        { id: 'post', label: 'Post Office', type: 'post_office', icon: 'mail' },
+        { id: 'bus', label: 'Bus / Tram Stop', type: 'transit_station', icon: 'bus-front' }, // bus_stop and bus_station removed because too noisy
+        { id: 'post', label: 'Post Office', type: 'mailing_service', icon: 'mail' }, // post_office -> mailing_service
         { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' }
       ]
     },
@@ -354,7 +354,17 @@ async function loadServices(lat, lon) {
     document.getElementById('score-desc').textContent = getScoreDescription(index, data.breakdown);
     renderScoreBreakdown(data.breakdown);
     bar.style.width = '70%';
-    services.forEach(async (s) => {
+    // Only draw route to nearest service per type
+    const nearestPerType = Object.values(
+      services.reduce((acc, s) => {
+        if (!acc[s.type] || s.walkingDistanceMeters < acc[s.type].walkingDistanceMeters) {
+          acc[s.type] = s;
+        }
+        return acc;
+      }, {})
+    );
+
+    nearestPerType.forEach(async (s) => {
       const svcConf = allSvc.find(conf => conf.type === s.type && conf.catId === s.catId) || { catColor: '#64748b', label: s.type };
       if (typeof s.walkingDistanceMeters === 'number' && s.walkingDistanceMeters > 800) {
         showAlert(svcConf.label, s.walkingDistanceMeters);
@@ -374,11 +384,10 @@ async function loadServices(lat, lon) {
 
         const path = google.maps.geometry.encoding.decodePath(rData.polyline);
         // Debugging logs for route decoding
-        console.log('path length:', path.length);
-        console.log('decoded path:', path);
+        // console.log('path length:', path.length);
+        // console.log('decoded path:', path);
         const polyline = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: svcConf.catColor, strokeOpacity: 0.7, strokeWeight: 4, map: map });
         // testing a fixed color for all routes to rule out styling issues
-        // const polyline = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.7, strokeWeight: 4, map: map });
         servicePolylines.push(polyline);
         let step = 0; const numSteps = 40;
         const interval = setInterval(() => { step++; const fraction = step / numSteps; polyline.setPath(path.slice(0, Math.ceil(fraction * path.length))); if (step >= numSteps) clearInterval(interval); }, 25);

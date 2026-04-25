@@ -15,11 +15,11 @@ import {
 
 const CACHE_MAX_ENTRIES = 500;
 const CACHE_TTL_MS = {
-  search: 1000 * 60 * 60 * 6,
-  place: 1000 * 60 * 60,
-  route: 1000 * 60 * 30,
+  search: 1000 * 60 * 60 * 8,
+  place: 1000 * 60 * 60 * 8,
+  route: 1000 * 60 * 60 * 8,
   analysis: 1000 * 60 * 15,
-  seedAnalytics: 1000 * 60 * 60 * 6,
+  seedAnalytics: 1000 * 60 * 60 * 8,
 };
 
 type CacheEntry<T> = {
@@ -114,7 +114,17 @@ function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
     const key = `${catId}:${type}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    parsed.push({ key, catId, type });
+    // parsed.push({ key, catId, type });
+    const existingItem = CORE_ANALYSIS_ITEMS.find(i => i.type === type);
+    // console.log(`[PARSE] type:${type} existingItem:`, existingItem?.key, 'hasFilter:', !!existingItem?.filter);
+    // parsed.push({ key, catId, type, filter: existingItem?.filter });
+    parsed.push({ 
+      key: existingItem?.key ?? key,  // ← use canonical key, not frontend key
+      catId: existingItem?.catId ?? catId, 
+      type, 
+      filter: existingItem?.filter 
+    });
+    
   }
 
   return parsed.length ? parsed : fallback;
@@ -131,18 +141,19 @@ function uniqueItems(items: RequestedItem[]): RequestedItem[] {
   return unique;
 }
 
-function distanceToFactor(distanceMeters: number | null): number {
-  if (distanceMeters === null) return 0;
-  if (distanceMeters <= WALKABLE_THRESHOLD_METERS) return 1;
-  return 0; // Simplified legacy version if still used, but we should use scoring.ts
-}
+// function distanceToFactor(distanceMeters: number | null): number {
+//   if (distanceMeters === null) return 0;
+//   if (distanceMeters <= WALKABLE_THRESHOLD_METERS) return 1;
+//   return 0; // Simplified legacy version if still used, but we should use scoring.ts
+// }
 
 async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
+  // console.log(`[FIND] ${item.key} hasFilter:${!!item.filter}`);
   const cacheKey = [
     'places',
     toCoordKey(originLat),
     toCoordKey(originLon),
-    item.key,
+    item.type, // key
   ].join('_');
 
   const cached = getCached<CandidateService[]>(cacheKey);
@@ -159,13 +170,29 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
       },
     });
 
-    const results = (response.data?.results || []).slice(0, 3); // Fetch up to 3 for density bonus
+    // const results = (response.data?.results || []).slice(0, 10); // Fetch up to 3 for density bonus
+    // Apply optional filter function if provided (e.g. to exclude certain place types that are too noisy)
+    const rawResults = response.data?.results || [];
+    const filtered = item.filter ? rawResults.filter(item.filter) : rawResults;
+    // console.log(`[${item.type}] raw: ${rawResults.length}, filtered: ${filtered.length}`);
+    // console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r:any) => r.name));
+    const results = filtered.slice(0, 5); // Fetch up to 3 for density bonus
+    // De-duplication step (some places appear multiple times with different types, e.g. a cafe that is both 'cafe' and 'restaurant')
+    const seen = new Set<string>();
+    const deduped = results.filter((r: any) => {
+      if (seen.has(r.name)) return false;
+      seen.add(r.name);
+      return true;
+    });
+    
+    // console.log(`[SLICE] ${item.type} top 3:`, results.map((r:any) => r.name));  // ← add this
     if (results.length === 0) {
       setCached(cacheKey, [], CACHE_TTL_MS.place);
       return [];
     }
 
-    const candidates: CandidateService[] = results.map((r: any) => ({
+    // const candidates: CandidateService[] = results.map((r: any) => ({
+    const candidates: CandidateService[] = deduped.map((r: any) => ({
       key: item.key,
       catId: item.catId,
       type: item.type,
@@ -178,6 +205,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
     }));
 
     setCached(cacheKey, candidates, CACHE_TTL_MS.place);
+    // console.log(`[CACHED] ${item.type}:`, candidates.map(c => c.name));  // ← add this
     return candidates;
   } catch (err) {
     console.error(`Failed places search for ${item.key}`, err);
@@ -201,14 +229,11 @@ function getHaversineDistance(lat1: number, lon1: number, lat2: number, lon2: nu
 async function enrichWithWalkingMetrics(originLat: number, originLon: number, candidates: CandidateService[]): Promise<CandidateService[]> {
   if (!candidates.length) return candidates;
 
-  // 1. Calculate baseline Haversine distance and estimate time (1.3 m/s walking speed)
+  // 1. Calculate baseline Haversine estimates for all candidates
   const results: CandidateService[] = candidates.map(c => {
     const dist = getHaversineDistance(originLat, originLon, c.lat, c.lon);
-    // Crow-flies distance is always shorter than walking path.
-    // We add a 30% "detour factor" to make the estimate more realistic for urban environments.
-    const estimatedWalkingDist = dist * 1.3; 
+    const estimatedWalkingDist = dist * 1.3; // 30% detour factor for urban environments
     const estimatedMinutes = Math.ceil(estimatedWalkingDist / 80); // ~4.8 km/h or 80m/min
-    
     return {
       ...c,
       walkingDistanceMeters: Math.round(estimatedWalkingDist),
@@ -217,25 +242,21 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     };
   });
 
-
-  // 2. Reduce wasted API calls by only upgrading candidates that are within a reasonable range of the threshold (e.g. 1.5x)
-  // Filter before hitting Distance Matrix API
-  const worthUpgrading = results.filter(c => 
+  // 2. Only upgrade candidates within 1.5x the walkable threshold to save API calls
+  const worthUpgrading = results.filter(c =>
     (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 1.5
   );
-  // If nothing is worth upgrading, return Haversine estimates as-is
+  // console.log(`[WORTH UPGRADING] ${worthUpgrading.length} of ${results.length} candidates`);
   if (!worthUpgrading.length) return results;
 
-
-  // 3. Attempt to upgrade with real Google Matrix API data
+  // 3. Upgrade with real walking distances from Distance Matrix API
   const BATCH_SIZE = 25;
   for (let i = 0; i < worthUpgrading.length; i += BATCH_SIZE) {
-    const batchIndices = Array.from({ length: Math.min(BATCH_SIZE, worthUpgrading.length - i) }, (_, k) => i + k);
-    const batch = batchIndices.map(idx => worthUpgrading[idx]);
-    const destinations = batch.map((c) => `${c.lat},${c.lon}`).join('|');
-    
+    const batch = worthUpgrading.slice(i, i + BATCH_SIZE);
+    const destinations = batch.map(c => `${c.lat},${c.lon}`).join('|');
+
     try {
-      trackApiCall('distanceMatrix');  // for monitoring usage
+      trackApiCall('distanceMatrix');
       const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
         params: {
           origins: `${originLat},${originLon}`,
@@ -244,34 +265,23 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
           key: getGoogleMapsApiKey(),
         },
       });
+      // console.log('[MATRIX RAW]', JSON.stringify(response.data).slice(0, 500));
 
       if (response.data?.status === 'OK') {
         const elements: any[] = response.data?.rows?.[0]?.elements || [];
-        // batchIndices.forEach((origIdx, batchIdx) => {
-        //   const element = elements[batchIdx];
-        //   if (element?.status === 'OK') {
-        //     const meters = Number(element.distance?.value);
-        //     const seconds = Number(element.duration?.value);
-        //     if (Number.isFinite(meters) && Number.isFinite(seconds)) {
-        //       results[origIdx] = {
-        //         ...results[origIdx],
-        //         walkingDistanceMeters: meters,
-        //         walkingDurationMinutes: Math.ceil(seconds / 60),
-        //         withinThreshold: meters <= WALKABLE_THRESHOLD_METERS,
-        //       };
-        //     }
-        //   }
-        // });
-
-        // Fix when changing to worthUpgrading from all candidates
-        batchIndices.forEach((origIdx, batchIdx) => {
+        // console.log(`[MATRIX RESPONSE] ${elements.length} elements:`, 
+          // elements.map((e: any, i: number) => `${batch[i]?.name}: ${e?.status} ${e?.distance?.value}m`)
+        // );
+        // console.log('[BATCH ORDER]', batch.map((c, i) => `${i}: ${c.name}`));
+        // console.log('[ELEMENTS]', elements.map((e: any, i: number) => `${i}: ${e?.status} ${e?.distance?.value}m`));
+        batch.forEach((candidate, batchIdx) => {
           const element = elements[batchIdx];
           if (element?.status === 'OK') {
             const meters = Number(element.distance?.value);
             const seconds = Number(element.duration?.value);
             if (Number.isFinite(meters) && Number.isFinite(seconds)) {
-              const candidate = worthUpgrading[origIdx];
-              const resultsIdx = results.indexOf(candidate); // ← find its position in results
+              // Find by name+key instead of reference equality
+              const resultsIdx = results.findIndex(r => r.name === candidate.name && r.key === candidate.key);
               if (resultsIdx !== -1) {
                 results[resultsIdx] = {
                   ...results[resultsIdx],
@@ -279,13 +289,14 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
                   walkingDurationMinutes: Math.ceil(seconds / 60),
                   withinThreshold: meters <= WALKABLE_THRESHOLD_METERS,
                 };
+                // console.log(`[MATRIX] ${candidate.name}: ${meters}m (${Math.ceil(seconds / 60)} min)`);
               }
             }
           }
         });
       }
     } catch (err) {
-      // Silently fail and keep Haversine estimate
+      console.error('[MATRIX ERROR]', err);
     }
   }
   return results;
@@ -294,16 +305,33 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
 async function analyzeLocation(originLat: number, originLon: number, requestedItems: RequestedItem[]): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
   const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
+  // console.log('[LOOKUP ITEMS]', lookupItems.map(i => i.key));
 
   const foundArrays = await Promise.all(lookupItems.map((item) => findPlacesByType(originLat, originLon, item)));
   const allCandidates = foundArrays.flat();
+  // console.log('[ALL CANDIDATES]', allCandidates.length, allCandidates.map(c => `${c.key}:${c.name}`));
   const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
-  
+
+  // Rerank by actual walking distance and trim to 3 per type
   const byKey = new Map<string, CandidateService[]>();
   for (const service of enriched) {
     if (!byKey.has(service.key)) byKey.set(service.key, []);
     byKey.get(service.key)!.push(service);
   }
+  for (const [key, candidates] of byKey.entries()) {
+    byKey.set(key, candidates
+      .sort((a, b) => (a.walkingDistanceMeters ?? 999999) - (b.walkingDistanceMeters ?? 999999))
+      .slice(0, 3)
+    );
+  }
+
+  // Temp logging to verify the final candidates being scored
+  for (const [key, candidates] of byKey.entries()) {
+    if (key.includes('gym')) {
+      // console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
+    }
+  }
+
 
   const { breakdown, index } = buildScoreBreakdown(byKey);
 
@@ -419,6 +447,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     // 3. Nearby Services (Places)
     if (routePath === '/api/nearby-services' && httpMethod === 'GET') {
+      // console.log('[NEARBY] request received, types:', event.queryStringParameters?.types);  // ← add this
       const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
       const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
       const requestedItems = parseRequestedItems(event.queryStringParameters?.types);
