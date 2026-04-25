@@ -17,6 +17,8 @@ The backend acts as a stateless secure proxy to protect API keys and provide a u
 
 - [Node.js](https://nodejs.org/) (v18+)
 - A **Google Maps API Key** (with Places, Geocoding, and Directions enabled).
+- API's specifically required: Directions API, Distance Matrix API, Geocoding API, Maps JavaScript API, Places API
+- Why not Places API (New)?
 
 ## Getting Started Locally
 
