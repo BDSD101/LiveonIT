@@ -1,0 +1,2006 @@
+[
+  {
+    "suburb": "Albert Park-Middle Park-West St Kilda",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 643,
+      "3brFlat": 825,
+      "2brHouse": 760,
+      "3brHouse": 1150,
+      "4brHouse": 1400,
+      "all": 698
+    }
+  },
+  {
+    "suburb": "Altona",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 385,
+      "2brFlat": 475,
+      "3brFlat": 550,
+      "2brHouse": 490,
+      "3brHouse": 530,
+      "4brHouse": 580,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Armadale",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 650,
+      "3brFlat": 1000,
+      "2brHouse": 830,
+      "3brHouse": 1100,
+      "4brHouse": 1738,
+      "all": 625
+    }
+  },
+  {
+    "suburb": "Aspendale-Chelsea-Carrum",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 435,
+      "2brFlat": 545,
+      "3brFlat": 675,
+      "2brHouse": 550,
+      "3brHouse": 680,
+      "4brHouse": 870,
+      "all": 620
+    }
+  },
+  {
+    "suburb": "Bairnsdale",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 290,
+      "2brFlat": 370,
+      "3brFlat": 458,
+      "2brHouse": 390,
+      "3brHouse": 460,
+      "4brHouse": 550,
+      "all": 460
+    }
+  },
+  {
+    "suburb": "Ballarat",
+    "lga": "Ballarat",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 285,
+      "2brFlat": 360,
+      "3brFlat": 400,
+      "2brHouse": 360,
+      "3brHouse": 410,
+      "4brHouse": 475,
+      "all": 400
+    }
+  },
+  {
+    "suburb": "Balwyn",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 588,
+      "3brFlat": 798,
+      "2brHouse": 570,
+      "3brHouse": 750,
+      "4brHouse": 1000,
+      "all": 740
+    }
+  },
+  {
+    "suburb": "Bayswater",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 393,
+      "2brFlat": 493,
+      "3brFlat": 590,
+      "2brHouse": 500,
+      "3brHouse": 590,
+      "4brHouse": 675,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Belmont-Grovedale",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 340,
+      "2brFlat": 430,
+      "3brFlat": 500,
+      "2brHouse": 450,
+      "3brHouse": 500,
+      "4brHouse": 550,
+      "all": 500
+    }
+  },
+  {
+    "suburb": "Benalla",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 305,
+      "2brFlat": 370,
+      "2brHouse": 380,
+      "3brHouse": 450,
+      "4brHouse": 570,
+      "all": 450
+    }
+  },
+  {
+    "suburb": "Bendigo",
+    "lga": "Bendigo",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 330,
+      "2brFlat": 400,
+      "2brHouse": 470,
+      "3brHouse": 480,
+      "4brHouse": 580,
+      "all": 470
+    }
+  },
+  {
+    "suburb": "Bentleigh",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 405,
+      "2brFlat": 590,
+      "3brFlat": 750,
+      "2brHouse": 600,
+      "3brHouse": 735,
+      "4brHouse": 1025,
+      "all": 700
+    }
+  },
+  {
+    "suburb": "Berwick",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 500,
+      "3brFlat": 550,
+      "2brHouse": 490,
+      "3brHouse": 560,
+      "4brHouse": 620,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Blackburn",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 460,
+      "2brFlat": 550,
+      "3brFlat": 644,
+      "2brHouse": 550,
+      "3brHouse": 620,
+      "4brHouse": 800,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Boronia",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 500,
+      "3brFlat": 600,
+      "2brHouse": 520,
+      "3brHouse": 590,
+      "4brHouse": 680,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Box Hill",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 490,
+      "2brFlat": 610,
+      "3brFlat": 710,
+      "2brHouse": 540,
+      "3brHouse": 650,
+      "4brHouse": 808,
+      "all": 610
+    }
+  },
+  {
+    "suburb": "Brighton",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 498,
+      "2brFlat": 680,
+      "3brFlat": 1000,
+      "2brHouse": 760,
+      "3brHouse": 1150,
+      "4brHouse": 1650,
+      "all": 825
+    }
+  },
+  {
+    "suburb": "Brighton East",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 265,
+      "2brFlat": 630,
+      "3brFlat": 738,
+      "2brHouse": 690,
+      "3brHouse": 940,
+      "4brHouse": 1295,
+      "all": 835
+    }
+  },
+  {
+    "suburb": "Broadmeadows-Roxburgh Park",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 325,
+      "2brFlat": 470,
+      "3brFlat": 520,
+      "2brHouse": 460,
+      "3brHouse": 506,
+      "4brHouse": 600,
+      "all": 515
+    }
+  },
+  {
+    "suburb": "Brunswick",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 460,
+      "2brFlat": 600,
+      "3brFlat": 840,
+      "2brHouse": 660,
+      "3brHouse": 850,
+      "4brHouse": 1000,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Bulleen-Templestowe-Doncaster",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 480,
+      "2brFlat": 595,
+      "3brFlat": 720,
+      "2brHouse": 570,
+      "3brHouse": 660,
+      "4brHouse": 820,
+      "all": 670
+    }
+  },
+  {
+    "suburb": "Bundoora-Greensborough-Hurstbridge",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 420,
+      "2brFlat": 490,
+      "3brFlat": 580,
+      "2brHouse": 500,
+      "3brHouse": 570,
+      "4brHouse": 600,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Burwood-Ashburton",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 570,
+      "3brFlat": 720,
+      "2brHouse": 580,
+      "3brHouse": 650,
+      "4brHouse": 878,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "CBD-St Kilda Rd",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 560,
+      "2brFlat": 735,
+      "3brFlat": 1050,
+      "all": 660
+    }
+  },
+  {
+    "suburb": "Camberwell-Glen Iris",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 440,
+      "2brFlat": 600,
+      "3brFlat": 815,
+      "2brHouse": 660,
+      "3brHouse": 838,
+      "4brHouse": 1195,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "Canterbury-Surrey Hills-Mont Albert",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 570,
+      "3brFlat": 740,
+      "2brHouse": 620,
+      "3brHouse": 800,
+      "4brHouse": 1100,
+      "all": 678
+    }
+  },
+  {
+    "suburb": "Carlton North",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 430,
+      "2brFlat": 600,
+      "3brFlat": 778,
+      "2brHouse": 755,
+      "3brHouse": 950,
+      "4brHouse": 1225,
+      "all": 760
+    }
+  },
+  {
+    "suburb": "Carlton-Parkville",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 670,
+      "3brFlat": 855,
+      "2brHouse": 670,
+      "3brHouse": 950,
+      "4brHouse": 1100,
+      "all": 620
+    }
+  },
+  {
+    "suburb": "Carnegie",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 420,
+      "2brFlat": 595,
+      "3brFlat": 775,
+      "2brHouse": 600,
+      "3brHouse": 750,
+      "4brHouse": 1100,
+      "all": 570
+    }
+  },
+  {
+    "suburb": "Castlemaine",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 390,
+      "2brHouse": 430,
+      "3brHouse": 500,
+      "4brHouse": 580,
+      "all": 475
+    }
+  },
+  {
+    "suburb": "Caulfield",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 630,
+      "3brFlat": 810,
+      "2brHouse": 633,
+      "3brHouse": 850,
+      "4brHouse": 1250,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "Chadstone-Oakleigh",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 580,
+      "3brFlat": 680,
+      "2brHouse": 570,
+      "3brHouse": 630,
+      "4brHouse": 850,
+      "all": 620
+    }
+  },
+  {
+    "suburb": "Cheltenham",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 550,
+      "3brFlat": 693,
+      "2brHouse": 585,
+      "3brHouse": 720,
+      "4brHouse": 950,
+      "all": 635
+    }
+  },
+  {
+    "suburb": "Clayton",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 490,
+      "2brFlat": 590,
+      "3brFlat": 650,
+      "2brHouse": 550,
+      "3brHouse": 603,
+      "4brHouse": 800,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Coburg-Pascoe Vale South",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 425,
+      "2brFlat": 550,
+      "3brFlat": 700,
+      "2brHouse": 580,
+      "3brHouse": 710,
+      "4brHouse": 850,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Collingwood-Abbotsford",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 520,
+      "2brFlat": 695,
+      "3brFlat": 1000,
+      "2brHouse": 720,
+      "3brHouse": 950,
+      "4brHouse": 1200,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "Corio",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 320,
+      "2brFlat": 380,
+      "3brFlat": 445,
+      "2brHouse": 380,
+      "3brHouse": 420,
+      "4brHouse": 485,
+      "all": 400
+    }
+  },
+  {
+    "suburb": "Craigieburn",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 440,
+      "3brFlat": 485,
+      "2brHouse": 450,
+      "3brHouse": 500,
+      "4brHouse": 560,
+      "all": 520
+    }
+  },
+  {
+    "suburb": "Cranbourne",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 460,
+      "3brFlat": 530,
+      "2brHouse": 490,
+      "3brHouse": 550,
+      "4brHouse": 600,
+      "all": 580
+    }
+  },
+  {
+    "suburb": "Croydon-Lilydale",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 363,
+      "2brFlat": 500,
+      "3brFlat": 620,
+      "2brHouse": 525,
+      "3brHouse": 600,
+      "4brHouse": 730,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Dandenong",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 375,
+      "2brFlat": 450,
+      "3brFlat": 570,
+      "2brHouse": 490,
+      "3brHouse": 560,
+      "4brHouse": 750,
+      "all": 520
+    }
+  },
+  {
+    "suburb": "Dandenong North-Endeavour Hills",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 350,
+      "2brFlat": 468,
+      "3brFlat": 550,
+      "2brHouse": 475,
+      "3brHouse": 530,
+      "4brHouse": 630,
+      "all": 530
+    }
+  },
+  {
+    "suburb": "Docklands",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 600,
+      "2brFlat": 763,
+      "3brFlat": 1200,
+      "all": 700
+    }
+  },
+  {
+    "suburb": "Doncaster East-Donvale",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 470,
+      "2brFlat": 575,
+      "3brFlat": 695,
+      "2brHouse": 530,
+      "3brHouse": 680,
+      "4brHouse": 830,
+      "all": 700
+    }
+  },
+  {
+    "suburb": "Dromana-Portsea",
+    "lga": "Mornington Peninsula",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 393,
+      "2brFlat": 478,
+      "3brFlat": 600,
+      "2brHouse": 490,
+      "3brHouse": 570,
+      "4brHouse": 745,
+      "all": 595
+    }
+  },
+  {
+    "suburb": "East Brunswick",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 625,
+      "3brFlat": 880,
+      "2brHouse": 710,
+      "3brHouse": 880,
+      "4brHouse": 1100,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "East Hawthorn",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 490,
+      "2brFlat": 610,
+      "3brFlat": 890,
+      "2brHouse": 698,
+      "3brHouse": 898,
+      "4brHouse": 1300,
+      "all": 595
+    }
+  },
+  {
+    "suburb": "East Melbourne",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 520,
+      "2brFlat": 690,
+      "3brFlat": 1175,
+      "2brHouse": 875,
+      "3brHouse": 1100,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "East St Kilda",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 425,
+      "2brFlat": 575,
+      "3brFlat": 840,
+      "2brHouse": 763,
+      "3brHouse": 900,
+      "4brHouse": 1100,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Echuca",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 278,
+      "2brFlat": 420,
+      "3brFlat": 450,
+      "2brHouse": 418,
+      "3brHouse": 520,
+      "4brHouse": 640,
+      "all": 470
+    }
+  },
+  {
+    "suburb": "Elsternwick",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 440,
+      "2brFlat": 600,
+      "3brFlat": 800,
+      "2brHouse": 718,
+      "3brHouse": 900,
+      "4brHouse": 1150,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Eltham-Research-Montmorency",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 360,
+      "2brFlat": 500,
+      "3brFlat": 620,
+      "2brHouse": 500,
+      "3brHouse": 650,
+      "4brHouse": 813,
+      "all": 640
+    }
+  },
+  {
+    "suburb": "Elwood",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 608,
+      "3brFlat": 875,
+      "2brHouse": 795,
+      "3brHouse": 1095,
+      "4brHouse": 1500,
+      "all": 595
+    }
+  },
+  {
+    "suburb": "Essendon",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 430,
+      "2brFlat": 510,
+      "3brFlat": 650,
+      "2brHouse": 550,
+      "3brHouse": 650,
+      "4brHouse": 895,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Fairfield-Alphington",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 575,
+      "3brFlat": 815,
+      "2brHouse": 650,
+      "3brHouse": 850,
+      "4brHouse": 1113,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Ferntree Gully",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 520,
+      "3brFlat": 580,
+      "2brHouse": 518,
+      "3brHouse": 600,
+      "4brHouse": 720,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Fitzroy",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 528,
+      "2brFlat": 750,
+      "3brFlat": 1175,
+      "2brHouse": 848,
+      "3brHouse": 1100,
+      "all": 700
+    }
+  },
+  {
+    "suburb": "Fitzroy North-Clifton Hill",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 690,
+      "3brFlat": 1050,
+      "2brHouse": 740,
+      "3brHouse": 998,
+      "4brHouse": 1295,
+      "all": 725
+    }
+  },
+  {
+    "suburb": "Flemington-Kensington",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 470,
+      "2brFlat": 560,
+      "3brFlat": 850,
+      "2brHouse": 620,
+      "3brHouse": 760,
+      "4brHouse": 945,
+      "all": 570
+    }
+  },
+  {
+    "suburb": "Flora Hill-Bendigo East",
+    "lga": "Bendigo",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 350,
+      "2brFlat": 380,
+      "3brFlat": 450,
+      "2brHouse": 420,
+      "3brHouse": 475,
+      "4brHouse": 570,
+      "all": 460
+    }
+  },
+  {
+    "suburb": "Footscray",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 560,
+      "3brFlat": 698,
+      "2brHouse": 573,
+      "3brHouse": 640,
+      "4brHouse": 750,
+      "all": 525
+    }
+  },
+  {
+    "suburb": "Frankston",
+    "lga": "Mornington Peninsula",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 350,
+      "2brFlat": 475,
+      "3brFlat": 560,
+      "2brHouse": 490,
+      "3brHouse": 570,
+      "4brHouse": 670,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Geelong-Newcombe",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 380,
+      "2brFlat": 460,
+      "3brFlat": 518,
+      "2brHouse": 440,
+      "3brHouse": 480,
+      "4brHouse": 575,
+      "all": 470
+    }
+  },
+  {
+    "suburb": "Gladstone Park-Tullamarine",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 450,
+      "3brFlat": 553,
+      "2brHouse": 500,
+      "3brHouse": 530,
+      "4brHouse": 620,
+      "all": 530
+    }
+  },
+  {
+    "suburb": "Glen Waverley-Mulgrave",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 550,
+      "2brFlat": 640,
+      "3brFlat": 660,
+      "2brHouse": 590,
+      "3brHouse": 640,
+      "4brHouse": 780,
+      "all": 695
+    }
+  },
+  {
+    "suburb": "Golden Square-Kangaroo Flat",
+    "lga": "Bendigo",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 320,
+      "2brFlat": 380,
+      "3brFlat": 470,
+      "2brHouse": 420,
+      "3brHouse": 480,
+      "4brHouse": 550,
+      "all": 475
+    }
+  },
+  {
+    "suburb": "Hamilton",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 260,
+      "2brFlat": 320,
+      "2brHouse": 330,
+      "3brHouse": 390,
+      "4brHouse": 460,
+      "all": 370
+    }
+  },
+  {
+    "suburb": "Hampton-Beaumaris",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 480,
+      "2brFlat": 650,
+      "3brFlat": 900,
+      "2brHouse": 650,
+      "3brHouse": 895,
+      "4brHouse": 1295,
+      "all": 750
+    }
+  },
+  {
+    "suburb": "Hastings-Flinders",
+    "lga": "Mornington Peninsula",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 360,
+      "2brFlat": 470,
+      "3brFlat": 550,
+      "2brHouse": 498,
+      "3brHouse": 595,
+      "4brHouse": 750,
+      "all": 580
+    }
+  },
+  {
+    "suburb": "Hawthorn",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 600,
+      "3brFlat": 850,
+      "2brHouse": 710,
+      "3brHouse": 950,
+      "4brHouse": 1500,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Heidelberg-Heidelberg West",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 530,
+      "3brFlat": 650,
+      "2brHouse": 510,
+      "3brHouse": 600,
+      "4brHouse": 795,
+      "all": 565
+    }
+  },
+  {
+    "suburb": "Herne Hill-Geelong West",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 340,
+      "2brFlat": 410,
+      "3brFlat": 575,
+      "2brHouse": 460,
+      "3brHouse": 520,
+      "4brHouse": 660,
+      "all": 480
+    }
+  },
+  {
+    "suburb": "Horsham",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 250,
+      "2brFlat": 320,
+      "3brFlat": 415,
+      "2brHouse": 350,
+      "3brHouse": 430,
+      "4brHouse": 520,
+      "all": 390
+    }
+  },
+  {
+    "suburb": "Ivanhoe-Ivanhoe East",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 490,
+      "2brFlat": 600,
+      "3brFlat": 750,
+      "2brHouse": 600,
+      "3brHouse": 750,
+      "4brHouse": 1000,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Keilor",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "3brHouse": 630,
+      "4brHouse": 730,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "Keilor East-Avondale Heights",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 520,
+      "3brFlat": 623,
+      "2brHouse": 520,
+      "3brHouse": 580,
+      "4brHouse": 768,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Kew",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 470,
+      "2brFlat": 575,
+      "3brFlat": 850,
+      "2brHouse": 663,
+      "3brHouse": 850,
+      "4brHouse": 1300,
+      "all": 690
+    }
+  },
+  {
+    "suburb": "Lara",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 415,
+      "3brFlat": 485,
+      "2brHouse": 430,
+      "3brHouse": 500,
+      "4brHouse": 580,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Malvern",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 600,
+      "3brFlat": 908,
+      "2brHouse": 790,
+      "3brHouse": 1000,
+      "4brHouse": 1400,
+      "all": 630
+    }
+  },
+  {
+    "suburb": "Malvern East",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 480,
+      "2brFlat": 600,
+      "3brFlat": 800,
+      "2brHouse": 650,
+      "3brHouse": 750,
+      "4brHouse": 1150,
+      "all": 610
+    }
+  },
+  {
+    "suburb": "Melton",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 350,
+      "2brFlat": 365,
+      "3brFlat": 400,
+      "2brHouse": 375,
+      "3brHouse": 420,
+      "4brHouse": 470,
+      "all": 450
+    }
+  },
+  {
+    "suburb": "Mentone-Parkdale-Mordialloc",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 405,
+      "2brFlat": 550,
+      "3brFlat": 720,
+      "2brHouse": 600,
+      "3brHouse": 750,
+      "4brHouse": 910,
+      "all": 580
+    }
+  },
+  {
+    "suburb": "Mildura",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 280,
+      "2brFlat": 350,
+      "3brFlat": 450,
+      "2brHouse": 380,
+      "3brHouse": 480,
+      "4brHouse": 580,
+      "all": 460
+    }
+  },
+  {
+    "suburb": "Mill Park-Epping",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 450,
+      "3brFlat": 520,
+      "2brHouse": 480,
+      "3brHouse": 530,
+      "4brHouse": 600,
+      "all": 530
+    }
+  },
+  {
+    "suburb": "Moe-Newborough",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 250,
+      "2brFlat": 310,
+      "2brHouse": 350,
+      "3brHouse": 420,
+      "4brHouse": 525,
+      "all": 390
+    }
+  },
+  {
+    "suburb": "Moonee Ponds-Ascot Vale",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 450,
+      "2brFlat": 550,
+      "3brFlat": 730,
+      "2brHouse": 620,
+      "3brHouse": 750,
+      "4brHouse": 995,
+      "all": 575
+    }
+  },
+  {
+    "suburb": "Morwell",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 275,
+      "2brFlat": 320,
+      "2brHouse": 350,
+      "3brHouse": 400,
+      "4brHouse": 493,
+      "all": 380
+    }
+  },
+  {
+    "suburb": "Mount Clear-Buninyong",
+    "lga": "Ballarat",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 285,
+      "2brFlat": 360,
+      "3brFlat": 390,
+      "2brHouse": 365,
+      "3brHouse": 430,
+      "4brHouse": 480,
+      "all": 420
+    }
+  },
+  {
+    "suburb": "Mount Waverley",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 280,
+      "2brFlat": 540,
+      "3brFlat": 700,
+      "2brHouse": 570,
+      "3brHouse": 660,
+      "4brHouse": 800,
+      "all": 695
+    }
+  },
+  {
+    "suburb": "Mt Eliza-Mornington-Mt Martha",
+    "lga": "Mornington Peninsula",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 535,
+      "3brFlat": 650,
+      "2brHouse": 533,
+      "3brHouse": 675,
+      "4brHouse": 895,
+      "all": 695
+    }
+  },
+  {
+    "suburb": "Murrumbeena-Hughesdale",
+    "lga": "Southern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 405,
+      "2brFlat": 570,
+      "3brFlat": 750,
+      "2brHouse": 590,
+      "3brHouse": 730,
+      "4brHouse": 1050,
+      "all": 580
+    }
+  },
+  {
+    "suburb": "Narre Warren-Hampton Park",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 323,
+      "2brFlat": 470,
+      "3brFlat": 545,
+      "2brHouse": 475,
+      "3brHouse": 550,
+      "4brHouse": 640,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Newport-Spotswood",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 455,
+      "2brFlat": 575,
+      "3brFlat": 725,
+      "2brHouse": 580,
+      "3brHouse": 700,
+      "4brHouse": 925,
+      "all": 620
+    }
+  },
+  {
+    "suburb": "Newtown",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 318,
+      "2brFlat": 440,
+      "3brFlat": 590,
+      "2brHouse": 485,
+      "3brHouse": 570,
+      "4brHouse": 700,
+      "all": 500
+    }
+  },
+  {
+    "suburb": "Noble Park",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 370,
+      "2brFlat": 495,
+      "3brFlat": 580,
+      "2brHouse": 480,
+      "3brHouse": 550,
+      "4brHouse": 630,
+      "all": 520
+    }
+  },
+  {
+    "suburb": "North Bendigo",
+    "lga": "Bendigo",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 320,
+      "2brFlat": 398,
+      "3brFlat": 475,
+      "2brHouse": 420,
+      "3brHouse": 480,
+      "4brHouse": 550,
+      "all": 480
+    }
+  },
+  {
+    "suburb": "North Geelong",
+    "lga": "Geelong",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 330,
+      "2brFlat": 420,
+      "3brFlat": 500,
+      "2brHouse": 440,
+      "3brHouse": 495,
+      "4brHouse": 580,
+      "all": 480
+    }
+  },
+  {
+    "suburb": "North Melbourne-West Melbourne",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 525,
+      "2brFlat": 660,
+      "3brFlat": 882,
+      "2brHouse": 650,
+      "3brHouse": 853,
+      "4brHouse": 1080,
+      "all": 600
+    }
+  },
+  {
+    "suburb": "Northcote",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 420,
+      "2brFlat": 600,
+      "3brFlat": 850,
+      "2brHouse": 700,
+      "3brHouse": 850,
+      "4brHouse": 1250,
+      "all": 640
+    }
+  },
+  {
+    "suburb": "Nunawading-Mitcham",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 435,
+      "2brFlat": 520,
+      "3brFlat": 650,
+      "2brHouse": 525,
+      "3brHouse": 625,
+      "4brHouse": 745,
+      "all": 580
+    }
+  },
+  {
+    "suburb": "Oak Park-Glenroy-Fawkner",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 385,
+      "2brFlat": 490,
+      "3brFlat": 600,
+      "2brHouse": 500,
+      "3brHouse": 551,
+      "4brHouse": 660,
+      "all": 530
+    }
+  },
+  {
+    "suburb": "Ocean Grove-Barwon Heads",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 468,
+      "3brFlat": 560,
+      "2brHouse": 520,
+      "3brHouse": 550,
+      "4brHouse": 650,
+      "all": 570
+    }
+  },
+  {
+    "suburb": "Pakenham",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 450,
+      "3brFlat": 500,
+      "2brHouse": 460,
+      "3brHouse": 530,
+      "4brHouse": 590,
+      "all": 540
+    }
+  },
+  {
+    "suburb": "Pascoe Vale-Coburg North",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 280,
+      "2brFlat": 500,
+      "3brFlat": 628,
+      "2brHouse": 540,
+      "3brHouse": 620,
+      "4brHouse": 785,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Port Melbourne",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 550,
+      "2brFlat": 745,
+      "3brFlat": 1175,
+      "2brHouse": 740,
+      "3brHouse": 980,
+      "4brHouse": 1125,
+      "all": 795
+    }
+  },
+  {
+    "suburb": "Portland",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 345,
+      "2brFlat": 350,
+      "3brFlat": 475,
+      "2brHouse": 380,
+      "3brHouse": 430,
+      "4brHouse": 565,
+      "all": 420
+    }
+  },
+  {
+    "suburb": "Prahran-Windsor",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 460,
+      "2brFlat": 650,
+      "3brFlat": 950,
+      "2brHouse": 775,
+      "3brHouse": 975,
+      "4brHouse": 1350,
+      "all": 590
+    }
+  },
+  {
+    "suburb": "Preston",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 440,
+      "2brFlat": 550,
+      "3brFlat": 695,
+      "2brHouse": 588,
+      "3brHouse": 675,
+      "4brHouse": 925,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Reservoir",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 500,
+      "3brFlat": 620,
+      "2brHouse": 500,
+      "3brHouse": 560,
+      "4brHouse": 700,
+      "all": 530
+    }
+  },
+  {
+    "suburb": "Richmond-Burnley",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 510,
+      "2brFlat": 700,
+      "3brFlat": 1000,
+      "2brHouse": 750,
+      "3brHouse": 990,
+      "4brHouse": 1315,
+      "all": 675
+    }
+  },
+  {
+    "suburb": "Ringwood",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 440,
+      "2brFlat": 520,
+      "3brFlat": 620,
+      "2brHouse": 520,
+      "3brHouse": 600,
+      "4brHouse": 710,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Rowville",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 530,
+      "3brFlat": 628,
+      "2brHouse": 550,
+      "3brHouse": 600,
+      "4brHouse": 725,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "Sale-Maffra",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 253,
+      "2brFlat": 360,
+      "3brFlat": 470,
+      "2brHouse": 400,
+      "3brHouse": 450,
+      "4brHouse": 550,
+      "all": 450
+    }
+  },
+  {
+    "suburb": "Seaford-Carrum Downs",
+    "lga": "Mornington Peninsula",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 380,
+      "2brFlat": 470,
+      "3brFlat": 560,
+      "2brHouse": 490,
+      "3brHouse": 560,
+      "4brHouse": 660,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Sebastopol-Delacombe",
+    "lga": "Ballarat",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 300,
+      "2brFlat": 350,
+      "3brFlat": 390,
+      "2brHouse": 360,
+      "3brHouse": 400,
+      "4brHouse": 455,
+      "all": 430
+    }
+  },
+  {
+    "suburb": "Seymour",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 275,
+      "2brFlat": 360,
+      "2brHouse": 380,
+      "3brHouse": 420,
+      "4brHouse": 530,
+      "all": 410
+    }
+  },
+  {
+    "suburb": "Shepparton",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 290,
+      "2brFlat": 385,
+      "3brFlat": 490,
+      "2brHouse": 390,
+      "3brHouse": 475,
+      "4brHouse": 590,
+      "all": 460
+    }
+  },
+  {
+    "suburb": "South Melbourne",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 548,
+      "2brFlat": 700,
+      "3brFlat": 950,
+      "2brHouse": 750,
+      "3brHouse": 950,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "South Yarra",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 700,
+      "3brFlat": 1100,
+      "2brHouse": 780,
+      "3brHouse": 1100,
+      "4brHouse": 1700,
+      "all": 620
+    }
+  },
+  {
+    "suburb": "Southbank",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 570,
+      "2brFlat": 720,
+      "3brFlat": 1010,
+      "all": 680
+    }
+  },
+  {
+    "suburb": "Springvale",
+    "lga": "South Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 370,
+      "2brFlat": 520,
+      "3brFlat": 650,
+      "2brHouse": 510,
+      "3brHouse": 570,
+      "4brHouse": 683,
+      "all": 570
+    }
+  },
+  {
+    "suburb": "St Albans-Deer Park",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 330,
+      "2brFlat": 420,
+      "3brFlat": 482,
+      "2brHouse": 420,
+      "3brHouse": 470,
+      "4brHouse": 550,
+      "all": 470
+    }
+  },
+  {
+    "suburb": "St Kilda",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 465,
+      "2brFlat": 630,
+      "3brFlat": 890,
+      "2brHouse": 728,
+      "3brHouse": 950,
+      "4brHouse": 1105,
+      "all": 560
+    }
+  },
+  {
+    "suburb": "Sunbury",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 440,
+      "3brFlat": 480,
+      "2brHouse": 440,
+      "3brHouse": 490,
+      "4brHouse": 570,
+      "all": 520
+    }
+  },
+  {
+    "suburb": "Sunshine",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 330,
+      "2brFlat": 410,
+      "3brFlat": 530,
+      "2brHouse": 460,
+      "3brHouse": 495,
+      "4brHouse": 600,
+      "all": 480
+    }
+  },
+  {
+    "suburb": "Swan Hill",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 245,
+      "2brFlat": 355,
+      "3brHouse": 475,
+      "4brHouse": 560,
+      "all": 430
+    }
+  },
+  {
+    "suburb": "Sydenham",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 450,
+      "3brFlat": 460,
+      "2brHouse": 440,
+      "3brHouse": 480,
+      "4brHouse": 530,
+      "all": 500
+    }
+  },
+  {
+    "suburb": "Thomastown-Lalor",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 375,
+      "2brFlat": 450,
+      "3brFlat": 501,
+      "2brHouse": 470,
+      "3brHouse": 510,
+      "4brHouse": 590,
+      "all": 500
+    }
+  },
+  {
+    "suburb": "Thornbury",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 520,
+      "3brFlat": 748,
+      "2brHouse": 650,
+      "3brHouse": 798,
+      "4brHouse": 960,
+      "all": 525
+    }
+  },
+  {
+    "suburb": "Toorak",
+    "lga": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 445,
+      "2brFlat": 650,
+      "3brFlat": 1000,
+      "2brHouse": 695,
+      "3brHouse": 1250,
+      "4brHouse": 1875,
+      "all": 688
+    }
+  },
+  {
+    "suburb": "Torquay",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 500,
+      "3brFlat": 660,
+      "2brHouse": 535,
+      "3brHouse": 650,
+      "4brHouse": 750,
+      "all": 685
+    }
+  },
+  {
+    "suburb": "Traralgon",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 293,
+      "2brFlat": 365,
+      "3brFlat": 488,
+      "2brHouse": 390,
+      "3brHouse": 460,
+      "4brHouse": 580,
+      "all": 450
+    }
+  },
+  {
+    "suburb": "Vermont-Forest Hill-Burwood East",
+    "lga": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 530,
+      "2brFlat": 578,
+      "3brFlat": 650,
+      "2brHouse": 540,
+      "3brHouse": 630,
+      "4brHouse": 750,
+      "all": 650
+    }
+  },
+  {
+    "suburb": "Wanagaratta",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 267,
+      "2brFlat": 350,
+      "3brFlat": 420,
+      "2brHouse": 400,
+      "3brHouse": 480,
+      "4brHouse": 555,
+      "all": 420
+    }
+  },
+  {
+    "suburb": "Wantirna-Scoresby",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 287,
+      "2brFlat": 510,
+      "3brFlat": 610,
+      "2brHouse": 550,
+      "3brHouse": 597,
+      "4brHouse": 700,
+      "all": 620
+    }
+  },
+  {
+    "suburb": "Warragul",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 250,
+      "2brFlat": 410,
+      "2brHouse": 420,
+      "3brHouse": 483,
+      "4brHouse": 590,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Warrnambool",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 345,
+      "2brFlat": 420,
+      "3brFlat": 500,
+      "2brHouse": 450,
+      "3brHouse": 550,
+      "4brHouse": 680,
+      "all": 500
+    }
+  },
+  {
+    "suburb": "Wendouree-Alfredton",
+    "lga": "Ballarat",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 285,
+      "2brFlat": 350,
+      "3brFlat": 413,
+      "2brHouse": 370,
+      "3brHouse": 410,
+      "4brHouse": 480,
+      "all": 440
+    }
+  },
+  {
+    "suburb": "Werribee-Hoppers Crossing",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 350,
+      "2brFlat": 405,
+      "3brFlat": 450,
+      "2brHouse": 420,
+      "3brHouse": 460,
+      "4brHouse": 525,
+      "all": 490
+    }
+  },
+  {
+    "suburb": "West Brunswick",
+    "lga": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 500,
+      "3brFlat": 725,
+      "2brHouse": 590,
+      "3brHouse": 755,
+      "4brHouse": 1000,
+      "all": 480
+    }
+  },
+  {
+    "suburb": "West Footscray",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 365,
+      "2brFlat": 475,
+      "3brFlat": 620,
+      "2brHouse": 500,
+      "3brHouse": 600,
+      "4brHouse": 725,
+      "all": 550
+    }
+  },
+  {
+    "suburb": "Whittlesea",
+    "lga": "North Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 440,
+      "3brFlat": 500,
+      "2brHouse": 450,
+      "3brHouse": 510,
+      "4brHouse": 550,
+      "all": 540
+    }
+  },
+  {
+    "suburb": "Williamstown",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 420,
+      "2brFlat": 523,
+      "3brFlat": 670,
+      "2brHouse": 600,
+      "3brHouse": 800,
+      "4brHouse": 1000,
+      "all": 670
+    }
+  },
+  {
+    "suburb": "Wodonga",
+    "lga": "Other Regional Centres",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 290,
+      "2brFlat": 385,
+      "3brFlat": 450,
+      "2brHouse": 418,
+      "3brHouse": 500,
+      "4brHouse": 590,
+      "all": 500
+    }
+  },
+  {
+    "suburb": "Yarra Ranges",
+    "lga": "Outer Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 350,
+      "2brFlat": 488,
+      "3brFlat": 550,
+      "2brHouse": 500,
+      "3brHouse": 595,
+      "4brHouse": 695,
+      "all": 580
+    }
+  },
+  {
+    "suburb": "Yarraville-Seddon",
+    "lga": "Outer Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 393,
+      "2brFlat": 520,
+      "3brFlat": 730,
+      "2brHouse": 600,
+      "3brHouse": 720,
+      "4brHouse": 850,
+      "all": 620
+    }
+  }
+]
