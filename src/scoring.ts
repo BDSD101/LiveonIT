@@ -8,6 +8,9 @@ export type RequestedItem = {
   // For text search capability
   useTextSearch?: boolean;
   textQuery?: string;
+  // to limit the number of candidates sent to Distance Matrix API for scoring
+  searchRadius?: number;
+  upgradeCount?: number;
 };
 
 export type CandidateService = {
@@ -74,21 +77,34 @@ export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> 
   dining: { label: 'Dining and Social', weight: 2 },
   education: { label: 'Education and Learning', weight: 2 },
   fitness: { label: 'Fitness and Recreation', weight: 1 },
+  community: { label: 'Community Services', weight: 1 },
 };
 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy'], // hospital removed for now as creates too much noise
+  health: ['doctor', 'pharmacy', 'hospital','dentist'],
   food: ['supermarket', 'convenience_store'],
-  connectivity: ['train_station', 'transit_station'], // bus_station and bus_stops removed because too noisy
+  connectivity: ['train_station', 'transit_station', 'post_office', 'bank','atm'], // bus_station and bus_stops removed because too noisy
   parks: ['park'], // playground removed for now as creates too much noise
   dining: ['cafe', 'restaurant', 'bar'],
-  education: ['library'], // kindergarten and school removed for now as creates too much noise
+  education: ['childcare', 'kindergarten', 'primary_school', 'secondary_school', 'library'], // note kindergarten is not an official type but is handled with a text query
   fitness: ['gym'], // 'sports_complex' removed too much noise
+  community: ['community'],
 };
 
 // Blocklist for certain pinlet icons that are misleading for specific categories (e.g., 'school_pinlet' for gyms)
 export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
   gym: ['school_pinlet'],
+};
+
+export const PLACE_TYPE_PINLET_ALLOWLIST: Record<string, string[]> = {
+  cafe: ['cafe_pinlet'],
+  restaurant: ['restaurant_pinlet'],
+  bar: ['bar_pinlet'],
+  library: ['school_pinlet'],
+  primary_school: ['school_pinlet'],
+  secondary_school: ['school_pinlet'],
+  kindergarten: ['school_pinlet'],
+  childcare: ['school_pinlet'],
 };
 
 export const PLACE_TYPE_NAME_BLOCKLIST: Record<string, string[]> = {
@@ -100,21 +116,18 @@ export const PLACE_TYPE_NAME_BLOCKLIST: Record<string, string[]> = {
 };
 
 export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
-  doctor: [
-    'medical', 'medical clinic', 'gp', 'general practice', 'family', 
-    'health centre', 'health center', 'medicare', 'bulk bill',
-    'medical centre', 'doctors'
-  ],
   supermarket: ['woolworths', 'coles', 'aldi', 'iga', 'foodworks', 'safeway'],
+  secondary_school: ['secondary', 'high', 'college'],
 };
 
 export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefined {
   const iconBlocklist = PLACE_TYPE_ICON_BLOCKLIST[type] ?? [];
   const nameBlocklist = PLACE_TYPE_NAME_BLOCKLIST[type] ?? [];
   const nameAllowlist = PLACE_TYPE_NAME_ALLOWLIST[type] ?? [];
+  const pinletAllowlist = PLACE_TYPE_PINLET_ALLOWLIST[type] ?? [];
 
   // if (iconBlocklist.length === 0 && nameBlocklist.length === 0) return undefined;
-  if (iconBlocklist.length === 0 && nameBlocklist.length === 0 && nameAllowlist.length === 0) return undefined;
+  if (iconBlocklist.length === 0 && nameBlocklist.length === 0 && nameAllowlist.length === 0 && pinletAllowlist.length === 0) return undefined;
 
   return (r: any) => {
     const pinlet = r.icon_mask_base_uri ?? '';
@@ -123,9 +136,17 @@ export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefine
     if (iconBlocklist.some(icon => pinlet.includes(icon))) return false;
     if (nameBlocklist.some(word => name.includes(word))) return false;
     if (nameAllowlist.length > 0 && !nameAllowlist.some(word => name.includes(word))) return false;
+    if (pinletAllowlist.length > 0 && !pinletAllowlist.some(p => pinlet.includes(p))) return false;
     return true;
   };
 }
+
+export const PLACE_TYPE_UPGRADE_COUNT: Record<string, number> = {
+  hospital: 20,
+  doctor:   10,
+  gym:      10,
+  park:     20,
+};
 
 export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY_TYPES).flatMap(([catId, types]) =>
   types.map((type) => ({
@@ -133,13 +154,34 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
     catId,
     type,
     filter: buildPlaceFilter(type),
+    upgradeCount: PLACE_TYPE_UPGRADE_COUNT[type] ?? 5,
     ...(type === 'doctor' ? {
       useTextSearch: true,
-      // textQuery: 'GP bulk billing medical centre center clinic'
-      textQuery: 'GP'
+      textQuery: 'GP',
+    } : {}),
+    ...(type === 'hospital' ? {
+      useTextSearch: true,
+      textQuery: 'hospital',
+    } : {}),
+    ...(type === 'post_office' ? {
+      useTextSearch: true,
+      textQuery: 'LPO',
+    } : {}),
+    ...(type === 'kindergarten' ? {
+      useTextSearch: true,
+      textQuery: 'kindergarten',
+    } : {}),
+    ...(type === 'childcare' ? {
+      useTextSearch: true,
+      textQuery: 'child care centre',
+    } : {}),
+    ...(type === 'community' ? {
+      useTextSearch: true,
+      textQuery: 'community neighbourhood centre house',
     } : {}),
   }))
 );
+
 
 export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
   { name: 'Carlton', ring: 'inner', lat: -37.7983, lng: 144.9671 },
