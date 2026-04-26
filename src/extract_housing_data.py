@@ -331,7 +331,7 @@ def extract_rent(filepath, engine, period_end):
 
         # Suburb = col 1, region = col 0
         suburb_col = cols[1]
-        lga_col = cols[0]
+        region_col = cols[0]
 
         # Find all Median columns — use the last one (most recent quarter)
         median_cols = [c for c in cols if "Median" in str(c) or "median" in str(c)]
@@ -349,10 +349,7 @@ def extract_rent(filepath, engine, period_end):
             if "group total" in suburb.lower() or "total" in suburb.lower():
                 continue
 
-            lga = str(row.get(lga_col, "")).strip()
-
-            # if lga and not is_melbourne_lga(lga):
-            #     continue
+            region = str(row.get(region_col, "")).strip()
 
             rent = None
             if latest_col and pd.notna(row.get(latest_col)):
@@ -363,8 +360,8 @@ def extract_rent(filepath, engine, period_end):
 
             if suburb not in result:
                 result[suburb] = {
-                    "suburb": suburb,
-                    "lga": lga if lga.lower() not in ("nan", "", "none") else None,
+                    "suburbs": [s.strip() for s in suburb.split("-")],
+                    "region": region if region.lower() not in ("nan", "", "none") else None,
                     "period": period_end,
                     "weeklyRent": {}
                 }
@@ -372,7 +369,7 @@ def extract_rent(filepath, engine, period_end):
             if rent is not None:
                 result[suburb]["weeklyRent"][type_key] = rent
 
-    suburb_list = sorted(result.values(), key=lambda x: x["suburb"])
+    suburb_list = sorted(result.values(), key=lambda x: x["suburbs"][0])
     print(f"  Suburbs extracted: {len(suburb_list)}")
     return suburb_list
 
