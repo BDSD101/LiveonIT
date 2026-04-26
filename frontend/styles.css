@@ -1,5 +1,15 @@
 body {
   font-family: 'Public Sans', sans-serif;
+
+  --colour-health:       #378ADD;
+  --colour-food:         #7F77DD;
+  --colour-connectivity: #D4537E;
+  --colour-parks:        #639922;
+  --colour-dining:       #D85A30;
+  --colour-education:    #EF9F27;
+  --colour-fitness:      #1D9E75;
+  --colour-other:        #888780;
+
 }
 
 .font-inter {

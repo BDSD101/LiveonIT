@@ -124,7 +124,8 @@ function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
       type, 
       filter: existingItem?.filter,
       useTextSearch: existingItem?.useTextSearch,
-      textQuery: existingItem?.textQuery,  
+      textQuery: existingItem?.textQuery,
+      upgradeCount: existingItem?.upgradeCount,  
     });
     
   }
@@ -178,7 +179,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
     const filtered = item.filter ? rawResults.filter(item.filter) : rawResults;
     // console.log(`[${item.type}] raw: ${rawResults.length}, filtered: ${filtered.length}`);
     console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r:any) => r.name));
-    const results = filtered.slice(0, 3); // Fetch up to 3 for density bonus
+    const results = filtered.slice(0, item.upgradeCount ?? 5); // ← use upgradeCount if specified, otherwise default to 3
     // De-duplication step (some places appear multiple times with different types, e.g. a cafe that is both 'cafe' and 'restaurant')
     const seen = new Set<string>();
     const deduped = results.filter((r: any) => {
@@ -245,7 +246,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
     
     const seen = new Set<string>();
     const deduped = filtered
-      .slice(0, 5)
+      .slice(0, item.upgradeCount ?? 5)
       .filter((r: any) => {
         if (seen.has(r.name)) return false;
         seen.add(r.name);
@@ -589,6 +590,9 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
       const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
       const query = event.queryStringParameters?.query;
+      const radius = Number(event.queryStringParameters?.radius) || 2000;
+      const strictbounds = event.queryStringParameters?.strictbounds === 'true';
+      const keyword = event.queryStringParameters?.keyword;
 
       if (!lat || !lon) {
         return jsonResponse(400, { error: 'Missing lat or lon' });
@@ -603,7 +607,8 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           params: {
             query,
             location: `${lat},${lon}`,
-            radius: 2000,
+            radius,
+            ...(strictbounds ? { strictbounds: true } : {}),
             ...(type ? { type } : {}),
             key: getGoogleMapsApiKey(),
           },
@@ -614,6 +619,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
             location: `${lat},${lon}`,
             rankby: 'distance',
             type,
+            ...(keyword ? { keyword } : {}),
             key: getGoogleMapsApiKey(),
           },
         });

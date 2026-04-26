@@ -10,10 +10,12 @@ function showView(view) {
   lucide.createIcons();
 }
 
+const root = getComputedStyle(document.body);
+
 const CONFIG = {
   categories: [
     {
-      id: 'health', label: 'Health Services', color: '#89bee8', icon: 'heart-pulse', services: [
+      id: 'health', label: 'Health Services', color: root.getPropertyValue('--colour-health'), icon: 'heart-pulse', services: [
         { id: 'doctor', label: 'Doctor / GP', type: 'doctor', icon: 'stethoscope' },
         { id: 'pharmacy', label: 'Pharmacy', type: 'pharmacy', icon: 'pill' },
         { id: 'hospital', label: 'Hospital', type: 'hospital', icon: 'hospital' },
@@ -22,7 +24,7 @@ const CONFIG = {
       ]
     },
     {
-      id: 'food', label: 'Food and Essentials', color: '#b39dcb', icon: 'shopping-basket', services: [
+      id: 'food', label: 'Food and Essentials', color: root.getPropertyValue('--colour-food'), icon: 'shopping-basket', services: [
         { id: 'supermarket', label: 'Supermarket', type: 'supermarket', icon: 'shopping-cart' },
         { id: 'bakery', label: 'Bakery', type: 'bakery', icon: 'croissant' },
         { id: 'convenience', label: 'Convenience', type: 'convenience_store', icon: 'store' },
@@ -30,20 +32,38 @@ const CONFIG = {
       ]
     },
     {
-      id: 'connectivity', label: 'Connectivity', color: '#f07f9d', icon: 'bus-front', services: [
+      id: 'connectivity', label: 'Connectivity', color: root.getPropertyValue('--colour-connectivity'), icon: 'bus-front', services: [
         { id: 'train', label: 'Train Station', type: 'train_station', icon: 'train-front' },
         { id: 'bus', label: 'Bus / Tram Stop', type: 'transit_station', icon: 'bus-front' }, // bus_stop and bus_station removed because too noisy
-        { id: 'post', label: 'Post Office', type: 'mailing_service', icon: 'mail' }, // post_office -> mailing_service
-        { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' }
+        { id: 'post', label: 'Post Office', type: 'post_office', icon: 'mail' },
+        { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' },
+        { id: 'atm', label: 'ATM', type: 'atm', icon: 'credit-card' }
       ]
     },
     {
-      id: 'parks', label: 'Parks and Nature', color: '#a5d17c', icon: 'trees', services: [
+      id: 'parks', label: 'Parks and Nature', color: root.getPropertyValue('--colour-parks'), icon: 'trees', services: [
         { id: 'park', label: 'Parks', type: 'park', icon: 'trees' },
+      ]
+    },
+    {
+      id: 'dining', label: 'Dining and Social', color: root.getPropertyValue('--colour-dining'), icon: 'utensils', services: [
         { id: 'cafe', label: 'Cafe', type: 'cafe', icon: 'coffee' },
         { id: 'restaurant', label: 'Restaurant', type: 'restaurant', icon: 'utensils' },
-        { id: 'community', label: 'Community Centre', type: 'community_center', icon: 'users' },
-        { id: 'school', label: 'Education', type: 'school', icon: 'graduation-cap' }
+        { id: 'bar', label: 'Bar / Pub', type: 'bar', icon: 'beer' },
+      ]
+    },
+    {
+      id: 'education', label: 'Education', color: root.getPropertyValue('--colour-education'), icon: 'school', services: [
+        { id: 'childcare', label: 'Childcare', type: 'childcare', icon: 'baby' },
+        { id: 'kindergarten', label: 'Kindergarten', type: 'kindergarten', icon: 'blocks' },
+        { id: 'primary', label: 'Primary School', type: 'primary_school', icon: 'school' },
+        { id: 'secondary', label: 'Secondary School', type: 'secondary_school', icon: 'school' },
+        { id: 'library', label: 'Library', type: 'library', icon: 'book' },
+      ]
+    },
+    {
+      id: 'other', label: 'Other Services', color: root.getPropertyValue('--colour-other'), icon: 'users', services: [
+        { id: 'community', label: 'Community Centre', type: 'community', icon: 'users' },
       ]
     }
   ]
@@ -51,7 +71,7 @@ const CONFIG = {
 
 let map, marker, radiusCircle, debounceTimer, currentPos;
 let serviceMarkers = [], servicePolylines = [];
-let selectedServices = new Set(['doctor', 'supermarket', 'train', 'park']);
+let selectedServices = new Set(['doctor', 'supermarket', 'train', 'bus', 'park']);
 let openCategories = new Set();
 let history = JSON.parse(sessionStorage.getItem('history') || '[]');
 let leaderboardData = null;
