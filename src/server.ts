@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import http, { IncomingMessage, ServerResponse } from 'http';
 import fs from 'fs';
 import path from 'path';

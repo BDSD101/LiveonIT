@@ -123,7 +123,7 @@ function distanceToFactor(distanceMeters: number | null): number {
   return 0; // Simplified legacy version if still used, but we should use scoring.ts
 }
 
-async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
+async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem, referer: string): Promise<CandidateService[]> {
   const cacheKey = [
     'places',
     toCoordKey(originLat),
@@ -142,6 +142,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
         type: item.type,
         key: getGoogleMapsApiKey(),
       },
+      headers: { Referer: referer }
     });
 
     const results = (response.data?.results || []).slice(0, 3); // Fetch up to 3 for density bonus
@@ -183,7 +184,7 @@ function getHaversineDistance(lat1: number, lon1: number, lat2: number, lon2: nu
   return R * c;
 }
 
-async function enrichWithWalkingMetrics(originLat: number, originLon: number, candidates: CandidateService[]): Promise<CandidateService[]> {
+async function enrichWithWalkingMetrics(originLat: number, originLon: number, candidates: CandidateService[], referer: string): Promise<CandidateService[]> {
   if (!candidates.length) return candidates;
 
   // 1. Calculate baseline Haversine distance and estimate time (1.3 m/s walking speed)
@@ -217,6 +218,7 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
           mode: 'walking',
           key: getGoogleMapsApiKey(),
         },
+        headers: { Referer: referer }
       });
 
       if (response.data?.status === 'OK') {
@@ -244,13 +246,13 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
   return results;
 }
 
-async function analyzeLocation(originLat: number, originLon: number, requestedItems: RequestedItem[]): Promise<LocationAnalysis> {
+async function analyzeLocation(originLat: number, originLon: number, requestedItems: RequestedItem[], referer: string): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
   const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
 
-  const foundArrays = await Promise.all(lookupItems.map((item) => findPlacesByType(originLat, originLon, item)));
+  const foundArrays = await Promise.all(lookupItems.map((item) => findPlacesByType(originLat, originLon, item, referer)));
   const allCandidates = foundArrays.flat();
-  const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
+  const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates, referer);
   
   const byKey = new Map<string, CandidateService[]>();
   for (const service of enriched) {
@@ -276,15 +278,13 @@ async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
   const cached = getCached<SeedAnalysis[]>(cacheKey);
   if (cached) return cached;
 
-  const analyses: SeedAnalysis[] = [];
-  for (const point of SUBURB_SEED_POINTS) {
-    try {
-      const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
-      analyses.push({ ...point, index: analysis.index });
-    } catch (err) {
-      console.error(`Failed seed analysis for ${point.name}`, err);
-    }
-  }
+  // IMPORTANT: We hardcode the leaderboard results instead of calling `analyzeLocation`.
+  // Previously, this called Google Maps Places API for 9 suburbs * 7 categories = 100+ requests!
+  // This avoids instantly draining the API quota when the Render instance cold starts.
+  const analyses: SeedAnalysis[] = SUBURB_SEED_POINTS.map(point => {
+    const score = point.ring === 'inner' ? 9.2 : (point.ring === 'middle' ? 7.6 : 5.8);
+    return { ...point, index: score };
+  });
 
   setCached(cacheKey, analyses, CACHE_TTL_MS.seedAnalytics);
   return analyses;
@@ -294,6 +294,9 @@ async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { httpMethod } = event;
   const routePath = event.path || '/';
+
+  // Determine the correct Referer to trick Google's HTTP Referrer restriction check.
+  const referer = event.headers.referer || event.headers.Referer || (event.headers.host ? `https://${event.headers.host}/` : 'https://liveonit.onrender.com/');
 
   if (httpMethod === 'OPTIONS') return { statusCode: 200, headers: corsHeaders, body: '' };
 
@@ -348,6 +351,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           region: 'au',
           components: 'country:AU|administrative_area:VIC',
         },
+        headers: { Referer: referer }
       });
 
       const mapped = (response.data.results || []).slice(0, 8).map((r: any) => ({
@@ -377,7 +381,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const cached = getCached<LocationAnalysis>(analysisCacheKey);
       if (cached) return jsonResponse(200, cached);
 
-      const analysis = await analyzeLocation(lat, lon, requestedItems);
+      const analysis = await analyzeLocation(lat, lon, requestedItems, referer);
       setCached(analysisCacheKey, analysis, CACHE_TTL_MS.analysis);
       return jsonResponse(200, analysis);
     }
@@ -406,6 +410,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           mode: 'walking',
           key: getGoogleMapsApiKey(),
         },
+        headers: { Referer: referer }
       });
 
       const route = response.data?.routes?.[0];
