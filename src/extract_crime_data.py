@@ -32,6 +32,43 @@ DATASET_ID = "criminal-incident"
 EXCEL_FILE = os.path.join(OUTPUT_DIR, "crime_incidents_lga.xlsx")
 OUTPUT_LGA = os.path.join(OUTPUT_DIR, "crime_by_lga.json")
 OUTPUT_SUBURB = os.path.join(OUTPUT_DIR, "crime_by_suburb.json")
+MELBOURNE_LGAS = [
+    "Banyule",
+    "Bayside",
+    "Boroondara",
+    "Brimbank",
+    "Cardinia",
+    "Casey",
+    "Darebin",
+    "Frankston",
+    "Glen Eira",
+    "Greater Dandenong",
+    "Hobsons Bay",
+    "Hume",
+    "Kingston",
+    "Knox",
+    "Manningham",
+    "Maribyrnong",
+    "Maroondah",
+    "Melbourne",
+    "Melton",
+    "Merri-bek",
+    "Monash",
+    "Moonee Valley",
+    "Mornington Peninsula",
+    "Nillumbik",
+    "Port Phillip",
+    "Stonnington",
+    "Whitehorse",
+    "Whittlesea",
+    "Wyndham",
+    "Yarra",
+    "Yarra Ranges",
+]
+
+def is_melbourne_lga(lga_name):
+    lga_lower = lga_name.lower()
+    return any(m.lower() in lga_lower for m in MELBOURNE_LGAS)
 
 def get_latest_lga_file_url():
     print("Querying CKAN API for latest dataset resources...")
@@ -119,6 +156,30 @@ def extract_lga_table(sheet_name):
             "ratePer100k": round(float(row[rate_col]), 1) if pd.notna(row.get(rate_col)) else None,
             "year": str(int(latest_year)) if pd.notna(latest_year) else "unknown",
         }
+
+    # Calculate Melbourne LGA rankings and percentiles
+    melbourne_entries = {
+        lga: data for lga, data in result.items()
+        if is_melbourne_lga(lga) and data["ratePer100k"] is not None
+    }
+
+    # Sort by rate ascending (lower crime rate = better rank = rank 1)
+    sorted_melbourne = sorted(melbourne_entries.items(), key=lambda x: x[1]["ratePer100k"], reverse=True)
+    total_melbourne = len(sorted_melbourne)
+
+    # Build rank lookup
+    rank_lookup = {lga: rank + 1 for rank, (lga, _) in enumerate(sorted_melbourne)}
+
+    # Add ranking and percentile to all LGAs
+    for lga, data in result.items():
+        if is_melbourne_lga(lga) and lga in rank_lookup:
+            rank = rank_lookup[lga]
+            data["melbourneRank"] = rank
+            # Percentile: 100 = safest, 0 = least safe
+            data["melbourneRankPercentile"] = round((1 - (rank - 1) / total_melbourne) * 100, 1)
+        else:
+            data["melbourneRank"] = "N/A"
+            data["melbourneRankPercentile"] = "N/A"
 
     print(f"  LGAs extracted: {len(result)}")
     with open(OUTPUT_LGA, "w") as f:
