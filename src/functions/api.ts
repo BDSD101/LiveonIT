@@ -122,7 +122,9 @@ function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
       key: existingItem?.key ?? key,  // ← use canonical key, not frontend key
       catId: existingItem?.catId ?? catId, 
       type, 
-      filter: existingItem?.filter 
+      filter: existingItem?.filter,
+      useTextSearch: existingItem?.useTextSearch,
+      textQuery: existingItem?.textQuery,  
     });
     
   }
@@ -170,13 +172,13 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
       },
     });
 
-    // const results = (response.data?.results || []).slice(0, 10); // Fetch up to 3 for density bonus
+    // const results = (response.data?.results || []).slice(0, 10); // Fetch up to 10 for density bonus
     // Apply optional filter function if provided (e.g. to exclude certain place types that are too noisy)
     const rawResults = response.data?.results || [];
     const filtered = item.filter ? rawResults.filter(item.filter) : rawResults;
     // console.log(`[${item.type}] raw: ${rawResults.length}, filtered: ${filtered.length}`);
-    // console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r:any) => r.name));
-    const results = filtered.slice(0, 5); // Fetch up to 3 for density bonus
+    console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r:any) => r.name));
+    const results = filtered.slice(0, 3); // Fetch up to 3 for density bonus
     // De-duplication step (some places appear multiple times with different types, e.g. a cafe that is both 'cafe' and 'restaurant')
     const seen = new Set<string>();
     const deduped = results.filter((r: any) => {
@@ -214,6 +216,68 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
   }
 }
 
+// Added for 'doctor' type to allow text search with more specific query, since nearbysearch with type 'doctor' is very noisy and often misses relevant results
+async function findPlacesByText(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
+  const cacheKey = [
+    'text',
+    toCoordKey(originLat),
+    toCoordKey(originLon),
+    item.type,
+  ].join('_');
+
+  const cached = getCached<CandidateService[]>(cacheKey);
+  if (cached !== undefined) return cached;
+
+  try {
+    trackApiCall('places');
+    const response = await axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
+      params: {
+        query: item.textQuery,
+        location: `${originLat},${originLon}`,
+        radius: 2000,
+        key: getGoogleMapsApiKey(),
+      },
+    });
+
+    const rawResults = response.data?.results || [];
+    const filtered = item.filter ? rawResults.filter(item.filter) : rawResults;
+    console.log(`[TEXT SEARCH] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
+    
+    const seen = new Set<string>();
+    const deduped = filtered
+      .slice(0, 5)
+      .filter((r: any) => {
+        if (seen.has(r.name)) return false;
+        seen.add(r.name);
+        return true;
+      });
+
+    if (deduped.length === 0) {
+      setCached(cacheKey, [], CACHE_TTL_MS.place);
+      return [];
+    }
+
+    const candidates: CandidateService[] = deduped.map((r: any) => ({
+      key: item.key,
+      catId: item.catId,
+      type: item.type,
+      name: r.name || item.type,
+      lat: Number(r.geometry.location.lat),
+      lon: Number(r.geometry.location.lng),
+      walkingDistanceMeters: null,
+      walkingDurationMinutes: null,
+      withinThreshold: false,
+    }));
+
+    setCached(cacheKey, candidates, CACHE_TTL_MS.place);
+    return candidates;
+
+  } catch (err) {
+    console.error(`[TEXT SEARCH ERROR] ${item.type}:`, err);
+    return [];
+  }
+}
+
 function getHaversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371000; // meters
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -244,7 +308,7 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
 
   // 2. Only upgrade candidates within 1.5x the walkable threshold to save API calls
   const worthUpgrading = results.filter(c =>
-    (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 1.5
+    (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 3
   );
   // console.log(`[WORTH UPGRADING] ${worthUpgrading.length} of ${results.length} candidates`);
   if (!worthUpgrading.length) return results;
@@ -307,7 +371,15 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
   const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
   // console.log('[LOOKUP ITEMS]', lookupItems.map(i => i.key));
 
-  const foundArrays = await Promise.all(lookupItems.map((item) => findPlacesByType(originLat, originLon, item)));
+  // Modified for Text Search
+  const foundArrays = await Promise.all(
+    lookupItems.map(item =>
+      item.useTextSearch
+        ? findPlacesByText(originLat, originLon, item)
+        : findPlacesByType(originLat, originLon, item)
+    )
+  );
+
   const allCandidates = foundArrays.flat();
   // console.log('[ALL CANDIDATES]', allCandidates.length, allCandidates.map(c => `${c.key}:${c.name}`));
   const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
@@ -327,9 +399,10 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
 
   // Temp logging to verify the final candidates being scored
   for (const [key, candidates] of byKey.entries()) {
-    if (key.includes('gym')) {
-      // console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
-    }
+    console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
+    // if (key.includes('doctor')) {
+    //   console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
+    // }
   }
 
 
@@ -508,6 +581,52 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
       setCached(routeCacheKey, routeData, CACHE_TTL_MS.route);
       return jsonResponse(200, routeData);
+    }
+
+    // Temporary debug endpoint to audit nearby search results for a given type and location, without affecting scoring cache
+    if (routePath === '/api/debug/audit' && httpMethod === 'GET') {
+      const type = event.queryStringParameters?.type;
+      const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
+      const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
+      const query = event.queryStringParameters?.query;
+
+      if (!lat || !lon) {
+        return jsonResponse(400, { error: 'Missing lat or lon' });
+      }
+      if (!query && !type) {
+        return jsonResponse(400, { error: 'Missing type or query' });
+      }
+
+      let response;
+      if (query) {
+        response = await axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
+          params: {
+            query,
+            location: `${lat},${lon}`,
+            radius: 2000,
+            ...(type ? { type } : {}),
+            key: getGoogleMapsApiKey(),
+          },
+        });
+      } else {
+        response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
+          params: {
+            location: `${lat},${lon}`,
+            rankby: 'distance',
+            type,
+            key: getGoogleMapsApiKey(),
+          },
+        });
+      }
+
+      const results = (response.data?.results || []).map((r: any) => ({
+        name: r.name,
+        pinlet: r.icon_mask_base_uri?.split('/').pop(),
+        vicinity: r.vicinity,
+        types: r.types,
+      }));
+
+      return jsonResponse(200, { type, query, total: results.length, results });
     }
 
     return jsonResponse(404, { error: 'Not Found' });
