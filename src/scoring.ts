@@ -3,7 +3,11 @@ export type RequestedItem = {
   key: string;
   catId: string;
   type: string;
-  filter?: (result: any) => boolean;  // ← add this line
+  // filter is an optional function that takes a raw API result and returns true if it should be included for scoring
+  filter?: (result: any) => boolean;
+  // For text search capability
+  useTextSearch?: boolean;
+  textQuery?: string;
 };
 
 export type CandidateService = {
@@ -89,18 +93,19 @@ export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
 
 export const PLACE_TYPE_NAME_BLOCKLIST: Record<string, string[]> = {
   gym: ['physio', 'physiotherapy', 'spinal', 'coaching', 'chiropractic'],
-  doctor: ['pathology', 'radiology', 'audiology', 'podiatry', 'dust mite', 'fun time', 'hearing', 'foot', 'allergy', 'skin', 'dental', 'optometrist', 'eye', 'vet', 'veterinary'],
+  // doctor: ['pathology', 'radiology', 'audiology', 'podiatry', 'dust mite', 'fun time', 'hearing', 'foot', 'allergy', 'skin', 'dental', 'optometrist', 'eye', 'vet', 'veterinary'],
   school: ['scuba', 'guitar', 'music', 'tennis', 'dance', 'yoga', 'pilates', 'flow with'],
-  supermarket: ['spices', 'convenience', 'haiku', 'ninja', 'market'],
+  supermarket: ['spices', 'convenience', 'smoke', 'liquor', 'bottle shop', 'petrol', 'fuel', 'bakery', 'butcher', 'seafood', 'organic'],
   cafe: ['health', 'nutrition', 'office', 'crew'],
 };
 
 export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
   doctor: [
-    'medical', 'clinic', 'gp', 'general practice', 'family', 
+    'medical', 'medical clinic', 'gp', 'general practice', 'family', 
     'health centre', 'health center', 'medicare', 'bulk bill',
     'medical centre', 'doctors'
   ],
+  supermarket: ['woolworths', 'coles', 'aldi', 'iga', 'foodworks', 'safeway'],
 };
 
 export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefined {
@@ -127,7 +132,12 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
     key: `${catId}:${type}`,
     catId,
     type,
-    filter: buildPlaceFilter(type),  // ← add this line
+    filter: buildPlaceFilter(type),
+    ...(type === 'doctor' ? {
+      useTextSearch: true,
+      // textQuery: 'GP bulk billing medical centre center clinic'
+      textQuery: 'GP'
+    } : {}),
   }))
 );
 

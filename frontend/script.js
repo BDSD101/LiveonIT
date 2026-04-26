@@ -87,7 +87,7 @@ function initApp() {
   });
   renderFilters();
   renderHistory();
-  fetchLeaderboard();
+  // fetchLeaderboard();
   lucide.createIcons();
 }
 
