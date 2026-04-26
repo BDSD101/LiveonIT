@@ -1,0 +1,412 @@
+{
+  "Banyule": {
+    "incidents": 8159,
+    "ratePer100k": 6137.2,
+    "year": "2025"
+  },
+  "Brimbank": {
+    "incidents": 14673,
+    "ratePer100k": 7366.8,
+    "year": "2025"
+  },
+  "Darebin": {
+    "incidents": 13759,
+    "ratePer100k": 8504.0,
+    "year": "2025"
+  },
+  "Hobsons Bay": {
+    "incidents": 6203,
+    "ratePer100k": 6402.7,
+    "year": "2025"
+  },
+  "Hume": {
+    "incidents": 17785,
+    "ratePer100k": 6346.4,
+    "year": "2025"
+  },
+  "Maribyrnong": {
+    "incidents": 10052,
+    "ratePer100k": 10545.5,
+    "year": "2025"
+  },
+  "Melbourne": {
+    "incidents": 34386,
+    "ratePer100k": 17671.9,
+    "year": "2025"
+  },
+  "Melton": {
+    "incidents": 12577,
+    "ratePer100k": 5388.3,
+    "year": "2025"
+  },
+  "Merri-bek": {
+    "incidents": 11553,
+    "ratePer100k": 6119.2,
+    "year": "2025"
+  },
+  "Moonee Valley": {
+    "incidents": 8191,
+    "ratePer100k": 6245.9,
+    "year": "2025"
+  },
+  "Nillumbik": {
+    "incidents": 1641,
+    "ratePer100k": 2567.5,
+    "year": "2025"
+  },
+  "Whittlesea": {
+    "incidents": 13890,
+    "ratePer100k": 5327.2,
+    "year": "2025"
+  },
+  "Wyndham": {
+    "incidents": 18823,
+    "ratePer100k": 5389.9,
+    "year": "2025"
+  },
+  "Yarra": {
+    "incidents": 12725,
+    "ratePer100k": 12460.7,
+    "year": "2025"
+  },
+  "Total": {
+    "incidents": 73,
+    "ratePer100k": null,
+    "year": "2025"
+  },
+  "Alpine": {
+    "incidents": 388,
+    "ratePer100k": 2934.0,
+    "year": "2025"
+  },
+  "Bass Coast": {
+    "incidents": 2577,
+    "ratePer100k": 5813.7,
+    "year": "2025"
+  },
+  "Baw Baw": {
+    "incidents": 3734,
+    "ratePer100k": 5916.8,
+    "year": "2025"
+  },
+  "Benalla": {
+    "incidents": 1099,
+    "ratePer100k": 7456.6,
+    "year": "2025"
+  },
+  "Boroondara": {
+    "incidents": 7986,
+    "ratePer100k": 4447.7,
+    "year": "2025"
+  },
+  "East Gippsland": {
+    "incidents": 4536,
+    "ratePer100k": 9114.7,
+    "year": "2025"
+  },
+  "Greater Shepparton": {
+    "incidents": 7281,
+    "ratePer100k": 10322.9,
+    "year": "2025"
+  },
+  "Indigo": {
+    "incidents": 460,
+    "ratePer100k": 2570.1,
+    "year": "2025"
+  },
+  "Knox": {
+    "incidents": 7993,
+    "ratePer100k": 4872.9,
+    "year": "2025"
+  },
+  "Latrobe": {
+    "incidents": 10214,
+    "ratePer100k": 12857.5,
+    "year": "2025"
+  },
+  "Manningham": {
+    "incidents": 4115,
+    "ratePer100k": 3100.2,
+    "year": "2025"
+  },
+  "Mansfield": {
+    "incidents": 310,
+    "ratePer100k": 2825.8,
+    "year": "2025"
+  },
+  "Maroondah": {
+    "incidents": 6783,
+    "ratePer100k": 5643.1,
+    "year": "2025"
+  },
+  "Mitchell": {
+    "incidents": 3692,
+    "ratePer100k": 6211.3,
+    "year": "2025"
+  },
+  "Moira": {
+    "incidents": 1742,
+    "ratePer100k": 5627.6,
+    "year": "2025"
+  },
+  "Monash": {
+    "incidents": 11787,
+    "ratePer100k": 5566.4,
+    "year": "2025"
+  },
+  "Murrindindi": {
+    "incidents": 564,
+    "ratePer100k": 3593.4,
+    "year": "2025"
+  },
+  "South Gippsland": {
+    "incidents": 1585,
+    "ratePer100k": 5068.9,
+    "year": "2025"
+  },
+  "Strathbogie": {
+    "incidents": 449,
+    "ratePer100k": 3785.3,
+    "year": "2025"
+  },
+  "Towong": {
+    "incidents": 154,
+    "ratePer100k": 2463.2,
+    "year": "2025"
+  },
+  "Wangaratta": {
+    "incidents": 1978,
+    "ratePer100k": 6519.9,
+    "year": "2025"
+  },
+  "Wellington": {
+    "incidents": 4031,
+    "ratePer100k": 8595.1,
+    "year": "2025"
+  },
+  "Whitehorse": {
+    "incidents": 9337,
+    "ratePer100k": 5032.8,
+    "year": "2025"
+  },
+  "Wodonga": {
+    "incidents": 3320,
+    "ratePer100k": 7274.5,
+    "year": "2025"
+  },
+  "Yarra Ranges": {
+    "incidents": 5903,
+    "ratePer100k": 3669.3,
+    "year": "2025"
+  },
+  "Bayside": {
+    "incidents": 4334,
+    "ratePer100k": 4053.5,
+    "year": "2025"
+  },
+  "Cardinia": {
+    "incidents": 6673,
+    "ratePer100k": 4967.7,
+    "year": "2025"
+  },
+  "Casey": {
+    "incidents": 22911,
+    "ratePer100k": 5486.1,
+    "year": "2025"
+  },
+  "Frankston": {
+    "incidents": 12891,
+    "ratePer100k": 8866.5,
+    "year": "2025"
+  },
+  "Glen Eira": {
+    "incidents": 6252,
+    "ratePer100k": 3838.9,
+    "year": "2025"
+  },
+  "Greater Dandenong": {
+    "incidents": 17170,
+    "ratePer100k": 10169.3,
+    "year": "2025"
+  },
+  "Kingston": {
+    "incidents": 9568,
+    "ratePer100k": 5702.9,
+    "year": "2025"
+  },
+  "Mornington Peninsula": {
+    "incidents": 9008,
+    "ratePer100k": 5236.7,
+    "year": "2025"
+  },
+  "Port Phillip": {
+    "incidents": 12624,
+    "ratePer100k": 11004.1,
+    "year": "2025"
+  },
+  "Stonnington": {
+    "incidents": 10984,
+    "ratePer100k": 9532.0,
+    "year": "2025"
+  },
+  "Ararat": {
+    "incidents": 1115,
+    "ratePer100k": 9534.3,
+    "year": "2025"
+  },
+  "Ballarat": {
+    "incidents": 10856,
+    "ratePer100k": 8767.5,
+    "year": "2025"
+  },
+  "Buloke": {
+    "incidents": 213,
+    "ratePer100k": 3619.8,
+    "year": "2025"
+  },
+  "Campaspe": {
+    "incidents": 2919,
+    "ratePer100k": 7640.2,
+    "year": "2025"
+  },
+  "Central Goldfields": {
+    "incidents": 1010,
+    "ratePer100k": 7324.4,
+    "year": "2025"
+  },
+  "Colac-Otway": {
+    "incidents": 1331,
+    "ratePer100k": 5957.7,
+    "year": "2025"
+  },
+  "Corangamite": {
+    "incidents": 724,
+    "ratePer100k": 4586.8,
+    "year": "2025"
+  },
+  "Gannawarra": {
+    "incidents": 573,
+    "ratePer100k": 5513.2,
+    "year": "2025"
+  },
+  "Glenelg": {
+    "incidents": 1765,
+    "ratePer100k": 8815.3,
+    "year": "2025"
+  },
+  "Golden Plains": {
+    "incidents": 621,
+    "ratePer100k": 2310.8,
+    "year": "2025"
+  },
+  "Greater Bendigo": {
+    "incidents": 8654,
+    "ratePer100k": 6788.1,
+    "year": "2025"
+  },
+  "Greater Geelong": {
+    "incidents": 18759,
+    "ratePer100k": 6338.4,
+    "year": "2025"
+  },
+  "Hepburn": {
+    "incidents": 636,
+    "ratePer100k": 3748.3,
+    "year": "2025"
+  },
+  "Hindmarsh": {
+    "incidents": 258,
+    "ratePer100k": 4727.2,
+    "year": "2025"
+  },
+  "Horsham": {
+    "incidents": 1754,
+    "ratePer100k": 8582.3,
+    "year": "2025"
+  },
+  "Loddon": {
+    "incidents": 397,
+    "ratePer100k": 5108.3,
+    "year": "2025"
+  },
+  "Macedon Ranges": {
+    "incidents": 1958,
+    "ratePer100k": 3588.1,
+    "year": "2025"
+  },
+  "Mildura": {
+    "incidents": 5904,
+    "ratePer100k": 10188.3,
+    "year": "2025"
+  },
+  "Moorabool": {
+    "incidents": 2434,
+    "ratePer100k": 5986.1,
+    "year": "2025"
+  },
+  "Mount Alexander": {
+    "incidents": 971,
+    "ratePer100k": 4615.1,
+    "year": "2025"
+  },
+  "Moyne": {
+    "incidents": 510,
+    "ratePer100k": 2866.9,
+    "year": "2025"
+  },
+  "Northern Grampians": {
+    "incidents": 1141,
+    "ratePer100k": 9706.5,
+    "year": "2025"
+  },
+  "Pyrenees": {
+    "incidents": 384,
+    "ratePer100k": 4782.6,
+    "year": "2025"
+  },
+  "Queenscliffe": {
+    "incidents": 55,
+    "ratePer100k": 1550.4,
+    "year": "2025"
+  },
+  "Southern Grampians": {
+    "incidents": 906,
+    "ratePer100k": 5478.9,
+    "year": "2025"
+  },
+  "Surf Coast": {
+    "incidents": 1006,
+    "ratePer100k": 2481.0,
+    "year": "2025"
+  },
+  "Swan Hill": {
+    "incidents": 1561,
+    "ratePer100k": 7431.0,
+    "year": "2025"
+  },
+  "Warrnambool": {
+    "incidents": 2621,
+    "ratePer100k": 7199.6,
+    "year": "2025"
+  },
+  "West Wimmera": {
+    "incidents": 153,
+    "ratePer100k": 3979.0,
+    "year": "2025"
+  },
+  "Yarriambiack": {
+    "incidents": 338,
+    "ratePer100k": 5379.1,
+    "year": "2025"
+  },
+  "Justice Institutions and Immigration Facilities": {
+    "incidents": 1122,
+    "ratePer100k": null,
+    "year": "2025"
+  },
+  "Unincorporated Vic": {
+    "incidents": 73,
+    "ratePer100k": null,
+    "year": "2025"
+  }
+}
