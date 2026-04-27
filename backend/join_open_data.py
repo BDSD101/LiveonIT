@@ -4,10 +4,11 @@ Combines Melbourne suburb data from multiple sources into a single JSON file
 and a flattened CSV for analysis.
 
 Sources:
-  - melbourne_suburbs_by_lga.json  — master suburb list with postcodes (Wikipedia)
-  - crime_by_suburb.json           — crime incidents by suburb (CSA Victoria)
-  - crime_by_lga.json              — crime rate per 100k by LGA (CSA Victoria)
-  - rent_by_suburb.json            — weekly rent by suburb group (DFFH Victoria)
+  - melbourne_suburbs_by_lga.json      — master suburb list with postcodes (Wikipedia)
+  - crime_by_suburb.json               — crime incidents by suburb (CSA Victoria)
+  - crime_by_lga.json                  — crime rate per 100k by LGA (CSA Victoria)
+  - rent_by_suburb.json                — weekly rent by suburb group (DFFH Victoria)
+  - house_unit_prices_by_suburb.json   — median house and unit sale prices (Land Vic)
 
 Output:
   melbourne_suburb_data.json       — combined suburb data keyed by suburb name
@@ -19,11 +20,13 @@ Output:
 import json
 import csv
 import os
+import math
 from collections import defaultdict
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 RENT_BY_SUBURB_FILE = "housing_data/rent_by_suburb.json"
 RENT_BY_SUBURB_RANKED_FILE = "housing_data/rent_by_suburb_ranked.json"
+HOUSE_UNIT_PRICES_FILE = "housing_data/house_unit_prices_by_suburb.json"
 MELBOURNE_SUBURBS_BY_LGA_FILE = "suburb_data/melbourne_suburbs_by_lga.json"
 CRIME_BY_SUBURB_FILE = "crime_data/crime_by_suburb.json"
 CRIME_BY_LGA_FILE = "crime_data/crime_by_lga.json"
@@ -39,6 +42,8 @@ with open(os.path.join(SCRIPT_DIR, CRIME_BY_SUBURB_FILE)) as f:
     crime_suburb_data = json.load(f)
 with open(os.path.join(SCRIPT_DIR, CRIME_BY_LGA_FILE)) as f:
     crime_lga_data = json.load(f)
+with open(os.path.join(SCRIPT_DIR, HOUSE_UNIT_PRICES_FILE)) as f:
+    house_unit_data = json.load(f)
 
 # =============================================================================
 # STEP 1 — Build lookups from master suburb list (Wikipedia)
@@ -57,7 +62,21 @@ for lga, suburbs in mel_suburbs_raw.items():
 print(f"Master suburb list: {len(wiki_suburb_lookup)} suburbs across {len(mel_suburbs_raw)} LGAs")
 
 # =============================================================================
-# STEP 2 — Process crime suburb data
+# STEP 2 — Build house/unit price lookup
+# =============================================================================
+
+house_price_lookup = {
+    entry["suburb"].lower(): {
+        "meanMedianHousePrice": entry.get("meanMedianHousePrice"),
+        "meanMedianUnitPrice":  entry.get("meanMedianUnitPrice"),
+    }
+    for entry in house_unit_data
+    if entry.get("suburb")
+}
+print(f"House/unit price entries: {len(house_price_lookup)}")
+
+# =============================================================================
+# STEP 3 — Process crime suburb data
 # Merge duplicates: sum incidents, keep topFiveOffenceProportion from highest-incident entry
 # =============================================================================
 
@@ -90,7 +109,7 @@ for entry in crime_by_suburb_merged.values():
 print(f"Crime suburb entries (Melbourne): {len(crime_by_suburb_merged)}")
 
 # =============================================================================
-# STEP 3 — Process crime LGA data
+# STEP 4 — Process crime LGA data
 # =============================================================================
 
 def normalise_lga(name: str) -> str:
@@ -107,7 +126,7 @@ crime_lga_lookup = {normalise_lga(k): v for k, v in crime_lga_data.items()}
 print(f"Crime LGA entries: {len(crime_lga_lookup)}")
 
 # =============================================================================
-# STEP 4 — Process rent data with dense ranking per category
+# STEP 5 — Process rent data with dense ranking per category
 # =============================================================================
 
 melbourne_suburb_set = set(wiki_suburb_lookup.keys())
@@ -119,30 +138,31 @@ print(f"Melbourne rent entries: {len(melbourne_rent_entries)}")
 
 CATEGORIES = sorted({cat for entry in rent_data for cat in entry.get("weeklyRent", {}).keys()})
 
-for cat in CATEGORIES:
-    entries_with_value = [
-        e for e in melbourne_rent_entries
-        if e.get("weeklyRent", {}).get(cat) is not None
-    ]
-    sorted_entries = sorted(entries_with_value,
-                            key=lambda e: e["weeklyRent"][cat],
-                            reverse=True)
-    total = len(sorted_entries)
+## REPLACED BY THE MAD SCORES
+# for cat in CATEGORIES:
+#     entries_with_value = [
+#         e for e in melbourne_rent_entries
+#         if e.get("weeklyRent", {}).get(cat) is not None
+#     ]
+#     sorted_entries = sorted(entries_with_value,
+#                             key=lambda e: e["weeklyRent"][cat],
+#                             reverse=True)
+#     total = len(sorted_entries)
 
-    for e in entries_with_value:
-        if "weeklyRentRank" not in e:
-            e["weeklyRentRank"] = {}
-            e["weeklyRentPercentile"] = {}
+#     for e in entries_with_value:
+#         if "weeklyRentRank" not in e:
+#             e["weeklyRentRank"] = {}
+#             e["weeklyRentPercentile"] = {}
 
-    rank = 1
-    for i, entry in enumerate(sorted_entries):
-        if i > 0 and entry["weeklyRent"][cat] == sorted_entries[i - 1]["weeklyRent"][cat]:
-            entry["weeklyRentRank"][cat] = sorted_entries[i - 1]["weeklyRentRank"][cat]
-            entry["weeklyRentPercentile"][cat] = sorted_entries[i - 1]["weeklyRentPercentile"][cat]
-        else:
-            rank = 1 if i == 0 else rank + 1
-            entry["weeklyRentRank"][cat] = rank
-            entry["weeklyRentPercentile"][cat] = round((1 - (rank - 1) / total) * 100, 1)
+#     rank = 1
+#     for i, entry in enumerate(sorted_entries):
+#         if i > 0 and entry["weeklyRent"][cat] == sorted_entries[i - 1]["weeklyRent"][cat]:
+#             entry["weeklyRentRank"][cat] = sorted_entries[i - 1]["weeklyRentRank"][cat]
+#             entry["weeklyRentPercentile"][cat] = sorted_entries[i - 1]["weeklyRentPercentile"][cat]
+#         else:
+#             rank = 1 if i == 0 else rank + 1
+#             entry["weeklyRentRank"][cat] = rank
+#             entry["weeklyRentPercentile"][cat] = round((1 - (rank - 1) / total) * 100, 1)
 
 # Build reverse lookup: suburb_lower → rent entry
 rent_lookup = {}
@@ -150,14 +170,15 @@ for entry in melbourne_rent_entries:
     for suburb in entry["suburbs"]:
         rent_lookup[suburb.lower()] = entry
 
+## REPLACED BY THE MAD SCORES
 # Save enriched rent JSON
-ranked_path = os.path.join(SCRIPT_DIR, RENT_BY_SUBURB_RANKED_FILE)
-with open(ranked_path, "w") as f:
-    json.dump(rent_data, f, indent=2, ensure_ascii=False)
-print(f"Saved: {ranked_path}")
+# ranked_path = os.path.join(SCRIPT_DIR, RENT_BY_SUBURB_RANKED_FILE)
+# with open(ranked_path, "w") as f:
+#     json.dump(rent_data, f, indent=2, ensure_ascii=False)
+# print(f"Saved: {ranked_path}")
 
 # =============================================================================
-# STEP 5 — Combine all data
+# STEP 6 — Combine all data
 # Top-level key is suburb name — not repeated inside entry
 # =============================================================================
 
@@ -189,8 +210,8 @@ for suburb_lower, wiki_info in wiki_suburb_lookup.items():
         stats["lga_found"] += 1
         crime_lga_out = {
             "ratePer100k": crime_lga["ratePer100k"],
-            "melbourneRank": crime_lga["melbourneRank"],
-            "melbourneRankPercentile": crime_lga["melbourneRankPercentile"],
+            # "melbourneRank": crime_lga["melbourneRank"],
+            # "melbourneRankPercentile": crime_lga["melbourneRankPercentile"],
             "year": crime_lga["year"],
         }
     else:
@@ -203,14 +224,21 @@ for suburb_lower, wiki_info in wiki_suburb_lookup.items():
         stats["rent_found"] += 1
         rent_out = {
             "weeklyRent": rent_entry.get("weeklyRent"),
-            "weeklyRentRank": rent_entry.get("weeklyRentRank"),
-            "weeklyRentPercentile": rent_entry.get("weeklyRentPercentile"),
+            # "weeklyRentRank": rent_entry.get("weeklyRentRank"),
+            # "weeklyRentPercentile": rent_entry.get("weeklyRentPercentile"),
             "region": rent_entry.get("region"),
             "period": rent_entry.get("period"),
         }
     else:
         stats["rent_missing"] += 1
         rent_out = None
+
+    # House/unit prices
+    house_prices = house_price_lookup.get(suburb_lower)
+    if house_prices:
+        stats["house_found"] += 1
+    else:
+        stats["house_missing"] += 1
 
     # suburb is the top-level key — not repeated inside
     combined[suburb] = {
@@ -219,6 +247,7 @@ for suburb_lower, wiki_info in wiki_suburb_lookup.items():
         "crimeSuburb": crime_suburb_out,
         "crimeLga": crime_lga_out,
         "rent": rent_out,
+        "housePrices": house_prices,
     }
 
 # Save combined JSON
@@ -230,9 +259,101 @@ print(f"\nSaved: {json_path} ({len(combined)} suburbs)")
 print(f"  Crime suburb:  {stats['crime_found']} found, {stats['crime_missing']} missing")
 print(f"  Crime LGA:     {stats['lga_found']} found, {stats['lga_missing']} missing")
 print(f"  Rent:          {stats['rent_found']} found, {stats['rent_missing']} missing")
+print(f"  House prices:  {stats['house_found']} found, {stats['house_missing']} missing")
 
 # =============================================================================
-# STEP 6 — Flattened CSV for analysis
+# STEP 7 — Robust z-scores (MAD) for house prices, rent, and crime
+# All scores computed only over Greater Melbourne suburbs (wiki_suburb_lookup).
+# Formula: (value - median) / MAD  where MAD = median absolute deviation
+# Crime score is negated so that safer = higher score.
+# Result is clamped to [-3, 3] to limit the effect of extreme outliers.
+# =============================================================================
+
+def mad_scores(values: list[float], invert: bool = False) -> list[float | None]:
+    """
+    Compute robust z-scores using median and MAD for a list of values.
+    None entries in the input are preserved as None in the output.
+    Args:
+        - values: list of floats (with None for missing)
+        - invert: if True, negate the score (use for crime: lower = safer = higher score)
+    Returns:
+        - list of robust z-scores (None where input was None), clamped to [-3, 3]
+    """
+    valid = [v for v in values if v is not None]
+    if len(valid) < 2:
+        return [None] * len(values)
+
+    median = sorted(valid)[len(valid) // 2]
+    mad = sorted(abs(v - median) for v in valid)[len(valid) // 2]
+
+    if mad == 0:
+        return [None] * len(values)
+
+    results = []
+    for v in values:
+        if v is None:
+            results.append(None)
+        else:
+            score = (v - median) / mad
+            if invert:
+                score = -score
+            results.append(max(-3.0, min(3.0, round(score, 4))))
+    return results
+
+
+print("\nComputing robust z-scores (MAD)...")
+
+suburb_keys = list(combined.keys())
+
+# --- House prices ---
+house_vals = [combined[s]["housePrices"].get("meanMedianHousePrice") if combined[s]["housePrices"] else None for s in suburb_keys]
+unit_vals  = [combined[s]["housePrices"].get("meanMedianUnitPrice")  if combined[s]["housePrices"] else None for s in suburb_keys]
+house_scores = mad_scores(house_vals)
+unit_scores  = mad_scores(unit_vals)
+
+for i, suburb in enumerate(suburb_keys):
+    if combined[suburb]["housePrices"] is None:
+        combined[suburb]["housePrices"] = {}
+    combined[suburb]["housePrices"]["housePriceScore"] = house_scores[i]
+    combined[suburb]["housePrices"]["unitPriceScore"]  = unit_scores[i]
+
+# --- Rent (per category) ---
+for cat in CATEGORIES:
+    cat_vals = []
+    for s in suburb_keys:
+        rent = combined[s].get("rent")
+        cat_vals.append(rent["weeklyRent"].get(cat) if rent and rent.get("weeklyRent") else None)
+    cat_scores = mad_scores(cat_vals)
+    for i, suburb in enumerate(suburb_keys):
+        if combined[suburb].get("rent") is None:
+            continue
+        if "rentScore" not in combined[suburb]["rent"]:
+            combined[suburb]["rent"]["rentScore"] = {}
+        combined[suburb]["rent"]["rentScore"][cat] = cat_scores[i]
+
+# --- Crime (LGA rate per 100k, inverted so safer = higher score) ---
+crime_vals = [combined[s]["crimeLga"]["ratePer100k"] if combined[s].get("crimeLga") else None for s in suburb_keys]
+crime_scores = mad_scores(crime_vals, invert=True)
+
+for i, suburb in enumerate(suburb_keys):
+    if combined[suburb].get("crimeLga") is None:
+        continue
+    combined[suburb]["crimeLga"]["crimeScore"] = crime_scores[i]
+
+scored = sum(1 for s in crime_scores if s is not None)
+print(f"  Crime scores:      {scored} suburbs scored")
+scored = sum(1 for s in house_scores if s is not None)
+print(f"  House price scores: {scored} suburbs scored")
+scored = sum(1 for s in unit_scores if s is not None)
+print(f"  Unit price scores:  {scored} suburbs scored")
+
+# Re-save combined JSON with scores added
+with open(json_path, "w") as f:
+    json.dump(combined, f, indent=2, ensure_ascii=False)
+print(f"  Re-saved: {json_path} (with scores)")
+
+# =============================================================================
+# STEP 8 — Flattened CSV for analysis
 # =============================================================================
 
 RENT_CATS = ["1brFlat", "2brFlat", "3brFlat", "2brHouse", "3brHouse", "4brHouse", "all"]
@@ -240,16 +361,21 @@ RENT_CATS = ["1brFlat", "2brFlat", "3brFlat", "2brHouse", "3brHouse", "4brHouse"
 fieldnames = (
     ["suburb", "postcode", "lga"]
     + ["crime_totalIncidents", "crime_year"]
-    + ["crime_offence1", "crime_offence1_proportion",
-       "crime_offence2", "crime_offence2_proportion",
-       "crime_offence3", "crime_offence3_proportion",
-       "crime_offence4", "crime_offence4_proportion",
-       "crime_offence5", "crime_offence5_proportion"]
-    + ["crimeLga_ratePer100k", "crimeLga_melbourneRank", "crimeLga_melbourneRankPercentile"]
+    # + ["crime_offence1", "crime_offence1_proportion",
+    #    "crime_offence2", "crime_offence2_proportion",
+    #    "crime_offence3", "crime_offence3_proportion",
+    #    "crime_offence4", "crime_offence4_proportion",
+    #    "crime_offence5", "crime_offence5_proportion"]
+    + ["crimeLga_ratePer100k", 
+    #    "crimeLga_melbourneRank", 
+    #    "crimeLga_melbourneRankPercentile", 
+       "crimeLga_crimeScore"]
     + ["rent_region", "rent_period"]
     + [f"rent_{cat}" for cat in RENT_CATS]
-    + [f"rent_{cat}_rank" for cat in RENT_CATS]
-    + [f"rent_{cat}_percentile" for cat in RENT_CATS]
+    # + [f"rent_{cat}_rank" for cat in RENT_CATS]
+    # + [f"rent_{cat}_percentile" for cat in RENT_CATS]
+    + [f"rent_{cat}_score" for cat in RENT_CATS]
+    + ["meanMedianHousePrice", "meanMedianUnitPrice", "housePriceScore", "unitPriceScore"]
 )
 
 csv_rows = []
@@ -266,20 +392,21 @@ for suburb, data in sorted(combined.items()):
     row["crime_year"] = cs.get("year", "")
 
     # Top 5 offences
-    top5 = list((cs.get("topFiveOffenceProportion") or {}).items())
-    for i in range(1, 6):
-        if i <= len(top5):
-            row[f"crime_offence{i}"] = top5[i-1][0]
-            row[f"crime_offence{i}_proportion"] = top5[i-1][1]
-        else:
-            row[f"crime_offence{i}"] = ""
-            row[f"crime_offence{i}_proportion"] = ""
+    # top5 = list((cs.get("topFiveOffenceProportion") or {}).items())
+    # for i in range(1, 6):
+    #     if i <= len(top5):
+    #         row[f"crime_offence{i}"] = top5[i-1][0]
+    #         row[f"crime_offence{i}_proportion"] = top5[i-1][1]
+    #     else:
+    #         row[f"crime_offence{i}"] = ""
+    #         row[f"crime_offence{i}_proportion"] = ""
 
     # Crime LGA
     cl = data.get("crimeLga") or {}
     row["crimeLga_ratePer100k"] = cl.get("ratePer100k", "")
-    row["crimeLga_melbourneRank"] = cl.get("melbourneRank", "")
-    row["crimeLga_melbourneRankPercentile"] = cl.get("melbourneRankPercentile", "")
+    row["crimeLga_crimeScore"] = cl.get("crimeScore", "")
+    # row["crimeLga_melbourneRank"] = cl.get("melbourneRank", "")
+    # row["crimeLga_melbourneRankPercentile"] = cl.get("melbourneRankPercentile", "")
 
     # Rent
     r = data.get("rent") or {}
@@ -290,8 +417,16 @@ for suburb, data in sorted(combined.items()):
     percentiles = r.get("weeklyRentPercentile") or {}
     for cat in RENT_CATS:
         row[f"rent_{cat}"] = weekly.get(cat, "")
-        row[f"rent_{cat}_rank"] = ranks.get(cat, "")
-        row[f"rent_{cat}_percentile"] = percentiles.get(cat, "")
+        row[f"rent_{cat}_score"] = (r.get("rentScore") or {}).get(cat, "")
+        # row[f"rent_{cat}_rank"] = ranks.get(cat, "")
+        # row[f"rent_{cat}_percentile"] = percentiles.get(cat, "")
+
+    # House/unit prices
+    hp = data.get("housePrices") or {}
+    row["meanMedianHousePrice"] = hp.get("meanMedianHousePrice", "")
+    row["meanMedianUnitPrice"]  = hp.get("meanMedianUnitPrice", "")
+    row["housePriceScore"]      = hp.get("housePriceScore", "")
+    row["unitPriceScore"]       = hp.get("unitPriceScore", "")
 
     csv_rows.append(row)
 
@@ -304,7 +439,7 @@ with open(csv_path, "w", newline="", encoding="utf-8") as f:
 print(f"Saved: {csv_path} ({len(csv_rows)} suburbs, {len(fieldnames)} columns)")
 
 # =============================================================================
-# STEP 7 — Debug CSV for 1brFlat rent ranking
+# STEP 9 — Debug CSV for 1brFlat rent ranking
 # =============================================================================
 
 # CAT = "1brFlat"
