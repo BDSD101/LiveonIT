@@ -1,5 +1,5 @@
 {
-  "City of Banyule": [
+  "Banyule": [
     "Bellfield",
     "Briar Hill",
     "Bundoora",
@@ -21,7 +21,7 @@
     "Watsonia North",
     "Yallambie"
   ],
-  "City of Bayside": [
+  "Bayside": [
     "Beaumaris",
     "Black Rock",
     "Brighton",
@@ -32,7 +32,7 @@
     "Highett",
     "Sandringham"
   ],
-  "City of Boroondara": [
+  "Boroondara": [
     "Ashburton",
     "Balwyn",
     "Balwyn North",
@@ -47,7 +47,7 @@
     "Mont Albert",
     "Surrey Hills"
   ],
-  "City of Brimbank": [
+  "Brimbank": [
     "Albanvale",
     "Albion",
     "Ardeer",
@@ -74,7 +74,7 @@
     "Taylors Lakes",
     "Tullamarine"
   ],
-  "Shire of Cardinia": [
+  "Cardinia": [
     "Beaconsfield",
     "Emerald",
     "Officer",
@@ -83,7 +83,7 @@
     "Pakenham East",
     "Pakenham South"
   ],
-  "City of Casey": [
+  "Casey": [
     "Beaconsfield",
     "Berwick",
     "Botanic Ridge",
@@ -110,7 +110,7 @@
     "Pearcedale",
     "Tooradin"
   ],
-  "City of Darebin": [
+  "Darebin": [
     "Alphington",
     "Bundoora",
     "Coburg",
@@ -123,7 +123,7 @@
     "Reservoir",
     "Thornbury"
   ],
-  "Category:Suburbs and localities in the City of Frankston": [
+  "Frankston": [
     "Frankston",
     "Frankston North",
     "Frankston South",
@@ -131,7 +131,7 @@
     "Seaford",
     "Skye"
   ],
-  "City of Glen Eira": [
+  "Glen Eira": [
     "Bentleigh",
     "Bentleigh East",
     "Brighton East",
@@ -148,7 +148,7 @@
     "Ormond",
     "St Kilda East"
   ],
-  "City of Greater Dandenong": [
+  "Greater Dandenong": [
     "Bangholme",
     "Dandenong",
     "Dandenong North",
@@ -160,7 +160,7 @@
     "Springvale",
     "Springvale South"
   ],
-  "City of Hobsons Bay": [
+  "Hobsons Bay": [
     "Altona",
     "Altona Meadows",
     "Altona North",
@@ -174,7 +174,7 @@
     "Williamstown",
     "Williamstown North"
   ],
-  "City of Hume": [
+  "Hume": [
     "Attwood",
     "Broadmeadows",
     "Campbellfield",
@@ -196,7 +196,7 @@
     "Tullamarine",
     "Westmeadows"
   ],
-  "City of Kingston (Victoria)": [
+  "Kingston": [
     "Aspendale",
     "Aspendale Gardens",
     "Bonbeach",
@@ -221,7 +221,7 @@
     "Patterson Lakes",
     "Waterways"
   ],
-  "City of Knox": [
+  "Knox": [
     "Bayswater",
     "Boronia",
     "Ferntree Gully",
@@ -234,7 +234,7 @@
     "Wantirna",
     "Wantirna South"
   ],
-  "City of Manningham": [
+  "Manningham": [
     "Bulleen",
     "Doncaster",
     "Doncaster East",
@@ -247,7 +247,7 @@
     "Warrandyte",
     "Wonga Park"
   ],
-  "City of Maribyrnong": [
+  "Maribyrnong": [
     "Braybrook",
     "Footscray",
     "Kingsville",
@@ -258,7 +258,7 @@
     "West Footscray",
     "Yarraville"
   ],
-  "City of Maroondah": [
+  "Maroondah": [
     "Bayswater North",
     "Croydon",
     "Croydon Hills",
@@ -275,7 +275,7 @@
     "Warranwood",
     "Wonga Park"
   ],
-  "City of Melbourne (LGA)": [
+  "Melbourne": [
     "Carlton",
     "Carlton North",
     "Docklands",
@@ -291,7 +291,7 @@
     "Southbank",
     "West Melbourne"
   ],
-  "City of Melton": [
+  "Melton": [
     "Aintree",
     "Bonnie Brook",
     "Brookfield",
@@ -319,7 +319,7 @@
     "Truganina",
     "Weir Views"
   ],
-  "City of Merri-bek": [
+  "Merri-bek": [
     "Brunswick",
     "Brunswick East",
     "Brunswick West",
@@ -336,7 +336,7 @@
     "Pascoe Vale South",
     "Tullamarine"
   ],
-  "City of Monash": [
+  "Monash": [
     "Ashwood",
     "Burwood",
     "Chadstone",
@@ -352,7 +352,7 @@
     "Oakleigh South",
     "Wheelers Hill"
   ],
-  "City of Moonee Valley": [
+  "Moonee Valley": [
     "Aberfeldie",
     "Airport West",
     "Ascot Vale",
@@ -369,7 +369,7 @@
     "Strathmore Heights",
     "Travancore"
   ],
-  "Shire of Mornington Peninsula": [
+  "Mornington Peninsula": [
     "Blairgowrie",
     "Capel Sound",
     "Crib Point",
@@ -390,7 +390,7 @@
     "Tootgarook",
     "Tyabb"
   ],
-  "Shire of Nillumbik": [
+  "Nillumbik": [
     "Diamond Creek",
     "Doreen",
     "Eltham",
@@ -400,7 +400,7 @@
     "Research",
     "Wattle Glen"
   ],
-  "City of Port Phillip": [
+  "Port Phillip": [
     "Albert Park",
     "Balaclava",
     "Elwood",
@@ -416,7 +416,7 @@
     "St Kilda West",
     "Windsor"
   ],
-  "City of Stonnington": [
+  "Stonnington": [
     "Armadale",
     "Glen Iris",
     "Kooyong",
@@ -427,7 +427,7 @@
     "Toorak",
     "Windsor"
   ],
-  "City of Whitehorse": [
+  "Whitehorse": [
     "Balwyn North",
     "Blackburn",
     "Blackburn North",
@@ -446,7 +446,7 @@
     "Vermont",
     "Vermont South"
   ],
-  "City of Whittlesea": [
+  "Whittlesea": [
     "Aurora",
     "Bundoora",
     "Doreen",
@@ -458,7 +458,7 @@
     "Thomastown",
     "Wollert"
   ],
-  "City of Wyndham": [
+  "Wyndham": [
     "Cocoroc",
     "Hoppers Crossing",
     "Laverton",
@@ -475,7 +475,7 @@
     "Williams Landing",
     "Wyndham Vale"
   ],
-  "City of Yarra": [
+  "Yarra": [
     "Abbotsford",
     "Alphington",
     "Burnley",
@@ -489,7 +489,7 @@
     "Princes Hill",
     "Richmond"
   ],
-  "Yarra Ranges Shire": [
+  "Yarra Ranges": [
     "Belgrave",
     "Belgrave Heights",
     "Belgrave South",

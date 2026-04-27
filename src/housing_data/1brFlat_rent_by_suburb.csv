@@ -1,0 +1,94 @@
+suburbs,region,weeklyRent,weeklyRentRank,weeklyRentPercentile
+Docklands,Inner Melbourne,600,1,100.0
+Southbank,Inner Melbourne,570,2,98.9
+"Glen Waverley, Mulgrave",Inner Eastern Melbourne,550,3,97.8
+Port Melbourne,Inner Melbourne,550,3,97.8
+South Melbourne,Inner Melbourne,548,4,96.8
+"Vermont, Forest Hill, Burwood East",Inner Eastern Melbourne,530,5,95.7
+Fitzroy,Inner Melbourne,528,6,94.6
+"North Melbourne, West Melbourne",Inner Melbourne,525,7,93.5
+"Collingwood, Abbotsford",Inner Melbourne,520,8,92.5
+East Melbourne,Inner Melbourne,520,8,92.5
+"Richmond, Burnley",Inner Melbourne,510,9,91.4
+Balwyn,Inner Eastern Melbourne,500,10,90.3
+"Carlton, Parkville",Inner Melbourne,500,10,90.3
+Caulfield,Southern Melbourne,500,10,90.3
+"Chadstone, Oakleigh",Inner Eastern Melbourne,500,10,90.3
+"Fitzroy North, Clifton Hill",Inner Melbourne,500,10,90.3
+South Yarra,Inner Melbourne,500,10,90.3
+Brighton,Southern Melbourne,498,11,89.2
+Box Hill,Inner Eastern Melbourne,490,12,88.2
+Clayton,Inner Eastern Melbourne,490,12,88.2
+"Ivanhoe, Ivanhoe East",North Eastern Melbourne,490,12,88.2
+"Bulleen, Templestowe, Doncaster",Inner Eastern Melbourne,480,13,87.1
+"Hampton, Beaumaris",Southern Melbourne,480,13,87.1
+Malvern East,Southern Melbourne,480,13,87.1
+"Doncaster East, Donvale",Inner Eastern Melbourne,470,14,86.0
+"Flemington, Kensington",Inner Melbourne,470,14,86.0
+Kew,Inner Eastern Melbourne,470,14,86.0
+St Kilda,Inner Melbourne,465,15,84.9
+Blackburn,Inner Eastern Melbourne,460,16,83.9
+Brunswick,North Western Melbourne,460,16,83.9
+"Prahran, Windsor",Inner Melbourne,460,16,83.9
+"Newport, Spotswood",Outer Western Melbourne,455,17,82.8
+"Albert Park, Middle Park, West St Kilda",Inner Melbourne,450,18,81.7
+Armadale,Inner Melbourne,450,18,81.7
+"Burwood, Ashburton",Inner Eastern Melbourne,450,18,81.7
+"Canterbury, Surrey Hills, Mont Albert",Inner Eastern Melbourne,450,18,81.7
+Cheltenham,Southern Melbourne,450,18,81.7
+Elwood,Inner Melbourne,450,18,81.7
+Footscray,Outer Western Melbourne,450,18,81.7
+Hawthorn,Inner Eastern Melbourne,450,18,81.7
+"Heidelberg, Heidelberg West",North Eastern Melbourne,450,18,81.7
+"Keilor East, Avondale Heights",Outer Western Melbourne,450,18,81.7
+Malvern,Southern Melbourne,450,18,81.7
+"Moonee Ponds, Ascot Vale",North Western Melbourne,450,18,81.7
+Toorak,Inner Melbourne,445,19,80.6
+"Camberwell, Glen Iris",Inner Eastern Melbourne,440,20,79.6
+Elsternwick,Southern Melbourne,440,20,79.6
+Preston,North Eastern Melbourne,440,20,79.6
+Ringwood,Outer Eastern Melbourne,440,20,79.6
+"Aspendale, Chelsea, Carrum",Southern Melbourne,435,21,78.5
+"Nunawading, Mitcham",Inner Eastern Melbourne,435,21,78.5
+Carlton North,Inner Melbourne,430,22,77.4
+Essendon,North Western Melbourne,430,22,77.4
+"Coburg, Pascoe Vale South",North Western Melbourne,425,23,76.3
+"Bundoora, Greensborough, Hurstbridge",North Eastern Melbourne,420,24,75.3
+Carnegie,Southern Melbourne,420,24,75.3
+Northcote,North Eastern Melbourne,420,24,75.3
+Williamstown,Outer Western Melbourne,420,24,75.3
+Bentleigh,Southern Melbourne,405,25,74.2
+"Mentone, Parkdale, Mordialloc",Southern Melbourne,405,25,74.2
+"Murrumbeena, Hughesdale",Southern Melbourne,405,25,74.2
+Boronia,Outer Eastern Melbourne,400,26,73.1
+Cranbourne,South Eastern Melbourne,400,26,73.1
+"Fairfield, Alphington",North Eastern Melbourne,400,26,73.1
+"Mill Park, Epping",North Eastern Melbourne,400,26,73.1
+Reservoir,North Eastern Melbourne,400,26,73.1
+Thornbury,North Eastern Melbourne,400,26,73.1
+Bayswater,Outer Eastern Melbourne,393,27,72.0
+"Dromana, Portsea",Mornington Peninsula,393,27,72.0
+"Yarraville, Seddon",Outer Western Melbourne,393,27,72.0
+Altona,Outer Western Melbourne,385,28,71.0
+"Oak Park, Glenroy, Fawkner",North Western Melbourne,385,28,71.0
+"Seaford, Carrum Downs",Mornington Peninsula,380,29,69.9
+Dandenong,South Eastern Melbourne,375,30,68.8
+"Thomastown, Lalor",North Eastern Melbourne,375,30,68.8
+Noble Park,South Eastern Melbourne,370,31,67.7
+Springvale,South Eastern Melbourne,370,31,67.7
+West Footscray,Outer Western Melbourne,365,32,66.7
+"Croydon, Lilydale",Outer Eastern Melbourne,363,33,65.6
+"Eltham, Research, Montmorency",North Eastern Melbourne,360,34,64.5
+"Hastings, Flinders",Mornington Peninsula,360,34,64.5
+"Dandenong North, Endeavour Hills",South Eastern Melbourne,350,35,63.4
+Frankston,Mornington Peninsula,350,35,63.4
+Melton,Outer Western Melbourne,350,35,63.4
+"Werribee, Hoppers Crossing",Outer Western Melbourne,350,35,63.4
+"St Albans, Deer Park",Outer Western Melbourne,330,36,62.4
+Sunshine,Outer Western Melbourne,330,36,62.4
+"Broadmeadows, Roxburgh Park",North Western Melbourne,325,37,61.3
+"Narre Warren, Hampton Park",South Eastern Melbourne,323,38,60.2
+"Wantirna, Scoresby",Outer Eastern Melbourne,287,39,59.1
+Mount Waverley,Inner Eastern Melbourne,280,40,58.1
+"Pascoe Vale, Coburg North",North Western Melbourne,280,40,58.1
+Brighton East,Southern Melbourne,265,41,57.0

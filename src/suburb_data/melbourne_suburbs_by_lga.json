@@ -1,0 +1,2378 @@
+{
+  "Melbourne": [
+    {
+      "suburb": "Carlton",
+      "postcode": "3053"
+    },
+    {
+      "suburb": "Carlton North",
+      "postcode": "3054"
+    },
+    {
+      "suburb": "Docklands",
+      "postcode": "3008"
+    },
+    {
+      "suburb": "East Melbourne",
+      "postcode": "3002"
+    },
+    {
+      "suburb": "Flemington",
+      "postcode": "3031"
+    },
+    {
+      "suburb": "Kensington",
+      "postcode": "3031"
+    },
+    {
+      "suburb": "Melbourne",
+      "postcode": "3000"
+    },
+    {
+      "suburb": "North Melbourne",
+      "postcode": "3051"
+    },
+    {
+      "suburb": "Parkville",
+      "postcode": "3052"
+    },
+    {
+      "suburb": "Port Melbourne",
+      "postcode": "3207"
+    },
+    {
+      "suburb": "Southbank",
+      "postcode": "3006"
+    },
+    {
+      "suburb": "South Wharf",
+      "postcode": "3006"
+    },
+    {
+      "suburb": "South Yarra",
+      "postcode": "3141"
+    },
+    {
+      "suburb": "West Melbourne",
+      "postcode": "3003"
+    }
+  ],
+  "Port Phillip": [
+    {
+      "suburb": "Albert Park",
+      "postcode": "3206"
+    },
+    {
+      "suburb": "Balaclava",
+      "postcode": "3183"
+    },
+    {
+      "suburb": "Elwood",
+      "postcode": "3184"
+    },
+    {
+      "suburb": "Melbourne",
+      "postcode": "3004"
+    },
+    {
+      "suburb": "Middle Park",
+      "postcode": "3206"
+    },
+    {
+      "suburb": "Port Melbourne",
+      "postcode": "3207"
+    },
+    {
+      "suburb": "Ripponlea",
+      "postcode": "3185"
+    },
+    {
+      "suburb": "St Kilda",
+      "postcode": "3182"
+    },
+    {
+      "suburb": "St Kilda East",
+      "postcode": "3183"
+    },
+    {
+      "suburb": "St Kilda West",
+      "postcode": "3182"
+    },
+    {
+      "suburb": "Southbank",
+      "postcode": "3006"
+    },
+    {
+      "suburb": "South Melbourne",
+      "postcode": "3205"
+    },
+    {
+      "suburb": "South Wharf",
+      "postcode": "3006"
+    }
+  ],
+  "Yarra": [
+    {
+      "suburb": "Abbotsford",
+      "postcode": "3067"
+    },
+    {
+      "suburb": "Alphington",
+      "postcode": "3078"
+    },
+    {
+      "suburb": "Burnley",
+      "postcode": "3121"
+    },
+    {
+      "suburb": "Carlton North",
+      "postcode": "3054"
+    },
+    {
+      "suburb": "Clifton Hill",
+      "postcode": "3068"
+    },
+    {
+      "suburb": "Collingwood",
+      "postcode": "3066"
+    },
+    {
+      "suburb": "Cremorne",
+      "postcode": "3121"
+    },
+    {
+      "suburb": "Fairfield",
+      "postcode": "3078"
+    },
+    {
+      "suburb": "Fitzroy",
+      "postcode": "3065"
+    },
+    {
+      "suburb": "Fitzroy North",
+      "postcode": "3068"
+    },
+    {
+      "suburb": "Princes Hill",
+      "postcode": "3054"
+    },
+    {
+      "suburb": "Richmond",
+      "postcode": "3121"
+    }
+  ],
+  "Banyule": [
+    {
+      "suburb": "Bellfield",
+      "postcode": "3081"
+    },
+    {
+      "suburb": "Briar Hill",
+      "postcode": "3088"
+    },
+    {
+      "suburb": "Bundoora",
+      "postcode": "3083"
+    },
+    {
+      "suburb": "Eaglemont",
+      "postcode": "3084"
+    },
+    {
+      "suburb": "Eltham",
+      "postcode": "3095"
+    },
+    {
+      "suburb": "Eltham North",
+      "postcode": "3095"
+    },
+    {
+      "suburb": "Greensborough",
+      "postcode": "3088"
+    },
+    {
+      "suburb": "Heidelberg",
+      "postcode": "3084"
+    },
+    {
+      "suburb": "Heidelberg Heights",
+      "postcode": "3081"
+    },
+    {
+      "suburb": "Heidelberg West",
+      "postcode": "3081"
+    },
+    {
+      "suburb": "Ivanhoe",
+      "postcode": "3079"
+    },
+    {
+      "suburb": "Ivanhoe East",
+      "postcode": "3079"
+    },
+    {
+      "suburb": "Lower Plenty",
+      "postcode": "3093"
+    },
+    {
+      "suburb": "Macleod",
+      "postcode": "3085"
+    },
+    {
+      "suburb": "Montmorency",
+      "postcode": "3094"
+    },
+    {
+      "suburb": "Rosanna",
+      "postcode": "3084"
+    },
+    {
+      "suburb": "St Helena",
+      "postcode": "3088"
+    },
+    {
+      "suburb": "Viewbank",
+      "postcode": "3084"
+    },
+    {
+      "suburb": "Watsonia",
+      "postcode": "3087"
+    },
+    {
+      "suburb": "Watsonia North",
+      "postcode": "3087"
+    },
+    {
+      "suburb": "Yallambie",
+      "postcode": "3085"
+    }
+  ],
+  "Darebin": [
+    {
+      "suburb": "Alphington",
+      "postcode": "3078"
+    },
+    {
+      "suburb": "Bundoora",
+      "postcode": "3083"
+    },
+    {
+      "suburb": "Coburg",
+      "postcode": "3058"
+    },
+    {
+      "suburb": "Coburg North",
+      "postcode": "3058"
+    },
+    {
+      "suburb": "Fairfield",
+      "postcode": "3078"
+    },
+    {
+      "suburb": "Kingsbury",
+      "postcode": "3083"
+    },
+    {
+      "suburb": "Macleod",
+      "postcode": "3085"
+    },
+    {
+      "suburb": "Northcote",
+      "postcode": "3070"
+    },
+    {
+      "suburb": "Preston",
+      "postcode": "3072"
+    },
+    {
+      "suburb": "Reservoir",
+      "postcode": "3073"
+    },
+    {
+      "suburb": "Thornbury",
+      "postcode": "3071"
+    }
+  ],
+  "Hume": [
+    {
+      "suburb": "Attwood",
+      "postcode": "3049"
+    },
+    {
+      "suburb": "Broadmeadows",
+      "postcode": "3047"
+    },
+    {
+      "suburb": "Campbellfield",
+      "postcode": "3061"
+    },
+    {
+      "suburb": "Coolaroo",
+      "postcode": "3048"
+    },
+    {
+      "suburb": "Craigieburn",
+      "postcode": "3064"
+    },
+    {
+      "suburb": "Dallas",
+      "postcode": "3047"
+    },
+    {
+      "suburb": "Diggers Rest",
+      "postcode": "3427"
+    },
+    {
+      "suburb": "Gladstone Park",
+      "postcode": "3043"
+    },
+    {
+      "suburb": "Greenvale",
+      "postcode": "3059"
+    },
+    {
+      "suburb": "Jacana",
+      "postcode": "3047"
+    },
+    {
+      "suburb": "Kalkallo",
+      "postcode": "3064"
+    },
+    {
+      "suburb": "Keilor",
+      "postcode": "3036"
+    },
+    {
+      "suburb": "Meadow Heights",
+      "postcode": "3048"
+    },
+    {
+      "suburb": "Melbourne Airport",
+      "postcode": "3045"
+    },
+    {
+      "suburb": "Mickleham",
+      "postcode": "3064"
+    },
+    {
+      "suburb": "Roxburgh Park",
+      "postcode": "3064"
+    },
+    {
+      "suburb": "Somerton",
+      "postcode": "3062"
+    },
+    {
+      "suburb": "Sunbury",
+      "postcode": "3429"
+    },
+    {
+      "suburb": "Tullamarine",
+      "postcode": "3043"
+    },
+    {
+      "suburb": "Westmeadows",
+      "postcode": "3049"
+    },
+    {
+      "suburb": "Bulla",
+      "postcode": "3428"
+    },
+    {
+      "suburb": "Clarkefield",
+      "postcode": "3430"
+    },
+    {
+      "suburb": "Oaklands Junction",
+      "postcode": "3063"
+    },
+    {
+      "suburb": "Wildwood",
+      "postcode": "3429"
+    },
+    {
+      "suburb": "Yuroke",
+      "postcode": "3063"
+    }
+  ],
+  "Merri-bek": [
+    {
+      "suburb": "Brunswick",
+      "postcode": "3056"
+    },
+    {
+      "suburb": "Brunswick East",
+      "postcode": "3057"
+    },
+    {
+      "suburb": "Brunswick West",
+      "postcode": "3055"
+    },
+    {
+      "suburb": "Coburg",
+      "postcode": "3058"
+    },
+    {
+      "suburb": "Coburg North",
+      "postcode": "3058"
+    },
+    {
+      "suburb": "Fawkner",
+      "postcode": "3060"
+    },
+    {
+      "suburb": "Glenroy",
+      "postcode": "3046"
+    },
+    {
+      "suburb": "Gowanbrae",
+      "postcode": "3043"
+    },
+    {
+      "suburb": "Hadfield",
+      "postcode": "3046"
+    },
+    {
+      "suburb": "Oak Park",
+      "postcode": "3046"
+    },
+    {
+      "suburb": "Pascoe Vale",
+      "postcode": "3044"
+    },
+    {
+      "suburb": "Pascoe Vale South",
+      "postcode": "3044"
+    },
+    {
+      "suburb": "Tullamarine",
+      "postcode": "3043"
+    }
+  ],
+  "Nillumbik": [
+    {
+      "suburb": "Diamond Creek",
+      "postcode": "3089"
+    },
+    {
+      "suburb": "Doreen",
+      "postcode": "3754"
+    },
+    {
+      "suburb": "Eltham",
+      "postcode": "3095"
+    },
+    {
+      "suburb": "Eltham North",
+      "postcode": "3095"
+    },
+    {
+      "suburb": "Greensborough",
+      "postcode": "3088"
+    },
+    {
+      "suburb": "Hurstbridge",
+      "postcode": "3099"
+    },
+    {
+      "suburb": "North Warrandyte",
+      "postcode": "3113"
+    },
+    {
+      "suburb": "Plenty",
+      "postcode": "3090"
+    },
+    {
+      "suburb": "Research",
+      "postcode": "3095"
+    },
+    {
+      "suburb": "Wattle Glen",
+      "postcode": "3096"
+    },
+    {
+      "suburb": "Arthurs Creek",
+      "postcode": "3099"
+    },
+    {
+      "suburb": "Bend of Islands",
+      "postcode": "3097"
+    },
+    {
+      "suburb": "Christmas Hills",
+      "postcode": "3775"
+    },
+    {
+      "suburb": "Cottles Bridge",
+      "postcode": "3099"
+    },
+    {
+      "suburb": "Kangaroo Ground",
+      "postcode": "3097"
+    },
+    {
+      "suburb": "Kinglake",
+      "postcode": "3763"
+    },
+    {
+      "suburb": "Kinglake West",
+      "postcode": "3778"
+    },
+    {
+      "suburb": "Nutfield",
+      "postcode": "3099"
+    },
+    {
+      "suburb": "Panton Hill",
+      "postcode": "3759"
+    },
+    {
+      "suburb": "St Andrews",
+      "postcode": "3761"
+    },
+    {
+      "suburb": "Smiths Gully",
+      "postcode": "3760"
+    },
+    {
+      "suburb": "Strathewen",
+      "postcode": "3099"
+    },
+    {
+      "suburb": "Watsons Creek",
+      "postcode": "3097"
+    },
+    {
+      "suburb": "Yan Yean",
+      "postcode": "3755"
+    },
+    {
+      "suburb": "Yarrambat",
+      "postcode": "3091"
+    }
+  ],
+  "Whittlesea": [
+    {
+      "suburb": "Bundoora",
+      "postcode": "3083"
+    },
+    {
+      "suburb": "Donnybrook",
+      "postcode": "3064"
+    },
+    {
+      "suburb": "Doreen",
+      "postcode": "3754"
+    },
+    {
+      "suburb": "Epping",
+      "postcode": "3076"
+    },
+    {
+      "suburb": "Lalor",
+      "postcode": "3075"
+    },
+    {
+      "suburb": "Mernda",
+      "postcode": "3754"
+    },
+    {
+      "suburb": "Mill Park",
+      "postcode": "3082"
+    },
+    {
+      "suburb": "South Morang",
+      "postcode": "3752"
+    },
+    {
+      "suburb": "Thomastown",
+      "postcode": "3074"
+    },
+    {
+      "suburb": "Wollert",
+      "postcode": "3750"
+    },
+    {
+      "suburb": "Beveridge",
+      "postcode": "3753"
+    },
+    {
+      "suburb": "Eden Park",
+      "postcode": "3757"
+    },
+    {
+      "suburb": "Humevale",
+      "postcode": "3757"
+    },
+    {
+      "suburb": "Kinglake West",
+      "postcode": "3778"
+    },
+    {
+      "suburb": "Whittlesea",
+      "postcode": "3757"
+    },
+    {
+      "suburb": "Woodstock",
+      "postcode": "3755"
+    },
+    {
+      "suburb": "Yan Yean",
+      "postcode": "3755"
+    }
+  ],
+  "Boroondara": [
+    {
+      "suburb": "Ashburton",
+      "postcode": "3147"
+    },
+    {
+      "suburb": "Balwyn",
+      "postcode": "3103"
+    },
+    {
+      "suburb": "Balwyn North",
+      "postcode": "3104"
+    },
+    {
+      "suburb": "Camberwell",
+      "postcode": "3124"
+    },
+    {
+      "suburb": "Canterbury",
+      "postcode": "3126"
+    },
+    {
+      "suburb": "Deepdene",
+      "postcode": "3103"
+    },
+    {
+      "suburb": "Glen Iris",
+      "postcode": "3146"
+    },
+    {
+      "suburb": "Hawthorn",
+      "postcode": "3122"
+    },
+    {
+      "suburb": "Hawthorn East",
+      "postcode": "3123"
+    },
+    {
+      "suburb": "Kew",
+      "postcode": "3101"
+    },
+    {
+      "suburb": "Kew East",
+      "postcode": "3102"
+    },
+    {
+      "suburb": "Mont Albert",
+      "postcode": "3127"
+    },
+    {
+      "suburb": "Surrey Hills",
+      "postcode": "3127"
+    }
+  ],
+  "Knox": [
+    {
+      "suburb": "Bayswater",
+      "postcode": "3153"
+    },
+    {
+      "suburb": "Boronia",
+      "postcode": "3155"
+    },
+    {
+      "suburb": "Ferntree Gully",
+      "postcode": "3156"
+    },
+    {
+      "suburb": "Knoxfield",
+      "postcode": "3180"
+    },
+    {
+      "suburb": "Lysterfield",
+      "postcode": "3156"
+    },
+    {
+      "suburb": "Rowville",
+      "postcode": "3178"
+    },
+    {
+      "suburb": "Sassafras",
+      "postcode": "3787"
+    },
+    {
+      "suburb": "Scoresby",
+      "postcode": "3179"
+    },
+    {
+      "suburb": "The Basin",
+      "postcode": "3154"
+    },
+    {
+      "suburb": "Upper Ferntree Gully",
+      "postcode": "3156"
+    },
+    {
+      "suburb": "Wantirna",
+      "postcode": "3152"
+    },
+    {
+      "suburb": "Wantirna South",
+      "postcode": "3152"
+    }
+  ],
+  "Manningham": [
+    {
+      "suburb": "Bulleen",
+      "postcode": "3105"
+    },
+    {
+      "suburb": "Doncaster",
+      "postcode": "3108"
+    },
+    {
+      "suburb": "Doncaster East",
+      "postcode": "3109"
+    },
+    {
+      "suburb": "Donvale",
+      "postcode": "3111"
+    },
+    {
+      "suburb": "Nunawading",
+      "postcode": "3131"
+    },
+    {
+      "suburb": "Park Orchards",
+      "postcode": "3114"
+    },
+    {
+      "suburb": "Ringwood North",
+      "postcode": "3134"
+    },
+    {
+      "suburb": "Templestowe",
+      "postcode": "3106"
+    },
+    {
+      "suburb": "Templestowe Lower",
+      "postcode": "3107"
+    },
+    {
+      "suburb": "Warrandyte",
+      "postcode": "3113"
+    },
+    {
+      "suburb": "Warrandyte South",
+      "postcode": "3134"
+    },
+    {
+      "suburb": "Wonga Park",
+      "postcode": "3115"
+    }
+  ],
+  "Maroondah": [
+    {
+      "suburb": "Bayswater North",
+      "postcode": "3153"
+    },
+    {
+      "suburb": "Croydon",
+      "postcode": "3136"
+    },
+    {
+      "suburb": "Croydon Hills",
+      "postcode": "3136"
+    },
+    {
+      "suburb": "Croydon North",
+      "postcode": "3136"
+    },
+    {
+      "suburb": "Croydon South",
+      "postcode": "3136"
+    },
+    {
+      "suburb": "Heathmont",
+      "postcode": "3135"
+    },
+    {
+      "suburb": "Kilsyth",
+      "postcode": "3137"
+    },
+    {
+      "suburb": "Kilsyth South",
+      "postcode": "3137"
+    },
+    {
+      "suburb": "Park Orchards",
+      "postcode": "3114"
+    },
+    {
+      "suburb": "Ringwood",
+      "postcode": "3134"
+    },
+    {
+      "suburb": "Ringwood East",
+      "postcode": "3135"
+    },
+    {
+      "suburb": "Ringwood North",
+      "postcode": "3134"
+    },
+    {
+      "suburb": "Vermont",
+      "postcode": "3133"
+    },
+    {
+      "suburb": "Warranwood",
+      "postcode": "3134"
+    },
+    {
+      "suburb": "Wonga Park",
+      "postcode": "3115"
+    }
+  ],
+  "Whitehorse": [
+    {
+      "suburb": "Blackburn",
+      "postcode": "3130"
+    },
+    {
+      "suburb": "Blackburn North",
+      "postcode": "3130"
+    },
+    {
+      "suburb": "Blackburn South",
+      "postcode": "3130"
+    },
+    {
+      "suburb": "Box Hill",
+      "postcode": "3128"
+    },
+    {
+      "suburb": "Box Hill North",
+      "postcode": "3129"
+    },
+    {
+      "suburb": "Box Hill South",
+      "postcode": "3128"
+    },
+    {
+      "suburb": "Burwood",
+      "postcode": "3125"
+    },
+    {
+      "suburb": "Burwood East",
+      "postcode": "3151"
+    },
+    {
+      "suburb": "Forest Hill",
+      "postcode": "3131"
+    },
+    {
+      "suburb": "Mitcham",
+      "postcode": "3132"
+    },
+    {
+      "suburb": "Mont Albert",
+      "postcode": "3127"
+    },
+    {
+      "suburb": "Mont Albert North",
+      "postcode": "3129"
+    },
+    {
+      "suburb": "Nunawading",
+      "postcode": "3131"
+    },
+    {
+      "suburb": "Surrey Hills",
+      "postcode": "3127"
+    },
+    {
+      "suburb": "Vermont",
+      "postcode": "3133"
+    },
+    {
+      "suburb": "Vermont South",
+      "postcode": "3133"
+    }
+  ],
+  "Yarra Ranges": [
+    {
+      "suburb": "Belgrave",
+      "postcode": "3160"
+    },
+    {
+      "suburb": "Belgrave Heights",
+      "postcode": "3160"
+    },
+    {
+      "suburb": "Belgrave South",
+      "postcode": "3160"
+    },
+    {
+      "suburb": "Chirnside Park",
+      "postcode": "3116"
+    },
+    {
+      "suburb": "Kilsyth",
+      "postcode": "3137"
+    },
+    {
+      "suburb": "Lilydale",
+      "postcode": "3140"
+    },
+    {
+      "suburb": "Montrose",
+      "postcode": "3765"
+    },
+    {
+      "suburb": "Mooroolbark",
+      "postcode": "3138"
+    },
+    {
+      "suburb": "Mount Evelyn",
+      "postcode": "3796"
+    },
+    {
+      "suburb": "Selby",
+      "postcode": "3159"
+    },
+    {
+      "suburb": "Tecoma",
+      "postcode": "3160"
+    },
+    {
+      "suburb": "Upper Ferntree Gully",
+      "postcode": "3156"
+    },
+    {
+      "suburb": "Upwey",
+      "postcode": "3158"
+    },
+    {
+      "suburb": "Wonga Park",
+      "postcode": "3115"
+    },
+    {
+      "suburb": "Badger Creek",
+      "postcode": "3777"
+    },
+    {
+      "suburb": "Beenak",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Big Pats Creek",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Cambarville",
+      "postcode": "3779"
+    },
+    {
+      "suburb": "Chum Creek",
+      "postcode": "3777"
+    },
+    {
+      "suburb": "Coldstream",
+      "postcode": "3770"
+    },
+    {
+      "suburb": "Dixons Creek",
+      "postcode": "3775"
+    },
+    {
+      "suburb": "Don Valley",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "East Warburton",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Emerald",
+      "postcode": "3782"
+    },
+    {
+      "suburb": "Fernshaw",
+      "postcode": "3778"
+    },
+    {
+      "suburb": "Ferny Creek",
+      "postcode": "3786"
+    },
+    {
+      "suburb": "Gilderoy",
+      "postcode": "3797"
+    },
+    {
+      "suburb": "Gladysdale",
+      "postcode": "3797"
+    },
+    {
+      "suburb": "Gruyere",
+      "postcode": "3770"
+    },
+    {
+      "suburb": "Healesville",
+      "postcode": "3777"
+    },
+    {
+      "suburb": "Hoddles Creek",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Kallista",
+      "postcode": "3791"
+    },
+    {
+      "suburb": "Kalorama",
+      "postcode": "3766"
+    },
+    {
+      "suburb": "Launching Place",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Lysterfield",
+      "postcode": "3156"
+    },
+    {
+      "suburb": "Macclesfield",
+      "postcode": "3782"
+    },
+    {
+      "suburb": "Matlock",
+      "postcode": "3723"
+    },
+    {
+      "suburb": "McMahons Creek",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Menzies Creek",
+      "postcode": "3159"
+    },
+    {
+      "suburb": "Millgrove",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Monbulk",
+      "postcode": "3793"
+    },
+    {
+      "suburb": "Mount Dandenong",
+      "postcode": "3767"
+    },
+    {
+      "suburb": "Mount Toolebewong",
+      "postcode": "3777"
+    },
+    {
+      "suburb": "Narre Warren East",
+      "postcode": "3804"
+    },
+    {
+      "suburb": "Olinda",
+      "postcode": "3788"
+    },
+    {
+      "suburb": "Powelltown",
+      "postcode": "3797"
+    },
+    {
+      "suburb": "Reefton",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Sassafras",
+      "postcode": "3787"
+    },
+    {
+      "suburb": "Seville",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Seville East",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Sherbrooke",
+      "postcode": "3789"
+    },
+    {
+      "suburb": "Silvan",
+      "postcode": "3795"
+    },
+    {
+      "suburb": "Steels Creek",
+      "postcode": "3775"
+    },
+    {
+      "suburb": "Tarrawarra",
+      "postcode": "3775"
+    },
+    {
+      "suburb": "The Patch",
+      "postcode": "3792"
+    },
+    {
+      "suburb": "Three Bridges",
+      "postcode": "3797"
+    },
+    {
+      "suburb": "Toolangi",
+      "postcode": "3777"
+    },
+    {
+      "suburb": "Toorongo",
+      "postcode": "3833"
+    },
+    {
+      "suburb": "Tremont",
+      "postcode": "3785"
+    },
+    {
+      "suburb": "Wandin East",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Wandin North",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Warburton",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Wesburn",
+      "postcode": "3799"
+    },
+    {
+      "suburb": "Woori Yallock",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Yarra Glen",
+      "postcode": "3775"
+    },
+    {
+      "suburb": "Yarra Junction",
+      "postcode": "3797"
+    },
+    {
+      "suburb": "Yellingbo",
+      "postcode": "3139"
+    },
+    {
+      "suburb": "Yering",
+      "postcode": "3770"
+    }
+  ],
+  "Bayside": [
+    {
+      "suburb": "Beaumaris",
+      "postcode": "3193"
+    },
+    {
+      "suburb": "Black Rock",
+      "postcode": "3193"
+    },
+    {
+      "suburb": "Brighton",
+      "postcode": "3186"
+    },
+    {
+      "suburb": "Brighton East",
+      "postcode": "3187"
+    },
+    {
+      "suburb": "Cheltenham",
+      "postcode": "3192"
+    },
+    {
+      "suburb": "Hampton",
+      "postcode": "3188"
+    },
+    {
+      "suburb": "Hampton East",
+      "postcode": "3188"
+    },
+    {
+      "suburb": "Highett",
+      "postcode": "3190"
+    },
+    {
+      "suburb": "Sandringham",
+      "postcode": "3191"
+    }
+  ],
+  "Cardinia": [
+    {
+      "suburb": "Beaconsfield",
+      "postcode": "3807"
+    },
+    {
+      "suburb": "Avonsleigh",
+      "postcode": "3782"
+    },
+    {
+      "suburb": "Bayles",
+      "postcode": "3981"
+    },
+    {
+      "suburb": "Beaconsfield Upper",
+      "postcode": "3808"
+    },
+    {
+      "suburb": "Bunyip",
+      "postcode": "3815"
+    },
+    {
+      "suburb": "Bunyip North",
+      "postcode": "3815"
+    },
+    {
+      "suburb": "Caldermeade",
+      "postcode": "3984"
+    },
+    {
+      "suburb": "Cardinia",
+      "postcode": "3978"
+    },
+    {
+      "suburb": "Catani",
+      "postcode": "3981"
+    },
+    {
+      "suburb": "Clematis",
+      "postcode": "3782"
+    },
+    {
+      "suburb": "Cockatoo",
+      "postcode": "3781"
+    },
+    {
+      "suburb": "Cora Lynn",
+      "postcode": "3814"
+    },
+    {
+      "suburb": "Dalmore",
+      "postcode": "3981"
+    },
+    {
+      "suburb": "Dewhurst",
+      "postcode": "3809"
+    },
+    {
+      "suburb": "Emerald",
+      "postcode": "3782"
+    },
+    {
+      "suburb": "Garfield",
+      "postcode": "3814"
+    },
+    {
+      "suburb": "Garfield North",
+      "postcode": "3814"
+    },
+    {
+      "suburb": "Gembrook",
+      "postcode": "3783"
+    },
+    {
+      "suburb": "Guys Hill",
+      "postcode": "3807"
+    },
+    {
+      "suburb": "Heath Hill",
+      "postcode": "3981"
+    },
+    {
+      "suburb": "Iona",
+      "postcode": "3815"
+    },
+    {
+      "suburb": "Koo Wee Rup",
+      "postcode": "3981"
+    },
+    {
+      "suburb": "Koo Wee Rup North",
+      "postcode": "3891"
+    },
+    {
+      "suburb": "Lang Lang",
+      "postcode": "3984"
+    },
+    {
+      "suburb": "Lang Lang East",
+      "postcode": "3894"
+    },
+    {
+      "suburb": "Longwarry",
+      "postcode": "3816"
+    },
+    {
+      "suburb": "Maryknoll",
+      "postcode": "3812"
+    },
+    {
+      "suburb": "Menzies Creek",
+      "postcode": "3159"
+    },
+    {
+      "suburb": "Modella",
+      "postcode": "3816"
+    },
+    {
+      "suburb": "Monomeith",
+      "postcode": "3984"
+    },
+    {
+      "suburb": "Mount Burnett",
+      "postcode": "3781"
+    },
+    {
+      "suburb": "Nangana",
+      "postcode": "3781"
+    },
+    {
+      "suburb": "Nar Nar Goon",
+      "postcode": "3812"
+    },
+    {
+      "suburb": "Nar Nar Goon North",
+      "postcode": "3812"
+    },
+    {
+      "suburb": "Nyora",
+      "postcode": "3987"
+    },
+    {
+      "suburb": "Officer South",
+      "postcode": "3809"
+    },
+    {
+      "suburb": "Pakenham South",
+      "postcode": "3810"
+    },
+    {
+      "suburb": "Pakenham Upper",
+      "postcode": "3810"
+    },
+    {
+      "suburb": "Rythdale",
+      "postcode": "3810"
+    },
+    {
+      "suburb": "Tonimbuk",
+      "postcode": "3815"
+    },
+    {
+      "suburb": "Tynong",
+      "postcode": "3813"
+    },
+    {
+      "suburb": "Tynong North",
+      "postcode": "3813"
+    },
+    {
+      "suburb": "Vervale",
+      "postcode": "3814"
+    },
+    {
+      "suburb": "Yannathan",
+      "postcode": "3894"
+    }
+  ],
+  "Casey": [
+    {
+      "suburb": "Beaconsfield",
+      "postcode": "3807"
+    },
+    {
+      "suburb": "Berwick",
+      "postcode": "3806"
+    },
+    {
+      "suburb": "Botanic Ridge",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Clyde",
+      "postcode": "3978"
+    },
+    {
+      "suburb": "Clyde North",
+      "postcode": "3978"
+    },
+    {
+      "suburb": "Cranbourne",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Cranbourne East",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Cranbourne North",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Cranbourne West",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Cranbourne South",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Doveton",
+      "postcode": "3177"
+    },
+    {
+      "suburb": "Endeavour Hills",
+      "postcode": "3802"
+    },
+    {
+      "suburb": "Eumemmerring",
+      "postcode": "3177"
+    },
+    {
+      "suburb": "Hallam",
+      "postcode": "3803"
+    },
+    {
+      "suburb": "Hampton Park",
+      "postcode": "3976"
+    },
+    {
+      "suburb": "Junction Village",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Lynbrook",
+      "postcode": "3975"
+    },
+    {
+      "suburb": "Lyndhurst",
+      "postcode": "3975"
+    },
+    {
+      "suburb": "Narre Warren",
+      "postcode": "3805"
+    },
+    {
+      "suburb": "Narre Warren North",
+      "postcode": "3804"
+    },
+    {
+      "suburb": "Narre Warren South",
+      "postcode": "3805"
+    },
+    {
+      "suburb": "Blind Bight",
+      "postcode": "3980"
+    },
+    {
+      "suburb": "Cannons Creek",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Devon Meadows",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Harkaway",
+      "postcode": "3806"
+    },
+    {
+      "suburb": "Lysterfield South",
+      "postcode": "3156"
+    },
+    {
+      "suburb": "Pearcedale",
+      "postcode": "3912"
+    },
+    {
+      "suburb": "Tooradin",
+      "postcode": "3980"
+    },
+    {
+      "suburb": "Warneet",
+      "postcode": "3980"
+    }
+  ],
+  "Greater Dandenong": [
+    {
+      "suburb": "Dandenong",
+      "postcode": "3175"
+    },
+    {
+      "suburb": "Dandenong North",
+      "postcode": "3175"
+    },
+    {
+      "suburb": "Dandenong South",
+      "postcode": "3175"
+    },
+    {
+      "suburb": "Keysborough",
+      "postcode": "3173"
+    },
+    {
+      "suburb": "Lyndhurst",
+      "postcode": "3975"
+    },
+    {
+      "suburb": "Noble Park",
+      "postcode": "3174"
+    },
+    {
+      "suburb": "Noble Park North",
+      "postcode": "3174"
+    },
+    {
+      "suburb": "Springvale",
+      "postcode": "3171"
+    },
+    {
+      "suburb": "Springvale South",
+      "postcode": "3172"
+    },
+    {
+      "suburb": "Bangholme",
+      "postcode": "3175"
+    }
+  ],
+  "Frankston": [
+    {
+      "suburb": "Carrum Downs",
+      "postcode": "3201"
+    },
+    {
+      "suburb": "Frankston",
+      "postcode": "3199"
+    },
+    {
+      "suburb": "Frankston North",
+      "postcode": "3200"
+    },
+    {
+      "suburb": "Frankston South",
+      "postcode": "3199"
+    },
+    {
+      "suburb": "Langwarrin",
+      "postcode": "3910"
+    },
+    {
+      "suburb": "Sandhurst",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Seaford",
+      "postcode": "3198"
+    },
+    {
+      "suburb": "Skye",
+      "postcode": "3977"
+    },
+    {
+      "suburb": "Langwarrin South",
+      "postcode": "3911"
+    }
+  ],
+  "Glen Eira": [
+    {
+      "suburb": "Bentleigh",
+      "postcode": "3204"
+    },
+    {
+      "suburb": "Bentleigh East",
+      "postcode": "3165"
+    },
+    {
+      "suburb": "Brighton East",
+      "postcode": "3187"
+    },
+    {
+      "suburb": "Carnegie",
+      "postcode": "3163"
+    },
+    {
+      "suburb": "Caulfield",
+      "postcode": "3162"
+    },
+    {
+      "suburb": "Caulfield East",
+      "postcode": "3145"
+    },
+    {
+      "suburb": "Caulfield North",
+      "postcode": "3161"
+    },
+    {
+      "suburb": "Caulfield South",
+      "postcode": "3162"
+    },
+    {
+      "suburb": "Elsternwick",
+      "postcode": "3185"
+    },
+    {
+      "suburb": "Gardenvale",
+      "postcode": "3185"
+    },
+    {
+      "suburb": "Glen Huntly",
+      "postcode": "3163"
+    },
+    {
+      "suburb": "McKinnon",
+      "postcode": "3204"
+    },
+    {
+      "suburb": "Murrumbeena",
+      "postcode": "3163"
+    },
+    {
+      "suburb": "Ormond",
+      "postcode": "3204"
+    },
+    {
+      "suburb": "St Kilda East",
+      "postcode": "3183"
+    }
+  ],
+  "Kingston": [
+    {
+      "suburb": "Aspendale",
+      "postcode": "3195"
+    },
+    {
+      "suburb": "Aspendale Gardens",
+      "postcode": "3195"
+    },
+    {
+      "suburb": "Bonbeach",
+      "postcode": "3196"
+    },
+    {
+      "suburb": "Braeside",
+      "postcode": "3195"
+    },
+    {
+      "suburb": "Carrum",
+      "postcode": "3197"
+    },
+    {
+      "suburb": "Chelsea",
+      "postcode": "3196"
+    },
+    {
+      "suburb": "Chelsea Heights",
+      "postcode": "3196"
+    },
+    {
+      "suburb": "Cheltenham",
+      "postcode": "3192"
+    },
+    {
+      "suburb": "Clarinda",
+      "postcode": "3169"
+    },
+    {
+      "suburb": "Clayton South",
+      "postcode": "3169"
+    },
+    {
+      "suburb": "Dingley Village",
+      "postcode": "3172"
+    },
+    {
+      "suburb": "Edithvale",
+      "postcode": "3196"
+    },
+    {
+      "suburb": "Heatherton",
+      "postcode": "3202"
+    },
+    {
+      "suburb": "Highett",
+      "postcode": "3190"
+    },
+    {
+      "suburb": "Mentone",
+      "postcode": "3194"
+    },
+    {
+      "suburb": "Moorabbin",
+      "postcode": "3189"
+    },
+    {
+      "suburb": "Moorabbin Airport",
+      "postcode": "3194"
+    },
+    {
+      "suburb": "Mordialloc",
+      "postcode": "3195"
+    },
+    {
+      "suburb": "Parkdale",
+      "postcode": "3195"
+    },
+    {
+      "suburb": "Patterson Lakes",
+      "postcode": "3197"
+    },
+    {
+      "suburb": "Waterways",
+      "postcode": "3195"
+    }
+  ],
+  "Monash": [
+    {
+      "suburb": "Ashwood",
+      "postcode": "3147"
+    },
+    {
+      "suburb": "Burwood",
+      "postcode": "3125"
+    },
+    {
+      "suburb": "Chadstone",
+      "postcode": "3148"
+    },
+    {
+      "suburb": "Clayton",
+      "postcode": "3168"
+    },
+    {
+      "suburb": "Glen Waverley",
+      "postcode": "3150"
+    },
+    {
+      "suburb": "Hughesdale",
+      "postcode": "3166"
+    },
+    {
+      "suburb": "Huntingdale",
+      "postcode": "3166"
+    },
+    {
+      "suburb": "Mount Waverley",
+      "postcode": "3149"
+    },
+    {
+      "suburb": "Mulgrave",
+      "postcode": "3170"
+    },
+    {
+      "suburb": "Notting Hill",
+      "postcode": "3168"
+    },
+    {
+      "suburb": "Oakleigh",
+      "postcode": "3166"
+    },
+    {
+      "suburb": "Oakleigh East",
+      "postcode": "3166"
+    },
+    {
+      "suburb": "Oakleigh South",
+      "postcode": "3167"
+    },
+    {
+      "suburb": "Wheelers Hill",
+      "postcode": "3150"
+    }
+  ],
+  "Mornington Peninsula": [
+    {
+      "suburb": "Blairgowrie",
+      "postcode": "3942"
+    },
+    {
+      "suburb": "Capel Sound",
+      "postcode": "3940"
+    },
+    {
+      "suburb": "Dromana",
+      "postcode": "3936"
+    },
+    {
+      "suburb": "McCrae",
+      "postcode": "3938"
+    },
+    {
+      "suburb": "Mornington",
+      "postcode": "3931"
+    },
+    {
+      "suburb": "Mount Eliza",
+      "postcode": "3930"
+    },
+    {
+      "suburb": "Mount Martha",
+      "postcode": "3934"
+    },
+    {
+      "suburb": "Portsea",
+      "postcode": "3944"
+    },
+    {
+      "suburb": "Rosebud",
+      "postcode": "3939"
+    },
+    {
+      "suburb": "Rye",
+      "postcode": "3941"
+    },
+    {
+      "suburb": "Safety Beach",
+      "postcode": "3936"
+    },
+    {
+      "suburb": "Sorrento",
+      "postcode": "3943"
+    },
+    {
+      "suburb": "Tootgarook",
+      "postcode": "3941"
+    },
+    {
+      "suburb": "Arthurs Seat",
+      "postcode": "3936"
+    },
+    {
+      "suburb": "Balnarring",
+      "postcode": "3926"
+    },
+    {
+      "suburb": "Balnarring Beach",
+      "postcode": "3926"
+    },
+    {
+      "suburb": "Baxter",
+      "postcode": "3911"
+    },
+    {
+      "suburb": "Bittern",
+      "postcode": "3918"
+    },
+    {
+      "suburb": "Boneo",
+      "postcode": "3939"
+    },
+    {
+      "suburb": "Cape Schanck",
+      "postcode": "3939"
+    },
+    {
+      "suburb": "Crib Point",
+      "postcode": "3919"
+    },
+    {
+      "suburb": "Fingal",
+      "postcode": "3939"
+    },
+    {
+      "suburb": "Flinders",
+      "postcode": "3929"
+    },
+    {
+      "suburb": "Hastings",
+      "postcode": "3915"
+    },
+    {
+      "suburb": "Main Ridge",
+      "postcode": "3928"
+    },
+    {
+      "suburb": "Merricks",
+      "postcode": "3916"
+    },
+    {
+      "suburb": "Merricks Beach",
+      "postcode": "3926"
+    },
+    {
+      "suburb": "Merricks North",
+      "postcode": "3926"
+    },
+    {
+      "suburb": "Moorooduc",
+      "postcode": "3933"
+    },
+    {
+      "suburb": "Pearcedale",
+      "postcode": "3912"
+    },
+    {
+      "suburb": "Point Leo",
+      "postcode": "3916"
+    },
+    {
+      "suburb": "Red Hill",
+      "postcode": "3937"
+    },
+    {
+      "suburb": "Red Hill South",
+      "postcode": "3937"
+    },
+    {
+      "suburb": "Shoreham",
+      "postcode": "3916"
+    },
+    {
+      "suburb": "Somers",
+      "postcode": "3927"
+    },
+    {
+      "suburb": "Somerville",
+      "postcode": "3912"
+    },
+    {
+      "suburb": "St Andrews Beach",
+      "postcode": "3941"
+    },
+    {
+      "suburb": "Tuerong",
+      "postcode": "3915"
+    },
+    {
+      "suburb": "Tyabb",
+      "postcode": "3913"
+    },
+    {
+      "suburb": "HMAS Cerberus",
+      "postcode": "3920"
+    }
+  ],
+  "Stonnington": [
+    {
+      "suburb": "Armadale",
+      "postcode": "3143"
+    },
+    {
+      "suburb": "Glen Iris",
+      "postcode": "3146"
+    },
+    {
+      "suburb": "Kooyong",
+      "postcode": "3144"
+    },
+    {
+      "suburb": "Malvern East",
+      "postcode": "3145"
+    },
+    {
+      "suburb": "South Yarra",
+      "postcode": "3141"
+    },
+    {
+      "suburb": "Toorak",
+      "postcode": "3142"
+    },
+    {
+      "suburb": "Windsor",
+      "postcode": "3181"
+    }
+  ],
+  "Brimbank": [
+    {
+      "suburb": "Albanvale",
+      "postcode": "3021"
+    },
+    {
+      "suburb": "Albion",
+      "postcode": "3020"
+    },
+    {
+      "suburb": "Ardeer",
+      "postcode": "3022"
+    },
+    {
+      "suburb": "Brooklyn",
+      "postcode": "3012"
+    },
+    {
+      "suburb": "Cairnlea",
+      "postcode": "3023"
+    },
+    {
+      "suburb": "Calder Park",
+      "postcode": "3037"
+    },
+    {
+      "suburb": "Deer Park",
+      "postcode": "3023"
+    },
+    {
+      "suburb": "Delahey",
+      "postcode": "3037"
+    },
+    {
+      "suburb": "Derrimut",
+      "postcode": "3026"
+    },
+    {
+      "suburb": "Hillside",
+      "postcode": "3037"
+    },
+    {
+      "suburb": "Kealba",
+      "postcode": "3021"
+    },
+    {
+      "suburb": "Keilor",
+      "postcode": "3036"
+    },
+    {
+      "suburb": "Keilor Downs",
+      "postcode": "3038"
+    },
+    {
+      "suburb": "Keilor East",
+      "postcode": "3033"
+    },
+    {
+      "suburb": "Keilor Lodge",
+      "postcode": "3038"
+    },
+    {
+      "suburb": "Keilor North",
+      "postcode": "3036"
+    },
+    {
+      "suburb": "Keilor Park",
+      "postcode": "3042"
+    },
+    {
+      "suburb": "Kings Park",
+      "postcode": "3021"
+    },
+    {
+      "suburb": "St Albans",
+      "postcode": "3021"
+    },
+    {
+      "suburb": "Sunshine",
+      "postcode": "3020"
+    },
+    {
+      "suburb": "Sunshine North",
+      "postcode": "3020"
+    },
+    {
+      "suburb": "Sunshine West",
+      "postcode": "3020"
+    },
+    {
+      "suburb": "Sydenham",
+      "postcode": "3037"
+    },
+    {
+      "suburb": "Taylors Lakes",
+      "postcode": "3038"
+    },
+    {
+      "suburb": "Tullamarine",
+      "postcode": "3043"
+    }
+  ],
+  "Hobsons Bay": [
+    {
+      "suburb": "Altona",
+      "postcode": "3018"
+    },
+    {
+      "suburb": "Altona Meadows",
+      "postcode": "3028"
+    },
+    {
+      "suburb": "Altona North",
+      "postcode": "3025"
+    },
+    {
+      "suburb": "Brooklyn",
+      "postcode": "3012"
+    },
+    {
+      "suburb": "Laverton",
+      "postcode": "3028"
+    },
+    {
+      "suburb": "Newport",
+      "postcode": "3015"
+    },
+    {
+      "suburb": "Seabrook",
+      "postcode": "3028"
+    },
+    {
+      "suburb": "Seaholme",
+      "postcode": "3018"
+    },
+    {
+      "suburb": "South Kingsville",
+      "postcode": "3015"
+    },
+    {
+      "suburb": "Spotswood",
+      "postcode": "3015"
+    },
+    {
+      "suburb": "Williamstown",
+      "postcode": "3016"
+    },
+    {
+      "suburb": "Williamstown North",
+      "postcode": "3016"
+    }
+  ],
+  "Maribyrnong": [
+    {
+      "suburb": "Braybrook",
+      "postcode": "3019"
+    },
+    {
+      "suburb": "Footscray",
+      "postcode": "3011"
+    },
+    {
+      "suburb": "Kingsville",
+      "postcode": "3012"
+    },
+    {
+      "suburb": "Maidstone",
+      "postcode": "3012"
+    },
+    {
+      "suburb": "Maribyrnong",
+      "postcode": "3032"
+    },
+    {
+      "suburb": "Seddon",
+      "postcode": "3011"
+    },
+    {
+      "suburb": "Tottenham",
+      "postcode": "3012"
+    },
+    {
+      "suburb": "West Footscray",
+      "postcode": "3012"
+    },
+    {
+      "suburb": "Yarraville",
+      "postcode": "3013"
+    }
+  ],
+  "Melton": [
+    {
+      "suburb": "Aintree",
+      "postcode": "3336"
+    },
+    {
+      "suburb": "Bonnie Brook",
+      "postcode": "3335"
+    },
+    {
+      "suburb": "Brookfield",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Burnside",
+      "postcode": "3023"
+    },
+    {
+      "suburb": "Burnside Heights",
+      "postcode": "3023"
+    },
+    {
+      "suburb": "Caroline Springs",
+      "postcode": "3023"
+    },
+    {
+      "suburb": "Cobblebank",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Deanside",
+      "postcode": "3336"
+    },
+    {
+      "suburb": "Diggers Rest",
+      "postcode": "3427"
+    },
+    {
+      "suburb": "Fieldstone",
+      "postcode": "3024"
+    },
+    {
+      "suburb": "Fraser Rise",
+      "postcode": "3336"
+    },
+    {
+      "suburb": "Grangefields",
+      "postcode": "3335"
+    },
+    {
+      "suburb": "Harkness",
+      "postcode": "3337"
+    },
+    {
+      "suburb": "Hillside",
+      "postcode": "3037"
+    },
+    {
+      "suburb": "Kurunjang",
+      "postcode": "3337"
+    },
+    {
+      "suburb": "Melton",
+      "postcode": "3337"
+    },
+    {
+      "suburb": "Melton South",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Melton West",
+      "postcode": "3337"
+    },
+    {
+      "suburb": "Plumpton",
+      "postcode": "3335"
+    },
+    {
+      "suburb": "Ravenhall",
+      "postcode": "3023"
+    },
+    {
+      "suburb": "Rockbank",
+      "postcode": "3335"
+    },
+    {
+      "suburb": "Strathtulloh",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Taylors Hill",
+      "postcode": "3037"
+    },
+    {
+      "suburb": "Thornhill Park",
+      "postcode": "3335"
+    },
+    {
+      "suburb": "Truganina",
+      "postcode": "3029"
+    },
+    {
+      "suburb": "Weir Views",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Exford",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Eynesbury",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Mount Cottrell",
+      "postcode": "3024"
+    },
+    {
+      "suburb": "Parwan",
+      "postcode": "3340"
+    },
+    {
+      "suburb": "Toolern Vale",
+      "postcode": "3337"
+    }
+  ],
+  "Wyndham": [
+    {
+      "suburb": "Hoppers Crossing",
+      "postcode": "3029"
+    },
+    {
+      "suburb": "Laverton",
+      "postcode": "3028"
+    },
+    {
+      "suburb": "Laverton North",
+      "postcode": "3026"
+    },
+    {
+      "suburb": "Mambourin",
+      "postcode": "3024"
+    },
+    {
+      "suburb": "Manor Lakes",
+      "postcode": "3024"
+    },
+    {
+      "suburb": "Point Cook",
+      "postcode": "3030"
+    },
+    {
+      "suburb": "Tarneit",
+      "postcode": "3029"
+    },
+    {
+      "suburb": "Truganina",
+      "postcode": "3029"
+    },
+    {
+      "suburb": "Werribee",
+      "postcode": "3030"
+    },
+    {
+      "suburb": "Werribee South",
+      "postcode": "3030"
+    },
+    {
+      "suburb": "Williams Landing",
+      "postcode": "3027"
+    },
+    {
+      "suburb": "Wyndham Vale",
+      "postcode": "3024"
+    },
+    {
+      "suburb": "Cocoroc",
+      "postcode": "3030"
+    },
+    {
+      "suburb": "Eynesbury",
+      "postcode": "3338"
+    },
+    {
+      "suburb": "Little River",
+      "postcode": "3211"
+    },
+    {
+      "suburb": "Mount Cottrell",
+      "postcode": "3024"
+    },
+    {
+      "suburb": "Quandong",
+      "postcode": "3340"
+    }
+  ]
+}
