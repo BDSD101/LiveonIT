@@ -3,43 +3,43 @@
     "incidents": 8159,
     "ratePer100k": 6137.2,
     "year": "2025",
-    "melbourneRank": 13,
-    "melbourneRankPercentile": 61.3
+    "melbourneRank": 12,
+    "melbourneRankPercentile": 63.3
   },
   "Brimbank": {
     "incidents": 14673,
     "ratePer100k": 7366.8,
     "year": "2025",
     "melbourneRank": 9,
-    "melbourneRankPercentile": 74.2
+    "melbourneRankPercentile": 73.3
   },
   "Darebin": {
     "incidents": 13759,
     "ratePer100k": 8504.0,
     "year": "2025",
     "melbourneRank": 8,
-    "melbourneRankPercentile": 77.4
+    "melbourneRankPercentile": 76.7
   },
   "Hobsons Bay": {
     "incidents": 6203,
     "ratePer100k": 6402.7,
     "year": "2025",
     "melbourneRank": 10,
-    "melbourneRankPercentile": 71.0
+    "melbourneRankPercentile": 70.0
   },
   "Hume": {
     "incidents": 17785,
     "ratePer100k": 6346.4,
     "year": "2025",
     "melbourneRank": 11,
-    "melbourneRankPercentile": 67.7
+    "melbourneRankPercentile": 66.7
   },
   "Maribyrnong": {
     "incidents": 10052,
     "ratePer100k": 10545.5,
     "year": "2025",
     "melbourneRank": 4,
-    "melbourneRankPercentile": 90.3
+    "melbourneRankPercentile": 90.0
   },
   "Melbourne": {
     "incidents": 34386,
@@ -52,50 +52,50 @@
     "incidents": 12577,
     "ratePer100k": 5388.3,
     "year": "2025",
-    "melbourneRank": 20,
-    "melbourneRankPercentile": 38.7
+    "melbourneRank": 19,
+    "melbourneRankPercentile": 40.0
   },
   "Merri-bek": {
     "incidents": 11553,
     "ratePer100k": 6119.2,
     "year": "2025",
-    "melbourneRank": 14,
-    "melbourneRankPercentile": 58.1
+    "melbourneRank": 13,
+    "melbourneRankPercentile": 60.0
   },
   "Moonee Valley": {
     "incidents": 8191,
     "ratePer100k": 6245.9,
     "year": "2025",
-    "melbourneRank": 12,
-    "melbourneRankPercentile": 64.5
+    "melbourneRank": "N/A",
+    "melbourneRankPercentile": "N/A"
   },
   "Nillumbik": {
     "incidents": 1641,
     "ratePer100k": 2567.5,
     "year": "2025",
-    "melbourneRank": 31,
-    "melbourneRankPercentile": 3.2
+    "melbourneRank": 30,
+    "melbourneRankPercentile": 3.3
   },
   "Whittlesea": {
     "incidents": 13890,
     "ratePer100k": 5327.2,
     "year": "2025",
-    "melbourneRank": 21,
-    "melbourneRankPercentile": 35.5
+    "melbourneRank": 20,
+    "melbourneRankPercentile": 36.7
   },
   "Wyndham": {
     "incidents": 18823,
     "ratePer100k": 5389.9,
     "year": "2025",
-    "melbourneRank": 19,
-    "melbourneRankPercentile": 41.9
+    "melbourneRank": 18,
+    "melbourneRankPercentile": 43.3
   },
   "Yarra": {
     "incidents": 12725,
     "ratePer100k": 12460.7,
     "year": "2025",
     "melbourneRank": 2,
-    "melbourneRankPercentile": 96.8
+    "melbourneRankPercentile": 96.7
   },
   "Total": {
     "incidents": 73,
@@ -136,8 +136,8 @@
     "incidents": 7986,
     "ratePer100k": 4447.7,
     "year": "2025",
-    "melbourneRank": 26,
-    "melbourneRankPercentile": 19.4
+    "melbourneRank": 25,
+    "melbourneRankPercentile": 20.0
   },
   "East Gippsland": {
     "incidents": 4536,
@@ -164,8 +164,8 @@
     "incidents": 7993,
     "ratePer100k": 4872.9,
     "year": "2025",
-    "melbourneRank": 25,
-    "melbourneRankPercentile": 22.6
+    "melbourneRank": 24,
+    "melbourneRankPercentile": 23.3
   },
   "Latrobe": {
     "incidents": 10214,
@@ -178,8 +178,8 @@
     "incidents": 4115,
     "ratePer100k": 3100.2,
     "year": "2025",
-    "melbourneRank": 30,
-    "melbourneRankPercentile": 6.5
+    "melbourneRank": 29,
+    "melbourneRankPercentile": 6.7
   },
   "Mansfield": {
     "incidents": 310,
@@ -192,8 +192,8 @@
     "incidents": 6783,
     "ratePer100k": 5643.1,
     "year": "2025",
-    "melbourneRank": 16,
-    "melbourneRankPercentile": 51.6
+    "melbourneRank": 15,
+    "melbourneRankPercentile": 53.3
   },
   "Mitchell": {
     "incidents": 3692,
@@ -213,8 +213,8 @@
     "incidents": 11787,
     "ratePer100k": 5566.4,
     "year": "2025",
-    "melbourneRank": 17,
-    "melbourneRankPercentile": 48.4
+    "melbourneRank": 16,
+    "melbourneRankPercentile": 50.0
   },
   "Murrindindi": {
     "incidents": 564,
@@ -262,8 +262,8 @@
     "incidents": 9337,
     "ratePer100k": 5032.8,
     "year": "2025",
-    "melbourneRank": 23,
-    "melbourneRankPercentile": 29.0
+    "melbourneRank": 22,
+    "melbourneRankPercentile": 30.0
   },
   "Wodonga": {
     "incidents": 3320,
@@ -276,78 +276,78 @@
     "incidents": 5903,
     "ratePer100k": 3669.3,
     "year": "2025",
-    "melbourneRank": 29,
-    "melbourneRankPercentile": 9.7
+    "melbourneRank": 28,
+    "melbourneRankPercentile": 10.0
   },
   "Bayside": {
     "incidents": 4334,
     "ratePer100k": 4053.5,
     "year": "2025",
-    "melbourneRank": 27,
-    "melbourneRankPercentile": 16.1
+    "melbourneRank": 26,
+    "melbourneRankPercentile": 16.7
   },
   "Cardinia": {
     "incidents": 6673,
     "ratePer100k": 4967.7,
     "year": "2025",
-    "melbourneRank": 24,
-    "melbourneRankPercentile": 25.8
+    "melbourneRank": 23,
+    "melbourneRankPercentile": 26.7
   },
   "Casey": {
     "incidents": 22911,
     "ratePer100k": 5486.1,
     "year": "2025",
-    "melbourneRank": 18,
-    "melbourneRankPercentile": 45.2
+    "melbourneRank": 17,
+    "melbourneRankPercentile": 46.7
   },
   "Frankston": {
     "incidents": 12891,
     "ratePer100k": 8866.5,
     "year": "2025",
     "melbourneRank": 7,
-    "melbourneRankPercentile": 80.6
+    "melbourneRankPercentile": 80.0
   },
   "Glen Eira": {
     "incidents": 6252,
     "ratePer100k": 3838.9,
     "year": "2025",
-    "melbourneRank": 28,
-    "melbourneRankPercentile": 12.9
+    "melbourneRank": 27,
+    "melbourneRankPercentile": 13.3
   },
   "Greater Dandenong": {
     "incidents": 17170,
     "ratePer100k": 10169.3,
     "year": "2025",
     "melbourneRank": 5,
-    "melbourneRankPercentile": 87.1
+    "melbourneRankPercentile": 86.7
   },
   "Kingston": {
     "incidents": 9568,
     "ratePer100k": 5702.9,
     "year": "2025",
-    "melbourneRank": 15,
-    "melbourneRankPercentile": 54.8
+    "melbourneRank": 14,
+    "melbourneRankPercentile": 56.7
   },
   "Mornington Peninsula": {
     "incidents": 9008,
     "ratePer100k": 5236.7,
     "year": "2025",
-    "melbourneRank": 22,
-    "melbourneRankPercentile": 32.3
+    "melbourneRank": 21,
+    "melbourneRankPercentile": 33.3
   },
   "Port Phillip": {
     "incidents": 12624,
     "ratePer100k": 11004.1,
     "year": "2025",
     "melbourneRank": 3,
-    "melbourneRankPercentile": 93.5
+    "melbourneRankPercentile": 93.3
   },
   "Stonnington": {
     "incidents": 10984,
     "ratePer100k": 9532.0,
     "year": "2025",
     "melbourneRank": 6,
-    "melbourneRankPercentile": 83.9
+    "melbourneRankPercentile": 83.3
   },
   "Ararat": {
     "incidents": 1115,

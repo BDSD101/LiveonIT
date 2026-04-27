@@ -2,32 +2,32 @@
   {
     "suburb": "Abbotsford",
     "meanMedianHousePrice": 1253500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Aberfeldie",
     "meanMedianHousePrice": 2011500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Aintree",
     "meanMedianHousePrice": 722100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Aireys Inlet",
     "meanMedianHousePrice": 1425300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Airport West",
     "meanMedianHousePrice": 938420.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Albanvale",
     "meanMedianHousePrice": 622600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Albert Park",
@@ -42,7 +42,7 @@
   {
     "suburb": "Alexandra",
     "meanMedianHousePrice": 552400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Alfredton",
@@ -52,7 +52,7 @@
   {
     "suburb": "Allansford",
     "meanMedianHousePrice": 590900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Alphington",
@@ -82,12 +82,12 @@
   {
     "suburb": "Anglesea",
     "meanMedianHousePrice": 1479000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Apollo Bay",
     "meanMedianHousePrice": 878000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ararat",
@@ -107,12 +107,12 @@
   {
     "suburb": "Armstrong Creek",
     "meanMedianHousePrice": 657600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ascot (Greater Bendigo)",
     "meanMedianHousePrice": 617800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ascot Vale",
@@ -137,22 +137,22 @@
   {
     "suburb": "Aspendale Gardens",
     "meanMedianHousePrice": 1229000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Attwood",
     "meanMedianHousePrice": 836360.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Avenel",
     "meanMedianHousePrice": 666900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Avoca",
     "meanMedianHousePrice": 398000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Avondale Heights",
@@ -167,7 +167,7 @@
   {
     "suburb": "Badger Creek",
     "meanMedianHousePrice": 669600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bairnsdale",
@@ -182,7 +182,7 @@
   {
     "suburb": "Balcombe",
     "meanMedianHousePrice": 1590800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ballan",
@@ -207,12 +207,12 @@
   {
     "suburb": "Balnarring",
     "meanMedianHousePrice": 1321500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Balnarring Beach",
     "meanMedianHousePrice": 1556200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Balwyn",
@@ -227,17 +227,17 @@
   {
     "suburb": "Bandiana",
     "meanMedianHousePrice": 612800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bannockburn",
     "meanMedianHousePrice": 715000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Baranduda",
     "meanMedianHousePrice": 631300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Barwon Heads",
@@ -267,12 +267,12 @@
   {
     "suburb": "Beaconsfield Upper",
     "meanMedianHousePrice": 1260620.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Beaufort",
     "meanMedianHousePrice": 372500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Beaumaris",
@@ -282,17 +282,17 @@
   {
     "suburb": "Beechworth",
     "meanMedianHousePrice": 794460.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Belgrave",
     "meanMedianHousePrice": 808200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Belgrave Heights",
     "meanMedianHousePrice": 1071620.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bell Park",
@@ -342,17 +342,17 @@
   {
     "suburb": "Beveridge",
     "meanMedianHousePrice": 650400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Birchip",
     "meanMedianHousePrice": 249000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Birregurra",
     "meanMedianHousePrice": 717100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bittern",
@@ -387,12 +387,12 @@
   {
     "suburb": "Blairgowrie",
     "meanMedianHousePrice": 1397000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Blind Bight",
     "meanMedianHousePrice": 725500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bonbeach",
@@ -402,17 +402,17 @@
   {
     "suburb": "Bonnie Brook",
     "meanMedianHousePrice": 660040.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bonshaw",
     "meanMedianHousePrice": 528900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Boort",
     "meanMedianHousePrice": 303800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Boronia",
@@ -422,7 +422,7 @@
   {
     "suburb": "Botanic Ridge",
     "meanMedianHousePrice": 894500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Box Hill",
@@ -447,7 +447,7 @@
   {
     "suburb": "Breakwater",
     "meanMedianHousePrice": 515500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Briar Hill",
@@ -472,7 +472,7 @@
   {
     "suburb": "Broadford",
     "meanMedianHousePrice": 547000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Broadmeadows",
@@ -482,7 +482,7 @@
   {
     "suburb": "Brookfield",
     "meanMedianHousePrice": 556000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Brooklyn",
@@ -522,22 +522,22 @@
   {
     "suburb": "Buninyong",
     "meanMedianHousePrice": 728100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Bunyip",
     "meanMedianHousePrice": 731060.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Burnside",
     "meanMedianHousePrice": 776600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Burnside Heights",
     "meanMedianHousePrice": 765600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Burwood",
@@ -567,17 +567,17 @@
   {
     "suburb": "Campbellfield",
     "meanMedianHousePrice": 624700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Campbells Creek",
     "meanMedianHousePrice": 712000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Camperdown",
     "meanMedianHousePrice": 440860.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Canadian",
@@ -592,12 +592,12 @@
   {
     "suburb": "Cape Paterson",
     "meanMedianHousePrice": 859500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Cape Schanck",
     "meanMedianHousePrice": 1640500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Capel Sound",
@@ -607,12 +607,12 @@
   {
     "suburb": "Cardigan Village",
     "meanMedianHousePrice": 560800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Carisbrook",
     "meanMedianHousePrice": 531900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Carlton",
@@ -647,7 +647,7 @@
   {
     "suburb": "Casterton",
     "meanMedianHousePrice": 317520.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Castlemaine",
@@ -682,12 +682,12 @@
   {
     "suburb": "Charlemont",
     "meanMedianHousePrice": 625900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Charlton",
     "meanMedianHousePrice": 316000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Chelsea",
@@ -717,12 +717,12 @@
   {
     "suburb": "Chewton",
     "meanMedianHousePrice": 756260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Chiltern",
     "meanMedianHousePrice": 504400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Chirnside Park",
@@ -732,12 +732,12 @@
   {
     "suburb": "Chum Creek",
     "meanMedianHousePrice": 776400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Churchill",
     "meanMedianHousePrice": 362400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Clarinda",
@@ -762,7 +762,7 @@
   {
     "suburb": "Clematis",
     "meanMedianHousePrice": 890100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Clifton Hill",
@@ -777,12 +777,12 @@
   {
     "suburb": "Clunes",
     "meanMedianHousePrice": 473500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Clyde",
     "meanMedianHousePrice": 693400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Clyde North",
@@ -792,12 +792,12 @@
   {
     "suburb": "Cobblebank",
     "meanMedianHousePrice": 627000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Cobden",
     "meanMedianHousePrice": 358000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Cobram",
@@ -822,12 +822,12 @@
   {
     "suburb": "Cockatoo",
     "meanMedianHousePrice": 707500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Cohuna",
     "meanMedianHousePrice": 337000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Colac",
@@ -837,12 +837,12 @@
   {
     "suburb": "Coldstream",
     "meanMedianHousePrice": 835000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Coleraine",
     "meanMedianHousePrice": 257500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Collingwood",
@@ -852,22 +852,22 @@
   {
     "suburb": "Connewarre",
     "meanMedianHousePrice": 1969000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Coolaroo",
     "meanMedianHousePrice": 572340.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Coonans Hill",
     "meanMedianHousePrice": 1241500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Corinella",
     "meanMedianHousePrice": 678600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Corio",
@@ -877,12 +877,12 @@
   {
     "suburb": "Coronet Bay",
     "meanMedianHousePrice": 496000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Corryong",
     "meanMedianHousePrice": 347300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Cowes",
@@ -917,7 +917,7 @@
   {
     "suburb": "Cranbourne South",
     "meanMedianHousePrice": 755200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Cranbourne West",
@@ -932,7 +932,7 @@
   {
     "suburb": "Creswick",
     "meanMedianHousePrice": 543500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Crib Point",
@@ -947,7 +947,7 @@
   {
     "suburb": "Croydon Hills",
     "meanMedianHousePrice": 1159240.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Croydon North",
@@ -962,7 +962,7 @@
   {
     "suburb": "Curlewis",
     "meanMedianHousePrice": 639660.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Dallas",
@@ -972,7 +972,7 @@
   {
     "suburb": "Dalyston",
     "meanMedianHousePrice": 536600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Dandenong",
@@ -992,17 +992,17 @@
   {
     "suburb": "Daylesford",
     "meanMedianHousePrice": 840000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Deanside",
     "meanMedianHousePrice": 673100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Deepdene",
     "meanMedianHousePrice": 3361780.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Deer Park",
@@ -1012,7 +1012,7 @@
   {
     "suburb": "Delacombe",
     "meanMedianHousePrice": 528900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Delahey",
@@ -1022,12 +1022,12 @@
   {
     "suburb": "Dennington",
     "meanMedianHousePrice": 607720.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Derrimut",
     "meanMedianHousePrice": 766100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Diamond Creek",
@@ -1037,12 +1037,12 @@
   {
     "suburb": "Diggers Rest",
     "meanMedianHousePrice": 649000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Dimboola",
     "meanMedianHousePrice": 255300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Dingley Village",
@@ -1051,13 +1051,13 @@
   },
   {
     "suburb": "Docklands",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 599000.0
   },
   {
     "suburb": "Donald",
     "meanMedianHousePrice": 283000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Doncaster",
@@ -1072,7 +1072,7 @@
   {
     "suburb": "Donnybrook",
     "meanMedianHousePrice": 651240.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Donvale",
@@ -1107,12 +1107,12 @@
   {
     "suburb": "Dunkeld",
     "meanMedianHousePrice": 427000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Eagle Point",
     "meanMedianHousePrice": 545360.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Eaglehawk",
@@ -1127,7 +1127,7 @@
   {
     "suburb": "East Bairnsdale",
     "meanMedianHousePrice": 366000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "East Bendigo",
@@ -1147,12 +1147,12 @@
   {
     "suburb": "East Warburton",
     "meanMedianHousePrice": 591500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Eastwood",
     "meanMedianHousePrice": 609900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Echuca",
@@ -1162,7 +1162,7 @@
   {
     "suburb": "Edenhope",
     "meanMedianHousePrice": 267520.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Edithvale",
@@ -1172,17 +1172,17 @@
   {
     "suburb": "Eildon",
     "meanMedianHousePrice": 399500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Elliminyt",
     "meanMedianHousePrice": 611000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Elmore",
     "meanMedianHousePrice": 405500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Elsternwick",
@@ -1197,7 +1197,7 @@
   {
     "suburb": "Eltham North",
     "meanMedianHousePrice": 1277400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Elwood",
@@ -1207,7 +1207,7 @@
   {
     "suburb": "Emerald",
     "meanMedianHousePrice": 911500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Endeavour Hills",
@@ -1222,7 +1222,7 @@
   {
     "suburb": "Epsom",
     "meanMedianHousePrice": 594200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Essendon",
@@ -1247,17 +1247,17 @@
   {
     "suburb": "Eureka",
     "meanMedianHousePrice": 439420.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Euroa",
     "meanMedianHousePrice": 515400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Eynesbury",
     "meanMedianHousePrice": 731200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Fairfield",
@@ -1267,7 +1267,7 @@
   {
     "suburb": "Fairhaven",
     "meanMedianHousePrice": 1911300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Fawkner",
@@ -1282,16 +1282,16 @@
   {
     "suburb": "Ferny Creek",
     "meanMedianHousePrice": 992400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Fingal",
     "meanMedianHousePrice": 1657500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Fishermans Bend",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 903660.0
   },
   {
@@ -1307,7 +1307,7 @@
   {
     "suburb": "Fiveways",
     "meanMedianHousePrice": 887360.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Flemington",
@@ -1317,7 +1317,7 @@
   {
     "suburb": "Flinders",
     "meanMedianHousePrice": 2623200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Flora Hill",
@@ -1337,7 +1337,7 @@
   {
     "suburb": "Foster",
     "meanMedianHousePrice": 537500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Frankston",
@@ -1357,17 +1357,17 @@
   {
     "suburb": "Fraser Rise",
     "meanMedianHousePrice": 699100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Fyansford",
     "meanMedianHousePrice": 974100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Garden City",
     "meanMedianHousePrice": 1783900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Gardenvale",
@@ -1377,7 +1377,7 @@
   {
     "suburb": "Garfield",
     "meanMedianHousePrice": 780000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Geelong",
@@ -1392,7 +1392,7 @@
   {
     "suburb": "Gembrook",
     "meanMedianHousePrice": 914920.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Gisborne",
@@ -1402,7 +1402,7 @@
   {
     "suburb": "Gladstone Park",
     "meanMedianHousePrice": 745900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Glen Huntly",
@@ -1422,7 +1422,7 @@
   {
     "suburb": "Glenrowan",
     "meanMedianHousePrice": 592300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Glenroy",
@@ -1432,7 +1432,7 @@
   {
     "suburb": "Golden Beach",
     "meanMedianHousePrice": 385000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Golden Point (Ballarat)",
@@ -1452,12 +1452,12 @@
   {
     "suburb": "Grantville",
     "meanMedianHousePrice": 584600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Green Lake",
     "meanMedianHousePrice": 449000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Greensborough",
@@ -1512,7 +1512,7 @@
   {
     "suburb": "Harcourt",
     "meanMedianHousePrice": 544900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Harkness",
@@ -1527,7 +1527,7 @@
   {
     "suburb": "Hastings West",
     "meanMedianHousePrice": 641100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Hawthorn",
@@ -1547,12 +1547,12 @@
   {
     "suburb": "Heathcote",
     "meanMedianHousePrice": 503900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Heatherton",
     "meanMedianHousePrice": 1140000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Heathmont",
@@ -1577,12 +1577,12 @@
   {
     "suburb": "Hepburn",
     "meanMedianHousePrice": 624900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Hepburn Springs",
     "meanMedianHousePrice": 783300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Herne Hill",
@@ -1592,12 +1592,12 @@
   {
     "suburb": "Heyfield",
     "meanMedianHousePrice": 371200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Heywood",
     "meanMedianHousePrice": 324100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Highett",
@@ -1617,7 +1617,7 @@
   {
     "suburb": "Hopetoun",
     "meanMedianHousePrice": 224000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Hoppers Crossing",
@@ -1642,22 +1642,22 @@
   {
     "suburb": "Huntly",
     "meanMedianHousePrice": 563900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Hurstbridge",
     "meanMedianHousePrice": 953040.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Indented Head",
     "meanMedianHousePrice": 812500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Inglewood",
     "meanMedianHousePrice": 335000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Inverloch",
@@ -1667,17 +1667,17 @@
   {
     "suburb": "Invermay Park",
     "meanMedianHousePrice": 596100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ironbark",
     "meanMedianHousePrice": 491760.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Irymple",
     "meanMedianHousePrice": 592500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ivanhoe",
@@ -1697,62 +1697,62 @@
   {
     "suburb": "Jackass Flat",
     "meanMedianHousePrice": 557660.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Jamieson",
     "meanMedianHousePrice": 612720.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Jan Juc",
     "meanMedianHousePrice": 1256000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Jeeralang North",
     "meanMedianHousePrice": 409000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Jeparit",
     "meanMedianHousePrice": 181800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Jolimont",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 1024000.0
   },
   {
     "suburb": "Junction Village",
     "meanMedianHousePrice": 692000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Junortoun",
     "meanMedianHousePrice": 861200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kalimna",
     "meanMedianHousePrice": 472260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kalkallo",
     "meanMedianHousePrice": 637400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kallista",
     "meanMedianHousePrice": 858500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kalorama",
     "meanMedianHousePrice": 936860.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kangaroo Flat",
@@ -1762,17 +1762,17 @@
   {
     "suburb": "Kangaroo Ground South",
     "meanMedianHousePrice": 1186400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kaniva",
     "meanMedianHousePrice": 231900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kealba",
     "meanMedianHousePrice": 708660.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Keilor",
@@ -1792,12 +1792,12 @@
   {
     "suburb": "Keilor Lodge",
     "meanMedianHousePrice": 965160.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Keilor Park",
     "meanMedianHousePrice": 820960.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kennington",
@@ -1821,7 +1821,7 @@
   },
   {
     "suburb": "Kew East",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 975800.0
   },
   {
@@ -1837,12 +1837,12 @@
   {
     "suburb": "Kialla",
     "meanMedianHousePrice": 675100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Killara (Wodonga)",
     "meanMedianHousePrice": 671080.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kilmore",
@@ -1857,17 +1857,17 @@
   {
     "suburb": "Kilsyth South",
     "meanMedianHousePrice": 1142060.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kinglake",
     "meanMedianHousePrice": 733200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kings Park",
     "meanMedianHousePrice": 621700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kingsbury",
@@ -1892,17 +1892,17 @@
   {
     "suburb": "Koondrook",
     "meanMedianHousePrice": 416500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Kooyong",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 968700.0
   },
   {
     "suburb": "Koroit",
     "meanMedianHousePrice": 583920.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Korumburra",
@@ -1927,17 +1927,17 @@
   {
     "suburb": "Lake Boga",
     "meanMedianHousePrice": 478000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lake Gardens",
     "meanMedianHousePrice": 698280.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lake Tyers Beach",
     "meanMedianHousePrice": 570800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lake Wendouree",
@@ -1957,12 +1957,12 @@
   {
     "suburb": "Lancefield",
     "meanMedianHousePrice": 658500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lang Lang",
     "meanMedianHousePrice": 708500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Langwarrin",
@@ -1982,7 +1982,7 @@
   {
     "suburb": "Launching Place",
     "meanMedianHousePrice": 703520.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Laverton",
@@ -1997,7 +1997,7 @@
   {
     "suburb": "Leneva",
     "meanMedianHousePrice": 708000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Leongatha",
@@ -2017,17 +2017,17 @@
   {
     "suburb": "Lismore",
     "meanMedianHousePrice": 248250.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Loch Sport",
     "meanMedianHousePrice": 375000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lockington",
     "meanMedianHousePrice": 332500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Long Gully",
@@ -2047,7 +2047,7 @@
   {
     "suburb": "Lovely Banks",
     "meanMedianHousePrice": 728600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lower Plenty",
@@ -2057,37 +2057,37 @@
   {
     "suburb": "Lucas",
     "meanMedianHousePrice": 629300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lucknow",
     "meanMedianHousePrice": 553900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lynbrook",
     "meanMedianHousePrice": 806200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lyndhurst",
     "meanMedianHousePrice": 926160.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Lysterfield",
     "meanMedianHousePrice": 1365000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Macarthur",
     "meanMedianHousePrice": 378980.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Macedon",
     "meanMedianHousePrice": 930500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Macleod",
@@ -2097,17 +2097,17 @@
   {
     "suburb": "Maddingley",
     "meanMedianHousePrice": 624260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Maffra",
     "meanMedianHousePrice": 435900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Maiden Gully",
     "meanMedianHousePrice": 778300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Maidstone",
@@ -2117,17 +2117,17 @@
   {
     "suburb": "Maldon",
     "meanMedianHousePrice": 703000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mallacoota",
     "meanMedianHousePrice": 516600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Malmsbury",
     "meanMedianHousePrice": 753000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Malvern",
@@ -2142,7 +2142,7 @@
   {
     "suburb": "Mambourin",
     "meanMedianHousePrice": 619200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Manifold Heights",
@@ -2152,7 +2152,7 @@
   {
     "suburb": "Manor Lakes",
     "meanMedianHousePrice": 645400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mansfield",
@@ -2167,12 +2167,12 @@
   {
     "suburb": "Marong",
     "meanMedianHousePrice": 655500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Marshall",
     "meanMedianHousePrice": 633500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Maryborough",
@@ -2187,7 +2187,7 @@
   {
     "suburb": "Mckenzie Hill",
     "meanMedianHousePrice": 812500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mckinnon",
@@ -2201,7 +2201,7 @@
   },
   {
     "suburb": "Melbourne",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 560400.0
   },
   {
@@ -2242,7 +2242,7 @@
   {
     "suburb": "Metung",
     "meanMedianHousePrice": 654200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mickleham",
@@ -2267,22 +2267,22 @@
   {
     "suburb": "Millgrove",
     "meanMedianHousePrice": 603260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Miners Rest",
     "meanMedianHousePrice": 578060.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Minyip",
     "meanMedianHousePrice": 169100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mirboo North",
     "meanMedianHousePrice": 500900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mitcham",
@@ -2297,7 +2297,7 @@
   {
     "suburb": "Monbulk",
     "meanMedianHousePrice": 806600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mont Albert",
@@ -2317,7 +2317,7 @@
   {
     "suburb": "Montrose",
     "meanMedianHousePrice": 925800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Moonee Ponds",
@@ -2352,7 +2352,7 @@
   {
     "suburb": "Mortlake",
     "meanMedianHousePrice": 318300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Morwell",
@@ -2362,7 +2362,7 @@
   {
     "suburb": "Mount Beauty",
     "meanMedianHousePrice": 559000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mount Clear",
@@ -2372,17 +2372,17 @@
   {
     "suburb": "Mount Cottrell",
     "meanMedianHousePrice": 593900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mount Dandenong",
     "meanMedianHousePrice": 955000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mount Duneed",
     "meanMedianHousePrice": 707500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mount Eliza",
@@ -2397,7 +2397,7 @@
   {
     "suburb": "Mount Helen",
     "meanMedianHousePrice": 610200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Mount Martha",
@@ -2427,22 +2427,22 @@
   {
     "suburb": "Murtoa",
     "meanMedianHousePrice": 304800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Myrtleford",
     "meanMedianHousePrice": 578000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Nagambie",
     "meanMedianHousePrice": 589300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Nar Nar Goon North",
     "meanMedianHousePrice": 733600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Narre Warren",
@@ -2452,7 +2452,7 @@
   {
     "suburb": "Narre Warren North",
     "meanMedianHousePrice": 1634500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Narre Warren South",
@@ -2462,22 +2462,22 @@
   {
     "suburb": "Nathalia",
     "meanMedianHousePrice": 410260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Neerim South",
     "meanMedianHousePrice": 664000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Nerrina",
     "meanMedianHousePrice": 719700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "New Gisborne",
     "meanMedianHousePrice": 808200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Newborough",
@@ -2492,12 +2492,12 @@
   {
     "suburb": "Newington",
     "meanMedianHousePrice": 660700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Newlands Arm",
     "meanMedianHousePrice": 592500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Newport",
@@ -2512,12 +2512,12 @@
   {
     "suburb": "Nhill",
     "meanMedianHousePrice": 253000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Nichols Point",
     "meanMedianHousePrice": 674700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Niddrie",
@@ -2557,12 +2557,12 @@
   {
     "suburb": "North Shore",
     "meanMedianHousePrice": 717500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "North Wonthaggi",
     "meanMedianHousePrice": 557500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Northcote",
@@ -2577,7 +2577,7 @@
   {
     "suburb": "Numurkah",
     "meanMedianHousePrice": 404800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Nunawading",
@@ -2587,12 +2587,12 @@
   {
     "suburb": "Nyah",
     "meanMedianHousePrice": 285900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Nyah West",
     "meanMedianHousePrice": 217800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Oak Park",
@@ -2627,17 +2627,17 @@
   {
     "suburb": "Officer South",
     "meanMedianHousePrice": 810500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Olinda",
     "meanMedianHousePrice": 952500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Orbost",
     "meanMedianHousePrice": 341800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ormond",
@@ -2652,7 +2652,7 @@
   {
     "suburb": "Ouyen",
     "meanMedianHousePrice": 256000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Pakenham",
@@ -2662,12 +2662,12 @@
   {
     "suburb": "Paradise Beach",
     "meanMedianHousePrice": 341000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Park Orchards",
     "meanMedianHousePrice": 2080300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Parkdale",
@@ -2692,7 +2692,7 @@
   {
     "suburb": "Patterson Gardens",
     "meanMedianHousePrice": 1180200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Patterson Lakes",
@@ -2712,12 +2712,12 @@
   {
     "suburb": "Peterborough",
     "meanMedianHousePrice": 751500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Pioneer Bay",
     "meanMedianHousePrice": 519860.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Point Cook",
@@ -2727,17 +2727,17 @@
   {
     "suburb": "Point Lonsdale",
     "meanMedianHousePrice": 1188200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Porepunkah",
     "meanMedianHousePrice": 987600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Port Fairy",
     "meanMedianHousePrice": 847460.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Port Melbourne",
@@ -2757,7 +2757,7 @@
   {
     "suburb": "Portsea",
     "meanMedianHousePrice": 3406000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Prahran",
@@ -2772,7 +2772,7 @@
   {
     "suburb": "Princes Hill",
     "meanMedianHousePrice": 1680000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Quarry Hill",
@@ -2782,22 +2782,22 @@
   {
     "suburb": "Queenscliff",
     "meanMedianHousePrice": 1498000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rainbow",
     "meanMedianHousePrice": 222900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rawson",
     "meanMedianHousePrice": 368400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Raymond Island",
     "meanMedianHousePrice": 469400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Red Cliffs",
@@ -2807,7 +2807,7 @@
   {
     "suburb": "Red Hill",
     "meanMedianHousePrice": 1742500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Redan",
@@ -2817,7 +2817,7 @@
   {
     "suburb": "Research",
     "meanMedianHousePrice": 1500600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Reservoir",
@@ -2827,7 +2827,7 @@
   {
     "suburb": "Rhyll",
     "meanMedianHousePrice": 874860.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Richmond",
@@ -2867,12 +2867,12 @@
   {
     "suburb": "Robinvale",
     "meanMedianHousePrice": 403280.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rochester",
     "meanMedianHousePrice": 331500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rockbank",
@@ -2902,7 +2902,7 @@
   {
     "suburb": "Rosedale",
     "meanMedianHousePrice": 476800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rowville",
@@ -2917,12 +2917,12 @@
   {
     "suburb": "Rupanyup",
     "meanMedianHousePrice": 200500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rutherglen",
     "meanMedianHousePrice": 559700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Rye",
@@ -2937,7 +2937,7 @@
   {
     "suburb": "Sailors Gully",
     "meanMedianHousePrice": 465800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sale",
@@ -2957,7 +2957,7 @@
   {
     "suburb": "Sandhurst",
     "meanMedianHousePrice": 1035760.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sandringham",
@@ -2967,7 +2967,7 @@
   {
     "suburb": "Sassafras",
     "meanMedianHousePrice": 931500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Scoresby",
@@ -2977,12 +2977,12 @@
   {
     "suburb": "Sea Lake",
     "meanMedianHousePrice": 240320.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Seabrook",
     "meanMedianHousePrice": 759900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Seaford",
@@ -2992,7 +2992,7 @@
   {
     "suburb": "Seaholme",
     "meanMedianHousePrice": 1194000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sebastopol",
@@ -3007,12 +3007,12 @@
   {
     "suburb": "Selby",
     "meanMedianHousePrice": 826400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Seville",
     "meanMedianHousePrice": 839960.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Seymour",
@@ -3027,12 +3027,12 @@
   {
     "suburb": "Shepparton North",
     "meanMedianHousePrice": 696000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Shoreham",
     "meanMedianHousePrice": 1855500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Skye",
@@ -3042,17 +3042,17 @@
   {
     "suburb": "Smiths Beach",
     "meanMedianHousePrice": 875440.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Smythes Creek",
     "meanMedianHousePrice": 532900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Smythesdale",
     "meanMedianHousePrice": 515360.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Soldiers Hill",
@@ -3062,7 +3062,7 @@
   {
     "suburb": "Somers",
     "meanMedianHousePrice": 1353500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Somerville",
@@ -3072,17 +3072,17 @@
   {
     "suburb": "Sorrento",
     "meanMedianHousePrice": 1826500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "South Dudley",
     "meanMedianHousePrice": 428900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "South Geelong",
     "meanMedianHousePrice": 797000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "South Kingsville",
@@ -3106,7 +3106,7 @@
   },
   {
     "suburb": "Southbank",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 586360.0
   },
   {
@@ -3142,17 +3142,17 @@
   {
     "suburb": "St Andrews Beach",
     "meanMedianHousePrice": 1382600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "St Arnaud",
     "meanMedianHousePrice": 283000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "St Helena",
     "meanMedianHousePrice": 1141160.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "St Kilda",
@@ -3177,7 +3177,7 @@
   {
     "suburb": "Stanhope",
     "meanMedianHousePrice": 343600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Stawell",
@@ -3187,7 +3187,7 @@
   {
     "suburb": "Stratford",
     "meanMedianHousePrice": 491860.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Strathdale",
@@ -3202,7 +3202,7 @@
   {
     "suburb": "Strathmerton",
     "meanMedianHousePrice": 374120.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Strathmore",
@@ -3212,12 +3212,12 @@
   {
     "suburb": "Strathmore Heights",
     "meanMedianHousePrice": 944500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Strathtulloh",
     "meanMedianHousePrice": 632700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Studfield",
@@ -3232,17 +3232,17 @@
   {
     "suburb": "Sunderland Bay",
     "meanMedianHousePrice": 628500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sunnycliffs",
     "meanMedianHousePrice": 366260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sunset Strip",
     "meanMedianHousePrice": 621100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sunshine",
@@ -3262,7 +3262,7 @@
   {
     "suburb": "Surf Beach",
     "meanMedianHousePrice": 719600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Surrey Hills",
@@ -3277,7 +3277,7 @@
   {
     "suburb": "Swan Reach",
     "meanMedianHousePrice": 656500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Sydenham",
@@ -3292,12 +3292,12 @@
   {
     "suburb": "Tallangatta",
     "meanMedianHousePrice": 471400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Tangambalanga",
     "meanMedianHousePrice": 683800.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Tarneit",
@@ -3312,7 +3312,7 @@
   {
     "suburb": "Tawonga South",
     "meanMedianHousePrice": 636300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Taylors Hill",
@@ -3327,7 +3327,7 @@
   {
     "suburb": "Tecoma",
     "meanMedianHousePrice": 887500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Templestowe",
@@ -3342,12 +3342,12 @@
   {
     "suburb": "Terang",
     "meanMedianHousePrice": 419500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "The Basin",
     "meanMedianHousePrice": 875500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Thomastown",
@@ -3367,27 +3367,27 @@
   {
     "suburb": "Thornhill Park",
     "meanMedianHousePrice": 588000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Timboon",
     "meanMedianHousePrice": 483900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Tongala",
     "meanMedianHousePrice": 451360.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Toongabbie",
     "meanMedianHousePrice": 618360.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Tooradin",
     "meanMedianHousePrice": 814200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Toorak",
@@ -3397,7 +3397,7 @@
   {
     "suburb": "Tootgarook",
     "meanMedianHousePrice": 898500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Torquay",
@@ -3417,17 +3417,17 @@
   {
     "suburb": "Traralgon East",
     "meanMedianHousePrice": 818000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Travancore",
-    "meanMedianHousePrice": NaN,
+    "meanMedianHousePrice": null,
     "meanMedianUnitPrice": 363960.0
   },
   {
     "suburb": "Trentham",
     "meanMedianHousePrice": 903000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Truganina",
@@ -3442,7 +3442,7 @@
   {
     "suburb": "Tungamah",
     "meanMedianHousePrice": 263300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Tyabb",
@@ -3452,7 +3452,7 @@
   {
     "suburb": "Underbool",
     "meanMedianHousePrice": 130400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Upper Ferntree Gully",
@@ -3462,17 +3462,17 @@
   {
     "suburb": "Upwey",
     "meanMedianHousePrice": 859520.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Ventnor",
     "meanMedianHousePrice": 834000.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Venus Bay",
     "meanMedianHousePrice": 487380.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Vermont",
@@ -3492,7 +3492,7 @@
   {
     "suburb": "Wahgunyah",
     "meanMedianHousePrice": 566600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wallan",
@@ -3507,12 +3507,12 @@
   {
     "suburb": "Wandana Heights",
     "meanMedianHousePrice": 978660.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wandin North",
     "meanMedianHousePrice": 910060.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wangaratta",
@@ -3532,12 +3532,12 @@
   {
     "suburb": "Warburton",
     "meanMedianHousePrice": 666560.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Warracknabeal",
     "meanMedianHousePrice": 199900.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Warragul",
@@ -3547,12 +3547,12 @@
   {
     "suburb": "Warrandyte",
     "meanMedianHousePrice": 1298100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Warranwood",
     "meanMedianHousePrice": 1311500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Warrnambool",
@@ -3562,7 +3562,7 @@
   {
     "suburb": "Waterways",
     "meanMedianHousePrice": 1429600.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Watsonia",
@@ -3572,27 +3572,27 @@
   {
     "suburb": "Watsonia North",
     "meanMedianHousePrice": 892160.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wattle Glen",
     "meanMedianHousePrice": 998100.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Waurn Ponds",
     "meanMedianHousePrice": 766180.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wedderburn",
     "meanMedianHousePrice": 289200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Weir Views",
     "meanMedianHousePrice": 565660.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wendouree",
@@ -3602,7 +3602,7 @@
   {
     "suburb": "Wendouree West",
     "meanMedianHousePrice": 363500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Werribee",
@@ -3682,12 +3682,12 @@
   {
     "suburb": "Wimbledon Heights",
     "meanMedianHousePrice": 567060.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Winchelsea",
     "meanMedianHousePrice": 637200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Windsor",
@@ -3697,7 +3697,7 @@
   {
     "suburb": "Winter Valley",
     "meanMedianHousePrice": 548400.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wodonga",
@@ -3712,7 +3712,7 @@
   {
     "suburb": "Wonga Park",
     "meanMedianHousePrice": 1233500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wonthaggi",
@@ -3727,22 +3727,22 @@
   {
     "suburb": "Woodstock",
     "meanMedianHousePrice": 715700.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Woolamai Waters",
     "meanMedianHousePrice": 717660.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Woori Yallock",
     "meanMedianHousePrice": 691500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wy Yung",
     "meanMedianHousePrice": 503260.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Wyndham Vale",
@@ -3752,22 +3752,22 @@
   {
     "suburb": "Yackandandah",
     "meanMedianHousePrice": 751200.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yallambie",
     "meanMedianHousePrice": 1021500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yallourn North",
     "meanMedianHousePrice": 343760.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yarra Glen",
     "meanMedianHousePrice": 869300.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yarra Junction",
@@ -3777,12 +3777,12 @@
   {
     "suburb": "Yarragon",
     "meanMedianHousePrice": 597500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yarram",
     "meanMedianHousePrice": 377500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yarraville",
@@ -3797,16 +3797,11 @@
   {
     "suburb": "Yea",
     "meanMedianHousePrice": 569500.0,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   },
   {
     "suburb": "Yinnar",
     "meanMedianHousePrice": 460100.0,
-    "meanMedianUnitPrice": NaN
-  },
-  {
-    "suburb": "^ Means There Were Fewer Than 10 Sales For The Quarter\r* Means There Were No Sales For The Quarter And The First Non-Zero Figure Is Carried Forward\rNa Means Insufficent Data Was Available To Create The Percentage Change ",
-    "meanMedianHousePrice": NaN,
-    "meanMedianUnitPrice": NaN
+    "meanMedianUnitPrice": null
   }
 ]
