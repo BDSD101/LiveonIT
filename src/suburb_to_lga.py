@@ -39,7 +39,15 @@ for subcat in subcategories:
     cat_title = subcat["title"]  # e.g. "Category:Suburbs of the City of Boroondara"
     
     # Extract LGA name from category title
-    lga = cat_title.replace("Category:Suburbs of the ", "").replace("Category:Suburbs of ", "")
+    lga = cat_title.replace("Category:Suburbs of the ", "").replace("Category:Suburbs of ", "").replace("Category:Suburbs and localities in the ", "").strip()
+    strip_words = ["City of", "Shire of", "Shire"]
+    # Remove strip words from the LGA name
+    for w in strip_words:
+        lga = lga.replace(w, "").strip()
+
+    # Strip anything in brackets, e.g. "City of Melbourne (LGA)" -> "City of Melbourne"
+    lga = lga.split("(")[0].strip()
+
     print(f"  Fetching suburbs for: {lga}")
     
     suburbs = []

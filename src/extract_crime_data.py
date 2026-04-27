@@ -66,11 +66,26 @@ MELBOURNE_LGAS = [
     "Yarra Ranges",
 ]
 
-def is_melbourne_lga(lga_name):
+def is_melbourne_lga(lga_name: str) -> bool:
+    """
+    Determine if an LGA is part of the Melbourne metropolitan area based on name matching.
+    Args:
+        - lga_name (str): The name of the Local Government Area (LGA) to check.
+    Returns:
+        - bool: True if the LGA is in the Melbourne metropolitan area, False otherwise.
+    """
     lga_lower = lga_name.lower()
     return any(m.lower() in lga_lower for m in MELBOURNE_LGAS)
 
-def get_latest_lga_file_url():
+def get_latest_lga_file_url() -> tuple[str, str]:
+    """
+    Query the CKAN API to find the latest LGA-level crime incidents Excel file URL.
+    Returns:
+        - file_url (str): The direct URL to the latest Excel file.
+        - file_name (str): The name of the resource (for logging).
+    Raises:
+        - Exception: If the CKAN API request fails or no suitable resource is found.
+    """
     print("Querying CKAN API for latest dataset resources...")
     url = f"{CKAN_API}/package_show?id={DATASET_ID}"
 
@@ -101,7 +116,15 @@ def get_latest_lga_file_url():
     print(f"  URL: {latest['url']}")
     return latest["url"], latest["name"]
 
-def download_file(url):
+def download_file(url: str, dest_path: str = EXCEL_FILE):
+    """
+    Download the file from the given URL and save it to the specified destination path.
+    Args:
+        - url (str): The URL of the file to download.
+        - dest_path (str): The local file path to save the downloaded file.
+    Raises:
+        - Exception: If the download fails due to a URL error.
+    """
     print(f"\nDownloading Excel file...")
     try:
         urllib.request.urlretrieve(url, EXCEL_FILE)
@@ -111,7 +134,12 @@ def download_file(url):
         raise Exception(f"Download failed: {e}")
 
 
-def inspect_sheets():
+def inspect_sheets() -> list[str]:
+    """
+    Load the Excel file and print the names and columns of all sheets to help identify which ones contain LGA and Suburb data.
+    Returns:
+        - sheet_names (list[str]): A list of all sheet names in the Excel file.
+    """
     print("\nInspecting sheet structure...")
     all_sheets = pd.read_excel(EXCEL_FILE, sheet_name=None, nrows=2)
     for name, df in all_sheets.items():
@@ -119,18 +147,31 @@ def inspect_sheets():
     return list(all_sheets.keys())
 
 
-def find_sheet(sheet_names, keywords):
+def find_sheet(sheet_names: list[str], keywords: list[str]) -> str:
+    """
+    Find a sheet name that contains any of the specified keywords.
+    Args:
+        - sheet_names (list[str]): A list of sheet names to search.
+        - keywords (list[str]): A list of keywords to look for.
+    Returns:
+        - str: The name of the first sheet that contains any of the keywords.
+    """
     for name in sheet_names:
         if any(kw.lower() in name.lower() for kw in keywords):
             return name
     return sheet_names[0]
 
 
-def extract_lga_table(sheet_name):
+def extract_lga_table(sheet_name: str) -> dict[str, dict]:
     """
     Extract LGA-level data with Rate per 100,000 population.
-    Expected columns: Year, Year ending, Police Region, Local Government Area,
-                      Incidents Recorded, Rate per 100,000 population
+    Expected columns: 
+        - Year, Year ending, Police Region, Local Government Area,
+        - Incidents Recorded, Rate per 100,000 population
+    Args:
+        - sheet_name (str): The name of the sheet to extract data from.
+    Returns:
+        - dict[str, dict]: A dictionary mapping LGA names to their crime data, including
     """
     print(f"\nExtracting LGA data from sheet: {sheet_name}")
     df = pd.read_excel(EXCEL_FILE, sheet_name=sheet_name)
@@ -188,10 +229,17 @@ def extract_lga_table(sheet_name):
     return result
 
 
-def extract_suburb_table(sheet_name):
+def extract_suburb_table(sheet_name: str) -> dict[str, dict]:
     """
     Extract Suburb/Town level data with total incidents per suburb
     and top 5 offence subgroups by proportion.
+    Expected columns: 
+        - Year, Year ending, Police Region, Local Government Area,
+        - Postcode, Suburb/Town, Offence Subgroup, Incidents Recorded
+    Args:
+        - sheet_name (str): The name of the sheet to extract data from.
+    Returns:
+        - dict[str, dict]: A dictionary mapping "suburb_postcode" to its crime data, including total incidents and top 5 offence subgroup proportions.
     """
     print(f"\nExtracting Suburb data from sheet: {sheet_name}")
     df = pd.read_excel(EXCEL_FILE, sheet_name=sheet_name)
@@ -262,7 +310,13 @@ def extract_suburb_table(sheet_name):
     return suburb_data
 
 
-def print_sample(lga_data, suburb_data):
+def print_sample(lga_data: dict, suburb_data: dict) -> None:
+    """
+    Print sample data from the extracted LGA and Suburb datasets for verification.
+    Args:
+        - lga_data (dict): The dictionary containing LGA-level crime data.
+        - suburb_data (dict): The dictionary containing Suburb-level crime data.
+    """
     print("\n--- Sample LGA data (top 5 by rate) ---")
     sorted_lgas = sorted(
         [(k, v) for k, v in lga_data.items() if v["ratePer100k"]],
