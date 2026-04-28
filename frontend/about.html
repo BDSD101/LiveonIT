@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | 20-Minute Neighbourhood Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-[#F8F9FA] text-slate-900 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-center">
+    <div class="flex items-center gap-3">
+    </div>
+    <nav class="hidden md:flex items-center gap-6">
+      <a href="/" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Home</a>
+      <a href="/dashboard.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Map</a>
+      <a href="/suburb.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Suburb Overview</a>
+      <a href="/about.html" class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5 transition-colors">About</a>
+    </nav>
+  </header>
+
+  <main class="flex-1 max-w-7xl mx-auto px-6 py-16 md:py-20 w-full">
+    <h2 class="text-3xl font-extrabold mb-8 text-slate-900">About the 20-Minute Neighbourhood</h2>
+    <div class="space-y-7 max-w-3xl">
+      <p class="text-lg text-[#536070] leading-relaxed">
+        The 20-minute neighbourhood concept means residents can meet most of their everyday needs within a 20-minute return walk from home — roughly an 800-metre radius. This is supported by safe cycling routes and reliable local transport.
+      </p>
+      
+      <h3 class="text-xl font-bold mt-8 mb-4 text-slate-800">How We Calculate Your Score</h3>
+      
+      <div class="flex gap-4">
+        <div class="w-10 h-10 rounded bg-[#004071] text-white flex-shrink-0 flex items-center justify-center font-bold text-base font-inter">1</div>
+        <div>
+          <h4 class="font-bold mb-1 text-sm text-slate-900">Search Essential Services</h4>
+          <p class="text-sm text-[#536070] leading-relaxed">For every address, we search Google Maps for the nearest instance of each service type — doctors, supermarkets, parks, schools, transit, and more.</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="w-10 h-10 rounded bg-[#004071] text-white flex-shrink-0 flex items-center justify-center font-bold text-base font-inter">2</div>
+        <div>
+          <h4 class="font-bold mb-1 text-sm text-slate-900">Measure Walking Distance</h4>
+          <p class="text-sm text-[#536070] leading-relaxed">We calculate real walking distance using Google Distance Matrix. The threshold is 800 metres — the distance of a 10-minute walk, or 20 minutes return.</p>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="w-10 h-10 rounded bg-[#004071] text-white flex-shrink-0 flex items-center justify-center font-bold text-base font-inter">3</div>
+        <div>
+          <h4 class="font-bold mb-1 text-sm text-slate-900">Weighted Category Scoring</h4>
+          <p class="text-sm text-[#536070] leading-relaxed">Each category (Health, Food, Connectivity, etc.) is scored and weighted by importance. Services closer to you contribute more to the final 0–10 index.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white py-10 px-6 border-t border-slate-200 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex gap-6 text-sm font-medium text-[#536070] font-inter">
+        <a class="hover:text-[#004071] transition-colors" href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods" target="_blank" rel="noopener">Vic Gov Policy</a>
+        <a class="hover:text-[#004071] transition-colors" href="/dashboard.html">Dashboard</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

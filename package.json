@@ -1,5 +1,5 @@
 {
-  "name": "liveonit",
+  "name": "20-min-neighbourhood",
   "version": "1.0.0",
   "description": "Google Maps Powered 20-Minute Neighbourhood Tool",
   "main": "src/functions/api.ts",

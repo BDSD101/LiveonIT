@@ -109,6 +109,8 @@ function initApp() {
   renderHistory();
   // fetchLeaderboard();
   lucide.createIcons();
+  // Auto-search if user arrived from landing page with ?q= param
+  checkUrlParams();
 }
 
 async function fetchLeaderboard() {
@@ -426,3 +428,26 @@ async function loadServices(lat, lon) {
 }
 
 window.onload = loadGoogleMaps;
+
+// Auto-search from landing page URL parameters
+function checkUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  const lat = params.get('lat');
+  const lon = params.get('lon');
+
+  if (q) {
+    document.getElementById('query').value = q;
+
+    if (lat && lon) {
+      // We have coordinates from the landing page — select directly
+      select({ display_name: q, lat, lon });
+    } else {
+      // Only have a query string — run a search to get suggestions
+      search(q);
+    }
+
+    // Clean the URL so it doesn't re-trigger on refresh
+    window.history.replaceState({}, '', '/dashboard.html');
+  }
+}
