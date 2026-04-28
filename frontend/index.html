@@ -4,232 +4,427 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LiveonIT | 20-Min Neighbourhood</title>
+  <title>20-Minute Neighbourhood Explorer</title>
+  <meta name="description"
+    content="Discover how walkable your neighbourhood is. Assess access to essential services within 800m, aligned with the Victorian Government's 20-Minute Neighbourhood initiative." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Landing-specific styles */
+    .hero-search:focus-within {
+      border-color: #004071;
+      box-shadow: 0 0 0 3px rgba(0, 64, 113, 0.15);
+    }
+
+    #landing-results {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      max-height: 240px;
+      overflow-y: auto;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    #landing-results.show {
+      display: block;
+    }
+
+    #landing-results li {
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.15s;
+    }
+
+    #landing-results li:hover,
+    #landing-results li.active {
+      background: #f8fafc;
+      color: #004071;
+    }
+
+    #landing-results li:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .anim-up {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+
+    .anim-delay-1 {
+      animation-delay: 0.08s;
+      opacity: 0;
+    }
+
+    .anim-delay-2 {
+      animation-delay: 0.16s;
+      opacity: 0;
+    }
+
+    .anim-delay-3 {
+      animation-delay: 0.24s;
+      opacity: 0;
+    }
+  </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+<body class="bg-[#F8F9FA] text-slate-900 min-h-screen flex flex-col">
 
-  <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-between">
+  <!-- Header -->
+  <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-center">
     <div class="flex items-center gap-3">
-      <i data-lucide="map-pin" class="w-6 h-6"></i>
-      <h1 class="text-xl font-bold tracking-tight">LiveonIT</h1>
     </div>
-    <nav class="flex gap-6 text-sm font-bold font-inter uppercase tracking-widest">
-      <button onclick="showView('home')" class="hover:text-blue-200 transition-colors">Dashboard</button>
-      <button onclick="showView('about')" class="hover:text-blue-200 transition-colors">About the Project</button>
+    <nav class="hidden md:flex items-center gap-6">
+      <a href="/"
+        class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5 transition-colors">Home</a>
+      <a href="/dashboard.html"
+        class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Map</a>
+      <a href="/suburb.html"
+        class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Suburb
+        Overview</a>
+      <a href="/about.html"
+        class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">About</a>
     </nav>
   </header>
 
-  <!-- HOME VIEW -->
-  <div id="view-home" class="flex-1 flex justify-center gap-8 px-8 py-10 max-w-[1600px] mx-auto w-full overflow-hidden">
+  <main class="flex-1">
 
-    <!-- Left Sidebar: Filters -->
-    <aside class="w-72 flex-shrink-0 space-y-6 overflow-y-auto pr-2">
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
-        <div
-          class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
-          <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
-          Service Filters
-        </div>
-        <div id="filter-container" class="space-y-1"></div>
-      </div>
-    </aside>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HERO — Search-first, matching mockup   -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="bg-[#F8F9FA] border-b border-slate-200 py-16 md:py-24">
+      <div class="max-w-3xl mx-auto px-6 text-center">
 
-    <!-- Center Column -->
-    <main class="max-w-[800px] w-full flex flex-col gap-6 px-1">
-      <!-- Search -->
-      <div class="bg-white rounded-xl border border-slate-200 p-6 custom-shadow relative">
-        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest font-inter mb-3">Address
-          Search</label>
-        <div class="relative">
-          <input id="query" type="text" placeholder="Start typing a Melbourne address..."
-            class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#004071] focus:border-[#004071] transition-all outline-none font-inter text-sm" />
-          <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
-        </div>
-        <ul id="results"
-          class="hidden absolute left-6 right-6 z-[100] mt-1 border border-slate-200 rounded-lg shadow-2xl divide-y divide-slate-50 overflow-hidden bg-white max-h-60 overflow-y-auto">
-        </ul>
-      </div>
 
-      <!-- Map Container -->
-      <div
-        class="relative bg-white rounded-xl border border-slate-200 custom-shadow overflow-hidden h-[600px] flex-shrink-0">
-        <div id="progress-bar"
-          class="absolute top-0 left-0 h-1 bg-blue-500 z-50 transition-all duration-300 opacity-0 w-0"></div>
 
-        <!-- Map Notifications -->
-        <div id="alert-container" class="absolute top-4 right-4 z-[100] flex flex-col gap-2 w-64 pointer-events-none">
-        </div>
+        <h1
+          class="text-4xl md:text-[46px] font-extrabold text-slate-900 tracking-tight leading-tight mb-5 anim-up anim-delay-1">
+          Find Your 20-Minute<br />Neighbourhood
+        </h1>
 
-        <div id="map"></div>
-      </div>
-    </main>
+        <p class="text-base md:text-lg text-[#536070] mb-10 leading-relaxed max-w-xl mx-auto anim-up anim-delay-2">
+          Map your accessibility to essential services, jobs, and public transport within a short walk from your home.
+        </p>
 
-    <!-- Right Sidebar -->
-    <aside class="w-72 flex-shrink-0 space-y-6 overflow-y-auto pl-2">
-      <!-- History -->
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
-        <div
-          class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
-          <i data-lucide="history" class="w-3.5 h-3.5"></i>
-          Recent Searches
-        </div>
-        <div id="history-list" class="space-y-2">
-          <p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>
+        <!-- Search bar -->
+        <div class="relative anim-up anim-delay-3">
+          <form id="landing-search-form" class="relative" autocomplete="off">
+            <div
+              class="hero-search flex flex-col md:flex-row bg-white border border-slate-300 rounded transition-all overflow-hidden">
+              <div class="flex items-center flex-1 px-4">
+                <i data-lucide="map-pin" class="w-5 h-5 text-slate-400 flex-shrink-0"></i>
+                <input id="landing-query" type="text"
+                  class="w-full border-none focus:ring-0 bg-transparent px-3 py-4 text-slate-900 text-base font-inter placeholder:text-slate-400"
+                  placeholder="Enter your address..." autocomplete="off" />
+              </div>
+              <button type="submit"
+                class="bg-[#004071] text-white px-10 py-4 font-bold hover:bg-[#003360] transition-colors uppercase tracking-wide text-sm font-inter flex-shrink-0">
+                Find My Area
+              </button>
+            </div>
+            <ul id="landing-results"></ul>
+          </form>
+          </p>
         </div>
       </div>
+    </section>
 
-      <!-- Index Score -->
-      <div class="bg-white rounded-xl border border-slate-200 p-6 custom-shadow">
-        <div
-          class="flex items-center gap-2 mb-5 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
-          <i data-lucide="activity" class="w-3.5 h-3.5"></i>
-          Liveability Index
-        </div>
-        <div class="text-center">
-          <div id="score-value" class="text-6xl font-black text-[#004071] mb-2">--</div>
-          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] mb-4 uppercase font-inter">Score out of 10.0
-          </div>
-          <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-4">
-            <div id="score-bar" class="h-full bg-emerald-500 w-0 transition-all duration-1000"></div>
-          </div>
-          <p id="score-desc" class="text-xs text-slate-500 font-medium leading-relaxed italic">Search an address to
-            analyze liveability.</p>
-        </div>
-        <div class="mt-5 pt-4 border-t border-slate-100">
-          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase font-inter mb-3 text-center">Why
-            this score?</div>
-          <div id="score-breakdown" class="space-y-2">
-            <p class="text-xs text-slate-400 text-center">Search an address to see core service coverage.</p>
-          </div>
-          <p id="score-threshold-note" class="mt-3 text-[11px] text-slate-400 text-center font-inter">Threshold: 800m
-            walking distance</p>
-        </div>
-      </div>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- LIVING LOCALLY — Benefit pillars       -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="max-w-7xl mx-auto px-6 py-16 md:py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
 
-      <!-- Suburb Leaderboard -->
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
-        <div class="flex items-center justify-between mb-4">
-          <div
-            class="flex items-center gap-2 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
-            <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
-            Leaderboards
-          </div>
-        </div>
-
-        <!-- Leaderboard Tabs -->
-        <div class="flex border-b border-slate-100 mb-4 overflow-x-auto no-scrollbar">
-          <button onclick="switchLeaderboard('inner')" id="tab-inner"
-            class="px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-[#004071] text-[#004071] whitespace-nowrap">Inner</button>
-          <button onclick="switchLeaderboard('middle')" id="tab-middle"
-            class="px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-transparent text-slate-400 hover:text-slate-600 whitespace-nowrap">Middle</button>
-          <button onclick="switchLeaderboard('outer')" id="tab-outer"
-            class="px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-transparent text-slate-400 hover:text-slate-600 whitespace-nowrap">Outer</button>
-        </div>
-
-        <div id="leaderboard-list" class="space-y-3">
-          <p class="text-center py-4 text-slate-400 text-xs font-inter">Loading rankings...</p>
-        </div>
-      </div>
-    </aside>
-  </div>
-
-  <!-- ABOUT VIEW -->
-  <div id="view-about" class="hidden-view flex-1 overflow-y-auto bg-slate-50">
-    <div class="max-w-4xl mx-auto py-16 px-8">
-      <div class="bg-white rounded-2xl border border-slate-200 p-12 custom-shadow">
-        <h2 class="text-4xl font-black text-[#004071] mb-6">About the 20-Min Index</h2>
-
-        <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-8">
-          <section>
-            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-              <i data-lucide="map" class="text-blue-500"></i>
-              What is a 20-Minute Neighbourhood?
-            </h3>
-            <p class="mt-3">
-              The <a
-                href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods"
-                target="_blank" class="text-blue-600 font-bold underline">Melbourne 20-Minute Neighbourhood</a>
-              initiative is a planning vision for a more liveable city. The goal is simple: ensure that all Melburnians
-              can access most of their daily needs within a 20-minute return walk from home. This represents an
-              <strong>800-metre radius</strong>.
+        <!-- Left column: narrative -->
+        <div class="space-y-8">
+          <div>
+            <h2 class="text-3xl font-bold text-slate-900 mb-5">Living Locally</h2>
+            <p class="text-[#536070] leading-relaxed text-lg">
+              Imagine a life where everything you need is just a short stroll away. A true 20-minute neighbourhood gives
+              you back your time, ensuring your groceries, health services, and green spaces are within a <strong
+                class="text-slate-800">genuine 20-minute return walk</strong> from your front door. Seamlessly connected
+              by safe walkable paths to bring about the lifestyle of living locally and leaving the car behind.
             </p>
-          </section>
+          </div>
 
-          <section class="grid md:grid-cols-2 gap-8 bg-slate-50 p-8 rounded-xl border border-slate-100">
-            <div>
-              <h3 class="font-bold text-slate-800 mb-2">Why it matters</h3>
-              <ul class="list-disc pl-5 space-y-2 text-sm">
-                <li>Reduced car dependency and traffic congestion.</li>
-                <li>Increased physical activity and better health outcomes.</li>
-                <li>Stronger, more connected local communities.</li>
-                <li>Lower environmental impact and carbon footprint.</li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="font-bold text-slate-800 mb-2">The Calculation Engine</h3>
-              <p class="text-sm">
-                Our <strong>Weighted Multi-Source Engine</strong> analyzes live data from Google Maps to calculate an
-                address score. We don't just count services; we evaluate their variety and importance.
-              </p>
-            </div>
-          </section>
+          <div class="space-y-5 pt-2">
+            <div class="flex gap-4 items-start pb-5 border-b border-slate-200/60">
 
-          <section>
-            <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <i data-lucide="database" class="text-emerald-500"></i>
-              How is the rating calculated?
-            </h3>
-            <div class="space-y-4">
-              <div class="flex gap-4">
-                <div
-                  class="w-12 h-12 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center font-bold text-blue-600">
-                  1</div>
-                <div>
-                  <h4 class="font-bold text-slate-800">Diversity Check</h4>
-                  <p class="text-sm">Access to different categories (Food, Health, Parks, Connectivity) is critical.
-                    Having 10 cafes but no grocery store results in a lower score than having one of each.</p>
-                </div>
+            </div>
+            <div class="flex gap-4 items-start pb-5 border-b border-slate-200/60">
+              <div class="w-9 h-9 rounded bg-[#004071]/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="store" class="w-5 h-5 text-[#004071]"></i>
               </div>
-              <div class="flex gap-4">
-                <div
-                  class="w-12 h-12 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center font-bold text-emerald-600">
-                  2</div>
-                <div>
-                  <h4 class="font-bold text-slate-800">Proximity & Routing</h4>
-                  <p class="text-sm">We use precise pedestrian routing. A service that is 200m away via walking paths
-                    contributes significantly more to the index than one at the 800m limit.</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <div
-                  class="w-12 h-12 rounded-full bg-purple-100 flex-shrink-0 flex items-center justify-center font-bold text-purple-600">
-                  3</div>
-                <div>
-                  <h4 class="font-bold text-slate-800">Weighted Priority</h4>
-                  <p class="text-sm">Not all services are equal. Essentials like Supermarkets and GP Services are
-                    assigned higher weights (3x) compared to lifestyle services like Cafes (1x).</p>
-                </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Proximity to Essential Services</h3>
+                <p class="text-sm text-[#536070] mt-1">Access to fresh food, healthcare, education, and banking within
+                  walking distance.</p>
               </div>
             </div>
-          </section>
+            <div class="flex gap-4 items-start pb-5 border-b border-slate-200/60">
+              <div class="w-9 h-9 rounded bg-[#2E7D32]/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="trees" class="w-5 h-5 text-[#2E7D32]"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Quality Public Spaces</h3>
+                <p class="text-sm text-[#536070] mt-1">Parks, playgrounds, and recreational facilities that foster
+                  social
+                  connection.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-9 h-9 rounded bg-[#004071]/10 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="train-front" class="w-5 h-5 text-[#004071]"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm">Transit Connectivity</h3>
+                <p class="text-sm text-[#536070] mt-1">Reliable access to trains, buses, and trams connecting you to the
+                  wider city.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <button onclick="showView('home')"
-          class="mt-12 w-full bg-[#004071] text-white py-4 rounded-xl font-bold hover:bg-blue-800 transition-all shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Dashboard
-        </button>
+        <!-- Right column: score methodology + policy -->
+        <div class="space-y-6">
+          <div class="bg-white rounded border border-slate-200 p-7 custom-shadow">
+            <div class="flex items-center justify-between mb-5">
+              <h4 class="font-bold text-[11px] uppercase tracking-widest text-slate-500 font-inter">How We Score</h4>
+              <span
+                class="bg-[#F8F9FA] px-2 py-0.5 text-[10px] font-bold font-inter text-slate-500 rounded border border-slate-200">LIVE
+                DATA</span>
+            </div>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-medium text-slate-700">Health Services</span>
+                <span class="font-inter font-bold text-slate-500 text-xs">doctor · pharmacy · dentist</span>
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-medium text-slate-700">Food &amp; Essentials</span>
+                <span class="font-inter font-bold text-slate-500 text-xs">supermarket · convenience</span>
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-medium text-slate-700">Connectivity</span>
+                <span class="font-inter font-bold text-slate-500 text-xs">train · bus · post · bank · atm</span>
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-medium text-slate-700">Parks &amp; Dining</span>
+                <span class="font-inter font-bold text-slate-500 text-xs">park · cafe · restaurant · bar</span>
+              </div>
+              <div class="flex justify-between items-center text-sm">
+                <span class="font-medium text-slate-700">Education</span>
+                <span class="font-inter font-bold text-slate-500 text-xs">childcare · school · library</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded border border-slate-200 p-7 custom-shadow">
+            <h4 class="font-bold text-slate-800 mb-3">Policy Framework</h4>
+            <p class="text-sm text-[#536070] mb-5 leading-relaxed">
+              Based on the Victorian Government's <strong>Plan Melbourne 2017–2050</strong> strategy for creating
+              inclusive, vibrant, and sustainable communities where people can live, work, and play locally.
+            </p>
+            <a class="inline-flex items-center text-[#004071] font-bold text-sm hover:underline font-inter"
+              href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods"
+              target="_blank" rel="noopener">
+              Read the Official Plan
+              <i data-lucide="external-link" class="w-3.5 h-3.5 ml-1.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- STATS BAR                              -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="py-14 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div class="border-l-2 border-[#004071] pl-5">
+          <div class="text-3xl font-extrabold text-slate-900 mb-1">20min</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Return Walk Target
+          </div>
+        </div>
+        <div class="border-l-2 border-[#004071] pl-5">
+          <div class="text-3xl font-extrabold text-slate-900 mb-1">800m</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Walking Radius</div>
+        </div>
+        <div class="border-l-2 border-[#2E7D32] pl-5">
+          <div class="text-3xl font-extrabold text-slate-900 mb-1">7</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Service Categories
+          </div>
+        </div>
+        <div class="border-l-2 border-[#2E7D32] pl-5">
+          <div class="text-3xl font-extrabold text-slate-900 mb-1">25+</div>
+          <div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Service Types</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CTA — Drive to dashboard               -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="py-16 md:py-20">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Ready to explore?</h2>
+        <p class="text-[#536070] mb-8 text-lg">Search any Melbourne address above, or jump straight to the interactive
+          map dashboard.</p>
+        <a href="/dashboard.html"
+          class="inline-flex items-center gap-2 bg-[#004071] text-white px-8 py-4 font-bold uppercase tracking-wider text-sm rounded hover:bg-[#003360] transition-colors font-inter">
+          <i data-lucide="map" class="w-4 h-4"></i>
+          Open Interactive Dashboard
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white py-10 px-6 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex gap-6 text-sm font-medium text-[#536070] font-inter">
+        <a class="hover:text-[#004071] transition-colors"
+          href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods"
+          target="_blank" rel="noopener">Vic Gov Policy</a>
+        <a class="hover:text-[#004071] transition-colors" href="/dashboard.html">Dashboard</a>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <script src="script.js" defer></script>
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    let debounceTimer;
+    let currentFocus = -1;
+
+    function setQuery(text) {
+      document.getElementById('landing-query').value = text;
+      document.getElementById('landing-query').focus();
+      searchLanding(text);
+    }
+
+    // Live search as user types
+    document.getElementById('landing-query').addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      currentFocus = -1;
+      const q = e.target.value.trim();
+      if (q.length < 3) {
+        document.getElementById('landing-results').classList.remove('show');
+        return;
+      }
+      debounceTimer = setTimeout(() => searchLanding(q), 400);
+    });
+
+    document.getElementById('landing-query').addEventListener('keydown', (e) => {
+      const list = document.getElementById('landing-results');
+      if (!list.classList.contains('show')) return;
+      // Only get clickable list items
+      const items = Array.from(list.getElementsByTagName('li')).filter(li => !li.classList.contains('pointer-events-none'));
+      if (items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        currentFocus++;
+        addActive(items);
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp') {
+        currentFocus--;
+        addActive(items);
+        e.preventDefault();
+      } else if (e.key === 'Enter') {
+        if (currentFocus > -1 && items[currentFocus]) {
+          e.preventDefault();
+          items[currentFocus].click();
+        }
+      }
+    });
+
+    function addActive(items) {
+      if (!items) return false;
+      removeActive(items);
+      if (currentFocus >= items.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (items.length - 1);
+      items[currentFocus].classList.add('active');
+      items[currentFocus].scrollIntoView({ block: 'nearest' });
+    }
+
+    function removeActive(items) {
+      for (let i = 0; i < items.length; i++) {
+        items[i].classList.remove('active');
+      }
+    }
+
+    // Form submit — go directly to dashboard with the typed query
+    document.getElementById('landing-search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = document.getElementById('landing-query').value.trim();
+      if (q.length < 2) return;
+      window.location.href = `/dashboard.html?q=${encodeURIComponent(q)}`;
+    });
+
+    async function searchLanding(q) {
+      const list = document.getElementById('landing-results');
+      list.classList.add('show');
+      list.innerHTML = '<li class="text-slate-400 italic pointer-events-none">Searching...</li>';
+
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+        if (!res.ok) throw new Error('Search failed');
+        const data = await res.json();
+        list.innerHTML = '';
+        currentFocus = -1;
+        if (!data.length) {
+          list.innerHTML = '<li class="text-slate-400 pointer-events-none">No results found</li>';
+          return;
+        }
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.display_name;
+          li.onclick = () => {
+            // Navigate to dashboard with coordinates for instant map load
+            window.location.href = `/dashboard.html?q=${encodeURIComponent(item.display_name)}&lat=${item.lat}&lon=${item.lon}`;
+          };
+          list.appendChild(li);
+        });
+      } catch (err) {
+        list.innerHTML = '<li class="text-slate-400 pointer-events-none">Search unavailable</li>';
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#landing-search-form')) {
+        document.getElementById('landing-results').classList.remove('show');
+      }
+    });
+  </script>
 </body>
 
 </html>

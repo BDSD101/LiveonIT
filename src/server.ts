@@ -8,7 +8,8 @@ const PORT = Number(process.env.PORT) || 3000;
 const server = http.createServer(async (req: IncomingMessage, res: ServerResponse) => {
   // Static file serving from the 'frontend' directory
   if (req.method === 'GET') {
-    const urlPath = req.url === '/' ? '/index.html' : req.url || '/index.html';
+    const rawUrl = req.url || '/';
+    const urlPath = rawUrl === '/' ? '/index.html' : rawUrl.split('?')[0];
     const filePath = path.join(__dirname, '../frontend', urlPath);
 
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
@@ -72,5 +73,5 @@ const server = http.createServer(async (req: IncomingMessage, res: ServerRespons
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`LiveonIT Server → http://0.0.0.0:${PORT}`);
+  console.log(`Server → http://0.0.0.0:${PORT}`);
 });

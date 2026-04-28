@@ -151,55 +151,71 @@ function uniqueItems(items: RequestedItem[]): RequestedItem[] {
 // }
 
 async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
-  // console.log(`[FIND] ${item.key} hasFilter:${!!item.filter}`);
   const cacheKey = [
     'places',
     toCoordKey(originLat),
     toCoordKey(originLon),
-    item.type, // key
+    item.type,
   ].join('_');
 
   const cached = getCached<CandidateService[]>(cacheKey);
   if (cached !== undefined) return cached;
 
   try {
-    trackApiCall('places');  // for monitoring usage
-    const response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
-      params: {
-        location: `${originLat},${originLon}`,
-        rankby: 'distance',
-        type: item.type,
-        key: getGoogleMapsApiKey(),
+    trackApiCall('places');
+    // Places API (New) — searchNearby uses POST with JSON body
+    const response = await axios.post(
+      'https://places.googleapis.com/v1/places:searchNearby',
+      {
+        includedTypes: [item.type],
+        maxResultCount: item.upgradeCount ?? 5,
+        rankPreference: 'DISTANCE',
+        locationRestriction: {
+          circle: {
+            center: { latitude: originLat, longitude: originLon },
+            radius: 2000.0,
+          },
+        },
       },
-    });
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-Api-Key': getGoogleMapsApiKey(),
+          'X-Goog-FieldMask': 'places.displayName,places.location,places.types,places.iconMaskBaseUri',
+        },
+      }
+    );
 
-    // const results = (response.data?.results || []).slice(0, 10); // Fetch up to 10 for density bonus
-    // Apply optional filter function if provided (e.g. to exclude certain place types that are too noisy)
-    const rawResults = response.data?.results || [];
-    const filtered = item.filter ? rawResults.filter(item.filter) : rawResults;
-    // console.log(`[${item.type}] raw: ${rawResults.length}, filtered: ${filtered.length}`);
-    console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r:any) => r.name));
-    const results = filtered.slice(0, item.upgradeCount ?? 5); // ← use upgradeCount if specified, otherwise default to 3
-    // De-duplication step (some places appear multiple times with different types, e.g. a cafe that is both 'cafe' and 'restaurant')
+    const rawResults = response.data?.places || [];
+    // Map to legacy-compatible shape for the filter function
+    const mapped = rawResults.map((p: any) => ({
+      name: p.displayName?.text || item.type,
+      geometry: { location: { lat: p.location?.latitude, lng: p.location?.longitude } },
+      icon_mask_base_uri: p.iconMaskBaseUri || '',
+      types: p.types || [],
+    }));
+
+    const filtered = item.filter ? mapped.filter(item.filter) : mapped;
+    console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
+    const results = filtered.slice(0, item.upgradeCount ?? 5);
+
     const seen = new Set<string>();
     const deduped = results.filter((r: any) => {
       if (seen.has(r.name)) return false;
       seen.add(r.name);
       return true;
     });
-    
-    // console.log(`[SLICE] ${item.type} top 3:`, results.map((r:any) => r.name));  // ← add this
-    if (results.length === 0) {
+
+    if (deduped.length === 0) {
       setCached(cacheKey, [], CACHE_TTL_MS.place);
       return [];
     }
 
-    // const candidates: CandidateService[] = results.map((r: any) => ({
     const candidates: CandidateService[] = deduped.map((r: any) => ({
       key: item.key,
       catId: item.catId,
       type: item.type,
-      name: r.name || item.type,
+      name: r.name,
       lat: Number(r.geometry.location.lat),
       lon: Number(r.geometry.location.lng),
       walkingDistanceMeters: null,
@@ -208,16 +224,14 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
     }));
 
     setCached(cacheKey, candidates, CACHE_TTL_MS.place);
-    // console.log(`[CACHED] ${item.type}:`, candidates.map(c => c.name));  // ← add this
     return candidates;
-  } catch (err) {
-    console.error(`Failed places search for ${item.key}`, err);
+  } catch (err: any) {
+    console.error(`Failed places search for ${item.key}`, err?.response?.data || err.message);
     setCached(cacheKey, [], CACHE_TTL_MS.place);
     return [];
   }
 }
 
-// Added for 'doctor' type to allow text search with more specific query, since nearbysearch with type 'doctor' is very noisy and often misses relevant results
 async function findPlacesByText(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
   const cacheKey = [
     'text',
@@ -231,19 +245,40 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    const response = await axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
-      params: {
-        query: item.textQuery,
-        location: `${originLat},${originLon}`,
-        radius: 2000,
-        key: getGoogleMapsApiKey(),
+    // Places API (New) — searchText uses POST with JSON body
+    const response = await axios.post(
+      'https://places.googleapis.com/v1/places:searchText',
+      {
+        textQuery: item.textQuery,
+        maxResultCount: item.upgradeCount ?? 5,
+        locationBias: {
+          circle: {
+            center: { latitude: originLat, longitude: originLon },
+            radius: 2000.0,
+          },
+        },
       },
-    });
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-Api-Key': getGoogleMapsApiKey(),
+          'X-Goog-FieldMask': 'places.displayName,places.location,places.types,places.iconMaskBaseUri',
+        },
+      }
+    );
 
-    const rawResults = response.data?.results || [];
-    const filtered = item.filter ? rawResults.filter(item.filter) : rawResults;
+    const rawResults = response.data?.places || [];
+    // Map to legacy-compatible shape for the filter function
+    const mapped = rawResults.map((p: any) => ({
+      name: p.displayName?.text || item.type,
+      geometry: { location: { lat: p.location?.latitude, lng: p.location?.longitude } },
+      icon_mask_base_uri: p.iconMaskBaseUri || '',
+      types: p.types || [],
+    }));
+
+    const filtered = item.filter ? mapped.filter(item.filter) : mapped;
     console.log(`[TEXT SEARCH] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
-    
+
     const seen = new Set<string>();
     const deduped = filtered
       .slice(0, item.upgradeCount ?? 5)
@@ -262,7 +297,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
       key: item.key,
       catId: item.catId,
       type: item.type,
-      name: r.name || item.type,
+      name: r.name,
       lat: Number(r.geometry.location.lat),
       lon: Number(r.geometry.location.lng),
       walkingDistanceMeters: null,
@@ -273,8 +308,8 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
     setCached(cacheKey, candidates, CACHE_TTL_MS.place);
     return candidates;
 
-  } catch (err) {
-    console.error(`[TEXT SEARCH ERROR] ${item.type}:`, err);
+  } catch (err: any) {
+    console.error(`[TEXT SEARCH ERROR] ${item.type}:`, err?.response?.data || err.message);
     return [];
   }
 }
@@ -591,8 +626,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
       const query = event.queryStringParameters?.query;
       const radius = Number(event.queryStringParameters?.radius) || 2000;
-      const strictbounds = event.queryStringParameters?.strictbounds === 'true';
-      const keyword = event.queryStringParameters?.keyword;
 
       if (!lat || !lon) {
         return jsonResponse(400, { error: 'Missing lat or lon' });
@@ -601,35 +634,50 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         return jsonResponse(400, { error: 'Missing type or query' });
       }
 
+      const headers = {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': getGoogleMapsApiKey(),
+        'X-Goog-FieldMask': 'places.displayName,places.location,places.types,places.iconMaskBaseUri',
+      };
+
       let response;
       if (query) {
-        response = await axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
-          params: {
-            query,
-            location: `${lat},${lon}`,
-            radius,
-            ...(strictbounds ? { strictbounds: true } : {}),
-            ...(type ? { type } : {}),
-            key: getGoogleMapsApiKey(),
+        response = await axios.post(
+          'https://places.googleapis.com/v1/places:searchText',
+          {
+            textQuery: query,
+            maxResultCount: 20,
+            locationBias: {
+              circle: {
+                center: { latitude: lat, longitude: lon },
+                radius: radius,
+              },
+            },
           },
-        });
+          { headers }
+        );
       } else {
-        response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
-          params: {
-            location: `${lat},${lon}`,
-            rankby: 'distance',
-            type,
-            ...(keyword ? { keyword } : {}),
-            key: getGoogleMapsApiKey(),
+        response = await axios.post(
+          'https://places.googleapis.com/v1/places:searchNearby',
+          {
+            includedTypes: [type],
+            maxResultCount: 20,
+            rankPreference: 'DISTANCE',
+            locationRestriction: {
+              circle: {
+                center: { latitude: lat, longitude: lon },
+                radius: radius,
+              },
+            },
           },
-        });
+          { headers }
+        );
       }
 
-      const results = (response.data?.results || []).map((r: any) => ({
-        name: r.name,
-        pinlet: r.icon_mask_base_uri?.split('/').pop(),
-        vicinity: r.vicinity,
-        types: r.types,
+      const results = (response.data?.places || []).map((p: any) => ({
+        name: p.displayName?.text,
+        pinlet: p.iconMaskBaseUri?.split('/').pop(),
+        types: p.types,
       }));
 
       return jsonResponse(200, { type, query, total: results.length, results });
