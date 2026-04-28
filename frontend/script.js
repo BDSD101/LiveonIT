@@ -84,6 +84,8 @@ function initApp() {
   renderHistory();
   fetchLeaderboard();
   lucide.createIcons();
+  // Auto-search if user came from landing page with ?q= param
+  checkUrlParams();
 }
 
 async function fetchLeaderboard() {
@@ -136,10 +138,10 @@ function formatDistance(meters) {
 }
 
 function getScoreDescription(index, breakdown) {
-  const met = breakdown?.summary?.categoriesMetWithin800m;
-  const total = breakdown?.summary?.totalCategories;
+  const met = breakdown?.summary?.servicesWithin800m;
+  const total = breakdown?.summary?.totalServices;
   if (typeof met === 'number' && typeof total === 'number') {
-    return `${met}/${total} core categories are within 800m walking distance.`;
+    return `${met}/${total} essential services are within 800m walking distance.`;
   }
   if (index >= 8) return 'Exceptional 20-min neighbourhood.';
   if (index >= 5) return 'Strong liveability with minor gaps.';
@@ -149,7 +151,7 @@ function getScoreDescription(index, breakdown) {
 function renderScoreBreakdown(breakdown) {
   const container = document.getElementById('score-breakdown');
   const thresholdNote = document.getElementById('score-threshold-note');
-  if (!breakdown || !Array.isArray(breakdown.categories)) {
+  if (!breakdown || !Array.isArray(breakdown.services)) {
     container.innerHTML = '<p class="text-xs text-slate-400 text-center">Score breakdown unavailable.</p>';
     thresholdNote.textContent = 'Threshold: 800m walking distance';
     return;
@@ -158,18 +160,20 @@ function renderScoreBreakdown(breakdown) {
   thresholdNote.textContent = `Threshold: ${breakdown.walkableThresholdMeters || 800}m walking distance`;
   container.innerHTML = '';
 
-  breakdown.categories
-    .sort((a, b) => b.weight - a.weight)
-    .slice(0, 3)
-    .forEach(cat => {
-      const statusLabel = cat.status === 'met' ? 'Within 800m' : (cat.status === 'partial' ? 'Over limit' : 'Missing');
-      const nearest = cat.nearestService?.name || 'No nearby match';
-      const distance = cat.walkingDistanceMeters == null ? '—' : formatDistance(cat.walkingDistanceMeters);
-      const duration = cat.walkingDurationMinutes == null ? '' : ` • ${cat.walkingDurationMinutes} min`;
+  // Sort: missing first, then partial, then met — show top 5
+  const statusOrder = { missing: 0, partial: 1, met: 2 };
+  breakdown.services
+    .sort((a, b) => statusOrder[a.status] - statusOrder[b.status])
+    .slice(0, 5)
+    .forEach(svc => {
+      const statusLabel = svc.status === 'met' ? 'Within 800m' : (svc.status === 'partial' ? 'Over 800m' : 'Not Found');
+      const nearest = svc.nearestService?.name || 'No nearby match';
+      const distance = svc.walkingDistanceMeters == null ? '—' : formatDistance(svc.walkingDistanceMeters);
+      const duration = svc.walkingDurationMinutes == null ? '' : ` • ${svc.walkingDurationMinutes} min`;
 
-      const statusClass = cat.status === 'met'
+      const statusClass = svc.status === 'met'
         ? 'text-emerald-700 bg-emerald-50 border-emerald-100'
-        : (cat.status === 'partial'
+        : (svc.status === 'partial'
           ? 'text-amber-700 bg-amber-50 border-amber-100'
           : 'text-rose-700 bg-rose-50 border-rose-100');
 
@@ -177,7 +181,7 @@ function renderScoreBreakdown(breakdown) {
       row.className = 'p-2 rounded-lg border border-slate-100 bg-slate-50';
       row.innerHTML = `
       <div class="flex items-center justify-between gap-2">
-        <span class="text-[11px] font-bold text-slate-700">${cat.label}</span>
+        <span class="text-[11px] font-bold text-slate-700">${svc.label}</span>
         <span class="text-[10px] px-1.5 py-0.5 rounded-full border font-bold ${statusClass}">${statusLabel}</span>
       </div>
       <div class="mt-1 text-[11px] text-slate-500 leading-tight">${nearest}</div>
@@ -387,3 +391,27 @@ async function loadServices(lat, lon) {
 }
 
 window.onload = loadGoogleMaps;
+
+// Auto-search from landing page URL parameters
+function checkUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  const lat = params.get('lat');
+  const lon = params.get('lon');
+
+  if (q) {
+    document.getElementById('query').value = q;
+
+    if (lat && lon) {
+      // We have coordinates from the landing page — select directly
+      const item = { display_name: q, lat: lat, lon: lon };
+      select(item);
+    } else {
+      // We only have a query string — run a search
+      search(q);
+    }
+
+    // Clean the URL so it doesn't re-trigger on refresh
+    window.history.replaceState({}, '', '/dashboard.html');
+  }
+}

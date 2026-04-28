@@ -5,6 +5,7 @@ import {
   CandidateService,
   LocationAnalysis,
   SeedAnalysis,
+  ALL_SERVICES,
   CORE_ANALYSIS_ITEMS,
   SUBURB_SEED_POINTS,
   buildScoreBreakdown,
@@ -125,7 +126,7 @@ function distanceToFactor(distanceMeters: number | null): number {
 
 async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem, referer: string): Promise<CandidateService[]> {
   const cacheKey = [
-    'places',
+    'places_v2', // Bumped cache key for new API format
     toCoordKey(originLat),
     toCoordKey(originLon),
     item.key,
@@ -135,17 +136,25 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
   if (cached !== undefined) return cached;
 
   try {
-    const response = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
-      params: {
-        location: `${originLat},${originLon}`,
-        rankby: 'distance',
-        type: item.type,
-        key: getGoogleMapsApiKey(),
+    const response = await axios.post('https://places.googleapis.com/v1/places:searchNearby', {
+      includedTypes: [item.type],
+      maxResultCount: 3, // Fetch up to 3 for density bonus
+      locationRestriction: {
+        circle: {
+          center: { latitude: originLat, longitude: originLon },
+          radius: 2000.0 // 2km radius to ensure we find nearby items
+        }
       },
-      headers: { Referer: referer }
+      rankPreference: 'DISTANCE'
+    }, {
+      headers: { 
+        'X-Goog-Api-Key': getGoogleMapsApiKey(),
+        'X-Goog-FieldMask': 'places.displayName.text,places.location',
+        'Referer': referer 
+      }
     });
 
-    const results = (response.data?.results || []).slice(0, 3); // Fetch up to 3 for density bonus
+    const results = response.data?.places || [];
     if (results.length === 0) {
       setCached(cacheKey, [], CACHE_TTL_MS.place);
       return [];
@@ -155,9 +164,9 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
       key: item.key,
       catId: item.catId,
       type: item.type,
-      name: r.name || item.type,
-      lat: Number(r.geometry.location.lat),
-      lon: Number(r.geometry.location.lng),
+      name: r.displayName?.text || item.type,
+      lat: Number(r.location?.latitude),
+      lon: Number(r.location?.longitude),
       walkingDistanceMeters: null,
       walkingDurationMinutes: null,
       withinThreshold: false,
@@ -248,6 +257,7 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
 
 async function analyzeLocation(originLat: number, originLon: number, requestedItems: RequestedItem[], referer: string): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
+  // Always look up ALL 18 services so the score is always out of 18
   const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
 
   const foundArrays = await Promise.all(lookupItems.map((item) => findPlacesByType(originLat, originLon, item, referer)));
@@ -262,7 +272,7 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
 
   const { breakdown, index } = buildScoreBreakdown(byKey);
 
-  // For the 'services' list returned to frontend, we just show the nearest for each requested type
+  // For the 'services' list returned to frontend, show the nearest for each requested type
   const services = displayItems
     .map((item) => {
       const options = byKey.get(item.key) || [];

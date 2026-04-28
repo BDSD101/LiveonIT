@@ -18,26 +18,26 @@ export type CandidateService = {
   withinThreshold: boolean;
 };
 
-export type CategoryBreakdown = {
-  id: string;
+export type ServiceBreakdown = {
+  key: string;
+  catId: string;
+  type: string;
   label: string;
-  weight: number;
   status: 'met' | 'partial' | 'missing';
   nearestService: { name: string; type: string } | null;
   walkingDistanceMeters: number | null;
   walkingDurationMinutes: number | null;
-  score: number;
 };
 
 export type ScoreBreakdown = {
   walkableThresholdMeters: number;
   methodology: string;
-  categories: CategoryBreakdown[];
+  services: ServiceBreakdown[];
   summary: {
-    categoriesMetWithin800m: number;
-    totalCategories: number;
-    missingCategories: string[];
-    partialCategories: string[];
+    servicesWithin800m: number;
+    totalServices: number;
+    missingServices: string[];
+    partialServices: string[];
   };
 };
 
@@ -58,33 +58,41 @@ export type SeedAnalysis = SuburbSeedPoint & {
   index: number;
 };
 
-export const WALKABLE_THRESHOLD_METERS = 800; // Legacy reference for status
-export const MAX_WALKING_MINUTES = 20;
-export const IDEAL_WALKING_MINUTES = 5;
+export const WALKABLE_THRESHOLD_METERS = 800;
 
-export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> = {
-  health: { label: 'Health Services', weight: 3 },
-  food: { label: 'Food and Essentials', weight: 3 },
-  connectivity: { label: 'Connectivity', weight: 2 },
-  parks: { label: 'Parks and Nature', weight: 2 },
-  dining: { label: 'Dining and Social', weight: 2 },
-  education: { label: 'Education and Learning', weight: 2 },
-  fitness: { label: 'Fitness and Recreation', weight: 1 },
-};
+// The 18 essential services that match the frontend UI exactly.
+// These are the services the user can filter by.
+export const ALL_SERVICES: { key: string; catId: string; type: string; label: string }[] = [
+  // Health Services (5)
+  { key: 'health:doctor', catId: 'health', type: 'doctor', label: 'Doctor / GP' },
+  { key: 'health:pharmacy', catId: 'health', type: 'pharmacy', label: 'Pharmacy' },
+  { key: 'health:hospital', catId: 'health', type: 'hospital', label: 'Hospital' },
+  { key: 'health:gym', catId: 'health', type: 'gym', label: 'Gym / Fitness' },
+  { key: 'health:dentist', catId: 'health', type: 'dentist', label: 'Dentist' },
+  // Food and Essentials (4)
+  { key: 'food:supermarket', catId: 'food', type: 'supermarket', label: 'Supermarket' },
+  { key: 'food:bakery', catId: 'food', type: 'bakery', label: 'Bakery' },
+  { key: 'food:convenience_store', catId: 'food', type: 'convenience_store', label: 'Convenience' },
+  { key: 'food:shopping_mall', catId: 'food', type: 'shopping_mall', label: 'General Shopping' },
+  // Connectivity (4)
+  { key: 'connectivity:train_station', catId: 'connectivity', type: 'train_station', label: 'Train Station' },
+  { key: 'connectivity:bus_station', catId: 'connectivity', type: 'bus_station', label: 'Bus Station' },
+  { key: 'connectivity:post_office', catId: 'connectivity', type: 'post_office', label: 'Post Office' },
+  { key: 'connectivity:bank', catId: 'connectivity', type: 'bank', label: 'Bank' },
+  // Parks and Nature (5)
+  { key: 'parks:park', catId: 'parks', type: 'park', label: 'Parks' },
+  { key: 'parks:cafe', catId: 'parks', type: 'cafe', label: 'Cafe' },
+  { key: 'parks:restaurant', catId: 'parks', type: 'restaurant', label: 'Restaurant' },
+  { key: 'parks:community_center', catId: 'parks', type: 'community_center', label: 'Community Centre' },
+  { key: 'parks:school', catId: 'parks', type: 'school', label: 'Education' },
+];
 
-export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy', 'hospital'],
-  food: ['supermarket', 'convenience_store'],
-  connectivity: ['bus_station', 'train_station', 'transit_station'],
-  parks: ['park', 'playground'],
-  dining: ['cafe', 'restaurant', 'bar'],
-  education: ['school', 'library', 'kindergarten'],
-  fitness: ['gym', 'sports_complex'],
-};
-
-export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY_TYPES).flatMap(([catId, types]) =>
-  types.map((type) => ({ key: `${catId}:${type}`, catId, type }))
-);
+// Build CORE_ANALYSIS_ITEMS from the master list for backward compatibility
+export const CORE_ANALYSIS_ITEMS: RequestedItem[] = ALL_SERVICES.map(s => ({
+  key: s.key,
+  catId: s.catId,
+  type: s.type,
+}));
 
 export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
   { name: 'Carlton', ring: 'inner', lat: -37.7983, lng: 144.9671 },
@@ -98,93 +106,66 @@ export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
   { name: 'Craigieburn', ring: 'outer', lat: -37.6010, lng: 144.9430 },
 ];
 
-// --- Improved Scoring Algorithms ---
+// --- Simple, Transparent Scoring ---
 
 /**
- * Calculates a decay factor based on walking minutes.
- * 1.0 (full score) if <= 5 minutes.
- * Decays linearly to 0.0 at 20 minutes.
+ * Builds a score breakdown based on the 18 essential services.
+ * 
+ * Score = (number of services found within 800m / total services checked) × 10
+ * 
+ * A perfect 10.0 is ONLY possible if ALL 18 services have at least one
+ * option within 800m walking distance.
  */
-export function calculateDistanceFactor(minutes: number | null): number {
-  if (minutes === null) return 0;
-  if (minutes <= IDEAL_WALKING_MINUTES) return 1;
-  if (minutes >= MAX_WALKING_MINUTES) return 0;
-  return Number((1 - (minutes - IDEAL_WALKING_MINUTES) / (MAX_WALKING_MINUTES - IDEAL_WALKING_MINUTES)).toFixed(2));
-}
-
-/**
- * Calculates the score for a single category based on all nearby candidates.
- * Implements a density bonus for multiple nearby options.
- * 1st option: 100% of its distance factor
- * 2nd option: 30% bonus factor
- * 3rd option: 10% bonus factor
- */
-export function calculateCategoryScore(candidates: CandidateService[], weight: number): number {
-  const sorted = candidates
-    .filter((c) => c.walkingDurationMinutes !== null)
-    .sort((a, b) => (a.walkingDurationMinutes as number) - (b.walkingDurationMinutes as number));
-
-  if (sorted.length === 0) return 0;
-
-  const firstFactor = calculateDistanceFactor(sorted[0].walkingDurationMinutes);
-  const secondFactor = sorted[1] ? calculateDistanceFactor(sorted[1].walkingDurationMinutes) * 0.3 : 0;
-  const thirdFactor = sorted[2] ? calculateDistanceFactor(sorted[2].walkingDurationMinutes) * 0.1 : 0;
-
-  const rawScore = weight * (firstFactor + secondFactor + thirdFactor);
-  return Number(Math.min(weight * 1.4, rawScore).toFixed(2)); // Cap density bonus at 1.4x weight
-}
-
 export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { breakdown: ScoreBreakdown; index: number } {
-  const categories = Object.entries(CATEGORY_CONFIG).map(([catId, meta]) => {
-    const coreTypes = CORE_CATEGORY_TYPES[catId] || [];
-    const candidates = coreTypes
-      .flatMap((type) => byKey.get(`${catId}:${type}`) || [])
-      .filter((c): c is CandidateService => Boolean(c));
+  const serviceBreakdowns: ServiceBreakdown[] = ALL_SERVICES.map(svc => {
+    const candidates = byKey.get(svc.key) || [];
 
+    // Find the nearest candidate with a valid distance
     const withDistance = candidates
-      .filter((c) => c.walkingDistanceMeters !== null)
+      .filter(c => c.walkingDistanceMeters !== null)
       .sort((a, b) => (a.walkingDistanceMeters as number) - (b.walkingDistanceMeters as number));
 
     const nearest = withDistance[0] || null;
-    const status: CategoryBreakdown['status'] = !nearest
-      ? 'missing'
-      : (nearest.walkingDistanceMeters || 0) <= WALKABLE_THRESHOLD_METERS
-      ? 'met'
-      : 'partial';
 
-    const categoryScore = calculateCategoryScore(candidates, meta.weight);
+    let status: ServiceBreakdown['status'];
+    if (!nearest) {
+      status = 'missing';
+    } else if ((nearest.walkingDistanceMeters || 0) <= WALKABLE_THRESHOLD_METERS) {
+      status = 'met';
+    } else {
+      status = 'partial';
+    }
 
     return {
-      id: catId,
-      label: meta.label,
-      weight: meta.weight,
+      key: svc.key,
+      catId: svc.catId,
+      type: svc.type,
+      label: svc.label,
       status,
       nearestService: nearest ? { name: nearest.name, type: nearest.type } : null,
       walkingDistanceMeters: nearest?.walkingDistanceMeters ?? null,
       walkingDurationMinutes: nearest?.walkingDurationMinutes ?? null,
-      score: categoryScore,
     };
   });
 
-  const totalWeight = categories.reduce((sum, c) => sum + c.weight, 0);
-  const rawScore = categories.reduce((sum, c) => sum + c.score, 0);
-  // Normalize index to 0-10 scale (where totalWeight * 1.0 is ~10, though density can push it higher)
-  const index = Math.min(10.0, Number(((rawScore / totalWeight) * 10).toFixed(1)));
+  const totalServices = serviceBreakdowns.length; // Always 18
+  const metCount = serviceBreakdowns.filter(s => s.status === 'met').length;
+  const missingServices = serviceBreakdowns.filter(s => s.status === 'missing').map(s => s.label);
+  const partialServices = serviceBreakdowns.filter(s => s.status === 'partial').map(s => s.label);
 
-  const missingCategories = categories.filter((c) => c.status === 'missing').map((c) => c.label);
-  const partialCategories = categories.filter((c) => c.status === 'partial').map((c) => c.label);
-  const metCount = categories.filter((c) => c.status === 'met').length;
+  // Simple formula: (met / total) * 10, rounded to 1 decimal place
+  const index = Number(((metCount / totalServices) * 10).toFixed(1));
 
   const breakdown: ScoreBreakdown = {
     walkableThresholdMeters: WALKABLE_THRESHOLD_METERS,
     methodology:
-      'Liveability score based on a continuous decay model (ideal < 5m, decays to 0 at 20m) and density bonuses for multiple nearby services across 7 categories.',
-    categories,
+      `Liveability index = (services within 800m / ${totalServices} total essential services) × 10. A perfect 10.0 requires all ${totalServices} services within walking distance.`,
+    services: serviceBreakdowns,
     summary: {
-      categoriesMetWithin800m: metCount,
-      totalCategories: categories.length,
-      missingCategories,
-      partialCategories,
+      servicesWithin800m: metCount,
+      totalServices,
+      missingServices,
+      partialServices,
     },
   };
 
