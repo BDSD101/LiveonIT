@@ -10,8 +10,15 @@ import {
   buildScoreBreakdown,
   buildLeaderboard,
   buildHeatmap,
-  WALKABLE_THRESHOLD_METERS
+  WALKABLE_THRESHOLD_METERS,
+    // --- new ---
+  buildErrandCandidateMap,
+  scoreErrandTripExact,
+  scoreAbundance,
+  scoreNearestServices,
+  ErrandTripResult,
 } from '../scoring';
+
 
 const CACHE_MAX_ENTRIES = 500;
 const CACHE_TTL_MS = {
@@ -442,9 +449,102 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
   }
 
 
+  // const { breakdown, index } = buildScoreBreakdown(byKey);
+
+  // // For the 'services' list returned to frontend, we just show the nearest for each requested type
+  // const services = displayItems
+  //   .map((item) => {
+  //     const options = byKey.get(item.key) || [];
+  //     return options.sort((a, b) => (a.walkingDistanceMeters ?? 999999) - (b.walkingDistanceMeters ?? 999999))[0];
+  //   })
+  //   .filter((s): s is CandidateService => Boolean(s));
+
+  // return { services, index, breakdown };
+
+  // --- New composite scoring logic ---
   const { breakdown, index } = buildScoreBreakdown(byKey);
 
-  // For the 'services' list returned to frontend, we just show the nearest for each requested type
+  // // --- Walkability sub-scores (zero extra API calls) ---
+  // const { candidatesByCategory } = buildErrandCandidateMap(enriched);
+  // const errandTrip  = scoreErrandTripExact(originLat, originLon, candidatesByCategory);
+  // const abundance   = scoreAbundance(enriched);
+  // const nearest     = scoreNearestServices(enriched);
+
+  // // Composite walkability score (weights are tunable)
+  // const WEIGHTS = { errandTrip: 0.4, abundance: 0.3, nearest: 0.3 };
+  // const walkabilityScore = Number((
+  //   errandTrip.score * WEIGHTS.errandTrip +
+  //   abundance.score  * WEIGHTS.abundance  +
+  //   nearest.score    * WEIGHTS.nearest
+  // ).toFixed(1));
+
+  // console.log(`[WALKABILITY] errand:${errandTrip.score} abundance:${abundance.score} nearest:${nearest.score} composite:${walkabilityScore}`);
+
+  // // For the 'services' list returned to frontend, show nearest per requested type
+  // const services = displayItems
+  //   .map((item) => {
+  //     const options = byKey.get(item.key) || [];
+  //     return options.sort((a, b) => (a.walkingDistanceMeters ?? 999999) - (b.walkingDistanceMeters ?? 999999))[0];
+  //   })
+  //   .filter((s): s is CandidateService => Boolean(s));
+
+  // return {
+  //   services,
+  //   index,
+  //   breakdown,
+  //   walkability: {
+  //     score: walkabilityScore,
+  //     errandTrip: {
+  //       score: errandTrip.score,
+  //       totalDistanceMeters: errandTrip.totalDistanceMeters,
+  //       meanEdgeMeters: errandTrip.meanEdgeMeters,
+  //       optimalPath: errandTrip.optimalPath,
+  //       missingCategories: errandTrip.missingCategories,
+  //     },
+  //     abundance: {
+  //       score: abundance.score,
+  //       totalWeightedOptions: abundance.totalWeightedOptions,
+  //     },
+  //     nearest: {
+  //       score: nearest.score,
+  //       perType: nearest.perType,
+  //     },
+  //   },
+  // };
+  // --- Walkability scores (zero extra API calls) ---
+
+  // Full neighbourhood score — all service types
+  const { candidatesByCategory: allCategories } = buildErrandCandidateMap(enriched);
+  const errandTripAll  = scoreErrandTripExact(originLat, originLon, allCategories);
+  const abundanceAll   = scoreAbundance(enriched);
+  const nearestAll     = scoreNearestServices(enriched);
+
+  // Selected services score — only what the user picked
+  const selectedTypes = new Set(displayItems.map(i => i.type));
+  const selectedCandidates = enriched.filter(c => selectedTypes.has(c.type));
+  const { candidatesByCategory: selectedCategories } = buildErrandCandidateMap(selectedCandidates);
+  const errandTripSel  = scoreErrandTripExact(originLat, originLon, selectedCategories);
+  const abundanceSel   = scoreAbundance(selectedCandidates);
+  const nearestSel     = scoreNearestServices(selectedCandidates);
+
+  const WEIGHTS = { errandTrip: 0.4, abundance: 0.3, nearest: 0.3 };
+
+  const neighbourhoodScore = Number((
+    errandTripAll.score * WEIGHTS.errandTrip +
+    abundanceAll.score  * WEIGHTS.abundance  +
+    nearestAll.score    * WEIGHTS.nearest
+  ).toFixed(1));
+
+  const selectionScore = Number((
+    errandTripSel.score * WEIGHTS.errandTrip +
+    abundanceSel.score  * WEIGHTS.abundance  +
+    nearestSel.score    * WEIGHTS.nearest
+  ).toFixed(1));
+
+  console.log(`[WALKABILITY] neighbourhood: errand:${errandTripAll.score} abundance:${abundanceAll.score} nearest:${nearestAll.score} composite:${neighbourhoodScore}`);
+  console.log(`[WALKABILITY] selection:     errand:${errandTripSel.score} abundance:${abundanceSel.score} nearest:${nearestSel.score} composite:${selectionScore}`);
+
+  // For the 'services' list returned to frontend, show nearest per requested type
   const services = displayItems
     .map((item) => {
       const options = byKey.get(item.key) || [];
@@ -452,7 +552,25 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
     })
     .filter((s): s is CandidateService => Boolean(s));
 
-  return { services, index, breakdown };
+  return {
+    services,
+    index,
+    breakdown,
+    walkability: {
+      neighbourhood: {
+        score: neighbourhoodScore,
+        errandTrip: { score: errandTripAll.score, totalDistanceMeters: errandTripAll.totalDistanceMeters, meanEdgeMeters: errandTripAll.meanEdgeMeters, optimalPath: errandTripAll.optimalPath, missingCategories: errandTripAll.missingCategories },
+        abundance:   { score: abundanceAll.score, totalWeightedOptions: abundanceAll.totalWeightedOptions },
+        nearest:     { score: nearestAll.score, perType: nearestAll.perType },
+      },
+      selection: {
+        score: selectionScore,
+        errandTrip: { score: errandTripSel.score, totalDistanceMeters: errandTripSel.totalDistanceMeters, meanEdgeMeters: errandTripSel.meanEdgeMeters, optimalPath: errandTripSel.optimalPath, missingCategories: errandTripSel.missingCategories },
+        abundance:   { score: abundanceSel.score, totalWeightedOptions: abundanceSel.totalWeightedOptions },
+        nearest:     { score: nearestSel.score, perType: nearestSel.perType },
+      },
+    },
+  };
 }
 
 async function getSeedAnalyses(): Promise<SeedAnalysis[]> {

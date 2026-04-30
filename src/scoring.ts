@@ -48,11 +48,43 @@ export type ScoreBreakdown = {
   };
 };
 
+// export type LocationAnalysis = {
+//   services: CandidateService[];
+//   index: number;
+//   breakdown: ScoreBreakdown;
+// };
+
+// export type LocationAnalysis = {
+//   services: CandidateService[];
+//   index: number;
+//   breakdown: ScoreBreakdown;
+//   walkability?: {
+//     score: number;
+//     errandTrip: { score: number; totalDistanceMeters: number; meanEdgeMeters: number; optimalPath: ErrandNode[]; missingCategories: string[] };
+//     abundance: { score: number; totalWeightedOptions: number };
+//     nearest: { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
+//   };
+// };
+
+export type WalkabilityComponent = {
+  score: number;
+  errandTrip: { score: number; totalDistanceMeters: number; meanEdgeMeters: number; optimalPath: ErrandNode[]; missingCategories: string[] };
+  abundance:  { score: number; totalWeightedOptions: number };
+  nearest:    { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
+};
+
 export type LocationAnalysis = {
   services: CandidateService[];
   index: number;
   breakdown: ScoreBreakdown;
+  walkability?: {
+    neighbourhood: WalkabilityComponent;
+    selection: WalkabilityComponent;
+  };
 };
+
+
+
 
 export type SuburbSeedPoint = {
   name: string;
@@ -119,6 +151,71 @@ export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
   supermarket: ['woolworths', 'coles', 'aldi', 'iga', 'foodworks', 'safeway'],
   secondary_school: ['secondary', 'high', 'college'],
 };
+
+
+// --- Errand Trip & Walkability Scoring ---
+export type VisitFrequency = 'high' | 'medium' | 'low' | 'rare';
+
+export const SERVICE_FREQUENCY: Record<string, VisitFrequency> = {
+  // Food
+  supermarket:        'high',
+  convenience_store:  'high',
+  // Connectivity
+  train_station:      'high',
+  transit_station:    'high',
+  atm:                'high',
+  // Dining
+  cafe:               'high',
+  restaurant:         'medium',
+  bar:                'medium',
+  // Fitness & Parks
+  gym:                'medium',
+  park:               'medium',
+  // Community
+  community:          'medium',
+  // Education
+  library:            'low',
+  childcare:          'low',
+  kindergarten:       'low',
+  primary_school:     'low',
+  secondary_school:   'low',
+  // Connectivity (less frequent)
+  post_office:        'low',
+  bank:               'low',
+  // Health
+  pharmacy:           'low',
+  dentist:            'rare',
+  doctor:             'rare',
+  hospital:           'rare',
+};
+
+export const FREQUENCY_WEIGHTS: Record<VisitFrequency, number> = {
+  high:   1.00,
+  medium: 0.50,
+  low:    0.10,
+  rare:   0.02,
+};
+
+export const TSP_FREQUENCY_THRESHOLD: Set<VisitFrequency> = new Set(['high', 'medium']);
+
+export type ErrandNode = {
+  catId: string;
+  type: string;
+  name: string;
+  lat: number;
+  lon: number;
+};
+
+export type ErrandTripResult = {
+  score: number;
+  totalDistanceMeters: number;
+  meanEdgeMeters: number;
+  optimalPath: ErrandNode[];
+  selectedCandidates: ErrandNode[];
+  missingCategories: string[];
+  excludedCategories: string[];
+};
+
 
 export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefined {
   const iconBlocklist = PLACE_TYPE_ICON_BLOCKLIST[type] ?? [];
@@ -322,4 +419,292 @@ export function buildHeatmap(analyses: SeedAnalysis[]) {
     name: a.name,
     ring: a.ring,
   }));
+}
+
+// ---------------------------------------------------------------------------
+// Haversine distance (metres, crow-flies)
+// ---------------------------------------------------------------------------
+function haversineMeters(aLat: number, aLon: number, bLat: number, bLon: number): number {
+  const R = 6_371_000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(bLat - aLat);
+  const dLon = toRad(bLon - aLon);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(aLat)) * Math.cos(toRad(bLat)) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// ---------------------------------------------------------------------------
+// COMPONENT 1 — Errand Trip Score (greedy, 0–10)
+// Finds the optimal combination of 1 candidate per TSP-eligible category
+// and scores based on mean edge length vs the 800m walkability threshold.
+// Zero API calls — pure haversine on existing lat/lon.
+// ---------------------------------------------------------------------------
+export function scoreErrandTripGreedy(
+  homeLat: number,
+  homeLon: number,
+  candidatesByCategory: Map<string, ErrandNode[]>,
+  walkableThresholdMeters = WALKABLE_THRESHOLD_METERS,
+  circuityFactor = 1.3,
+): ErrandTripResult {
+  const MISSING_PENALTY = 5000;
+  const home: ErrandNode = { catId: '__home__', type: '__home__', name: 'Home', lat: homeLat, lon: homeLon };
+
+  const categories = [...candidatesByCategory.keys()];
+  const missingCategories = categories.filter(c => (candidatesByCategory.get(c)?.length ?? 0) === 0);
+  const scorableCategories = categories.filter(c => (candidatesByCategory.get(c)?.length ?? 0) > 0);
+
+  if (scorableCategories.length === 0) {
+    return { score: 0, totalDistanceMeters: 0, meanEdgeMeters: 0, optimalPath: [home], selectedCandidates: [], missingCategories, excludedCategories: [] };
+  }
+
+  const candidateLists = scorableCategories.map(c => candidatesByCategory.get(c)!);
+  const counts = candidateLists.map(l => l.length);
+  const totalCombinations = counts.reduce((a, b) => a * b, 1);
+
+  let bestDistance = Infinity;
+  let bestPath: ErrandNode[] = [];
+  let bestSelection: ErrandNode[] = [];
+
+  for (let combo = 0; combo < totalCombinations; combo++) {
+    const selected: ErrandNode[] = [];
+    let remaining = combo;
+    for (let i = 0; i < candidateLists.length; i++) {
+      selected.push(candidateLists[i][remaining % counts[i]]);
+      remaining = Math.floor(remaining / counts[i]);
+    }
+
+    // Greedy nearest-neighbour from home
+    const unvisited = [...selected];
+    const path: ErrandNode[] = [home];
+    let current = home;
+    let totalDist = 0;
+
+    while (unvisited.length > 0) {
+      let nearestIdx = 0;
+      let nearestDist = Infinity;
+      for (let i = 0; i < unvisited.length; i++) {
+        const d = haversineMeters(current.lat, current.lon, unvisited[i].lat, unvisited[i].lon);
+        if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
+      }
+      current = unvisited.splice(nearestIdx, 1)[0];
+      path.push(current);
+      totalDist += nearestDist;
+    }
+
+    if (totalDist < bestDistance) {
+      bestDistance = totalDist;
+      bestPath = path;
+      bestSelection = selected;
+    }
+  }
+
+  const walkingDistance = bestDistance * circuityFactor;
+  const totalEdges = scorableCategories.length + missingCategories.length;
+  const meanEdgeMeters = (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges;
+  const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
+
+  return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
+}
+
+// ---------------------------------------------------------------------------
+// COMPONENT 1 (alt) — Errand Trip Score (exact TSP, 0–10)
+// Checks all permutations for provably optimal path. Auto-falls back to
+// greedy if combinations × permutations exceed complexityCap.
+// ---------------------------------------------------------------------------
+export function scoreErrandTripExact(
+  homeLat: number,
+  homeLon: number,
+  candidatesByCategory: Map<string, ErrandNode[]>,
+  walkableThresholdMeters = WALKABLE_THRESHOLD_METERS,
+  circuityFactor = 1.3,
+  complexityCap = 500_000,
+): ErrandTripResult {
+  const categories = [...candidatesByCategory.keys()];
+  const scorableCategories = categories.filter(c => (candidatesByCategory.get(c)?.length ?? 0) > 0);
+  const counts = scorableCategories.map(c => candidatesByCategory.get(c)!.length);
+  const factorial = (n: number): number => n <= 1 ? 1 : n * factorial(n - 1);
+  const totalCombinations = counts.reduce((a, b) => a * b, 1);
+  const totalChecks = totalCombinations * factorial(scorableCategories.length);
+
+  if (totalChecks > complexityCap) {
+    console.warn(`[TSP] ${totalChecks.toLocaleString()} checks exceeds cap — falling back to greedy`);
+    return scoreErrandTripGreedy(homeLat, homeLon, candidatesByCategory, walkableThresholdMeters, circuityFactor);
+  }
+
+  const MISSING_PENALTY = 5000;
+  const home: ErrandNode = { catId: '__home__', type: '__home__', name: 'Home', lat: homeLat, lon: homeLon };
+  const missingCategories = categories.filter(c => (candidatesByCategory.get(c)?.length ?? 0) === 0);
+
+  if (scorableCategories.length === 0) {
+    return { score: 0, totalDistanceMeters: 0, meanEdgeMeters: 0, optimalPath: [home], selectedCandidates: [], missingCategories, excludedCategories: [] };
+  }
+
+  const candidateLists = scorableCategories.map(c => candidatesByCategory.get(c)!);
+
+  function permutations<T>(arr: T[]): T[][] {
+    if (arr.length <= 1) return [arr];
+    return arr.flatMap((item, i) =>
+      permutations([...arr.slice(0, i), ...arr.slice(i + 1)]).map(p => [item, ...p])
+    );
+  }
+
+  function pathDistance(nodes: ErrandNode[]): number {
+    let total = 0;
+    for (let i = 1; i < nodes.length; i++) {
+      total += haversineMeters(nodes[i - 1].lat, nodes[i - 1].lon, nodes[i].lat, nodes[i].lon);
+    }
+    return total;
+  }
+
+  let bestDistance = Infinity;
+  let bestPath: ErrandNode[] = [];
+  let bestSelection: ErrandNode[] = [];
+
+  for (let combo = 0; combo < totalCombinations; combo++) {
+    const selected: ErrandNode[] = [];
+    let remaining = combo;
+    for (let i = 0; i < candidateLists.length; i++) {
+      selected.push(candidateLists[i][remaining % counts[i]]);
+      remaining = Math.floor(remaining / counts[i]);
+    }
+    for (const perm of permutations(selected)) {
+      const dist = pathDistance([home, ...perm]);
+      if (dist < bestDistance) {
+        bestDistance = dist;
+        bestPath = [home, ...perm];
+        bestSelection = selected;
+      }
+    }
+  }
+
+  const walkingDistance = bestDistance * circuityFactor;
+  const totalEdges = scorableCategories.length + missingCategories.length;
+  const meanEdgeMeters = (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges;
+  const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
+
+  return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
+}
+
+// ---------------------------------------------------------------------------
+// COMPONENT 2 — Abundance Score (0–10)
+// Counts walkable options weighted by frequency and proximity decay.
+// Uses walkingDistanceMeters already on CandidateService — zero extra API calls.
+// ---------------------------------------------------------------------------
+export function scoreAbundance(
+  allCandidates: CandidateService[],
+  thresholdMeters = WALKABLE_THRESHOLD_METERS,
+): { score: number; totalWeightedOptions: number; referenceWeightedOptions: number } {
+  const proximityDecay = (meters: number) => Math.max(0, 1 - meters / thresholdMeters);
+
+  let totalWeightedOptions = 0;
+  for (const c of allCandidates) {
+    if (c.walkingDistanceMeters === null || c.walkingDistanceMeters > thresholdMeters) continue;
+    const freq = SERVICE_FREQUENCY[c.type];
+    if (!freq) continue;
+    totalWeightedOptions += FREQUENCY_WEIGHTS[freq] * proximityDecay(c.walkingDistanceMeters);
+  }
+
+  // Reference: ideal neighbourhood benchmark per frequency tier
+  const REFERENCE_CONFIG: Record<VisitFrequency, { count: number; distanceMeters: number }> = {
+    high:   { count: 5, distanceMeters: 200 },
+    medium: { count: 3, distanceMeters: 300 },
+    low:    { count: 1, distanceMeters: 400 },
+    rare:   { count: 1, distanceMeters: 400 },
+  };
+
+  let referenceWeightedOptions = 0;
+  for (const type of Object.values(CORE_CATEGORY_TYPES).flat()) {
+    const freq = SERVICE_FREQUENCY[type];
+    if (!freq) continue;
+    const ref = REFERENCE_CONFIG[freq];
+    referenceWeightedOptions += ref.count * FREQUENCY_WEIGHTS[freq] * proximityDecay(ref.distanceMeters);
+  }
+
+  const score = Math.min(10, Number(((totalWeightedOptions / referenceWeightedOptions) * 10).toFixed(1)));
+  return { score, totalWeightedOptions, referenceWeightedOptions };
+}
+
+// ---------------------------------------------------------------------------
+// COMPONENT 3 — Nearest Service Score (0–10)
+// How close is the single best option for each service, weighted by frequency.
+// Covers all frequency tiers — rare services contribute very little via weight.
+// Uses walkingDurationMinutes from Distance Matrix where available, falls back
+// to linear distance decay. Zero extra API calls.
+// ---------------------------------------------------------------------------
+export function scoreNearestServices(
+  allCandidates: CandidateService[],
+  thresholdMeters = WALKABLE_THRESHOLD_METERS,
+): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
+
+  // Find nearest candidate per type
+  const nearestByType = new Map<string, CandidateService>();
+  for (const c of allCandidates) {
+    if (c.walkingDistanceMeters === null) continue;
+    const existing = nearestByType.get(c.type);
+    if (!existing || c.walkingDistanceMeters < (existing.walkingDistanceMeters ?? Infinity)) {
+      nearestByType.set(c.type, c);
+    }
+  }
+
+  const allTypes = Object.values(CORE_CATEGORY_TYPES).flat();
+  let weightedScore = 0;
+  let maxPossibleScore = 0;
+  const perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> = [];
+
+  for (const type of allTypes) {
+    const freq = SERVICE_FREQUENCY[type];
+    if (!freq) continue;
+    const weight = FREQUENCY_WEIGHTS[freq];
+    maxPossibleScore += weight;
+
+    const nearest = nearestByType.get(type);
+    if (!nearest) {
+      perType.push({ type, frequencyWeight: weight, distanceFactor: 0, contribution: 0 });
+      continue;
+    }
+
+    // Prefer duration-based decay (aligns with existing scoring engine)
+    // Fall back to distance-based linear decay if duration unavailable
+    const distanceFactor = nearest.walkingDurationMinutes !== null
+      ? calculateDistanceFactor(nearest.walkingDurationMinutes)
+      : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+
+    const contribution = weight * distanceFactor;
+    weightedScore += contribution;
+    perType.push({ type, frequencyWeight: weight, distanceFactor, contribution });
+  }
+
+  const score = maxPossibleScore > 0
+    ? Math.min(10, Number(((weightedScore / maxPossibleScore) * 10).toFixed(1)))
+    : 0;
+
+  return { score, perType };
+}
+
+// ---------------------------------------------------------------------------
+// buildErrandCandidateMap
+// Filters enriched candidates to TSP-eligible types and groups by catId.
+// Call this before scoreErrandTripGreedy / scoreErrandTripExact.
+// ---------------------------------------------------------------------------
+export function buildErrandCandidateMap(
+  allCandidates: CandidateService[],
+  frequencyThreshold: Set<VisitFrequency> = TSP_FREQUENCY_THRESHOLD,
+): { candidatesByCategory: Map<string, ErrandNode[]>; excludedTypes: string[] } {
+  const excluded = [...new Set(
+    allCandidates
+      .filter(c => { const f = SERVICE_FREQUENCY[c.type]; return !f || !frequencyThreshold.has(f); })
+      .map(c => c.type)
+  )];
+
+  const map = new Map<string, ErrandNode[]>();
+  for (const c of allCandidates) {
+    const freq = SERVICE_FREQUENCY[c.type];
+    if (!freq || !frequencyThreshold.has(freq)) continue;
+    if (!map.has(c.catId)) map.set(c.catId, []);
+    map.get(c.catId)!.push({ catId: c.catId, type: c.type, name: c.name, lat: c.lat, lon: c.lon });
+  }
+
+  return { candidatesByCategory: map, excludedTypes: excluded };
 }
