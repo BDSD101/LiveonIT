@@ -48,23 +48,6 @@ export type ScoreBreakdown = {
   };
 };
 
-// export type LocationAnalysis = {
-//   services: CandidateService[];
-//   index: number;
-//   breakdown: ScoreBreakdown;
-// };
-
-// export type LocationAnalysis = {
-//   services: CandidateService[];
-//   index: number;
-//   breakdown: ScoreBreakdown;
-//   walkability?: {
-//     score: number;
-//     errandTrip: { score: number; totalDistanceMeters: number; meanEdgeMeters: number; optimalPath: ErrandNode[]; missingCategories: string[] };
-//     abundance: { score: number; totalWeightedOptions: number };
-//     nearest: { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
-//   };
-// };
 
 export type WalkabilityComponent = {
   score: number;
@@ -80,6 +63,15 @@ export type LocationAnalysis = {
   walkability?: {
     neighbourhood: WalkabilityComponent;
     selection: WalkabilityComponent;
+    suburb: {
+      name: string | null;
+      housePriceScore: number | null;
+      crimeScore: number | null;
+      rawHousePriceScore: number | null;
+      rawCrimeScore: number | null;
+      housePriceResolvedFrom: 'suburb' | 'postcode' | 'lga' | null;
+      housePriceResolvedSuburb: string | null;
+    };
   };
 };
 
