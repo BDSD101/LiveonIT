@@ -525,31 +525,33 @@ async function analyzeLocation(
   const rawHousePriceScore = priceResolution.score;
   const housePriceScore = rawHousePriceScore !== null ? normaliseToTen(rawHousePriceScore) : null;
 
-  console.log(
-    `[SUBURB] "${suburbName}"`,
-    `crime:${crimeScore}`,
-    `housePrice:${housePriceScore}`,
-    priceResolution.resolvedFrom && priceResolution.resolvedFrom !== 'suburb'
-      ? `(price resolved via ${priceResolution.resolvedFrom} → "${priceResolution.resolvedSuburb}")`
-      : ''
-  );
-
-  // --- Composite scores (housing/crime weighted in if available) ---
-  const WEIGHTS = { errandTrip: 0.4, abundance: 0.3, nearest: 0.3 };
+  // --- Create composite score with weighted components (weights are subjective and can be tuned) ---
+  const WEIGHTS = {
+    errandTrip: 0.25,
+    abundance:  0.20,
+    nearest:    0.20,
+    housePrice: 0.20,
+    crime:      0.15,
+  };
 
   function compositeScore(errand: number, abund: number, near: number): number {
-    let score = errand * WEIGHTS.errandTrip + abund * WEIGHTS.abundance + near * WEIGHTS.nearest;
-    let totalWeight = 1.0;
-    if (housePriceScore !== null) { score += housePriceScore * 0.15; totalWeight += 0.15; }
-    if (crimeScore !== null)      { score += crimeScore      * 0.15; totalWeight += 0.15; }
-    return Number((score / totalWeight).toFixed(1));
+    const components = [
+      { score: errand,          weight: WEIGHTS.errandTrip },
+      { score: abund,           weight: WEIGHTS.abundance  },
+      { score: near,            weight: WEIGHTS.nearest    },
+      { score: housePriceScore, weight: WEIGHTS.housePrice },
+      { score: crimeScore,      weight: WEIGHTS.crime      },
+    ].filter(c => c.score !== null) as { score: number; weight: number }[];
+
+    const totalWeight = components.reduce((sum, c) => sum + c.weight, 0);
+    return Number((components.reduce((sum, c) => sum + c.score * c.weight, 0) / totalWeight).toFixed(1));
   }
 
   const neighbourhoodScore = compositeScore(errandTripAll.score, abundanceAll.score, nearestAll.score);
   const selectionScore     = compositeScore(errandTripSel.score, abundanceSel.score, nearestSel.score);
 
-  console.log(`[WALKABILITY] neighbourhood: errand:${errandTripAll.score} abundance:${abundanceAll.score} nearest:${nearestAll.score} composite:${neighbourhoodScore}`);
-  console.log(`[WALKABILITY] selection:     errand:${errandTripSel.score} abundance:${abundanceSel.score} nearest:${nearestSel.score} composite:${selectionScore}`);
+  console.log(`[WALKABILITY_NEIGHOOD] errand:${errandTripAll.score} abundance:${abundanceAll.score} nearest:${nearestAll.score} crime:${crimeScore} housePrice:${housePriceScore} composite:${neighbourhoodScore}`);
+  console.log(`[WALKABILITY_SELECTED] errand:${errandTripSel.score} abundance:${abundanceSel.score} nearest:${nearestSel.score} crime:${crimeScore} housePrice:${housePriceScore} composite:${selectionScore}`);
 
   const services = displayItems
     .map((item) => {
