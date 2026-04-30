@@ -1,3 +1,6 @@
+// Imports
+import housingCrimeData from '../backend/melbourne_housing_crime_data.json';
+
 // --- Scoring Configuration & Types ---
 export type RequestedItem = {
   key: string;
@@ -320,6 +323,60 @@ export function calculateCategoryScore(candidates: CandidateService[], weight: n
   return Number(Math.min(weight * 1.4, rawScore).toFixed(2)); // Cap density bonus at 1.4x weight
 }
 
+// --- Suburb & Housing/Crime Lookup Helpers ---
+
+export function getSuburbData(suburbName: string): any | null {
+  return (housingCrimeData as any)[suburbName] ?? null;
+}
+
+export function extractSuburbFromAddress(formattedAddress: string): string | null {
+  const parts = formattedAddress.split(',').map(p => p.trim());
+  for (const part of parts) {
+    const cleaned = part.replace(/\s+(VIC|NSW|QLD|SA|WA|TAS|NT|ACT)\s+\d{4}$/i, '').trim();
+    if ((housingCrimeData as any)[cleaned]) return cleaned;
+    if ((housingCrimeData as any)[part]) return part;
+  }
+  return null;
+}
+
+export function normaliseToTen(score: number, min = -3, max = 3): number {
+  return Number(((score - min) / (max - min) * 10).toFixed(1));
+}
+
+export function resolveHousePriceScore(suburbName: string): {
+  score: number | null;
+  resolvedFrom: 'suburb' | 'postcode' | 'lga' | null;
+  resolvedSuburb: string | null;
+} {
+  const data = housingCrimeData as any;
+  const suburbData = data[suburbName];
+  if (!suburbData) return { score: null, resolvedFrom: null, resolvedSuburb: null };
+
+  if (suburbData.housePrices?.housePriceScore != null) {
+    return { score: suburbData.housePrices.housePriceScore, resolvedFrom: 'suburb', resolvedSuburb: suburbName };
+  }
+
+  const postcode = suburbData.postcode;
+  const lga = suburbData.lga;
+  const allSuburbs = Object.entries(data) as [string, any][];
+
+  const postcodeSibling = allSuburbs.find(
+    ([name, d]) => name !== suburbName && d.postcode === postcode && d.housePrices?.housePriceScore != null
+  );
+  if (postcodeSibling) {
+    return { score: postcodeSibling[1].housePrices.housePriceScore, resolvedFrom: 'postcode', resolvedSuburb: postcodeSibling[0] };
+  }
+
+  const lgaSibling = allSuburbs.find(
+    ([name, d]) => name !== suburbName && d.lga === lga && d.housePrices?.housePriceScore != null
+  );
+  if (lgaSibling) {
+    return { score: lgaSibling[1].housePrices.housePriceScore, resolvedFrom: 'lga', resolvedSuburb: lgaSibling[0] };
+  }
+
+  return { score: null, resolvedFrom: null, resolvedSuburb: null };
+}
+
 export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { breakdown: ScoreBreakdown; index: number } {
   const categories = Object.entries(CATEGORY_CONFIG).map(([catId, meta]) => {
     const coreTypes = CORE_CATEGORY_TYPES[catId] || [];
@@ -416,7 +473,7 @@ export function buildHeatmap(analyses: SeedAnalysis[]) {
 // ---------------------------------------------------------------------------
 // Haversine distance (metres, crow-flies)
 // ---------------------------------------------------------------------------
-function haversineMeters(aLat: number, aLon: number, bLat: number, bLon: number): number {
+export function haversineMeters(aLat: number, aLon: number, bLat: number, bLon: number): number {
   const R = 6_371_000;
   const toRad = (d: number) => (d * Math.PI) / 180;
   const dLat = toRad(bLat - aLat);
