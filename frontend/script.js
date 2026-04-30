@@ -69,7 +69,7 @@ const CONFIG = {
   ]
 };
 
-let map, marker, radiusCircle, debounceTimer, currentPos;
+let map, marker, radiusCircle, debounceTimer, currentPos, currentAddress = '';
 let serviceMarkers = [], servicePolylines = [];
 let selectedServices = new Set(['doctor', 'supermarket', 'train', 'bus', 'park']);
 let openCategories = new Set();
@@ -84,8 +84,6 @@ async function loadGoogleMaps() {
     if (!key) throw new Error('Google Maps key missing');
     const script = document.createElement('script');
 
-    // script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization`;
-    // script.onload = initApp;
     script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
     script.async = true;
     script.defer = true;
@@ -107,7 +105,7 @@ function initApp() {
   });
   renderFilters();
   renderHistory();
-  // fetchLeaderboard();
+  // fetchLeaderboard(); // Commented out to speed up initial loading, can be re-enabled if needed
   lucide.createIcons();
   // Auto-search if user arrived from landing page with ?q= param
   checkUrlParams();
@@ -327,6 +325,7 @@ async function search(q) {
 
 function select(item, updateHistory = true) {
   currentPos = { lat: parseFloat(item.lat), lng: parseFloat(item.lon) };
+  currentAddress = item.display_name || '';
   document.getElementById('query').value = item.display_name;
   document.getElementById('results').classList.add('hidden');
   map.panTo(currentPos);
@@ -344,6 +343,7 @@ function select(item, updateHistory = true) {
 }
 
 async function loadServices(lat, lon) {
+  console.log('[DEBUG] loadServices called', lat, lon, currentAddress);
   serviceMarkers.forEach(m => m.setMap(null));
   servicePolylines.forEach(p => p.setMap(null));
   serviceMarkers = []; servicePolylines = [];
@@ -366,7 +366,8 @@ async function loadServices(lat, lon) {
     return;
   }
   try {
-    const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}`);
+    // const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}`);
+    const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
     if (!res.ok) throw new Error('Failed to load nearby services');
     const data = await res.json();
     const services = Array.isArray(data.services) ? data.services : [];

@@ -1,5 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
+import housingCrimeData from '../../backend/melbourne_housing_crime_data.json';
+
 import {
   RequestedItem,
   CandidateService,
@@ -106,6 +108,58 @@ function parseCoordinate(raw: string | undefined, name: 'lat' | 'lon'): number {
   return value;
 }
 
+// --- Suburb & Housing/Crime Lookup Helpers ---
+function extractSuburbFromAddress(formattedAddress: string): string | null {
+  const parts = formattedAddress.split(',').map(p => p.trim());
+  for (const part of parts) {
+    const cleaned = part.replace(/\s+(VIC|NSW|QLD|SA|WA|TAS|NT|ACT)\s+\d{4}$/i, '').trim();
+    if ((housingCrimeData as any)[cleaned]) return cleaned;
+    if ((housingCrimeData as any)[part]) return part;
+  }
+  return null;
+}
+
+function normaliseToTen(score: number, min = -3, max = 3): number {
+  return Number(((score - min) / (max - min) * 10).toFixed(1));
+}
+
+function resolveHousePriceScore(suburbName: string): {
+  score: number | null;
+  resolvedFrom: 'suburb' | 'postcode' | 'lga' | null;
+  resolvedSuburb: string | null;
+} {
+  const data = housingCrimeData as any;
+  const suburbData = data[suburbName];
+  if (!suburbData) return { score: null, resolvedFrom: null, resolvedSuburb: null };
+
+  // Level 1 — direct match
+  if (suburbData.housePrices?.housePriceScore != null) {
+    return { score: suburbData.housePrices.housePriceScore, resolvedFrom: 'suburb', resolvedSuburb: suburbName };
+  }
+
+  const postcode = suburbData.postcode;
+  const lga = suburbData.lga;
+  const allSuburbs = Object.entries(data) as [string, any][];
+
+  // Level 2 — same postcode sibling
+  const postcodeSibling = allSuburbs.find(
+    ([name, d]) => name !== suburbName && d.postcode === postcode && d.housePrices?.housePriceScore != null
+  );
+  if (postcodeSibling) {
+    return { score: postcodeSibling[1].housePrices.housePriceScore, resolvedFrom: 'postcode', resolvedSuburb: postcodeSibling[0] };
+  }
+
+  // Level 3 — same LGA sibling
+  const lgaSibling = allSuburbs.find(
+    ([name, d]) => name !== suburbName && d.lga === lga && d.housePrices?.housePriceScore != null
+  );
+  if (lgaSibling) {
+    return { score: lgaSibling[1].housePrices.housePriceScore, resolvedFrom: 'lga', resolvedSuburb: lgaSibling[0] };
+  }
+
+  return { score: null, resolvedFrom: null, resolvedSuburb: null };
+}
+
 function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
   const fallback = CORE_ANALYSIS_ITEMS;
   if (!typesParam?.trim()) return fallback;
@@ -150,12 +204,6 @@ function uniqueItems(items: RequestedItem[]): RequestedItem[] {
   }
   return unique;
 }
-
-// function distanceToFactor(distanceMeters: number | null): number {
-//   if (distanceMeters === null) return 0;
-//   if (distanceMeters <= WALKABLE_THRESHOLD_METERS) return 1;
-//   return 0; // Simplified legacy version if still used, but we should use scoring.ts
-// }
 
 async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
   const cacheKey = [
@@ -409,12 +457,15 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
   return results;
 }
 
-async function analyzeLocation(originLat: number, originLon: number, requestedItems: RequestedItem[]): Promise<LocationAnalysis> {
+async function analyzeLocation(
+  originLat: number,
+  originLon: number,
+  requestedItems: RequestedItem[],
+  formattedAddress?: string,
+): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
   const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
-  // console.log('[LOOKUP ITEMS]', lookupItems.map(i => i.key));
 
-  // Modified for Text Search
   const foundArrays = await Promise.all(
     lookupItems.map(item =>
       item.useTextSearch
@@ -424,7 +475,6 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
   );
 
   const allCandidates = foundArrays.flat();
-  // console.log('[ALL CANDIDATES]', allCandidates.length, allCandidates.map(c => `${c.key}:${c.name}`));
   const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
 
   // Rerank by actual walking distance and trim to 3 per type
@@ -440,111 +490,67 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
     );
   }
 
-  // Temp logging to verify the final candidates being scored
   for (const [key, candidates] of byKey.entries()) {
     console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
-    // if (key.includes('doctor')) {
-    //   console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
-    // }
   }
 
-
-  // const { breakdown, index } = buildScoreBreakdown(byKey);
-
-  // // For the 'services' list returned to frontend, we just show the nearest for each requested type
-  // const services = displayItems
-  //   .map((item) => {
-  //     const options = byKey.get(item.key) || [];
-  //     return options.sort((a, b) => (a.walkingDistanceMeters ?? 999999) - (b.walkingDistanceMeters ?? 999999))[0];
-  //   })
-  //   .filter((s): s is CandidateService => Boolean(s));
-
-  // return { services, index, breakdown };
-
-  // --- New composite scoring logic ---
   const { breakdown, index } = buildScoreBreakdown(byKey);
 
-  // // --- Walkability sub-scores (zero extra API calls) ---
-  // const { candidatesByCategory } = buildErrandCandidateMap(enriched);
-  // const errandTrip  = scoreErrandTripExact(originLat, originLon, candidatesByCategory);
-  // const abundance   = scoreAbundance(enriched);
-  // const nearest     = scoreNearestServices(enriched);
-
-  // // Composite walkability score (weights are tunable)
-  // const WEIGHTS = { errandTrip: 0.4, abundance: 0.3, nearest: 0.3 };
-  // const walkabilityScore = Number((
-  //   errandTrip.score * WEIGHTS.errandTrip +
-  //   abundance.score  * WEIGHTS.abundance  +
-  //   nearest.score    * WEIGHTS.nearest
-  // ).toFixed(1));
-
-  // console.log(`[WALKABILITY] errand:${errandTrip.score} abundance:${abundance.score} nearest:${nearest.score} composite:${walkabilityScore}`);
-
-  // // For the 'services' list returned to frontend, show nearest per requested type
-  // const services = displayItems
-  //   .map((item) => {
-  //     const options = byKey.get(item.key) || [];
-  //     return options.sort((a, b) => (a.walkingDistanceMeters ?? 999999) - (b.walkingDistanceMeters ?? 999999))[0];
-  //   })
-  //   .filter((s): s is CandidateService => Boolean(s));
-
-  // return {
-  //   services,
-  //   index,
-  //   breakdown,
-  //   walkability: {
-  //     score: walkabilityScore,
-  //     errandTrip: {
-  //       score: errandTrip.score,
-  //       totalDistanceMeters: errandTrip.totalDistanceMeters,
-  //       meanEdgeMeters: errandTrip.meanEdgeMeters,
-  //       optimalPath: errandTrip.optimalPath,
-  //       missingCategories: errandTrip.missingCategories,
-  //     },
-  //     abundance: {
-  //       score: abundance.score,
-  //       totalWeightedOptions: abundance.totalWeightedOptions,
-  //     },
-  //     nearest: {
-  //       score: nearest.score,
-  //       perType: nearest.perType,
-  //     },
-  //   },
-  // };
   // --- Walkability scores (zero extra API calls) ---
 
   // Full neighbourhood score — all service types
   const { candidatesByCategory: allCategories } = buildErrandCandidateMap(enriched);
-  const errandTripAll  = scoreErrandTripExact(originLat, originLon, allCategories);
-  const abundanceAll   = scoreAbundance(enriched);
-  const nearestAll     = scoreNearestServices(enriched);
+  const errandTripAll = scoreErrandTripExact(originLat, originLon, allCategories);
+  const abundanceAll  = scoreAbundance(enriched);
+  const nearestAll    = scoreNearestServices(enriched);
 
   // Selected services score — only what the user picked
   const selectedTypes = new Set(displayItems.map(i => i.type));
   const selectedCandidates = enriched.filter(c => selectedTypes.has(c.type));
   const { candidatesByCategory: selectedCategories } = buildErrandCandidateMap(selectedCandidates);
-  const errandTripSel  = scoreErrandTripExact(originLat, originLon, selectedCategories);
-  const abundanceSel   = scoreAbundance(selectedCandidates);
-  const nearestSel     = scoreNearestServices(selectedCandidates);
+  const errandTripSel = scoreErrandTripExact(originLat, originLon, selectedCategories);
+  const abundanceSel  = scoreAbundance(selectedCandidates);
+  const nearestSel    = scoreNearestServices(selectedCandidates);
 
+  // --- Housing & crime scores from static JSON (zero API calls) ---
+  const suburbName = formattedAddress ? extractSuburbFromAddress(formattedAddress) : null;
+  const suburbData = suburbName ? (housingCrimeData as any)[suburbName] : null;
+
+  const rawCrimeScore = suburbData?.crimeLga?.crimeScore ?? null;
+  const crimeScore = rawCrimeScore !== null ? normaliseToTen(rawCrimeScore) : null;
+
+  const priceResolution = suburbName
+    ? resolveHousePriceScore(suburbName)
+    : { score: null, resolvedFrom: null as null, resolvedSuburb: null };
+  const rawHousePriceScore = priceResolution.score;
+  const housePriceScore = rawHousePriceScore !== null ? normaliseToTen(rawHousePriceScore) : null;
+
+  console.log(
+    `[SUBURB] "${suburbName}"`,
+    `crime:${crimeScore}`,
+    `housePrice:${housePriceScore}`,
+    priceResolution.resolvedFrom && priceResolution.resolvedFrom !== 'suburb'
+      ? `(price resolved via ${priceResolution.resolvedFrom} → "${priceResolution.resolvedSuburb}")`
+      : ''
+  );
+
+  // --- Composite scores (housing/crime weighted in if available) ---
   const WEIGHTS = { errandTrip: 0.4, abundance: 0.3, nearest: 0.3 };
 
-  const neighbourhoodScore = Number((
-    errandTripAll.score * WEIGHTS.errandTrip +
-    abundanceAll.score  * WEIGHTS.abundance  +
-    nearestAll.score    * WEIGHTS.nearest
-  ).toFixed(1));
+  function compositeScore(errand: number, abund: number, near: number): number {
+    let score = errand * WEIGHTS.errandTrip + abund * WEIGHTS.abundance + near * WEIGHTS.nearest;
+    let totalWeight = 1.0;
+    if (housePriceScore !== null) { score += housePriceScore * 0.15; totalWeight += 0.15; }
+    if (crimeScore !== null)      { score += crimeScore      * 0.15; totalWeight += 0.15; }
+    return Number((score / totalWeight).toFixed(1));
+  }
 
-  const selectionScore = Number((
-    errandTripSel.score * WEIGHTS.errandTrip +
-    abundanceSel.score  * WEIGHTS.abundance  +
-    nearestSel.score    * WEIGHTS.nearest
-  ).toFixed(1));
+  const neighbourhoodScore = compositeScore(errandTripAll.score, abundanceAll.score, nearestAll.score);
+  const selectionScore     = compositeScore(errandTripSel.score, abundanceSel.score, nearestSel.score);
 
   console.log(`[WALKABILITY] neighbourhood: errand:${errandTripAll.score} abundance:${abundanceAll.score} nearest:${nearestAll.score} composite:${neighbourhoodScore}`);
   console.log(`[WALKABILITY] selection:     errand:${errandTripSel.score} abundance:${abundanceSel.score} nearest:${nearestSel.score} composite:${selectionScore}`);
 
-  // For the 'services' list returned to frontend, show nearest per requested type
   const services = displayItems
     .map((item) => {
       const options = byKey.get(item.key) || [];
@@ -568,6 +574,15 @@ async function analyzeLocation(originLat: number, originLon: number, requestedIt
         errandTrip: { score: errandTripSel.score, totalDistanceMeters: errandTripSel.totalDistanceMeters, meanEdgeMeters: errandTripSel.meanEdgeMeters, optimalPath: errandTripSel.optimalPath, missingCategories: errandTripSel.missingCategories },
         abundance:   { score: abundanceSel.score, totalWeightedOptions: abundanceSel.totalWeightedOptions },
         nearest:     { score: nearestSel.score, perType: nearestSel.perType },
+      },
+      suburb: {
+        name: suburbName,
+        housePriceScore,
+        crimeScore,
+        rawHousePriceScore,
+        rawCrimeScore,
+        housePriceResolvedFrom: priceResolution.resolvedFrom,
+        housePriceResolvedSuburb: priceResolution.resolvedSuburb,
       },
     },
   };
@@ -674,10 +689,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     // 3. Nearby Services (Places)
     if (routePath === '/api/nearby-services' && httpMethod === 'GET') {
-      // console.log('[NEARBY] request received, types:', event.queryStringParameters?.types);  // ← add this
       const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
       const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
       const requestedItems = parseRequestedItems(event.queryStringParameters?.types);
+      const formattedAddress = event.queryStringParameters?.address
+        ? decodeURIComponent(event.queryStringParameters.address)
+        : undefined;
 
       const analysisCacheKey = [
         'analysis',
@@ -689,7 +706,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const cached = getCached<LocationAnalysis>(analysisCacheKey);
       if (cached) return jsonResponse(200, cached);
 
-      const analysis = await analyzeLocation(lat, lon, requestedItems);
+      const analysis = await analyzeLocation(lat, lon, requestedItems, formattedAddress);
       setCached(analysisCacheKey, analysis, CACHE_TTL_MS.analysis);
       return jsonResponse(200, analysis);
     }
