@@ -1,6 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
-import housingCrimeData from '../../backend/melbourne_housing_crime_data.json';
 
 import {
   RequestedItem,
@@ -18,7 +17,12 @@ import {
   scoreErrandTripExact,
   scoreAbundance,
   scoreNearestServices,
-  ErrandTripResult,
+  // ErrandTripResult,
+  haversineMeters,
+  extractSuburbFromAddress,
+  normaliseToTen,
+  resolveHousePriceScore,
+  getSuburbData
 } from '../scoring';
 
 
@@ -108,57 +112,6 @@ function parseCoordinate(raw: string | undefined, name: 'lat' | 'lon'): number {
   return value;
 }
 
-// --- Suburb & Housing/Crime Lookup Helpers ---
-function extractSuburbFromAddress(formattedAddress: string): string | null {
-  const parts = formattedAddress.split(',').map(p => p.trim());
-  for (const part of parts) {
-    const cleaned = part.replace(/\s+(VIC|NSW|QLD|SA|WA|TAS|NT|ACT)\s+\d{4}$/i, '').trim();
-    if ((housingCrimeData as any)[cleaned]) return cleaned;
-    if ((housingCrimeData as any)[part]) return part;
-  }
-  return null;
-}
-
-function normaliseToTen(score: number, min = -3, max = 3): number {
-  return Number(((score - min) / (max - min) * 10).toFixed(1));
-}
-
-function resolveHousePriceScore(suburbName: string): {
-  score: number | null;
-  resolvedFrom: 'suburb' | 'postcode' | 'lga' | null;
-  resolvedSuburb: string | null;
-} {
-  const data = housingCrimeData as any;
-  const suburbData = data[suburbName];
-  if (!suburbData) return { score: null, resolvedFrom: null, resolvedSuburb: null };
-
-  // Level 1 — direct match
-  if (suburbData.housePrices?.housePriceScore != null) {
-    return { score: suburbData.housePrices.housePriceScore, resolvedFrom: 'suburb', resolvedSuburb: suburbName };
-  }
-
-  const postcode = suburbData.postcode;
-  const lga = suburbData.lga;
-  const allSuburbs = Object.entries(data) as [string, any][];
-
-  // Level 2 — same postcode sibling
-  const postcodeSibling = allSuburbs.find(
-    ([name, d]) => name !== suburbName && d.postcode === postcode && d.housePrices?.housePriceScore != null
-  );
-  if (postcodeSibling) {
-    return { score: postcodeSibling[1].housePrices.housePriceScore, resolvedFrom: 'postcode', resolvedSuburb: postcodeSibling[0] };
-  }
-
-  // Level 3 — same LGA sibling
-  const lgaSibling = allSuburbs.find(
-    ([name, d]) => name !== suburbName && d.lga === lga && d.housePrices?.housePriceScore != null
-  );
-  if (lgaSibling) {
-    return { score: lgaSibling[1].housePrices.housePriceScore, resolvedFrom: 'lga', resolvedSuburb: lgaSibling[0] };
-  }
-
-  return { score: null, resolvedFrom: null, resolvedSuburb: null };
-}
 
 function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
   const fallback = CORE_ANALYSIS_ITEMS;
@@ -369,24 +322,14 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
   }
 }
 
-function getHaversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371000; // meters
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return R * c;
-}
 
 async function enrichWithWalkingMetrics(originLat: number, originLon: number, candidates: CandidateService[]): Promise<CandidateService[]> {
   if (!candidates.length) return candidates;
 
   // 1. Calculate baseline Haversine estimates for all candidates
   const results: CandidateService[] = candidates.map(c => {
-    const dist = getHaversineDistance(originLat, originLon, c.lat, c.lon);
+    // const dist = getHaversineDistance(originLat, originLon, c.lat, c.lon);
+    const dist = haversineMeters(originLat, originLon, c.lat, c.lon);
     const estimatedWalkingDist = dist * 1.3; // 30% detour factor for urban environments
     const estimatedMinutes = Math.ceil(estimatedWalkingDist / 80); // ~4.8 km/h or 80m/min
     return {
@@ -514,7 +457,8 @@ async function analyzeLocation(
 
   // --- Housing & crime scores from static JSON (zero API calls) ---
   const suburbName = formattedAddress ? extractSuburbFromAddress(formattedAddress) : null;
-  const suburbData = suburbName ? (housingCrimeData as any)[suburbName] : null;
+  // const suburbData = suburbName ? (housingCrimeData as any)[suburbName] : null;
+  const suburbData = suburbName ? getSuburbData(suburbName) : null;
 
   const rawCrimeScore = suburbData?.crimeLga?.crimeScore ?? null;
   const crimeScore = rawCrimeScore !== null ? normaliseToTen(rawCrimeScore) : null;
