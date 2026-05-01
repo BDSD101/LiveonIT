@@ -4,13 +4,25 @@
 
 Five components, each 0–10, combined in WEIGHTS inside analyzeLocation (api.ts). Must sum to 1.0.
 
+## Description of Components making up "My Score"
+- Closest Services — 85% · Distance decay score for the nearest instance of each selected service type. Ideal ≤5 min walk, zero at 20 min. → Weights in api.ts WEIGHTS.nearest; decay curve in scoring.ts calculateDistanceFactor()
+
+- Errand Walk — 5% · Shortest loop route from home through all selected services. Scored against an 800 m walkable threshold. → WEIGHTS.errandTrip in api.ts; loop logic in scoring.ts scoreErrandTripExact()
+
+- Choice & Variety — 5% · Weighted count of all services within 800 m, decay-adjusted by distance. Benchmarked against a reference neighbourhood. → WEIGHTS.abundance in api.ts; reference config in scoring.ts scoreAbundance()
+
+- Housing Cost — 2.5% · Suburb median house/unit price expressed as a z-score vs Greater Melbourne, inverted so cheaper = higher score. → WEIGHTS.housePrice in api.ts; raw scores in melbourne_housing_crime_data.json (housePrices.housePriceScore); normalisation in scoring.ts normaliseToTen()
+
+- Safety — 2.5% · LGA crime rate per 100k population, inverted so lower crime = higher score. → WEIGHTS.crime in api.ts; raw scores in melbourne_housing_crime_data.json (crimeLga.crimeScore)
+
+
 ```typescript
 const WEIGHTS = {
-  errandTrip: 0.25,  // shortest walking route through high/medium frequency services
-  abundance:  0.20,  // count of walkable options weighted by frequency + proximity
-  nearest:    0.20,  // how close the nearest of each service type is
-  housePrice: 0.20,  // suburb affordability (-3→+3 normalised to 0–10)
-  crime:      0.15,  // suburb safety (-3→+3 normalised to 0–10)
+  errandTrip: 0.05,  // shortest walking route through high/medium frequency services
+  abundance:  0.05,  // count of walkable options weighted by frequency + proximity
+  nearest:    0.85,  // how close the nearest of each service type is
+  housePrice: 0.025,  // suburb affordability (-3→+3 normalised to 0–10)
+  crime:      0.025,  // suburb safety (-3→+3 normalised to 0–10)
 };
 ```
 
