@@ -12,12 +12,10 @@ import {
   buildLeaderboard,
   buildHeatmap,
   WALKABLE_THRESHOLD_METERS,
-    // --- new ---
   buildErrandCandidateMap,
   scoreErrandTripExact,
   scoreAbundance,
   scoreNearestServices,
-  // ErrandTripResult,
   haversineMeters,
   extractSuburbFromAddress,
   normaliseToTen,
@@ -40,16 +38,14 @@ type CacheEntry<T> = {
   expiresAt: number;
 };
 
-// --- CORS Helpers ---
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Content-Type,Authorization',
   'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
 };
-// --- In-memory cache (TTL + bounded size) ---
+
 const cache = new Map<string, CacheEntry<any>>();
 
-// --- API Call Tracking (for monitoring usage and debugging) ---
 const apiCallCounts: Record<string, number> = {
   places: 0,
   distanceMatrix: 0,
@@ -128,12 +124,9 @@ function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
     const key = `${catId}:${type}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    // parsed.push({ key, catId, type });
     const existingItem = CORE_ANALYSIS_ITEMS.find(i => i.type === type);
-    // console.log(`[PARSE] type:${type} existingItem:`, existingItem?.key, 'hasFilter:', !!existingItem?.filter);
-    // parsed.push({ key, catId, type, filter: existingItem?.filter });
     parsed.push({ 
-      key: existingItem?.key ?? key,  // ← use canonical key, not frontend key
+      key: existingItem?.key ?? key,
       catId: existingItem?.catId ?? catId, 
       type, 
       filter: existingItem?.filter,
@@ -171,7 +164,6 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    // Places API (New) — searchNearby uses POST with JSON body
     const response = await axios.post(
       'https://places.googleapis.com/v1/places:searchNearby',
       {
@@ -195,7 +187,6 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
     );
 
     const rawResults = response.data?.places || [];
-    // Map to legacy-compatible shape for the filter function
     const mapped = rawResults.map((p: any) => ({
       name: p.displayName?.text || item.type,
       geometry: { location: { lat: p.location?.latitude, lng: p.location?.longitude } },
@@ -253,7 +244,6 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    // Places API (New) — searchText uses POST with JSON body
     const response = await axios.post(
       'https://places.googleapis.com/v1/places:searchText',
       {
@@ -276,7 +266,6 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
     );
 
     const rawResults = response.data?.places || [];
-    // Map to legacy-compatible shape for the filter function
     const mapped = rawResults.map((p: any) => ({
       name: p.displayName?.text || item.type,
       geometry: { location: { lat: p.location?.latitude, lng: p.location?.longitude } },
@@ -326,12 +315,10 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
 async function enrichWithWalkingMetrics(originLat: number, originLon: number, candidates: CandidateService[]): Promise<CandidateService[]> {
   if (!candidates.length) return candidates;
 
-  // 1. Calculate baseline Haversine estimates for all candidates
   const results: CandidateService[] = candidates.map(c => {
-    // const dist = getHaversineDistance(originLat, originLon, c.lat, c.lon);
     const dist = haversineMeters(originLat, originLon, c.lat, c.lon);
-    const estimatedWalkingDist = dist * 1.3; // 30% detour factor for urban environments
-    const estimatedMinutes = Math.ceil(estimatedWalkingDist / 80); // ~4.8 km/h or 80m/min
+    const estimatedWalkingDist = dist * 1.3;
+    const estimatedMinutes = Math.ceil(estimatedWalkingDist / 80);
     return {
       ...c,
       walkingDistanceMeters: Math.round(estimatedWalkingDist),
@@ -340,14 +327,11 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     };
   });
 
-  // 2. Only upgrade candidates within 1.5x the walkable threshold to save API calls
   const worthUpgrading = results.filter(c =>
     (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 3
   );
-  // console.log(`[WORTH UPGRADING] ${worthUpgrading.length} of ${results.length} candidates`);
   if (!worthUpgrading.length) return results;
 
-  // 3. Upgrade with real walking distances from Distance Matrix API
   const BATCH_SIZE = 25;
   for (let i = 0; i < worthUpgrading.length; i += BATCH_SIZE) {
     const batch = worthUpgrading.slice(i, i + BATCH_SIZE);
@@ -363,22 +347,15 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
           key: getGoogleMapsApiKey(),
         },
       });
-      // console.log('[MATRIX RAW]', JSON.stringify(response.data).slice(0, 500));
 
       if (response.data?.status === 'OK') {
         const elements: any[] = response.data?.rows?.[0]?.elements || [];
-        // console.log(`[MATRIX RESPONSE] ${elements.length} elements:`, 
-          // elements.map((e: any, i: number) => `${batch[i]?.name}: ${e?.status} ${e?.distance?.value}m`)
-        // );
-        // console.log('[BATCH ORDER]', batch.map((c, i) => `${i}: ${c.name}`));
-        // console.log('[ELEMENTS]', elements.map((e: any, i: number) => `${i}: ${e?.status} ${e?.distance?.value}m`));
         batch.forEach((candidate, batchIdx) => {
           const element = elements[batchIdx];
           if (element?.status === 'OK') {
             const meters = Number(element.distance?.value);
             const seconds = Number(element.duration?.value);
             if (Number.isFinite(meters) && Number.isFinite(seconds)) {
-              // Find by name+key instead of reference equality
               const resultsIdx = results.findIndex(r => r.name === candidate.name && r.key === candidate.key);
               if (resultsIdx !== -1) {
                 results[resultsIdx] = {
@@ -387,7 +364,6 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
                   walkingDurationMinutes: Math.ceil(seconds / 60),
                   withinThreshold: meters <= WALKABLE_THRESHOLD_METERS,
                 };
-                // console.log(`[MATRIX] ${candidate.name}: ${meters}m (${Math.ceil(seconds / 60)} min)`);
               }
             }
           }
@@ -420,7 +396,6 @@ async function analyzeLocation(
   const allCandidates = foundArrays.flat();
   const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
 
-  // Rerank by actual walking distance and trim to 3 per type
   const byKey = new Map<string, CandidateService[]>();
   for (const service of enriched) {
     if (!byKey.has(service.key)) byKey.set(service.key, []);
@@ -448,16 +423,16 @@ async function analyzeLocation(
   const nearestAll    = scoreNearestServices(enriched);
 
   // Selected services score — only what the user picked
+  // NOW passes selectedTypes so scoring only considers selected service types
   const selectedTypes = new Set(displayItems.map(i => i.type));
   const selectedCandidates = enriched.filter(c => selectedTypes.has(c.type));
   const { candidatesByCategory: selectedCategories } = buildErrandCandidateMap(selectedCandidates);
   const errandTripSel = scoreErrandTripExact(originLat, originLon, selectedCategories);
-  const abundanceSel  = scoreAbundance(selectedCandidates);
-  const nearestSel    = scoreNearestServices(selectedCandidates);
+  const abundanceSel  = scoreAbundance(selectedCandidates, WALKABLE_THRESHOLD_METERS, selectedTypes);
+  const nearestSel    = scoreNearestServices(selectedCandidates, WALKABLE_THRESHOLD_METERS, selectedTypes);
 
   // --- Housing & crime scores from static JSON (zero API calls) ---
   const suburbName = formattedAddress ? extractSuburbFromAddress(formattedAddress) : null;
-  // const suburbData = suburbName ? (housingCrimeData as any)[suburbName] : null;
   const suburbData = suburbName ? getSuburbData(suburbName) : null;
 
   const rawCrimeScore = suburbData?.crimeLga?.crimeScore ?? null;
@@ -469,13 +444,12 @@ async function analyzeLocation(
   const rawHousePriceScore = priceResolution.score;
   const housePriceScore = rawHousePriceScore !== null ? normaliseToTen(rawHousePriceScore) : null;
 
-  // --- Create composite score with weighted components (weights are subjective and can be tuned) ---
   const WEIGHTS = {
-    errandTrip: 0.25,
-    abundance:  0.20,
-    nearest:    0.20,
-    housePrice: 0.20,
-    crime:      0.15,
+    errandTrip: 0.05,
+    abundance:  0.05,
+    nearest:    0.85,
+    housePrice: 0.025,
+    crime:      0.025,
   };
 
   function compositeScore(errand: number, abund: number, near: number): number {
@@ -535,7 +509,7 @@ async function analyzeLocation(
 }
 
 async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
-  const cacheKey = 'seed_analyses_v2'; // Bumped version for new scoring logic
+  const cacheKey = 'seed_analyses_v2';
   const cached = getCached<SeedAnalysis[]>(cacheKey);
   if (cached) return cached;
 
@@ -561,7 +535,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   if (httpMethod === 'OPTIONS') return { statusCode: 200, headers: corsHeaders, body: '' };
 
   try {
-    // 0. Debug: API call stats
     if (routePath === '/api/debug/stats' && httpMethod === 'GET') {
       return jsonResponse(200, {
         apiCallCounts,
@@ -569,12 +542,10 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       });
     }
 
-    // 1. Health Check
     if (routePath === '/health' && httpMethod === 'GET') {
       return jsonResponse(200, { status: 'ok' });
     }
 
-    // 1b. Config (Provide Key to Frontend)
     if (routePath === '/api/config' && httpMethod === 'GET') {
       try {
         return jsonResponse(200, { key: getGoogleMapsApiKey() });
@@ -583,7 +554,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    // 1c. Suburb Leaderboard (Derived from cached live analysis)
     if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
       try {
         const analyses = await getSeedAnalyses();
@@ -593,7 +563,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    // 1d. Heatmap Data (Derived from cached live analysis)
     if (routePath === '/api/heatmap' && httpMethod === 'GET') {
       try {
         const analyses = await getSeedAnalyses();
@@ -603,7 +572,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    // 2. Address Search (Geocoding)
     if (routePath === '/api/search' && httpMethod === 'GET') {
       const q = (event.queryStringParameters?.q || '').trim();
       if (!q) return jsonResponse(400, { error: 'Missing query' });
@@ -612,7 +580,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const cached = getCached<any[]>(cacheKey);
       if (cached) return jsonResponse(200, cached);
 
-      trackApiCall('geocoding'); // for monitoring usage
+      trackApiCall('geocoding');
       const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: `${q}, Victoria, Australia`,
@@ -633,7 +601,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return jsonResponse(200, mapped);
     }
 
-    // 3. Nearby Services (Places)
     if (routePath === '/api/nearby-services' && httpMethod === 'GET') {
       const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
       const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
@@ -657,7 +624,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return jsonResponse(200, analysis);
     }
 
-    // 4. Routing (Directions)
     if (routePath === '/api/route' && httpMethod === 'GET') {
       const sLat = parseCoordinate(event.queryStringParameters?.sLat, 'lat');
       const sLon = parseCoordinate(event.queryStringParameters?.sLon, 'lon');
@@ -674,7 +640,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
       const cached = getCached<any>(routeCacheKey);
       if (cached) return jsonResponse(200, cached);
-      trackApiCall('directions'); // for monitoring usage
+      trackApiCall('directions');
       const response = await axios.get('https://maps.googleapis.com/maps/api/directions/json', {
         params: {
           origin: `${sLat},${sLon}`,
@@ -700,7 +666,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return jsonResponse(200, routeData);
     }
 
-    // Temporary debug endpoint to audit nearby search results for a given type and location, without affecting scoring cache
     if (routePath === '/api/debug/audit' && httpMethod === 'GET') {
       const type = event.queryStringParameters?.type;
       const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');

@@ -6,12 +6,9 @@ export type RequestedItem = {
   key: string;
   catId: string;
   type: string;
-  // filter is an optional function that takes a raw API result and returns true if it should be included for scoring
   filter?: (result: any) => boolean;
-  // For text search capability
   useTextSearch?: boolean;
   textQuery?: string;
-  // to limit the number of candidates sent to Distance Matrix API for scoring
   searchRadius?: number;
   upgradeCount?: number;
 };
@@ -92,7 +89,7 @@ export type SeedAnalysis = SuburbSeedPoint & {
   index: number;
 };
 
-export const WALKABLE_THRESHOLD_METERS = 800; // Legacy reference for status
+export const WALKABLE_THRESHOLD_METERS = 800;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
 
@@ -110,15 +107,14 @@ export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
   health: ['doctor', 'pharmacy', 'hospital','dentist'],
   food: ['supermarket', 'convenience_store'],
-  connectivity: ['train_station', 'transit_station', 'post_office', 'bank','atm'], // bus_station and bus_stops removed because too noisy
-  parks: ['park'], // playground removed for now as creates too much noise
+  connectivity: ['train_station', 'transit_station', 'post_office', 'bank','atm'],
+  parks: ['park'],
   dining: ['cafe', 'restaurant', 'bar'],
-  education: ['childcare', 'kindergarten', 'primary_school', 'secondary_school', 'library'], // note kindergarten is not an official type but is handled with a text query
-  fitness: ['gym'], // 'sports_complex' removed too much noise
+  education: ['childcare', 'kindergarten', 'primary_school', 'secondary_school', 'library'],
+  fitness: ['gym'],
   community: ['community'],
 };
 
-// Blocklist for certain pinlet icons that are misleading for specific categories (e.g., 'school_pinlet' for gyms)
 export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
   gym: ['school_pinlet'],
 };
@@ -136,7 +132,6 @@ export const PLACE_TYPE_PINLET_ALLOWLIST: Record<string, string[]> = {
 
 export const PLACE_TYPE_NAME_BLOCKLIST: Record<string, string[]> = {
   gym: ['physio', 'physiotherapy', 'spinal', 'coaching', 'chiropractic'],
-  // doctor: ['pathology', 'radiology', 'audiology', 'podiatry', 'dust mite', 'fun time', 'hearing', 'foot', 'allergy', 'skin', 'dental', 'optometrist', 'eye', 'vet', 'veterinary'],
   school: ['scuba', 'guitar', 'music', 'tennis', 'dance', 'yoga', 'pilates', 'flow with'],
   supermarket: ['spices', 'convenience', 'smoke', 'liquor', 'bottle shop', 'petrol', 'fuel', 'bakery', 'butcher', 'seafood', 'organic'],
   cafe: ['health', 'nutrition', 'office', 'crew'],
@@ -152,32 +147,24 @@ export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
 export type VisitFrequency = 'high' | 'medium' | 'low' | 'rare';
 
 export const SERVICE_FREQUENCY: Record<string, VisitFrequency> = {
-  // Food
   supermarket:        'high',
   convenience_store:  'high',
-  // Connectivity
   train_station:      'high',
   transit_station:    'high',
   atm:                'high',
-  // Dining
   cafe:               'high',
   restaurant:         'medium',
   bar:                'medium',
-  // Fitness & Parks
   gym:                'medium',
   park:               'medium',
-  // Community
   community:          'medium',
-  // Education
   library:            'low',
   childcare:          'low',
   kindergarten:       'low',
   primary_school:     'low',
   secondary_school:   'low',
-  // Connectivity (less frequent)
   post_office:        'low',
   bank:               'low',
-  // Health
   pharmacy:           'low',
   dentist:            'rare',
   doctor:             'rare',
@@ -218,7 +205,6 @@ export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefine
   const nameAllowlist = PLACE_TYPE_NAME_ALLOWLIST[type] ?? [];
   const pinletAllowlist = PLACE_TYPE_PINLET_ALLOWLIST[type] ?? [];
 
-  // if (iconBlocklist.length === 0 && nameBlocklist.length === 0) return undefined;
   if (iconBlocklist.length === 0 && nameBlocklist.length === 0 && nameAllowlist.length === 0 && pinletAllowlist.length === 0) return undefined;
 
   return (r: any) => {
@@ -289,11 +275,6 @@ export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
 
 // --- Improved Scoring Algorithms ---
 
-/**
- * Calculates a decay factor based on walking minutes.
- * 1.0 (full score) if <= 5 minutes.
- * Decays linearly to 0.0 at 20 minutes.
- */
 export function calculateDistanceFactor(minutes: number | null): number {
   if (minutes === null) return 0;
   if (minutes <= IDEAL_WALKING_MINUTES) return 1;
@@ -301,13 +282,6 @@ export function calculateDistanceFactor(minutes: number | null): number {
   return Number((1 - (minutes - IDEAL_WALKING_MINUTES) / (MAX_WALKING_MINUTES - IDEAL_WALKING_MINUTES)).toFixed(2));
 }
 
-/**
- * Calculates the score for a single category based on all nearby candidates.
- * Implements a density bonus for multiple nearby options.
- * 1st option: 100% of its distance factor
- * 2nd option: 30% bonus factor
- * 3rd option: 10% bonus factor
- */
 export function calculateCategoryScore(candidates: CandidateService[], weight: number): number {
   const sorted = candidates
     .filter((c) => c.walkingDurationMinutes !== null)
@@ -320,7 +294,7 @@ export function calculateCategoryScore(candidates: CandidateService[], weight: n
   const thirdFactor = sorted[2] ? calculateDistanceFactor(sorted[2].walkingDurationMinutes) * 0.1 : 0;
 
   const rawScore = weight * (firstFactor + secondFactor + thirdFactor);
-  return Number(Math.min(weight * 1.4, rawScore).toFixed(2)); // Cap density bonus at 1.4x weight
+  return Number(Math.min(weight * 1.4, rawScore).toFixed(2));
 }
 
 // --- Suburb & Housing/Crime Lookup Helpers ---
@@ -411,7 +385,6 @@ export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { b
 
   const totalWeight = categories.reduce((sum, c) => sum + c.weight, 0);
   const rawScore = categories.reduce((sum, c) => sum + c.score, 0);
-  // Normalize index to 0-10 scale (where totalWeight * 1.0 is ~10, though density can push it higher)
   const index = Math.min(10.0, Number(((rawScore / totalWeight) * 10).toFixed(1)));
 
   const missingCategories = categories.filter((c) => c.status === 'missing').map((c) => c.label);
@@ -486,9 +459,6 @@ export function haversineMeters(aLat: number, aLon: number, bLat: number, bLon: 
 
 // ---------------------------------------------------------------------------
 // COMPONENT 1 — Errand Trip Score (greedy, 0–10)
-// Finds the optimal combination of 1 candidate per TSP-eligible category
-// and scores based on mean edge length vs the 800m walkability threshold.
-// Zero API calls — pure haversine on existing lat/lon.
 // ---------------------------------------------------------------------------
 export function scoreErrandTripGreedy(
   homeLat: number,
@@ -524,7 +494,6 @@ export function scoreErrandTripGreedy(
       remaining = Math.floor(remaining / counts[i]);
     }
 
-    // Greedy nearest-neighbour from home
     const unvisited = [...selected];
     const path: ErrandNode[] = [home];
     let current = home;
@@ -559,8 +528,6 @@ export function scoreErrandTripGreedy(
 
 // ---------------------------------------------------------------------------
 // COMPONENT 1 (alt) — Errand Trip Score (exact TSP, 0–10)
-// Checks all permutations for provably optimal path. Auto-falls back to
-// greedy if combinations × permutations exceed complexityCap.
 // ---------------------------------------------------------------------------
 export function scoreErrandTripExact(
   homeLat: number,
@@ -638,12 +605,12 @@ export function scoreErrandTripExact(
 
 // ---------------------------------------------------------------------------
 // COMPONENT 2 — Abundance Score (0–10)
-// Counts walkable options weighted by frequency and proximity decay.
-// Uses walkingDistanceMeters already on CandidateService — zero extra API calls.
+// Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
 export function scoreAbundance(
   allCandidates: CandidateService[],
   thresholdMeters = WALKABLE_THRESHOLD_METERS,
+  restrictToTypes?: Set<string>,
 ): { score: number; totalWeightedOptions: number; referenceWeightedOptions: number } {
   const proximityDecay = (meters: number) => Math.max(0, 1 - meters / thresholdMeters);
 
@@ -655,7 +622,6 @@ export function scoreAbundance(
     totalWeightedOptions += FREQUENCY_WEIGHTS[freq] * proximityDecay(c.walkingDistanceMeters);
   }
 
-  // Reference: ideal neighbourhood benchmark per frequency tier
   const REFERENCE_CONFIG: Record<VisitFrequency, { count: number; distanceMeters: number }> = {
     high:   { count: 5, distanceMeters: 200 },
     medium: { count: 3, distanceMeters: 300 },
@@ -663,31 +629,35 @@ export function scoreAbundance(
     rare:   { count: 1, distanceMeters: 400 },
   };
 
+  // Only consider selected types for the reference benchmark when restrictToTypes is set
+  const refTypes = restrictToTypes
+    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    : Object.values(CORE_CATEGORY_TYPES).flat();
+
   let referenceWeightedOptions = 0;
-  for (const type of Object.values(CORE_CATEGORY_TYPES).flat()) {
+  for (const type of refTypes) {
     const freq = SERVICE_FREQUENCY[type];
     if (!freq) continue;
     const ref = REFERENCE_CONFIG[freq];
     referenceWeightedOptions += ref.count * FREQUENCY_WEIGHTS[freq] * proximityDecay(ref.distanceMeters);
   }
 
-  const score = Math.min(10, Number(((totalWeightedOptions / referenceWeightedOptions) * 10).toFixed(1)));
+  const score = referenceWeightedOptions > 0
+    ? Math.min(10, Number(((totalWeightedOptions / referenceWeightedOptions) * 10).toFixed(1)))
+    : 0;
   return { score, totalWeightedOptions, referenceWeightedOptions };
 }
 
 // ---------------------------------------------------------------------------
 // COMPONENT 3 — Nearest Service Score (0–10)
-// How close is the single best option for each service, weighted by frequency.
-// Covers all frequency tiers — rare services contribute very little via weight.
-// Uses walkingDurationMinutes from Distance Matrix where available, falls back
-// to linear distance decay. Zero extra API calls.
+// Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
 export function scoreNearestServices(
   allCandidates: CandidateService[],
   thresholdMeters = WALKABLE_THRESHOLD_METERS,
+  restrictToTypes?: Set<string>,
 ): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
 
-  // Find nearest candidate per type
   const nearestByType = new Map<string, CandidateService>();
   for (const c of allCandidates) {
     if (c.walkingDistanceMeters === null) continue;
@@ -697,7 +667,11 @@ export function scoreNearestServices(
     }
   }
 
-  const allTypes = Object.values(CORE_CATEGORY_TYPES).flat();
+  // Only score against selected types when restrictToTypes is provided
+  const allTypes = restrictToTypes
+    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    : Object.values(CORE_CATEGORY_TYPES).flat();
+
   let weightedScore = 0;
   let maxPossibleScore = 0;
   const perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> = [];
@@ -714,8 +688,6 @@ export function scoreNearestServices(
       continue;
     }
 
-    // Prefer duration-based decay (aligns with existing scoring engine)
-    // Fall back to distance-based linear decay if duration unavailable
     const distanceFactor = nearest.walkingDurationMinutes !== null
       ? calculateDistanceFactor(nearest.walkingDurationMinutes)
       : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
@@ -734,8 +706,6 @@ export function scoreNearestServices(
 
 // ---------------------------------------------------------------------------
 // buildErrandCandidateMap
-// Filters enriched candidates to TSP-eligible types and groups by catId.
-// Call this before scoreErrandTripGreedy / scoreErrandTripExact.
 // ---------------------------------------------------------------------------
 export function buildErrandCandidateMap(
   allCandidates: CandidateService[],
