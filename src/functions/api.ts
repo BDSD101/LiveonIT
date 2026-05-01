@@ -442,7 +442,7 @@ async function analyzeLocation(
     ? resolveHousePriceScore(suburbName)
     : { score: null, resolvedFrom: null as null, resolvedSuburb: null };
   const rawHousePriceScore = priceResolution.score;
-  const housePriceScore = rawHousePriceScore !== null ? normaliseToTen(rawHousePriceScore) : null;
+  const housePriceScore = rawHousePriceScore !== null ? normaliseToTen(-rawHousePriceScore) : null; // invert so that higher price = lower score
 
   const WEIGHTS = {
     errandTrip: 0.05,
