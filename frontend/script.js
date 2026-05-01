@@ -1,15 +1,3 @@
-function showView(view) {
-  if (view === 'home') {
-    document.getElementById('view-home').classList.remove('hidden-view');
-    document.getElementById('view-about').classList.add('hidden-view');
-  } else {
-    document.getElementById('view-home').classList.add('hidden-view');
-    document.getElementById('view-about').classList.remove('hidden-view');
-    window.scrollTo(0, 0);
-  }
-  lucide.createIcons();
-}
-
 const root = getComputedStyle(document.body);
 
 const CONFIG = {
@@ -18,9 +6,8 @@ const CONFIG = {
       id: 'health', label: 'Health Services', color: root.getPropertyValue('--colour-health'), icon: 'heart-pulse', services: [
         { id: 'doctor', label: 'Doctor / GP', type: 'doctor', icon: 'stethoscope' },
         { id: 'pharmacy', label: 'Pharmacy', type: 'pharmacy', icon: 'pill' },
-        { id: 'hospital', label: 'Hospital', type: 'hospital', icon: 'hospital' },
+        { id: 'dentist', label: 'Dentist', type: 'dentist', icon: 'smile' },
         { id: 'gym', label: 'Gym / Fitness', type: 'gym', icon: 'dumbbell' },
-        { id: 'dentist', label: 'Dentist', type: 'dentist', icon: 'smile' }
       ]
     },
     {
@@ -28,16 +15,16 @@ const CONFIG = {
         { id: 'supermarket', label: 'Supermarket', type: 'supermarket', icon: 'shopping-cart' },
         { id: 'bakery', label: 'Bakery', type: 'bakery', icon: 'croissant' },
         { id: 'convenience', label: 'Convenience', type: 'convenience_store', icon: 'store' },
-        { id: 'shopping', label: 'General Shopping', type: 'shopping_mall', icon: 'shopping-bag' } // replaced bag-shopping to shopping-bag
+        { id: 'shopping', label: 'General Shopping', type: 'shopping_mall', icon: 'shopping-bag' },
       ]
     },
     {
       id: 'connectivity', label: 'Connectivity', color: root.getPropertyValue('--colour-connectivity'), icon: 'bus-front', services: [
         { id: 'train', label: 'Train Station', type: 'train_station', icon: 'train-front' },
-        { id: 'bus', label: 'Bus / Tram Stop', type: 'transit_station', icon: 'bus-front' }, // bus_stop and bus_station removed because too noisy
+        { id: 'bus', label: 'Bus / Tram Stop', type: 'transit_station', icon: 'bus-front' },
         { id: 'post', label: 'Post Office', type: 'post_office', icon: 'mail' },
         { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' },
-        { id: 'atm', label: 'ATM', type: 'atm', icon: 'credit-card' }
+        { id: 'atm', label: 'ATM', type: 'atm', icon: 'credit-card' },
       ]
     },
     {
@@ -69,29 +56,29 @@ const CONFIG = {
   ]
 };
 
+// ── State ──
 let map, marker, radiusCircle, debounceTimer, currentPos, currentAddress = '';
 let serviceMarkers = [], servicePolylines = [];
 let selectedServices = new Set(['doctor', 'supermarket', 'train', 'bus', 'park']);
 let openCategories = new Set();
 let history = JSON.parse(sessionStorage.getItem('history') || '[]');
-let leaderboardData = null;
+let lastScore = null;
 
+// ── Google Maps bootstrap ──
 async function loadGoogleMaps() {
   try {
     const res = await fetch('/api/config');
-    if (!res.ok) throw new Error('Google Maps configuration unavailable');
+    if (!res.ok) throw new Error('Config unavailable');
     const { key } = await res.json();
-    if (!key) throw new Error('Google Maps key missing');
-    const script = document.createElement('script');
-
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
-    script.async = true;
-    script.defer = true;
-
-    document.head.appendChild(script);
+    if (!key) throw new Error('Key missing');
+    const s = document.createElement('script');
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
   } catch (e) {
     console.error('Failed to load config', e);
-    document.getElementById('score-desc').textContent = 'Unable to initialize maps. Please check API configuration.';
+    document.getElementById('score-desc').textContent = 'Unable to initialise maps.';
   }
 }
 
@@ -101,163 +88,265 @@ function initApp() {
     zoom: 12,
     disableDefaultUI: true,
     zoomControl: true,
-    styles: [{ featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] }]
+    styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] }]
   });
   renderFilters();
   renderHistory();
-  // fetchLeaderboard(); // Commented out to speed up initial loading, can be re-enabled if needed
   lucide.createIcons();
-  // Auto-search if user arrived from landing page with ?q= param
   checkUrlParams();
 }
 
-async function fetchLeaderboard() {
-  try {
-    const res = await fetch('/api/leaderboard');
-    if (!res.ok) throw new Error('Failed to fetch leaderboard');
-    leaderboardData = await res.json();
-    switchLeaderboard('inner');
-  } catch (e) { console.error('Failed to load leaderboard', e); }
+// ── Helpers ──
+function formatDistance(m) {
+  if (typeof m !== 'number' || !Number.isFinite(m)) return 'n/a';
+  return m >= 1000 ? `${(m / 1000).toFixed(1)} km` : `${Math.round(m)} m`;
 }
 
-function switchLeaderboard(category) {
-  if (!leaderboardData) return;
+function getScoreColor(score) {
+  if (score >= 7.5) return { text: 'text-emerald-600', barBg: 'bg-emerald-500', light: 'bg-emerald-50', border: 'border-emerald-100' };
+  if (score >= 5.0) return { text: 'text-amber-600', barBg: 'bg-amber-500', light: 'bg-amber-50', border: 'border-amber-100' };
+  return { text: 'text-rose-600', barBg: 'bg-rose-500', light: 'bg-rose-50', border: 'border-rose-100' };
+}
 
-  ['inner', 'middle', 'outer'].forEach(id => {
-    const btn = document.getElementById(`tab-${id}`);
-    if (id === category) {
-      btn.className = "px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-[#004071] text-[#004071] whitespace-nowrap";
-    } else {
-      btn.className = "px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-transparent text-slate-400 hover:text-slate-600 whitespace-nowrap";
-    }
-  });
+function getScoreLabel(score) {
+  if (score >= 8.5) return 'Excellent';
+  if (score >= 7.0) return 'Very Good';
+  if (score >= 5.5) return 'Good';
+  if (score >= 4.0) return 'Fair';
+  if (score >= 2.5) return 'Below Average';
+  return 'Poor';
+}
 
-  const container = document.getElementById('leaderboard-list');
-  container.innerHTML = '';
-  const rows = Array.isArray(leaderboardData[category]) ? leaderboardData[category] : [];
-  if (!rows.length) {
-    container.innerHTML = '<p class="text-center py-4 text-slate-400 text-xs font-inter">No rankings available</p>';
-    return;
+function getScoreDescription(score, walkability) {
+  if (!walkability) {
+    if (score >= 8) return 'Exceptional walkable neighbourhood.';
+    if (score >= 5) return 'Good liveability with some gaps.';
+    return 'Limited walkable services.';
   }
+  const s = walkability.selection;
+  const suburb = walkability.suburb;
+  const parts = [];
 
-  rows.forEach(suburb => {
-    const div = document.createElement('div');
-    div.className = "flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100 transition-all hover:border-[#004071]";
-    div.innerHTML = `
-      <div class="flex items-center gap-3">
-        <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] font-black font-inter">${suburb.rank}</span>
-        <span class="text-xs font-bold text-slate-700">${suburb.name}</span>
-      </div>
-      <span class="text-[11px] font-black text-[#004071] font-inter bg-blue-50 px-2 py-0.5 rounded-full">${suburb.score.toFixed(1)}</span>
-    `;
-    container.appendChild(div);
-  });
+  if (s.nearest.score >= 7) parts.push('most selected services are close by');
+  else if (s.nearest.score >= 4) parts.push('some services within walking distance');
+  else parts.push('key services are hard to reach on foot');
+
+  if (s.abundance.score >= 7) parts.push('good variety');
+  else if (s.abundance.score < 3) parts.push('limited choice');
+
+  if (suburb?.crimeScore !== null && suburb.crimeScore >= 7) parts.push('safe area');
+  if (suburb?.housePriceScore !== null && suburb.housePriceScore >= 7) parts.push('affordable');
+
+  return `${getScoreLabel(score)} — ${parts.join(', ')}.`;
 }
 
-function formatDistance(meters) {
-  if (typeof meters !== 'number' || !Number.isFinite(meters)) return 'n/a';
-  if (meters >= 1000) return `${(meters / 1000).toFixed(1)} km`;
-  return `${Math.round(meters)} m`;
-}
-
-function getScoreDescription(index, breakdown) {
-  const met = breakdown?.summary?.categoriesMetWithin800m;
-  const total = breakdown?.summary?.totalCategories;
-  if (typeof met === 'number' && typeof total === 'number') {
-    return `${met}/${total} core categories are within 800m walking distance.`;
-  }
-  if (index >= 8) return 'Exceptional 20-min neighbourhood.';
-  if (index >= 5) return 'Strong liveability with minor gaps.';
-  return 'Developing infrastructure area.';
-}
-
-function renderScoreBreakdown(breakdown) {
+// ── Score breakdown ──
+function renderWalkabilityBreakdown(walkability) {
   const container = document.getElementById('score-breakdown');
-  const thresholdNote = document.getElementById('score-threshold-note');
-  if (!breakdown || !Array.isArray(breakdown.categories)) {
-    container.innerHTML = '<p class="text-xs text-slate-400 text-center">Score breakdown unavailable.</p>';
-    thresholdNote.textContent = 'Threshold: 800m walking distance';
+  const note = document.getElementById('score-threshold-note');
+
+  if (!walkability) {
+    container.innerHTML = '<p class="text-xs text-slate-400 text-center">Search an address to see breakdown.</p>';
+    note.textContent = 'Based on your selected services';
     return;
   }
 
-  thresholdNote.textContent = `Threshold: ${breakdown.walkableThresholdMeters || 800}m walking distance`;
+  const s = walkability.selection;
+  const suburb = walkability.suburb;
+  note.textContent = 'Based on your selected services · 800 m threshold';
   container.innerHTML = '';
 
-  breakdown.categories
-    .sort((a, b) => b.weight - a.weight)
-    .slice(0, 3)
-    .forEach(cat => {
-      const statusLabel = cat.status === 'met' ? 'Within 800m' : (cat.status === 'partial' ? 'Over limit' : 'Missing');
-      const nearest = cat.nearestService?.name || 'No nearby match';
-      const distance = cat.walkingDistanceMeters == null ? '—' : formatDistance(cat.walkingDistanceMeters);
-      const duration = cat.walkingDurationMinutes == null ? '' : ` • ${cat.walkingDurationMinutes} min`;
+  function tag(score, thresholds) {
+    if (score === null || score === undefined) return 'No data available';
+    for (const [min, label] of thresholds) { if (score >= min) return label; }
+    return thresholds[thresholds.length - 1][1];
+  }
 
-      const statusClass = cat.status === 'met'
-        ? 'text-emerald-700 bg-emerald-50 border-emerald-100'
-        : (cat.status === 'partial'
-          ? 'text-amber-700 bg-amber-50 border-amber-100'
-          : 'text-rose-700 bg-rose-50 border-rose-100');
+  const components = [
+    {
+      label: 'Closest Services',
+      icon: 'map-pin',
+      score: s.nearest.score,
+      weight: 85,
+      tagText: tag(s.nearest.score, [[8, 'Almost everything nearby'], [6, 'Most essentials within reach'], [4, 'Some services nearby'], [2, 'Limited access'], [0, 'Most services too far']]),
+      tooltip: 'How close is the nearest of each service you selected? Services within a 5-minute walk score highest, decaying to zero at 20 minutes.',
+    },
+    {
+      label: 'Errand Walk',
+      icon: 'route',
+      score: s.errandTrip.score,
+      weight: 5,
+      tagText: tag(s.errandTrip.score, [[8, 'Quick loop on foot'], [5, 'Walkable with some effort'], [2, 'Long walk needed'], [0, 'Not practical on foot']]),
+      tooltip: 'Could you walk a single loop from home through your regular services and back? Shorter, more efficient loops score higher.',
+    },
+    {
+      label: 'Choice & Variety',
+      icon: 'layers',
+      score: s.abundance.score,
+      weight: 5,
+      tagText: tag(s.abundance.score, [[8, 'Lots of choice'], [5, 'Decent variety'], [2, 'Limited options'], [0, 'Very few options']]),
+      tooltip: 'Are there multiple options for each service? More nearby supermarkets, cafes, and transport stops means better choice.',
+    },
+    {
+      label: 'Housing Cost',
+      icon: 'home',
+      score: suburb?.housePriceScore ?? null,
+      weight: 2.5,
+      tagText: suburb?.housePriceScore != null
+        ? `${tag(suburb.housePriceScore, [[8, 'Very affordable'], [6, 'Reasonably priced'], [4, 'Moderate pricing'], [0, 'Expensive area']])} · ${suburb.name}`
+        : 'No data available',
+      tooltip: 'How affordable is housing in this suburb compared to Greater Melbourne? Based on median house and unit prices.',
+    },
+    {
+      label: 'Safety',
+      icon: 'shield',
+      score: suburb?.crimeScore ?? null,
+      weight: 2.5,
+      tagText: suburb?.crimeScore != null
+        ? `${tag(suburb.crimeScore, [[8, 'Very safe area'], [6, 'Generally safe'], [4, 'Average safety'], [0, 'Higher crime rates']])} · ${suburb.name}`
+        : 'No data available',
+      tooltip: 'How does this suburb compare on reported crime? Based on Crime Statistics Agency data for the local government area.',
+    },
+  ];
 
-      const row = document.createElement('div');
-      row.className = 'p-2 rounded-lg border border-slate-100 bg-slate-50';
-      row.innerHTML = `
-      <div class="flex items-center justify-between gap-2">
-        <span class="text-[11px] font-bold text-slate-700">${cat.label}</span>
-        <span class="text-[10px] px-1.5 py-0.5 rounded-full border font-bold ${statusClass}">${statusLabel}</span>
+  components.forEach(comp => {
+    const sc = comp.score;
+    const has = sc !== null && sc !== undefined;
+    const c = has ? getScoreColor(sc) : { text: 'text-slate-400', barBg: 'bg-slate-200', light: 'bg-slate-50', border: 'border-slate-100' };
+    const display = has ? sc.toFixed(1) : '—';
+    const bar = has ? (sc * 10) : 0;
+
+    const row = document.createElement('div');
+    row.className = `p-3 rounded-lg border ${c.border} ${c.light}`;
+    row.innerHTML = `
+      <div class="flex items-center justify-between gap-2 mb-1.5">
+        <div class="flex items-center gap-1.5">
+          <i data-lucide="${comp.icon}" class="w-3.5 h-3.5 ${c.text}"></i>
+          <span class="text-[11px] font-bold text-slate-700">${comp.label}</span>
+          <span class="text-[9px] font-medium text-slate-400">${comp.weight}%</span>
+          <span class="tip-wrap relative cursor-help">
+            <i data-lucide="info" class="w-3 h-3 text-slate-300 hover:text-slate-500 transition-colors"></i>
+            <span class="tip-box absolute z-50 left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 px-3 py-2 text-[10px] leading-relaxed text-white bg-slate-800 rounded-lg shadow-xl font-normal pointer-events-none">
+              ${comp.tooltip}
+              <span class="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800"></span>
+            </span>
+          </span>
+        </div>
+        <span class="text-[12px] font-black ${c.text} font-inter">${display}</span>
       </div>
-      <div class="mt-1 text-[11px] text-slate-500 leading-tight">${nearest}</div>
-      <div class="text-[10px] text-slate-400">${distance}${duration}</div>
+      <div class="h-1 w-full bg-white/60 rounded-full overflow-hidden mb-1.5">
+        <div class="h-full ${c.barBg} rounded-full transition-all duration-700" style="width:${bar}%"></div>
+      </div>
+      <div class="text-[10px] text-slate-500 leading-tight font-medium">${comp.tagText}</div>
     `;
-      container.appendChild(row);
-    });
+    container.appendChild(row);
+  });
+
+  lucide.createIcons();
 }
 
+// ── Services Found list ──
+function renderServicesFound(services) {
+  const container = document.getElementById('services-found-list');
+  if (!services || !services.length) {
+    container.innerHTML = '<p class="text-center py-6 text-slate-400 text-xs font-inter">No services found for selected filters.</p>';
+    return;
+  }
+
+  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id, catLabel: c.label, catIcon: c.icon })));
+  const grouped = {};
+  services.forEach(s => {
+    const conf = allSvc.find(c => c.type === s.type && c.catId === s.catId);
+    const catLabel = conf?.catLabel || s.catId;
+    const catColor = conf?.catColor || '#64748b';
+    const catIcon = conf?.catIcon || 'circle';
+    if (!grouped[catLabel]) grouped[catLabel] = { color: catColor, icon: catIcon, items: [] };
+    grouped[catLabel].items.push(s);
+  });
+
+  container.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+
+  Object.entries(grouped).forEach(([catLabel, group]) => {
+    const card = document.createElement('div');
+    card.className = 'border border-slate-100 rounded-lg p-4 bg-slate-50/50';
+
+    const header = `
+      <div class="flex items-center gap-2 mb-3">
+        <i data-lucide="${group.icon}" class="w-4 h-4" style="color:${group.color}"></i>
+        <span class="text-[11px] font-bold uppercase tracking-widest text-slate-600">${catLabel}</span>
+        <span class="text-[10px] text-slate-400 font-inter">${group.items.length} found</span>
+      </div>
+    `;
+
+    const rows = group.items
+      .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
+      .map(s => {
+        const dist = typeof s.walkingDistanceMeters === 'number' ? formatDistance(s.walkingDistanceMeters) : '—';
+        const dur = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
+        const within = s.withinThreshold;
+        const dotColor = within ? 'bg-emerald-400' : (typeof s.walkingDistanceMeters === 'number' ? 'bg-amber-400' : 'bg-slate-300');
+        return `
+          <div class="flex items-center justify-between py-1.5 border-b border-slate-100 last:border-0">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-1.5 h-1.5 rounded-full ${dotColor} flex-shrink-0"></span>
+              <span class="text-[12px] font-medium text-slate-700 truncate">${s.name}</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-inter flex-shrink-0 ml-3">${dist}${dur ? ' · ' + dur : ''}</span>
+          </div>
+        `;
+      }).join('');
+
+    card.innerHTML = header + `<div>${rows}</div>`;
+    grid.appendChild(card);
+  });
+
+  container.appendChild(grid);
+  lucide.createIcons();
+}
+
+// ── Alerts ──
 function showAlert(serviceName, distance) {
   const container = document.getElementById('alert-container');
   const div = document.createElement('div');
-  div.className = "bg-white/95 backdrop-blur-sm border-l-4 border-amber-500 p-3 rounded-lg shadow-xl flex items-start gap-3 pointer-events-auto transform translate-x-8 opacity-0 transition-all duration-300";
+  div.className = 'bg-white/95 backdrop-blur-sm border-l-4 border-amber-500 p-3 rounded-lg shadow-xl flex items-start gap-3 pointer-events-auto transform translate-x-8 opacity-0 transition-all duration-300';
   div.innerHTML = `
     <div class="mt-0.5"><i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500"></i></div>
     <div class="flex-1">
-      <div class="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-0.5">Limit Exceeded</div>
+      <div class="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-0.5">Over 800 m</div>
       <div class="text-[11px] font-bold text-slate-800 leading-tight">${serviceName} is ${formatDistance(distance)} away</div>
     </div>
-    <button onclick="this.parentElement.remove()" class="text-slate-300 hover:text-slate-500 transition-colors"><i data-lucide="x" class="w-3 h-3"></i></button>
+    <button onclick="this.parentElement.remove()" class="text-slate-300 hover:text-slate-500"><i data-lucide="x" class="w-3 h-3"></i></button>
   `;
   container.appendChild(div);
   lucide.createIcons();
-
-  setTimeout(() => {
-    div.classList.remove('translate-x-8', 'opacity-0');
-  }, 10);
-
-  setTimeout(() => {
-    if (div.parentElement) {
-      div.classList.add('opacity-0', 'scale-95');
-      setTimeout(() => div.remove(), 300);
-    }
-  }, 6000);
+  setTimeout(() => div.classList.remove('translate-x-8', 'opacity-0'), 10);
+  setTimeout(() => { if (div.parentElement) { div.classList.add('opacity-0', 'scale-95'); setTimeout(() => div.remove(), 300); } }, 6000);
 }
 
+// ── Filters ──
 function renderFilters() {
   const container = document.getElementById('filter-container');
   container.innerHTML = '';
   CONFIG.categories.forEach(cat => {
     const isOpen = openCategories.has(cat.id);
     const group = document.createElement('div');
-    group.className = "border border-slate-100 rounded-lg overflow-hidden mb-1";
+    group.className = 'border border-slate-100 rounded-lg overflow-hidden mb-1';
+
     const header = document.createElement('div');
-    header.className = "flex items-center justify-between p-3 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors";
+    header.className = 'flex items-center justify-between p-3 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors';
     header.innerHTML = `
       <div class="flex items-center gap-2">
         <i data-lucide="${cat.icon}" class="w-4 h-4" style="color:${cat.color}"></i>
         <span class="text-xs font-bold uppercase tracking-tight text-slate-700">${cat.label}</span>
       </div>
-      <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 transition-transform duration-200" style="transform: ${isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}"></i>
+      <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 transition-transform duration-200" style="transform:${isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}"></i>
     `;
 
     const list = document.createElement('div');
     list.className = `${isOpen ? '' : 'hidden'} p-2 space-y-1 bg-white border-t border-slate-50`;
+
     header.onclick = () => {
       if (openCategories.has(cat.id)) openCategories.delete(cat.id);
       else openCategories.add(cat.id);
@@ -266,9 +355,17 @@ function renderFilters() {
 
     cat.services.forEach(svc => {
       const item = document.createElement('div');
-      item.className = "flex items-center justify-between p-2 rounded-md cursor-pointer hover:bg-slate-50 transition-colors group";
-      const isChecked = selectedServices.has(svc.id);
-      item.innerHTML = `<div class="flex items-center gap-2"><i data-lucide="${svc.icon}" class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600"></i><span class="text-[13px] font-medium text-slate-600">${svc.label}</span></div><div id="check-${svc.id}" class="w-4 h-4 rounded border transition-all flex items-center justify-center ${isChecked ? 'border-transparent' : 'border-slate-300'}" style="background:${isChecked ? cat.color : 'transparent'}"><i data-lucide="check" class="w-2.5 h-2.5 text-white ${isChecked ? '' : 'hidden'}"></i></div>`;
+      item.className = 'flex items-center justify-between p-2 rounded-md cursor-pointer hover:bg-slate-50 transition-colors group';
+      const checked = selectedServices.has(svc.id);
+      item.innerHTML = `
+        <div class="flex items-center gap-2">
+          <i data-lucide="${svc.icon}" class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600"></i>
+          <span class="text-[13px] font-medium text-slate-600">${svc.label}</span>
+        </div>
+        <div class="w-4 h-4 rounded border transition-all flex items-center justify-center ${checked ? 'border-transparent' : 'border-slate-300'}" style="background:${checked ? cat.color : 'transparent'}">
+          <i data-lucide="check" class="w-2.5 h-2.5 text-white ${checked ? '' : 'hidden'}"></i>
+        </div>
+      `;
       item.onclick = (e) => {
         e.stopPropagation();
         if (selectedServices.has(svc.id)) selectedServices.delete(svc.id);
@@ -278,6 +375,7 @@ function renderFilters() {
       };
       list.appendChild(item);
     });
+
     group.appendChild(header);
     group.appendChild(list);
     container.appendChild(group);
@@ -285,20 +383,34 @@ function renderFilters() {
   lucide.createIcons();
 }
 
+// ── History (with scores) ──
 function renderHistory() {
   const list = document.getElementById('history-list');
-  if (!history.length) return;
+  if (!history.length) {
+    list.innerHTML = '<p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>';
+    return;
+  }
   list.innerHTML = '';
   history.forEach(item => {
+    const hasScore = typeof item.score === 'number';
+    const scoreColor = hasScore ? getScoreColor(item.score) : null;
+
     const div = document.createElement('div');
-    div.className = "p-3 bg-slate-50 border border-slate-100 rounded-lg cursor-pointer hover:border-[#004071] hover:bg-white transition-all group flex items-center gap-3";
-    div.innerHTML = `<i data-lucide="map-pin" class="w-4 h-4 text-slate-400 group-hover:text-[#004071]"></i><span class="text-xs font-semibold text-slate-600 truncate">${item.display_name}</span>`;
+    div.className = 'p-3 bg-slate-50 border border-slate-100 rounded-lg cursor-pointer hover:border-[#004071] hover:bg-white transition-all group flex items-center gap-3';
+    div.innerHTML = `
+      <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 group-hover:text-[#004071] flex-shrink-0"></i>
+      <div class="flex-1 min-w-0">
+        <div class="text-xs font-semibold text-slate-600 truncate">${item.display_name}</div>
+      </div>
+      ${hasScore ? `<span class="text-[11px] font-black ${scoreColor.text} font-inter flex-shrink-0">${item.score.toFixed(1)}</span>` : ''}
+    `;
     div.onclick = () => select(item, false);
     list.appendChild(div);
   });
   lucide.createIcons();
 }
 
+// ── Search ──
 document.getElementById('query').addEventListener('input', (e) => {
   clearTimeout(debounceTimer);
   const q = e.target.value.trim();
@@ -317,7 +429,7 @@ async function search(q) {
   data.forEach(item => {
     const li = document.createElement('li');
     li.textContent = item.display_name;
-    li.className = "p-4 cursor-pointer hover:bg-slate-50 text-sm font-medium transition-colors";
+    li.className = 'p-4 cursor-pointer hover:bg-slate-50 text-sm font-medium transition-colors';
     li.onclick = () => select(item);
     list.appendChild(li);
   });
@@ -330,73 +442,119 @@ function select(item, updateHistory = true) {
   document.getElementById('results').classList.add('hidden');
   map.panTo(currentPos);
   map.setZoom(15);
+
   if (marker) marker.setMap(null);
-  marker = new google.maps.Marker({ position: currentPos, map: map, icon: { path: google.maps.SymbolPath.CIRCLE, fillColor: '#c0392b', fillOpacity: 1, strokeWeight: 2, strokeColor: '#fff', scale: 8 } });
+  marker = new google.maps.Marker({
+    position: currentPos, map,
+    icon: { path: google.maps.SymbolPath.CIRCLE, fillColor: '#c0392b', fillOpacity: 1, strokeWeight: 2, strokeColor: '#fff', scale: 8 }
+  });
+
   if (radiusCircle) radiusCircle.setMap(null);
-  radiusCircle = new google.maps.Circle({ strokeColor: '#004071', strokeOpacity: 0.1, strokeWeight: 1, fillColor: '#004071', fillOpacity: 0.05, map: map, center: currentPos, radius: 800 });
+  radiusCircle = new google.maps.Circle({
+    strokeColor: '#004071', strokeOpacity: 0.1, strokeWeight: 1,
+    fillColor: '#004071', fillOpacity: 0.05, map, center: currentPos, radius: 800
+  });
+
   if (updateHistory) {
-    history = [item, ...history.filter(i => i.display_name !== item.display_name)].slice(0, 5);
+    lastScore = null;
+    history = [{ ...item, score: null }, ...history.filter(i => i.display_name !== item.display_name)].slice(0, 5);
     sessionStorage.setItem('history', JSON.stringify(history));
     renderHistory();
   }
+
   loadServices(currentPos.lat, currentPos.lng);
 }
 
+// ── Main analysis ──
 async function loadServices(lat, lon) {
-  console.log('[DEBUG] loadServices called', lat, lon, currentAddress);
   serviceMarkers.forEach(m => m.setMap(null));
   servicePolylines.forEach(p => p.setMap(null));
-  serviceMarkers = []; servicePolylines = [];
+  serviceMarkers = [];
+  servicePolylines = [];
   document.getElementById('alert-container').innerHTML = '';
 
   const bar = document.getElementById('progress-bar');
-  bar.style.opacity = '1'; bar.style.width = '30%';
-  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id })));
+  bar.style.opacity = '1';
+  bar.style.width = '30%';
+
+  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id, catLabel: c.label })));
   const types = Array.from(selectedServices).map(id => {
-    const s = allSvc.find(s => s.id === id);
+    const s = allSvc.find(sv => sv.id === id);
     return s ? `${s.catId}:${s.type}` : null;
   }).filter(Boolean);
 
   if (!types.length) {
     document.getElementById('score-value').textContent = '--';
+    document.getElementById('score-value').className = 'text-6xl font-extrabold text-[#004071] mb-1';
     document.getElementById('score-bar').style.width = '0%';
-    document.getElementById('score-desc').textContent = 'Select at least one service filter to run analysis.';
-    renderScoreBreakdown(null);
+    document.getElementById('score-desc').textContent = 'Select at least one service to see your score.';
+    renderWalkabilityBreakdown(null);
+    renderServicesFound([]);
     bar.style.opacity = '0';
     return;
   }
+
   try {
-    // const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}`);
     const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
-    if (!res.ok) throw new Error('Failed to load nearby services');
+    if (!res.ok) throw new Error('Failed');
     const data = await res.json();
     const services = Array.isArray(data.services) ? data.services : [];
-    const index = Number(data.index || 0);
-    document.getElementById('score-value').textContent = index.toFixed(1);
-    document.getElementById('score-bar').style.width = (index * 10) + '%';
-    document.getElementById('score-desc').textContent = getScoreDescription(index, data.breakdown);
-    renderScoreBreakdown(data.breakdown);
+    const walkability = data.walkability || null;
+
+    // Use SELECTION score (personalised to user's chosen filters)
+    const score = walkability?.selection?.score ?? Number(data.index || 0);
+    const colors = getScoreColor(score);
+
+    document.getElementById('score-value').textContent = score.toFixed(1);
+    document.getElementById('score-value').className = `text-6xl font-extrabold mb-1 ${colors.text}`;
+    document.getElementById('score-bar').style.width = (score * 10) + '%';
+    document.getElementById('score-bar').className = `h-full ${colors.barBg} rounded-full w-0 transition-all duration-1000`;
+    document.getElementById('score-desc').textContent = getScoreDescription(score, walkability);
+
+    renderWalkabilityBreakdown(walkability);
+
+    // Update history with score
+    if (currentAddress && history.length > 0 && history[0].display_name === currentAddress) {
+      history[0].score = score;
+      sessionStorage.setItem('history', JSON.stringify(history));
+      renderHistory();
+    }
+
     bar.style.width = '70%';
-    // Only draw route to nearest service per type
+
+    // Draw routes to nearest per type
     const nearestPerType = Object.values(
       services.reduce((acc, s) => {
-        if (!acc[s.type] || s.walkingDistanceMeters < acc[s.type].walkingDistanceMeters) {
-          acc[s.type] = s;
-        }
+        if (!acc[s.type] || s.walkingDistanceMeters < acc[s.type].walkingDistanceMeters) acc[s.type] = s;
         return acc;
       }, {})
     );
 
+    // Render services found (only nearest per type — what's on the map)
+    renderServicesFound(nearestPerType);
+
     nearestPerType.forEach(async (s) => {
-      const svcConf = allSvc.find(conf => conf.type === s.type && conf.catId === s.catId) || { catColor: '#64748b', label: s.type };
+      const conf = allSvc.find(c => c.type === s.type && c.catId === s.catId) || { catColor: '#64748b', label: s.type };
       if (typeof s.walkingDistanceMeters === 'number' && s.walkingDistanceMeters > 800) {
-        showAlert(svcConf.label, s.walkingDistanceMeters);
+        showAlert(conf.label || conf.catLabel, s.walkingDistanceMeters);
       }
-      const m = new google.maps.Marker({ position: { lat: s.lat, lng: s.lon }, map: map, icon: { path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z", fillColor: svcConf.catColor, fillOpacity: 1, strokeWeight: 2, strokeColor: "#FFFFFF", scale: 1.5, anchor: new google.maps.Point(12, 22) }, title: s.name });
-      const distanceLabel = typeof s.walkingDistanceMeters === 'number' ? `${formatDistance(s.walkingDistanceMeters)} walk` : 'Walk distance unavailable';
-      const durationLabel = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
-      const infoWindow = new google.maps.InfoWindow({ content: `<div class="p-2 font-inter"><div class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:${svcConf.catColor}">${svcConf.label}</div><div class="text-sm font-bold">${s.name}</div><div class="text-[11px] text-slate-500 mt-1">${distanceLabel}${durationLabel ? ` • ${durationLabel}` : ''}</div></div>` });
-      m.addListener('click', () => infoWindow.open(map, m));
+
+      const m = new google.maps.Marker({
+        position: { lat: s.lat, lng: s.lon }, map,
+        icon: {
+          path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z',
+          fillColor: conf.catColor, fillOpacity: 1, strokeWeight: 2, strokeColor: '#FFFFFF', scale: 1.5,
+          anchor: new google.maps.Point(12, 22)
+        },
+        title: s.name
+      });
+
+      const distLabel = typeof s.walkingDistanceMeters === 'number' ? `${formatDistance(s.walkingDistanceMeters)} walk` : '';
+      const durLabel = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
+      const info = new google.maps.InfoWindow({
+        content: `<div class="p-2 font-inter"><div class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:${conf.catColor}">${conf.label || conf.catLabel}</div><div class="text-sm font-bold">${s.name}</div><div class="text-[11px] text-slate-500 mt-1">${distLabel}${durLabel ? ' · ' + durLabel : ''}</div></div>`
+      });
+      m.addListener('click', () => info.open(map, m));
       serviceMarkers.push(m);
 
       try {
@@ -404,51 +562,43 @@ async function loadServices(lat, lon) {
         if (!rRes.ok) return;
         const rData = await rRes.json();
         if (!rData.polyline) return;
-
         const path = google.maps.geometry.encoding.decodePath(rData.polyline);
-        // Debugging logs for route decoding
-        // console.log('path length:', path.length);
-        // console.log('decoded path:', path);
-        const polyline = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: svcConf.catColor, strokeOpacity: 0.7, strokeWeight: 4, map: map });
-        // testing a fixed color for all routes to rule out styling issues
-        servicePolylines.push(polyline);
-        let step = 0; const numSteps = 40;
-        const interval = setInterval(() => { step++; const fraction = step / numSteps; polyline.setPath(path.slice(0, Math.ceil(fraction * path.length))); if (step >= numSteps) clearInterval(interval); }, 25);
-      } catch (routeError) {
-        console.error('Failed to load route', routeError);
-      }
+        const poly = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: conf.catColor, strokeOpacity: 0.7, strokeWeight: 4, map });
+        servicePolylines.push(poly);
+        let step = 0;
+        const total = 40;
+        const iv = setInterval(() => {
+          step++;
+          poly.setPath(path.slice(0, Math.ceil((step / total) * path.length)));
+          if (step >= total) clearInterval(iv);
+        }, 25);
+      } catch (e) { console.error('Route error', e); }
     });
 
-    bar.style.width = '100%'; setTimeout(() => { bar.style.opacity = '0'; bar.style.width = '0'; }, 600);
+    bar.style.width = '100%';
+    setTimeout(() => { bar.style.opacity = '0'; bar.style.width = '0'; }, 600);
+
   } catch (e) {
     console.error(e);
     bar.style.opacity = '0';
-    document.getElementById('score-desc').textContent = 'Liveability analysis failed. Please try again.';
-    renderScoreBreakdown(null);
+    document.getElementById('score-desc').textContent = 'Analysis failed. Please try again.';
+    renderWalkabilityBreakdown(null);
+    renderServicesFound([]);
   }
 }
 
+// ── Boot ──
 window.onload = loadGoogleMaps;
 
-// Auto-search from landing page URL parameters
 function checkUrlParams() {
   const params = new URLSearchParams(window.location.search);
   const q = params.get('q');
   const lat = params.get('lat');
   const lon = params.get('lon');
-
   if (q) {
     document.getElementById('query').value = q;
-
-    if (lat && lon) {
-      // We have coordinates from the landing page — select directly
-      select({ display_name: q, lat, lon });
-    } else {
-      // Only have a query string — run a search to get suggestions
-      search(q);
-    }
-
-    // Clean the URL so it doesn't re-trigger on refresh
+    if (lat && lon) select({ display_name: q, lat, lon });
+    else search(q);
     window.history.replaceState({}, '', '/dashboard.html');
   }
 }
