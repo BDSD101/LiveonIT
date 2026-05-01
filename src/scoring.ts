@@ -470,6 +470,72 @@ export function buildHeatmap(analyses: SeedAnalysis[]) {
   }));
 }
 
+// ─── Open Suburb Data ──────────────────────────────────────────────────────
+
+export type SuburbOpenData = {
+  crimeScore: number;       // -3 to +3, higher = safer
+  housePriceScore: number;  // -3 to +3, higher = more expensive
+};
+
+/**
+ * Maps a raw score in range [-3, +3] to [0, 10].
+ */
+function normaliseOpenScore(raw: number): number {
+  // clamp to [-3, 3] then map to [0, 10]
+  const clamped = Math.max(-3, Math.min(3, raw));
+  return Number(((clamped + 3) / 6 * 10).toFixed(2));
+}
+
+/**
+ * Personalised score:
+ *  - 90% from selected services only (each selected type contributes equally to 10.0)
+ *  - 10% from suburb open data (average of crimeScore and housePriceScore, mapped 0–10)
+ *
+ * If suburbData is null the full weight goes to services.
+ */
+export function buildPersonalisedScore(
+  byKey: Map<string, CandidateService[]>,
+  requestedItems: RequestedItem[],
+  suburbData: SuburbOpenData | null
+): { personalisedIndex: number; serviceScore: number; suburbBonus: number | null } {
+  const n = requestedItems.length;
+  if (n === 0) return { personalisedIndex: 0, serviceScore: 0, suburbBonus: null };
+
+  const pointsEach = 10 / n;
+  let total = 0;
+
+  for (const item of requestedItems) {
+    const candidates = byKey.get(item.key) || [];
+    const sorted = candidates
+      .filter((c) => c.walkingDurationMinutes !== null)
+      .sort((a, b) => (a.walkingDurationMinutes as number) - (b.walkingDurationMinutes as number));
+
+    if (sorted.length === 0) {
+      // Not found — 0 contribution
+      continue;
+    }
+
+    const factor = calculateDistanceFactor(sorted[0].walkingDurationMinutes);
+    total += pointsEach * factor;
+  }
+
+  const serviceScore = Number(Math.min(10, total).toFixed(2));
+
+  if (suburbData === null) {
+    return { personalisedIndex: serviceScore, serviceScore, suburbBonus: null };
+  }
+
+  const avgOpenRaw = (suburbData.crimeScore + suburbData.housePriceScore) / 2;
+  const suburbBonus = normaliseOpenScore(avgOpenRaw);
+
+  const personalisedIndex = Number(
+    Math.min(10, serviceScore * 0.9 + suburbBonus * 0.1).toFixed(1)
+  );
+
+  return { personalisedIndex, serviceScore, suburbBonus };
+}
+
+
 // ---------------------------------------------------------------------------
 // Haversine distance (metres, crow-flies)
 // ---------------------------------------------------------------------------

@@ -12,12 +12,10 @@ import {
   buildLeaderboard,
   buildHeatmap,
   WALKABLE_THRESHOLD_METERS,
-    // --- new ---
   buildErrandCandidateMap,
   scoreErrandTripExact,
   scoreAbundance,
   scoreNearestServices,
-  // ErrandTripResult,
   haversineMeters,
   extractSuburbFromAddress,
   normaliseToTen,
@@ -132,16 +130,16 @@ function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
     const existingItem = CORE_ANALYSIS_ITEMS.find(i => i.type === type);
     // console.log(`[PARSE] type:${type} existingItem:`, existingItem?.key, 'hasFilter:', !!existingItem?.filter);
     // parsed.push({ key, catId, type, filter: existingItem?.filter });
-    parsed.push({ 
+    parsed.push({
       key: existingItem?.key ?? key,  // ← use canonical key, not frontend key
-      catId: existingItem?.catId ?? catId, 
-      type, 
+      catId: existingItem?.catId ?? catId,
+      type,
       filter: existingItem?.filter,
       useTextSearch: existingItem?.useTextSearch,
       textQuery: existingItem?.textQuery,
-      upgradeCount: existingItem?.upgradeCount,  
+      upgradeCount: existingItem?.upgradeCount,
     });
-    
+
   }
 
   return parsed.length ? parsed : fallback;
@@ -368,7 +366,7 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
       if (response.data?.status === 'OK') {
         const elements: any[] = response.data?.rows?.[0]?.elements || [];
         // console.log(`[MATRIX RESPONSE] ${elements.length} elements:`, 
-          // elements.map((e: any, i: number) => `${batch[i]?.name}: ${e?.status} ${e?.distance?.value}m`)
+        // elements.map((e: any, i: number) => `${batch[i]?.name}: ${e?.status} ${e?.distance?.value}m`)
         // );
         // console.log('[BATCH ORDER]', batch.map((c, i) => `${i}: ${c.name}`));
         // console.log('[ELEMENTS]', elements.map((e: any, i: number) => `${i}: ${e?.status} ${e?.distance?.value}m`));
@@ -444,16 +442,16 @@ async function analyzeLocation(
   // Full neighbourhood score — all service types
   const { candidatesByCategory: allCategories } = buildErrandCandidateMap(enriched);
   const errandTripAll = scoreErrandTripExact(originLat, originLon, allCategories);
-  const abundanceAll  = scoreAbundance(enriched);
-  const nearestAll    = scoreNearestServices(enriched);
+  const abundanceAll = scoreAbundance(enriched);
+  const nearestAll = scoreNearestServices(enriched);
 
   // Selected services score — only what the user picked
   const selectedTypes = new Set(displayItems.map(i => i.type));
   const selectedCandidates = enriched.filter(c => selectedTypes.has(c.type));
   const { candidatesByCategory: selectedCategories } = buildErrandCandidateMap(selectedCandidates);
   const errandTripSel = scoreErrandTripExact(originLat, originLon, selectedCategories);
-  const abundanceSel  = scoreAbundance(selectedCandidates);
-  const nearestSel    = scoreNearestServices(selectedCandidates);
+  const abundanceSel = scoreAbundance(selectedCandidates);
+  const nearestSel = scoreNearestServices(selectedCandidates);
 
   // --- Housing & crime scores from static JSON (zero API calls) ---
   const suburbName = formattedAddress ? extractSuburbFromAddress(formattedAddress) : null;
@@ -472,19 +470,19 @@ async function analyzeLocation(
   // --- Create composite score with weighted components (weights are subjective and can be tuned) ---
   const WEIGHTS = {
     errandTrip: 0.25,
-    abundance:  0.20,
-    nearest:    0.20,
+    abundance: 0.20,
+    nearest: 0.20,
     housePrice: 0.20,
-    crime:      0.15,
+    crime: 0.15,
   };
 
   function compositeScore(errand: number, abund: number, near: number): number {
     const components = [
-      { score: errand,          weight: WEIGHTS.errandTrip },
-      { score: abund,           weight: WEIGHTS.abundance  },
-      { score: near,            weight: WEIGHTS.nearest    },
+      { score: errand, weight: WEIGHTS.errandTrip },
+      { score: abund, weight: WEIGHTS.abundance },
+      { score: near, weight: WEIGHTS.nearest },
       { score: housePriceScore, weight: WEIGHTS.housePrice },
-      { score: crimeScore,      weight: WEIGHTS.crime      },
+      { score: crimeScore, weight: WEIGHTS.crime },
     ].filter(c => c.score !== null) as { score: number; weight: number }[];
 
     const totalWeight = components.reduce((sum, c) => sum + c.weight, 0);
@@ -492,7 +490,7 @@ async function analyzeLocation(
   }
 
   const neighbourhoodScore = compositeScore(errandTripAll.score, abundanceAll.score, nearestAll.score);
-  const selectionScore     = compositeScore(errandTripSel.score, abundanceSel.score, nearestSel.score);
+  const selectionScore = compositeScore(errandTripSel.score, abundanceSel.score, nearestSel.score);
 
   console.log(`[WALKABILITY_NEIGHOOD] errand:${errandTripAll.score} abundance:${abundanceAll.score} nearest:${nearestAll.score} crime:${crimeScore} housePrice:${housePriceScore} composite:${neighbourhoodScore}`);
   console.log(`[WALKABILITY_SELECTED] errand:${errandTripSel.score} abundance:${abundanceSel.score} nearest:${nearestSel.score} crime:${crimeScore} housePrice:${housePriceScore} composite:${selectionScore}`);
@@ -512,14 +510,14 @@ async function analyzeLocation(
       neighbourhood: {
         score: neighbourhoodScore,
         errandTrip: { score: errandTripAll.score, totalDistanceMeters: errandTripAll.totalDistanceMeters, meanEdgeMeters: errandTripAll.meanEdgeMeters, optimalPath: errandTripAll.optimalPath, missingCategories: errandTripAll.missingCategories },
-        abundance:   { score: abundanceAll.score, totalWeightedOptions: abundanceAll.totalWeightedOptions },
-        nearest:     { score: nearestAll.score, perType: nearestAll.perType },
+        abundance: { score: abundanceAll.score, totalWeightedOptions: abundanceAll.totalWeightedOptions },
+        nearest: { score: nearestAll.score, perType: nearestAll.perType },
       },
       selection: {
         score: selectionScore,
         errandTrip: { score: errandTripSel.score, totalDistanceMeters: errandTripSel.totalDistanceMeters, meanEdgeMeters: errandTripSel.meanEdgeMeters, optimalPath: errandTripSel.optimalPath, missingCategories: errandTripSel.missingCategories },
-        abundance:   { score: abundanceSel.score, totalWeightedOptions: abundanceSel.totalWeightedOptions },
-        nearest:     { score: nearestSel.score, perType: nearestSel.perType },
+        abundance: { score: abundanceSel.score, totalWeightedOptions: abundanceSel.totalWeightedOptions },
+        nearest: { score: nearestSel.score, perType: nearestSel.perType },
       },
       suburb: {
         name: suburbName,
@@ -649,13 +647,58 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         requestedItems.map((i) => i.key).sort().join('|'),
       ].join('_');
 
-      const cached = getCached<LocationAnalysis>(analysisCacheKey);
+      const cached = getCached<any>(analysisCacheKey);
       if (cached) return jsonResponse(200, cached);
 
       const analysis = await analyzeLocation(lat, lon, requestedItems, formattedAddress);
-      setCached(analysisCacheKey, analysis, CACHE_TTL_MS.analysis);
-      return jsonResponse(200, analysis);
+
+      // ── Personalised Index ──────────────────────────────────────────────
+      // Simple binary rule: each selected service contributes equally.
+      // Full points if the nearest instance is within the 800m threshold,
+      // partial credit if just over (decays to 0 at ~2km), zero if missing.
+      const THRESHOLD_M = 800;
+      const DECAY_M = 2000;
+      const totalSelected = requestedItems.length;
+
+      let servicePoints = 0;
+      if (totalSelected > 0) {
+        const pointsEach = 10 / totalSelected;
+        // analysis.services = nearest candidate per selected type
+        for (const svc of analysis.services) {
+          const dist = svc.walkingDistanceMeters;
+          if (dist === null || dist === undefined) continue;
+          if (dist <= THRESHOLD_M) {
+            servicePoints += pointsEach;          // full credit
+          } else if (dist < DECAY_M) {
+            // linear decay from 1 → 0 between 800m and 2000m
+            const partial = 1 - (dist - THRESHOLD_M) / (DECAY_M - THRESHOLD_M);
+            servicePoints += pointsEach * partial;
+          }
+          // else 0 contribution
+        }
+      }
+      const serviceScore = Math.min(10, Number(servicePoints.toFixed(2)));
+
+      // 10% suburb open-data nudge (crime score already 0-10 via normaliseToTen)
+      const suburbCrime = analysis.walkability?.suburb?.crimeScore;          // 0-10 or null
+      const suburbPrice = analysis.walkability?.suburb?.housePriceScore;     // 0-10 or null
+      let suburbBonus: number | null = null;
+      if (suburbCrime !== null && suburbCrime !== undefined) {
+        const parts = [suburbCrime, suburbPrice].filter((v): v is number => v !== null && v !== undefined);
+        suburbBonus = Number((parts.reduce((a, b) => a + b, 0) / parts.length).toFixed(1));
+      }
+
+      const personalisedIndex = suburbBonus !== null
+        ? Number(Math.min(10, serviceScore * 0.9 + suburbBonus * 0.1).toFixed(1))
+        : Number(serviceScore.toFixed(1));
+
+      console.log(`[PERSONALISED] services:${serviceScore} suburb:${suburbBonus} → ${personalisedIndex} (${totalSelected} filters, ${analysis.services.filter(s => (s.walkingDistanceMeters ?? 9999) <= THRESHOLD_M).length} within 800m)`);
+
+      const result = { ...analysis, personalised_index: personalisedIndex, service_score: serviceScore, suburb_bonus: suburbBonus };
+      setCached(analysisCacheKey, result, CACHE_TTL_MS.analysis);
+      return jsonResponse(200, result);
     }
+
 
     // 4. Routing (Directions)
     if (routePath === '/api/route' && httpMethod === 'GET') {

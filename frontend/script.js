@@ -74,7 +74,7 @@ let serviceMarkers = [], servicePolylines = [];
 let selectedServices = new Set(['doctor', 'supermarket', 'train', 'bus', 'park']);
 let openCategories = new Set();
 let history = JSON.parse(sessionStorage.getItem('history') || '[]');
-let leaderboardData = null;
+let historyScores = JSON.parse(sessionStorage.getItem('historyScores') || '{}');
 
 async function loadGoogleMaps() {
   try {
@@ -105,53 +105,8 @@ function initApp() {
   });
   renderFilters();
   renderHistory();
-  // fetchLeaderboard(); // Commented out to speed up initial loading, can be re-enabled if needed
   lucide.createIcons();
-  // Auto-search if user arrived from landing page with ?q= param
   checkUrlParams();
-}
-
-async function fetchLeaderboard() {
-  try {
-    const res = await fetch('/api/leaderboard');
-    if (!res.ok) throw new Error('Failed to fetch leaderboard');
-    leaderboardData = await res.json();
-    switchLeaderboard('inner');
-  } catch (e) { console.error('Failed to load leaderboard', e); }
-}
-
-function switchLeaderboard(category) {
-  if (!leaderboardData) return;
-
-  ['inner', 'middle', 'outer'].forEach(id => {
-    const btn = document.getElementById(`tab-${id}`);
-    if (id === category) {
-      btn.className = "px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-[#004071] text-[#004071] whitespace-nowrap";
-    } else {
-      btn.className = "px-3 py-2 text-[10px] font-bold uppercase tracking-tighter border-b-2 border-transparent text-slate-400 hover:text-slate-600 whitespace-nowrap";
-    }
-  });
-
-  const container = document.getElementById('leaderboard-list');
-  container.innerHTML = '';
-  const rows = Array.isArray(leaderboardData[category]) ? leaderboardData[category] : [];
-  if (!rows.length) {
-    container.innerHTML = '<p class="text-center py-4 text-slate-400 text-xs font-inter">No rankings available</p>';
-    return;
-  }
-
-  rows.forEach(suburb => {
-    const div = document.createElement('div');
-    div.className = "flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100 transition-all hover:border-[#004071]";
-    div.innerHTML = `
-      <div class="flex items-center gap-3">
-        <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] font-black font-inter">${suburb.rank}</span>
-        <span class="text-xs font-bold text-slate-700">${suburb.name}</span>
-      </div>
-      <span class="text-[11px] font-black text-[#004071] font-inter bg-blue-50 px-2 py-0.5 rounded-full">${suburb.score.toFixed(1)}</span>
-    `;
-    container.appendChild(div);
-  });
 }
 
 function formatDistance(meters) {
@@ -160,15 +115,17 @@ function formatDistance(meters) {
   return `${Math.round(meters)} m`;
 }
 
-function getScoreDescription(index, breakdown) {
+function getScoreDescription(index, breakdown, numFilters) {
+  const n = numFilters || 0;
+  if (n === 0) return 'Select service filters to personalise your score.';
   const met = breakdown?.summary?.categoriesMetWithin800m;
   const total = breakdown?.summary?.totalCategories;
   if (typeof met === 'number' && typeof total === 'number') {
-    return `${met}/${total} core categories are within 800m walking distance.`;
+    return `${met} of your ${n} selected service${n !== 1 ? 's' : ''} ${met === 1 ? 'is' : 'are'} within 800m.`;
   }
-  if (index >= 8) return 'Exceptional 20-min neighbourhood.';
-  if (index >= 5) return 'Strong liveability with minor gaps.';
-  return 'Developing infrastructure area.';
+  if (index >= 8) return 'All selected services are within easy walking distance!';
+  if (index >= 5) return 'Most selected services are accessible on foot.';
+  return 'Some selected services fall outside the 800m threshold.';
 }
 
 function renderScoreBreakdown(breakdown) {
@@ -287,12 +244,19 @@ function renderFilters() {
 
 function renderHistory() {
   const list = document.getElementById('history-list');
-  if (!history.length) return;
+  if (!history.length) {
+    list.innerHTML = '<p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>';
+    return;
+  }
   list.innerHTML = '';
   history.forEach(item => {
+    const score = historyScores[item.display_name];
+    const scoreBadge = score != null
+      ? `<span class="history-score">${score}</span>`
+      : '';
     const div = document.createElement('div');
     div.className = "p-3 bg-slate-50 border border-slate-100 rounded-lg cursor-pointer hover:border-[#004071] hover:bg-white transition-all group flex items-center gap-3";
-    div.innerHTML = `<i data-lucide="map-pin" class="w-4 h-4 text-slate-400 group-hover:text-[#004071]"></i><span class="text-xs font-semibold text-slate-600 truncate">${item.display_name}</span>`;
+    div.innerHTML = `<i data-lucide="map-pin" class="w-4 h-4 text-slate-400 group-hover:text-[#004071] flex-shrink-0"></i><span class="text-xs font-semibold text-slate-600 truncate flex-1">${item.display_name}</span>${scoreBadge}`;
     div.onclick = () => select(item, false);
     list.appendChild(div);
   });
@@ -366,17 +330,26 @@ async function loadServices(lat, lon) {
     return;
   }
   try {
-    // const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}`);
     const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
     if (!res.ok) throw new Error('Failed to load nearby services');
     const data = await res.json();
     const services = Array.isArray(data.services) ? data.services : [];
-    const index = Number(data.index || 0);
+
+    // Use personalised_index: simple binary score — services within 800m = full points
+    const rawScore = data.personalised_index ?? data.walkability?.selection?.score ?? data.index ?? 0;
+    const index = Number(rawScore);
     document.getElementById('score-value').textContent = index.toFixed(1);
     document.getElementById('score-bar').style.width = (index * 10) + '%';
-    document.getElementById('score-desc').textContent = getScoreDescription(index, data.breakdown);
+    document.getElementById('score-desc').textContent = getScoreDescription(index, data.breakdown, selectedServices.size);
     renderScoreBreakdown(data.breakdown);
     bar.style.width = '70%';
+
+    // Save score to history
+    if (currentAddress) {
+      historyScores[currentAddress] = index.toFixed(1);
+      sessionStorage.setItem('historyScores', JSON.stringify(historyScores));
+      renderHistory();
+    }
     // Only draw route to nearest service per type
     const nearestPerType = Object.values(
       services.reduce((acc, s) => {
