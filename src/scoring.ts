@@ -307,6 +307,7 @@ export function extractSuburbFromAddress(formattedAddress: string): string | nul
   const parts = formattedAddress.split(',').map(p => p.trim());
   for (const part of parts) {
     const cleaned = part.replace(/\s+(VIC|NSW|QLD|SA|WA|TAS|NT|ACT)\s+\d{4}$/i, '').trim();
+    // const cleaned = part.replace(/\s+(VIC|NSW|QLD|SA|WA|TAS|NT|ACT)(\s+\d{4})?$/i, '').trim(); // This will allow the postcode to be optional in the suburb extraction
     if ((housingCrimeData as any)[cleaned]) return cleaned;
     if ((housingCrimeData as any)[part]) return part;
   }
