@@ -3,7 +3,7 @@
     "suburbs": [
       "Albert Park",
       "Middle Park",
-      "West St Kilda"
+      "St Kilda West"
     ],
     "region": "Inner Melbourne",
     "period": "2025-09-30",
@@ -324,6 +324,38 @@
   },
   {
     "suburbs": [
+      "Brunswick East"
+    ],
+    "region": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 500,
+      "2brFlat": 625,
+      "3brFlat": 880,
+      "2brHouse": 710,
+      "3brHouse": 880,
+      "4brHouse": 1100,
+      "all": 600
+    }
+  },
+  {
+    "suburbs": [
+      "Brunswick West"
+    ],
+    "region": "North Western Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 400,
+      "2brFlat": 500,
+      "3brFlat": 725,
+      "2brHouse": 590,
+      "3brHouse": 755,
+      "4brHouse": 1000,
+      "all": 480
+    }
+  },
+  {
+    "suburbs": [
       "Bulleen",
       "Templestowe",
       "Doncaster"
@@ -373,20 +405,6 @@
       "3brHouse": 650,
       "4brHouse": 878,
       "all": 650
-    }
-  },
-  {
-    "suburbs": [
-      "CBD",
-      "St Kilda Rd"
-    ],
-    "region": "Inner Melbourne",
-    "period": "2025-09-30",
-    "weeklyRent": {
-      "1brFlat": 560,
-      "2brFlat": 735,
-      "3brFlat": 1050,
-      "all": 660
     }
   },
   {
@@ -732,38 +750,6 @@
   },
   {
     "suburbs": [
-      "East Brunswick"
-    ],
-    "region": "North Western Melbourne",
-    "period": "2025-09-30",
-    "weeklyRent": {
-      "1brFlat": 500,
-      "2brFlat": 625,
-      "3brFlat": 880,
-      "2brHouse": 710,
-      "3brHouse": 880,
-      "4brHouse": 1100,
-      "all": 600
-    }
-  },
-  {
-    "suburbs": [
-      "East Hawthorn"
-    ],
-    "region": "Inner Eastern Melbourne",
-    "period": "2025-09-30",
-    "weeklyRent": {
-      "1brFlat": 490,
-      "2brFlat": 610,
-      "3brFlat": 890,
-      "2brHouse": 698,
-      "3brHouse": 898,
-      "4brHouse": 1300,
-      "all": 595
-    }
-  },
-  {
-    "suburbs": [
       "East Melbourne"
     ],
     "region": "Inner Melbourne",
@@ -775,22 +761,6 @@
       "2brHouse": 875,
       "3brHouse": 1100,
       "all": 650
-    }
-  },
-  {
-    "suburbs": [
-      "East St Kilda"
-    ],
-    "region": "Inner Melbourne",
-    "period": "2025-09-30",
-    "weeklyRent": {
-      "1brFlat": 425,
-      "2brFlat": 575,
-      "3brFlat": 840,
-      "2brHouse": 763,
-      "3brHouse": 900,
-      "4brHouse": 1100,
-      "all": 550
     }
   },
   {
@@ -1139,6 +1109,22 @@
   },
   {
     "suburbs": [
+      "Hawthorn East"
+    ],
+    "region": "Inner Eastern Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 490,
+      "2brFlat": 610,
+      "3brFlat": 890,
+      "2brHouse": 698,
+      "3brHouse": 898,
+      "4brHouse": 1300,
+      "all": 595
+    }
+  },
+  {
+    "suburbs": [
       "Heidelberg",
       "Heidelberg West"
     ],
@@ -1298,6 +1284,20 @@
   },
   {
     "suburbs": [
+      "Melbourne",
+      "Melbourne"
+    ],
+    "region": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 560,
+      "2brFlat": 735,
+      "3brFlat": 1050,
+      "all": 660
+    }
+  },
+  {
+    "suburbs": [
       "Melton"
     ],
     "region": "Outer Western Melbourne",
@@ -1430,6 +1430,23 @@
   },
   {
     "suburbs": [
+      "Mount Eliza",
+      "Mornington",
+      "Mount Martha"
+    ],
+    "region": "Mornington Peninsula",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "2brFlat": 535,
+      "3brFlat": 650,
+      "2brHouse": 533,
+      "3brHouse": 675,
+      "4brHouse": 895,
+      "all": 695
+    }
+  },
+  {
+    "suburbs": [
       "Mount Waverley"
     ],
     "region": "Inner Eastern Melbourne",
@@ -1441,23 +1458,6 @@
       "2brHouse": 570,
       "3brHouse": 660,
       "4brHouse": 800,
-      "all": 695
-    }
-  },
-  {
-    "suburbs": [
-      "Mt Eliza",
-      "Mornington",
-      "Mt Martha"
-    ],
-    "region": "Mornington Peninsula",
-    "period": "2025-09-30",
-    "weeklyRent": {
-      "2brFlat": 535,
-      "3brFlat": 650,
-      "2brHouse": 533,
-      "3brHouse": 675,
-      "4brHouse": 895,
       "all": 695
     }
   },
@@ -1998,6 +1998,22 @@
   },
   {
     "suburbs": [
+      "St Kilda East"
+    ],
+    "region": "Inner Melbourne",
+    "period": "2025-09-30",
+    "weeklyRent": {
+      "1brFlat": 425,
+      "2brFlat": 575,
+      "3brFlat": 840,
+      "2brHouse": 763,
+      "3brHouse": 900,
+      "4brHouse": 1100,
+      "all": 550
+    }
+  },
+  {
+    "suburbs": [
       "Sunbury"
     ],
     "region": "North Western Melbourne",
@@ -2250,22 +2266,6 @@
       "3brHouse": 460,
       "4brHouse": 525,
       "all": 490
-    }
-  },
-  {
-    "suburbs": [
-      "West Brunswick"
-    ],
-    "region": "North Western Melbourne",
-    "period": "2025-09-30",
-    "weeklyRent": {
-      "1brFlat": 400,
-      "2brFlat": 500,
-      "3brFlat": 725,
-      "2brHouse": 590,
-      "3brHouse": 755,
-      "4brHouse": 1000,
-      "all": 480
     }
   },
   {

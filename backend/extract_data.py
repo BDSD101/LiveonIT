@@ -283,6 +283,9 @@ def extract_house_prices(filepath: str, engine: str, period_end: str) -> pd.Data
     df_output["suburb"] = df_output["suburb"].str.title()
     return df_output
 
+RENT_SUBURB_SWAP = {"West St Kilda":"St Kilda West", "East St Kilda":"St Kilda East", "CBD":"Melbourne", "St Kilda Rd":"Melbourne", "East Brunswick":"Brunswick East", "East Hawthorn":"Hawthorn East", "Mt Eliza": "Mount Eliza", "Mt Martha": "Mount Martha", "West Brunswick":"Brunswick West"}
+# print(RENT_SUBURB_SWAP.keys())
+# print(RENT_SUBURB_SWAP.values())
 
 def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
     """
@@ -377,9 +380,22 @@ def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
                 except (ValueError, TypeError):
                     pass
 
+
+
             if suburb not in result:
+
+                suburbs = [s.strip() for s in suburb.split("-")]
+                # print("YYYYY", suburbs)
+                new_suburbs = []
+                for s in suburbs:
+                    if s in RENT_SUBURB_SWAP.keys():
+                        print(f"    Swapped suburb '{s}' to '{RENT_SUBURB_SWAP[s]}' for consistency")
+                        s = RENT_SUBURB_SWAP[s]
+                    new_suburbs.append(s)
+
+
                 result[suburb] = {
-                    "suburbs": [s.strip() for s in suburb.split("-")],
+                    "suburbs": new_suburbs,
                     "region": region if region.lower() not in ("nan", "", "none") else None,
                     "period": period_end,
                     "weeklyRent": {},
@@ -389,7 +405,20 @@ def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
                 result[suburb]["weeklyRent"][type_key] = rent
 
     suburb_list = sorted(result.values(), key=lambda x: x["suburbs"][0])
+
+    # for suburb in suburb_list:
+        # print("XXXX", suburb)
+
+#     print("XXXX", suburb)
+# if suburb in RENT_SUBURB_SWAP.keys():
+#     print(f"    Swapped suburb '{suburb}' to '{RENT_SUBURB_SWAP[suburb]}' for consistency")
+#     suburb = RENT_SUBURB_SWAP[suburb]
+
+
     print(f"  Suburb groups extracted: {len(suburb_list)}")
+
+
+    # print(suburb_list)
     return suburb_list
 
 
@@ -571,6 +600,7 @@ def extract_suburb_table(filepath: str, sheet_name: str) -> dict[str, dict]:
 # SUBURBS — EXTRACT
 # =============================================================================
 
+
 def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
     """
     Fetch Melbourne suburbs with postcodes grouped by LGA from the Wikipedia API.
@@ -665,6 +695,39 @@ def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
 if __name__ == "__main__":
 
     # -------------------------------------------------------------------------
+    # SUBURBS
+    # -------------------------------------------------------------------------
+    print("\n" + "=" * 60)
+    print("SUBURB DATA")
+    print("=" * 60)
+    melbourne_suburb_list = []
+    try:
+        suburbs_by_lga = fetch_melbourne_suburbs_by_lga()
+        # print(suburbs_by_lga)
+        # for each lga print the suburbs
+        for lga, suburbs in suburbs_by_lga.items():
+            # print(suburbs)
+            # print each suburb name and postcode
+            # add a tuple of (suburb, postcode) to melbourne_suburb_list
+            for s in suburbs:
+                # print(f"  - {s['suburb']} ({s['postcode']})")
+                melbourne_suburb_list.append((s['suburb'], s['postcode'], lga))
+
+        # extract the first element of each tuple in melbourne_suburb_list to create a list of suburb names only
+        melbourne_suburb_names = [suburb for suburb, _, _ in melbourne_suburb_list]
+        melbourne_unique_suburb_list = sorted(list(set(melbourne_suburb_names)))
+
+        print(f"  Total Melbourne suburbs: {len(melbourne_suburb_list)}")
+        # print(f"  Melbourne Suburbs: {melbourne_suburb_list}")
+        # print(f"  Unique Melbourne suburbs: {melbourne_unique_suburb_list}")
+
+    except Exception as e:
+        print(f"Suburb extraction failed: {e}")
+        import traceback; traceback.print_exc()
+        suburbs_by_lga = []
+
+
+    # -------------------------------------------------------------------------
     # HOUSING — House & Unit Prices
     # -------------------------------------------------------------------------
     for label, dataset_id, raw_path in [
@@ -710,6 +773,7 @@ if __name__ == "__main__":
             json.dump(output_data, f, indent=2, ensure_ascii=False)
         print(f"\n  Saved: {OUTPUT_HOUSE_UNIT} ({len(output_data)} suburbs)")
 
+    
     # -------------------------------------------------------------------------
     # HOUSING — Rent
     # -------------------------------------------------------------------------
@@ -731,6 +795,15 @@ if __name__ == "__main__":
         if filepath and os.path.exists(filepath):
             _, engine = resolve_engine(filepath)
             rent_data = extract_rent(filepath, engine, period_end)
+
+            # print values for suburbs key
+            for suburb_data in rent_data:
+                suburbs = suburb_data.get("suburbs", [])
+                for suburb in suburbs:
+                    if suburb not in melbourne_unique_suburb_list:
+                        print(f"  Warning: suburb '{suburb}' not found in Melbourne suburbs list.")
+
+
             with open(OUTPUT_RENT, "w") as f:
                 json.dump(rent_data, f, indent=2, ensure_ascii=False)
             print(f"\n  Saved: {OUTPUT_RENT} ({len(rent_data)} suburb groups)")
@@ -739,18 +812,7 @@ if __name__ == "__main__":
         print(f"Rental extraction failed: {e}")
         import traceback; traceback.print_exc()
 
-    # -------------------------------------------------------------------------
-    # SUBURBS
-    # -------------------------------------------------------------------------
-    print("\n" + "=" * 60)
-    print("SUBURB DATA")
-    print("=" * 60)
-    try:
-        suburbs_by_lga = fetch_melbourne_suburbs_by_lga()
-    except Exception as e:
-        print(f"Suburb extraction failed: {e}")
-        import traceback; traceback.print_exc()
-        suburbs_by_lga = []
+
 
     # -------------------------------------------------------------------------
     # CRIME
