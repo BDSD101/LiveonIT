@@ -616,7 +616,8 @@ def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
         lga_match = lga_pattern.match(line.strip())
         if lga_match:
             raw = lga_match.group(1).strip()
-            current_lga = re.sub(r"^(City of |Shire of )", "", raw).strip()
+            current_lga = re.sub(r"^(City of |Shire of)", "", raw).strip()
+            current_lga = re.sub(r" City Council$", "", current_lga).strip()
             if current_lga not in result:
                 result[current_lga] = []
             continue
