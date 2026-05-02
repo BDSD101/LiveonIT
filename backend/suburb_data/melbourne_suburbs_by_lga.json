@@ -1221,6 +1221,14 @@
       "postcode": "3807"
     },
     {
+      "suburb": "Officer",
+      "postcode": "3809"
+    },
+    {
+      "suburb": "Pakenham",
+      "postcode": "3810"
+    },
+    {
       "suburb": "Avonsleigh",
       "postcode": "3782"
     },
@@ -1973,8 +1981,16 @@
       "postcode": "3144"
     },
     {
+      "suburb": "Malvern",
+      "postcode": "3144"
+    },
+    {
       "suburb": "Malvern East",
       "postcode": "3145"
+    },
+    {
+      "suburb": "Prahran",
+      "postcode": "3181"
     },
     {
       "suburb": "South Yarra",
@@ -2303,6 +2319,68 @@
     {
       "suburb": "Toolern Vale",
       "postcode": "3337"
+    }
+  ],
+  "Moonee Valley": [
+    {
+      "suburb": "Aberfeldie",
+      "postcode": "3040"
+    },
+    {
+      "suburb": "Airport West",
+      "postcode": "3042"
+    },
+    {
+      "suburb": "Ascot Vale",
+      "postcode": "3032"
+    },
+    {
+      "suburb": "Avondale Heights",
+      "postcode": "3034"
+    },
+    {
+      "suburb": "Essendon",
+      "postcode": "3040"
+    },
+    {
+      "suburb": "Essendon Fields",
+      "postcode": "3041"
+    },
+    {
+      "suburb": "Essendon North",
+      "postcode": "3041"
+    },
+    {
+      "suburb": "Essendon West",
+      "postcode": "3040"
+    },
+    {
+      "suburb": "Flemington",
+      "postcode": "3031"
+    },
+    {
+      "suburb": "Keilor East",
+      "postcode": "3033"
+    },
+    {
+      "suburb": "Moonee Ponds",
+      "postcode": "3039"
+    },
+    {
+      "suburb": "Niddrie",
+      "postcode": "3042"
+    },
+    {
+      "suburb": "Strathmore",
+      "postcode": "3041"
+    },
+    {
+      "suburb": "Strathmore Heights",
+      "postcode": "3041"
+    },
+    {
+      "suburb": "Travancore",
+      "postcode": "3032"
     }
   ],
   "Wyndham": [

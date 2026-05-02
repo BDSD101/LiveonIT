@@ -605,24 +605,41 @@ def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
     print(f"  Page fetched — {len(lines)} lines")
 
     # ===[[City of Melbourne]]=== or ===[[Shire of X|Shire of X]]===
-    lga_pattern    = re.compile(r"^===\[\[(?:[^\]|]+\|)?([^\]]+)\]\]===")
+    # lga_pattern    = re.compile(r"^===\[\[(?:[^\]|]+\|)?([^\]]+)\]\]===")
+    lga_pattern = re.compile(r"^===\s*(?:\[\[(?:[^\]|]+\|)?([^\]]+)\]\]|([^\[=]+?))\s*===")
+    
     # * [[Suburb, Victoria|Suburb Name]] 3053  or  * [[Suburb Name]] 3053
-    suburb_pattern = re.compile(r"^\*\s+\[\[(?:[^\]|]+\|)?([^\]|]+)\]\]\s+(\d{4})")
+    # suburb_pattern = re.compile(r"^\*\s+\[\[(?:[^\]|]+\|)?([^\]|]+)\]\]\s+(\d{4})")
+    suburb_pattern = re.compile(r"^\*\s*\[\[(?:[^\]|]+\|)?([^\]|]+)\]\](?:\s+\([^)]*\))?\s+(\d{4})")
 
     result: dict[str, list[dict]] = {}
     current_lga: str | None = None
 
+
     for line in lines:
         lga_match = lga_pattern.match(line.strip())
+
+        # # Debug Moonee Valley
+        # if lga_match:
+        #     raw = (lga_match.group(1) or lga_match.group(2) if lga_match.lastindex >= 2 else lga_match.group(1)).strip()
+        #     print(f"LGA FOUND: {repr(line.strip())} -> {repr(raw)}")
+        # elif '===' in line:
+        #     print(f"UNMATCHED HEADING: {repr(line.strip())}")
+
         if lga_match:
             raw = lga_match.group(1).strip()
             current_lga = re.sub(r"^(City of |Shire of)", "", raw).strip()
-            current_lga = re.sub(r" City Council$", "", current_lga).strip()
+            # current_lga = re.sub(r" City Council$", "", current_lga).strip()
+            print(f"Current LGA: {current_lga}")
             if current_lga not in result:
                 result[current_lga] = []
             continue
 
-        if current_lga and line.startswith("* "):
+        # if current_lga == "Moonee Valley":
+        #     print(repr(line))
+
+        if current_lga and line.startswith("*"):
+            # print(f"  Checking suburb line: {repr(line.strip())}")
             suburb_match = suburb_pattern.match(line)
             if suburb_match:
                 suburb   = suburb_match.group(1).strip()

@@ -31,7 +31,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 2.4,
         "2brHouse": 1.4286,
         "3brFlat": 1.75,
@@ -43,8 +43,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1452500.0,
       "meanMedianUnitPrice": 395300.0,
-      "housePriceScore": 1.6096,
-      "unitPriceScore": -2.2256
+      "housePriceScore": 1.5902,
+      "unitPriceScore": -2.2269
     }
   },
   "Carlton North": {
@@ -79,7 +79,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.1111,
+        "1brFlat": -0.2128,
         "2brFlat": 1.0,
         "2brHouse": 2.6429,
         "3brFlat": 0.98,
@@ -91,8 +91,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1665700.0,
       "meanMedianUnitPrice": 774900.0,
-      "housePriceScore": 2.3649,
-      "unitPriceScore": 1.2023
+      "housePriceScore": 2.3448,
+      "unitPriceScore": 1.2178
     }
   },
   "Docklands": {
@@ -137,7 +137,7 @@
       "meanMedianHousePrice": null,
       "meanMedianUnitPrice": 599000.0,
       "housePriceScore": null,
-      "unitPriceScore": -0.3861
+      "unitPriceScore": -0.3784
     }
   },
   "East Melbourne": {
@@ -171,7 +171,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.8889,
+        "1brFlat": 1.7021,
         "2brFlat": 2.8,
         "2brHouse": 3.0,
         "3brFlat": 3.0,
@@ -184,12 +184,12 @@
       "meanMedianHousePrice": 2860400.0,
       "meanMedianUnitPrice": 761800.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.084
+      "unitPriceScore": 1.0989
     }
   },
   "Flemington": {
     "postcode": "3031",
-    "lga": "Melbourne",
+    "lga": "Moonee Valley",
     "crimeSuburb": {
       "totalIncidents": 1324,
       "topFiveOffenceProportion": {
@@ -202,9 +202,9 @@
       "year": "2025"
     },
     "crimeLga": {
-      "ratePer100k": 17671.9,
+      "ratePer100k": 6245.9,
       "year": "2025",
-      "crimeScore": -3.0
+      "crimeScore": -1.1451
     },
     "rent": {
       "weeklyRent": {
@@ -219,7 +219,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.7778,
+        "1brFlat": 0.6383,
         "2brFlat": 0.2,
         "2brHouse": 0.7143,
         "3brFlat": 1.7,
@@ -231,8 +231,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1082160.0,
       "meanMedianUnitPrice": 410960.0,
-      "housePriceScore": 0.2978,
-      "unitPriceScore": -2.0842
+      "housePriceScore": 0.2796,
+      "unitPriceScore": -2.0848
     }
   },
   "Kensington": {
@@ -267,7 +267,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.7778,
+        "1brFlat": 0.6383,
         "2brFlat": 0.2,
         "2brHouse": 0.7143,
         "3brFlat": 1.7,
@@ -279,8 +279,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1086360.0,
       "meanMedianUnitPrice": 520700.0,
-      "housePriceScore": 0.3126,
-      "unitPriceScore": -1.0932
+      "housePriceScore": 0.2945,
+      "unitPriceScore": -1.0889
     }
   },
   "Melbourne": {
@@ -307,7 +307,7 @@
       "meanMedianHousePrice": null,
       "meanMedianUnitPrice": 560400.0,
       "housePriceScore": null,
-      "unitPriceScore": -0.7347
+      "unitPriceScore": -0.7287
     }
   },
   "North Melbourne": {
@@ -342,7 +342,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.0,
+        "1brFlat": 1.8085,
         "2brFlat": 2.2,
         "2brHouse": 1.1429,
         "3brFlat": 2.02,
@@ -354,8 +354,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1359500.0,
       "meanMedianUnitPrice": 504600.0,
-      "housePriceScore": 1.2802,
-      "unitPriceScore": -1.2386
+      "housePriceScore": 1.2611,
+      "unitPriceScore": -1.235
     }
   },
   "Parkville": {
@@ -390,7 +390,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 2.4,
         "2brHouse": 1.4286,
         "3brFlat": 1.75,
@@ -402,8 +402,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1835600.0,
       "meanMedianUnitPrice": 539500.0,
-      "housePriceScore": 2.9667,
-      "unitPriceScore": -0.9234
+      "housePriceScore": 2.9461,
+      "unitPriceScore": -0.9183
     }
   },
   "Port Melbourne": {
@@ -438,7 +438,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.5556,
+        "1brFlat": 2.3404,
         "2brFlat": 3.0,
         "2brHouse": 2.4286,
         "3brFlat": 3.0,
@@ -450,8 +450,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1576000.0,
       "meanMedianUnitPrice": 745520.0,
-      "housePriceScore": 2.0471,
-      "unitPriceScore": 0.937
+      "housePriceScore": 2.0273,
+      "unitPriceScore": 0.9512
     }
   },
   "Southbank": {
@@ -483,7 +483,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 3.0,
+        "1brFlat": 2.766,
         "2brFlat": 3.0,
         "2brHouse": null,
         "3brFlat": 3.0,
@@ -496,7 +496,7 @@
       "meanMedianHousePrice": null,
       "meanMedianUnitPrice": 586360.0,
       "housePriceScore": null,
-      "unitPriceScore": -0.5003
+      "unitPriceScore": -0.4931
     }
   },
   "South Wharf": {
@@ -556,7 +556,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 3.0,
         "2brHouse": 3.0,
         "3brFlat": 3.0,
@@ -569,7 +569,7 @@
       "meanMedianHousePrice": 2038760.0,
       "meanMedianUnitPrice": 571500.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": -0.6345
+      "unitPriceScore": -0.6279
     }
   },
   "West Melbourne": {
@@ -604,7 +604,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.0,
+        "1brFlat": 1.8085,
         "2brFlat": 2.2,
         "2brHouse": 1.1429,
         "3brFlat": 2.02,
@@ -616,8 +616,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1282000.0,
       "meanMedianUnitPrice": 526900.0,
-      "housePriceScore": 1.0057,
-      "unitPriceScore": -1.0372
+      "housePriceScore": 0.9868,
+      "unitPriceScore": -1.0327
     }
   },
   "Albert Park": {
@@ -652,7 +652,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 1.86,
         "2brHouse": 2.7143,
         "3brFlat": 1.45,
@@ -691,8 +691,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1329000.0,
       "meanMedianUnitPrice": 553760.0,
-      "housePriceScore": 1.1722,
-      "unitPriceScore": -0.7947
+      "housePriceScore": 1.1532,
+      "unitPriceScore": -0.7889
     }
   },
   "Elwood": {
@@ -727,7 +727,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 1.16,
         "2brHouse": 3.0,
         "3brFlat": 1.95,
@@ -740,7 +740,7 @@
       "meanMedianHousePrice": 2187500.0,
       "meanMedianUnitPrice": 639400.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": -0.0213
+      "unitPriceScore": -0.0118
     }
   },
   "Middle Park": {
@@ -775,7 +775,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 1.86,
         "2brHouse": 2.7143,
         "3brFlat": 1.45,
@@ -814,8 +814,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1838000.0,
       "meanMedianUnitPrice": 532760.0,
-      "housePriceScore": 2.9752,
-      "unitPriceScore": -0.9843
+      "housePriceScore": 2.9546,
+      "unitPriceScore": -0.9795
     }
   },
   "St Kilda": {
@@ -850,7 +850,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.6667,
+        "1brFlat": 0.5319,
         "2brFlat": 1.6,
         "2brHouse": 2.2571,
         "3brFlat": 2.1,
@@ -862,8 +862,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1587600.0,
       "meanMedianUnitPrice": 523400.0,
-      "housePriceScore": 2.0882,
-      "unitPriceScore": -1.0688
+      "housePriceScore": 2.0684,
+      "unitPriceScore": -1.0644
     }
   },
   "St Kilda East": {
@@ -889,8 +889,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1590200.0,
       "meanMedianUnitPrice": 588500.0,
-      "housePriceScore": 2.0974,
-      "unitPriceScore": -0.4809
+      "housePriceScore": 2.0776,
+      "unitPriceScore": -0.4737
     }
   },
   "St Kilda West": {
@@ -917,7 +917,7 @@
       "meanMedianHousePrice": 2423000.0,
       "meanMedianUnitPrice": 532100.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": -0.9902
+      "unitPriceScore": -0.9855
     }
   },
   "South Melbourne": {
@@ -951,7 +951,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.5111,
+        "1brFlat": 2.2979,
         "2brFlat": 3.0,
         "2brHouse": 2.5714,
         "3brFlat": 2.7,
@@ -963,8 +963,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1571260.0,
       "meanMedianUnitPrice": 597000.0,
-      "housePriceScore": 2.0303,
-      "unitPriceScore": -0.4042
+      "housePriceScore": 2.0105,
+      "unitPriceScore": -0.3966
     }
   },
   "Abbotsford": {
@@ -999,7 +999,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.8889,
+        "1brFlat": 1.7021,
         "2brFlat": 2.9,
         "2brHouse": 2.1429,
         "3brFlat": 3.0,
@@ -1011,7 +1011,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1253500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.9047,
+      "housePriceScore": 0.886,
       "unitPriceScore": null
     }
   },
@@ -1047,7 +1047,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": 0.5,
         "2brHouse": 1.1429,
         "3brFlat": 1.35,
@@ -1060,7 +1060,7 @@
       "meanMedianHousePrice": 2023660.0,
       "meanMedianUnitPrice": 840960.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.7988
+      "unitPriceScore": 1.8172
     }
   },
   "Burnley": {
@@ -1095,7 +1095,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.6667,
+        "1brFlat": 1.4894,
         "2brFlat": 3.0,
         "2brHouse": 2.5714,
         "3brFlat": 3.0,
@@ -1141,7 +1141,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 2.8,
         "2brHouse": 2.4286,
         "3brFlat": 3.0,
@@ -1153,8 +1153,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1652380.0,
       "meanMedianUnitPrice": 777000.0,
-      "housePriceScore": 2.3177,
-      "unitPriceScore": 1.2212
+      "housePriceScore": 2.2976,
+      "unitPriceScore": 1.2368
     }
   },
   "Collingwood": {
@@ -1189,7 +1189,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.8889,
+        "1brFlat": 1.7021,
         "2brFlat": 2.9,
         "2brHouse": 2.1429,
         "3brFlat": 3.0,
@@ -1201,8 +1201,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1238200.0,
       "meanMedianUnitPrice": 625100.0,
-      "housePriceScore": 0.8505,
-      "unitPriceScore": -0.1504
+      "housePriceScore": 0.8318,
+      "unitPriceScore": -0.1416
     }
   },
   "Cremorne": {
@@ -1228,8 +1228,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1271500.0,
       "meanMedianUnitPrice": 596200.0,
-      "housePriceScore": 0.9685,
-      "unitPriceScore": -0.4114
+      "housePriceScore": 0.9497,
+      "unitPriceScore": -0.4038
     }
   },
   "Fairfield": {
@@ -1264,7 +1264,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": 0.5,
         "2brHouse": 1.1429,
         "3brFlat": 1.35,
@@ -1276,8 +1276,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1683400.0,
       "meanMedianUnitPrice": 581900.0,
-      "housePriceScore": 2.4276,
-      "unitPriceScore": -0.5405
+      "housePriceScore": 2.4074,
+      "unitPriceScore": -0.5336
     }
   },
   "Fitzroy": {
@@ -1311,7 +1311,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.0667,
+        "1brFlat": 1.8723,
         "2brFlat": 3.0,
         "2brHouse": 3.0,
         "3brFlat": 3.0,
@@ -1323,8 +1323,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1742760.0,
       "meanMedianUnitPrice": 795800.0,
-      "housePriceScore": 2.6378,
-      "unitPriceScore": 1.391
+      "housePriceScore": 2.6175,
+      "unitPriceScore": 1.4074
     }
   },
   "Fitzroy North": {
@@ -1359,7 +1359,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 2.8,
         "2brHouse": 2.4286,
         "3brFlat": 3.0,
@@ -1371,8 +1371,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1543100.0,
       "meanMedianUnitPrice": 674900.0,
-      "housePriceScore": 1.9306,
-      "unitPriceScore": 0.2993
+      "housePriceScore": 1.9109,
+      "unitPriceScore": 0.3103
     }
   },
   "Princes Hill": {
@@ -1398,7 +1398,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1680000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 2.4155,
+      "housePriceScore": 2.3954,
       "unitPriceScore": null
     }
   },
@@ -1434,7 +1434,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.6667,
+        "1brFlat": 1.4894,
         "2brFlat": 3.0,
         "2brHouse": 2.5714,
         "3brFlat": 3.0,
@@ -1446,8 +1446,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1400500.0,
       "meanMedianUnitPrice": 565160.0,
-      "housePriceScore": 1.4254,
-      "unitPriceScore": -0.6917
+      "housePriceScore": 1.4062,
+      "unitPriceScore": -0.6855
     }
   },
   "Bellfield": {
@@ -1498,8 +1498,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1003160.0,
       "meanMedianUnitPrice": 853100.0,
-      "housePriceScore": 0.0179,
-      "unitPriceScore": 1.9084
+      "housePriceScore": 0.0,
+      "unitPriceScore": 1.9274
     }
   },
   "Bundoora": {
@@ -1534,7 +1534,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.3333,
+        "1brFlat": -0.4255,
         "2brFlat": -1.2,
         "2brHouse": -1.0,
         "3brFlat": -1.0,
@@ -1546,8 +1546,8 @@
     "housePrices": {
       "meanMedianHousePrice": 879280.0,
       "meanMedianUnitPrice": 464140.0,
-      "housePriceScore": -0.4209,
-      "unitPriceScore": -1.6039
+      "housePriceScore": -0.4384,
+      "unitPriceScore": -1.6022
     }
   },
   "Eaglemont": {
@@ -1609,7 +1609,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6667,
+        "1brFlat": -1.7021,
         "2brFlat": -1.0,
         "2brHouse": -1.0,
         "3brFlat": -0.6,
@@ -1621,8 +1621,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1209200.0,
       "meanMedianUnitPrice": 786160.0,
-      "housePriceScore": 0.7478,
-      "unitPriceScore": 1.304
+      "housePriceScore": 0.7292,
+      "unitPriceScore": 1.32
     }
   },
   "Eltham North": {
@@ -1648,7 +1648,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1277400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.9894,
+      "housePriceScore": 0.9706,
       "unitPriceScore": null
     }
   },
@@ -1684,7 +1684,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.3333,
+        "1brFlat": -0.4255,
         "2brFlat": -1.2,
         "2brHouse": -1.0,
         "3brFlat": -1.0,
@@ -1696,8 +1696,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1024060.0,
       "meanMedianUnitPrice": 729160.0,
-      "housePriceScore": 0.092,
-      "unitPriceScore": 0.7892
+      "housePriceScore": 0.074,
+      "unitPriceScore": 0.8027
     }
   },
   "Heidelberg": {
@@ -1732,7 +1732,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": -0.4,
         "2brHouse": -0.8571,
         "3brFlat": -0.3,
@@ -1744,8 +1744,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1279300.0,
       "meanMedianUnitPrice": 640700.0,
-      "housePriceScore": 0.9961,
-      "unitPriceScore": -0.0096
+      "housePriceScore": 0.9773,
+      "unitPriceScore": 0.0
     }
   },
   "Heidelberg Heights": {
@@ -1771,8 +1771,8 @@
     "housePrices": {
       "meanMedianHousePrice": 945200.0,
       "meanMedianUnitPrice": 728000.0,
-      "housePriceScore": -0.1874,
-      "unitPriceScore": 0.7788
+      "housePriceScore": -0.2051,
+      "unitPriceScore": 0.7922
     }
   },
   "Heidelberg West": {
@@ -1807,7 +1807,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": -0.4,
         "2brHouse": -0.8571,
         "3brFlat": -0.3,
@@ -1819,8 +1819,8 @@
     "housePrices": {
       "meanMedianHousePrice": 790000.0,
       "meanMedianUnitPrice": 647000.0,
-      "housePriceScore": -0.7372,
-      "unitPriceScore": 0.0473
+      "housePriceScore": -0.7544,
+      "unitPriceScore": 0.0572
     }
   },
   "Ivanhoe": {
@@ -1855,7 +1855,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.2222,
+        "1brFlat": 1.0638,
         "2brFlat": 1.0,
         "2brHouse": 0.4286,
         "3brFlat": 0.7,
@@ -1868,7 +1868,7 @@
       "meanMedianHousePrice": 1938500.0,
       "meanMedianUnitPrice": 708400.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 0.6018
+      "unitPriceScore": 0.6143
     }
   },
   "Ivanhoe East": {
@@ -1903,7 +1903,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.2222,
+        "1brFlat": 1.0638,
         "2brFlat": 1.0,
         "2brHouse": 0.4286,
         "3brFlat": 0.7,
@@ -1942,8 +1942,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1372500.0,
       "meanMedianUnitPrice": 720500.0,
-      "housePriceScore": 1.3262,
-      "unitPriceScore": 0.711
+      "housePriceScore": 1.3071,
+      "unitPriceScore": 0.7241
     }
   },
   "Macleod": {
@@ -1969,8 +1969,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1136200.0,
       "meanMedianUnitPrice": 757300.0,
-      "housePriceScore": 0.4892,
-      "unitPriceScore": 1.0433
+      "housePriceScore": 0.4708,
+      "unitPriceScore": 1.0581
     }
   },
   "Montmorency": {
@@ -2005,7 +2005,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6667,
+        "1brFlat": -1.7021,
         "2brFlat": -1.0,
         "2brHouse": -1.0,
         "3brFlat": -0.6,
@@ -2017,8 +2017,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1158800.0,
       "meanMedianUnitPrice": 855160.0,
-      "housePriceScore": 0.5693,
-      "unitPriceScore": 1.927
+      "housePriceScore": 0.5508,
+      "unitPriceScore": 1.9461
     }
   },
   "Rosanna": {
@@ -2044,8 +2044,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1387600.0,
       "meanMedianUnitPrice": 906600.0,
-      "housePriceScore": 1.3797,
-      "unitPriceScore": 2.3915
+      "housePriceScore": 1.3606,
+      "unitPriceScore": 2.4129
     }
   },
   "St Helena": {
@@ -2071,7 +2071,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1141160.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.5068,
+      "housePriceScore": 0.4884,
       "unitPriceScore": null
     }
   },
@@ -2098,8 +2098,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1168300.0,
       "meanMedianUnitPrice": 745460.0,
-      "housePriceScore": 0.6029,
-      "unitPriceScore": 0.9364
+      "housePriceScore": 0.5844,
+      "unitPriceScore": 0.9506
     }
   },
   "Watsonia": {
@@ -2125,8 +2125,8 @@
     "housePrices": {
       "meanMedianHousePrice": 949460.0,
       "meanMedianUnitPrice": 752500.0,
-      "housePriceScore": -0.1723,
-      "unitPriceScore": 1.0
+      "housePriceScore": -0.19,
+      "unitPriceScore": 1.0145
     }
   },
   "Watsonia North": {
@@ -2152,7 +2152,7 @@
     "housePrices": {
       "meanMedianHousePrice": 892160.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.3753,
+      "housePriceScore": -0.3928,
       "unitPriceScore": null
     }
   },
@@ -2179,7 +2179,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1021500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.0829,
+      "housePriceScore": 0.0649,
       "unitPriceScore": null
     }
   },
@@ -2215,7 +2215,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.2222,
+        "1brFlat": -0.3191,
         "2brFlat": 0.0,
         "2brHouse": 0.1429,
         "3brFlat": 0.2,
@@ -2227,8 +2227,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1179200.0,
       "meanMedianUnitPrice": 632060.0,
-      "housePriceScore": 0.6415,
-      "unitPriceScore": -0.0876
+      "housePriceScore": 0.623,
+      "unitPriceScore": -0.0784
     }
   },
   "Coburg North": {
@@ -2275,8 +2275,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1067400.0,
       "meanMedianUnitPrice": 707300.0,
-      "housePriceScore": 0.2455,
-      "unitPriceScore": 0.5918
+      "housePriceScore": 0.2273,
+      "unitPriceScore": 0.6044
     }
   },
   "Kingsbury": {
@@ -2302,8 +2302,8 @@
     "housePrices": {
       "meanMedianHousePrice": 842020.0,
       "meanMedianUnitPrice": 492800.0,
-      "housePriceScore": -0.5529,
-      "unitPriceScore": -1.3451
+      "housePriceScore": -0.5703,
+      "unitPriceScore": -1.3421
     }
   },
   "Northcote": {
@@ -2338,7 +2338,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.3333,
+        "1brFlat": -0.4255,
         "2brFlat": 1.0,
         "2brHouse": 1.8571,
         "3brFlat": 1.7,
@@ -2350,8 +2350,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1624900.0,
       "meanMedianUnitPrice": 638080.0,
-      "housePriceScore": 2.2203,
-      "unitPriceScore": -0.0332
+      "housePriceScore": 2.2004,
+      "unitPriceScore": -0.0238
     }
   },
   "Preston": {
@@ -2386,7 +2386,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.1111,
+        "1brFlat": 0.0,
         "2brFlat": 0.0,
         "2brHouse": 0.2571,
         "3brFlat": 0.15,
@@ -2398,8 +2398,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1185460.0,
       "meanMedianUnitPrice": 605160.0,
-      "housePriceScore": 0.6637,
-      "unitPriceScore": -0.3305
+      "housePriceScore": 0.6452,
+      "unitPriceScore": -0.3225
     }
   },
   "Reservoir": {
@@ -2434,7 +2434,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": -1.0,
         "2brHouse": -1.0,
         "3brFlat": -0.6,
@@ -2446,8 +2446,8 @@
     "housePrices": {
       "meanMedianHousePrice": 912200.0,
       "meanMedianUnitPrice": 641000.0,
-      "housePriceScore": -0.3043,
-      "unitPriceScore": -0.0069
+      "housePriceScore": -0.3219,
+      "unitPriceScore": 0.0027
     }
   },
   "Thornbury": {
@@ -2482,7 +2482,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": -0.6,
         "2brHouse": 1.1429,
         "3brFlat": 0.68,
@@ -2494,8 +2494,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1394900.0,
       "meanMedianUnitPrice": 548800.0,
-      "housePriceScore": 1.4056,
-      "unitPriceScore": -0.8394
+      "housePriceScore": 1.3864,
+      "unitPriceScore": -0.8339
     }
   },
   "Attwood": {
@@ -2521,7 +2521,7 @@
     "housePrices": {
       "meanMedianHousePrice": 836360.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.5729,
+      "housePriceScore": -0.5903,
       "unitPriceScore": null
     }
   },
@@ -2557,7 +2557,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.4444,
+        "1brFlat": -2.4468,
         "2brFlat": -1.6,
         "2brHouse": -1.5714,
         "3brFlat": -1.6,
@@ -2569,8 +2569,8 @@
     "housePrices": {
       "meanMedianHousePrice": 599400.0,
       "meanMedianUnitPrice": 461200.0,
-      "housePriceScore": -1.4123,
-      "unitPriceScore": -1.6305
+      "housePriceScore": -1.4289,
+      "unitPriceScore": -1.6289
     }
   },
   "Campbellfield": {
@@ -2596,7 +2596,7 @@
     "housePrices": {
       "meanMedianHousePrice": 624700.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.3227,
+      "housePriceScore": -1.3394,
       "unitPriceScore": null
     }
   },
@@ -2623,7 +2623,7 @@
     "housePrices": {
       "meanMedianHousePrice": 572340.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.5082,
+      "housePriceScore": -1.5247,
       "unitPriceScore": null
     }
   },
@@ -2670,8 +2670,8 @@
     "housePrices": {
       "meanMedianHousePrice": 670200.0,
       "meanMedianUnitPrice": 451260.0,
-      "housePriceScore": -1.1615,
-      "unitPriceScore": -1.7202
+      "housePriceScore": -1.1784,
+      "unitPriceScore": -1.7191
     }
   },
   "Dallas": {
@@ -2697,8 +2697,8 @@
     "housePrices": {
       "meanMedianHousePrice": 552400.0,
       "meanMedianUnitPrice": 433500.0,
-      "housePriceScore": -1.5788,
-      "unitPriceScore": -1.8806
+      "housePriceScore": -1.5953,
+      "unitPriceScore": -1.8802
     }
   },
   "Diggers Rest": {
@@ -2724,7 +2724,7 @@
     "housePrices": {
       "meanMedianHousePrice": 649000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.2366,
+      "housePriceScore": -1.2534,
       "unitPriceScore": null
     }
   },
@@ -2771,7 +2771,7 @@
     "housePrices": {
       "meanMedianHousePrice": 745900.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.8934,
+      "housePriceScore": -0.9105,
       "unitPriceScore": null
     }
   },
@@ -2798,8 +2798,8 @@
     "housePrices": {
       "meanMedianHousePrice": 865300.0,
       "meanMedianUnitPrice": 613600.0,
-      "housePriceScore": -0.4704,
-      "unitPriceScore": -0.2543
+      "housePriceScore": -0.4879,
+      "unitPriceScore": -0.2459
     }
   },
   "Jacana": {
@@ -2825,8 +2825,8 @@
     "housePrices": {
       "meanMedianHousePrice": 608700.0,
       "meanMedianUnitPrice": 511040.0,
-      "housePriceScore": -1.3794,
-      "unitPriceScore": -1.1804
+      "housePriceScore": -1.396,
+      "unitPriceScore": -1.1766
     }
   },
   "Kalkallo": {
@@ -2852,7 +2852,7 @@
     "housePrices": {
       "meanMedianHousePrice": 637400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.2777,
+      "housePriceScore": -1.2945,
       "unitPriceScore": null
     }
   },
@@ -2896,8 +2896,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1134900.0,
       "meanMedianUnitPrice": 740560.0,
-      "housePriceScore": 0.4846,
-      "unitPriceScore": 0.8922
+      "housePriceScore": 0.4662,
+      "unitPriceScore": 0.9062
     }
   },
   "Meadow Heights": {
@@ -2923,8 +2923,8 @@
     "housePrices": {
       "meanMedianHousePrice": 622800.0,
       "meanMedianUnitPrice": 495100.0,
-      "housePriceScore": -1.3294,
-      "unitPriceScore": -1.3244
+      "housePriceScore": -1.3461,
+      "unitPriceScore": -1.3212
     }
   },
   "Melbourne Airport": {
@@ -2975,8 +2975,8 @@
     "housePrices": {
       "meanMedianHousePrice": 678480.0,
       "meanMedianUnitPrice": 593800.0,
-      "housePriceScore": -1.1322,
-      "unitPriceScore": -0.4331
+      "housePriceScore": -1.1491,
+      "unitPriceScore": -0.4256
     }
   },
   "Roxburgh Park": {
@@ -3011,7 +3011,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.4444,
+        "1brFlat": -2.4468,
         "2brFlat": -1.6,
         "2brHouse": -1.5714,
         "3brFlat": -1.6,
@@ -3023,8 +3023,8 @@
     "housePrices": {
       "meanMedianHousePrice": 670400.0,
       "meanMedianUnitPrice": 495000.0,
-      "housePriceScore": -1.1608,
-      "unitPriceScore": -1.3253
+      "housePriceScore": -1.1777,
+      "unitPriceScore": -1.3221
     }
   },
   "Somerton": {
@@ -3095,8 +3095,8 @@
     "housePrices": {
       "meanMedianHousePrice": 671900.0,
       "meanMedianUnitPrice": 510980.0,
-      "housePriceScore": -1.1555,
-      "unitPriceScore": -1.181
+      "housePriceScore": -1.1724,
+      "unitPriceScore": -1.1771
     }
   },
   "Tullamarine": {
@@ -3142,8 +3142,8 @@
     "housePrices": {
       "meanMedianHousePrice": 755700.0,
       "meanMedianUnitPrice": 560860.0,
-      "housePriceScore": -0.8587,
-      "unitPriceScore": -0.7305
+      "housePriceScore": -0.8758,
+      "unitPriceScore": -0.7245
     }
   },
   "Westmeadows": {
@@ -3169,8 +3169,8 @@
     "housePrices": {
       "meanMedianHousePrice": 728160.0,
       "meanMedianUnitPrice": 587700.0,
-      "housePriceScore": -0.9562,
-      "unitPriceScore": -0.4882
+      "housePriceScore": -0.9732,
+      "unitPriceScore": -0.4809
     }
   },
   "Bulla": {
@@ -3330,7 +3330,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.5556,
+        "1brFlat": 0.4255,
         "2brFlat": 1.0,
         "2brHouse": 1.2857,
         "3brFlat": 1.6,
@@ -3342,8 +3342,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1285900.0,
       "meanMedianUnitPrice": 580300.0,
-      "housePriceScore": 1.0195,
-      "unitPriceScore": -0.555
+      "housePriceScore": 1.0006,
+      "unitPriceScore": -0.5481
     }
   },
   "Brunswick East": {
@@ -3369,8 +3369,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1425000.0,
       "meanMedianUnitPrice": 538900.0,
-      "housePriceScore": 1.5122,
-      "unitPriceScore": -0.9288
+      "housePriceScore": 1.4929,
+      "unitPriceScore": -0.9238
     }
   },
   "Brunswick West": {
@@ -3396,8 +3396,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1341000.0,
       "meanMedianUnitPrice": 474800.0,
-      "housePriceScore": 1.2147,
-      "unitPriceScore": -1.5077
+      "housePriceScore": 1.1956,
+      "unitPriceScore": -1.5054
     }
   },
   "Fawkner": {
@@ -3432,7 +3432,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.1111,
+        "1brFlat": -1.1702,
         "2brFlat": -1.2,
         "2brHouse": -1.0,
         "3brFlat": -0.8,
@@ -3444,8 +3444,8 @@
     "housePrices": {
       "meanMedianHousePrice": 786600.0,
       "meanMedianUnitPrice": 568200.0,
-      "housePriceScore": -0.7492,
-      "unitPriceScore": -0.6643
+      "housePriceScore": -0.7664,
+      "unitPriceScore": -0.6579
     }
   },
   "Glenroy": {
@@ -3480,7 +3480,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.1111,
+        "1brFlat": -1.1702,
         "2brFlat": -1.2,
         "2brHouse": -1.0,
         "3brFlat": -0.8,
@@ -3492,8 +3492,8 @@
     "housePrices": {
       "meanMedianHousePrice": 830460.0,
       "meanMedianUnitPrice": 589060.0,
-      "housePriceScore": -0.5938,
-      "unitPriceScore": -0.4759
+      "housePriceScore": -0.6112,
+      "unitPriceScore": -0.4686
     }
   },
   "Gowanbrae": {
@@ -3519,8 +3519,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1018500.0,
       "meanMedianUnitPrice": 711400.0,
-      "housePriceScore": 0.0723,
-      "unitPriceScore": 0.6289
+      "housePriceScore": 0.0543,
+      "unitPriceScore": 0.6416
     }
   },
   "Hadfield": {
@@ -3546,8 +3546,8 @@
     "housePrices": {
       "meanMedianHousePrice": 851300.0,
       "meanMedianUnitPrice": 601560.0,
-      "housePriceScore": -0.52,
-      "unitPriceScore": -0.363
+      "housePriceScore": -0.5374,
+      "unitPriceScore": -0.3552
     }
   },
   "Oak Park": {
@@ -3582,7 +3582,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.1111,
+        "1brFlat": -1.1702,
         "2brFlat": -1.2,
         "2brHouse": -1.0,
         "3brFlat": -0.8,
@@ -3594,8 +3594,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1132700.0,
       "meanMedianUnitPrice": 665960.0,
-      "housePriceScore": 0.4768,
-      "unitPriceScore": 0.2185
+      "housePriceScore": 0.4585,
+      "unitPriceScore": 0.2292
     }
   },
   "Pascoe Vale": {
@@ -3642,8 +3642,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1109000.0,
       "meanMedianUnitPrice": 643700.0,
-      "housePriceScore": 0.3928,
-      "unitPriceScore": 0.0175
+      "housePriceScore": 0.3746,
+      "unitPriceScore": 0.0272
     }
   },
   "Pascoe Vale South": {
@@ -3678,7 +3678,7 @@
       "region": "North Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.2222,
+        "1brFlat": -0.3191,
         "2brFlat": 0.0,
         "2brHouse": 0.1429,
         "3brFlat": 0.2,
@@ -3690,8 +3690,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1197000.0,
       "meanMedianUnitPrice": 681300.0,
-      "housePriceScore": 0.7046,
-      "unitPriceScore": 0.3571
+      "housePriceScore": 0.686,
+      "unitPriceScore": 0.3684
     }
   },
   "Diamond Creek": {
@@ -3717,8 +3717,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1059800.0,
       "meanMedianUnitPrice": 792100.0,
-      "housePriceScore": 0.2186,
-      "unitPriceScore": 1.3576
+      "housePriceScore": 0.2005,
+      "unitPriceScore": 1.3739
     }
   },
   "Doreen": {
@@ -3744,8 +3744,8 @@
     "housePrices": {
       "meanMedianHousePrice": 761000.0,
       "meanMedianUnitPrice": 532340.0,
-      "housePriceScore": -0.8399,
-      "unitPriceScore": -0.9881
+      "housePriceScore": -0.857,
+      "unitPriceScore": -0.9833
     }
   },
   "Hurstbridge": {
@@ -3780,7 +3780,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.3333,
+        "1brFlat": -0.4255,
         "2brFlat": -1.2,
         "2brHouse": -1.0,
         "3brFlat": -1.0,
@@ -3792,7 +3792,7 @@
     "housePrices": {
       "meanMedianHousePrice": 953040.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.1596,
+      "housePriceScore": -0.1774,
       "unitPriceScore": null
     }
   },
@@ -3878,7 +3878,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6667,
+        "1brFlat": -1.7021,
         "2brFlat": -1.0,
         "2brHouse": -1.0,
         "3brFlat": -0.6,
@@ -3890,7 +3890,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1500600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.78,
+      "housePriceScore": 1.7605,
       "unitPriceScore": null
     }
   },
@@ -3917,7 +3917,7 @@
     "housePrices": {
       "meanMedianHousePrice": 998100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.0,
+      "housePriceScore": -0.0179,
       "unitPriceScore": null
     }
   },
@@ -4059,7 +4059,7 @@
     "housePrices": {
       "meanMedianHousePrice": 733200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.9384,
+      "housePriceScore": -0.9554,
       "unitPriceScore": null
     }
   },
@@ -4300,7 +4300,7 @@
     "housePrices": {
       "meanMedianHousePrice": 651240.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.2287,
+      "housePriceScore": -1.2455,
       "unitPriceScore": null
     }
   },
@@ -4336,7 +4336,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": -2.0,
         "2brHouse": -1.2857,
         "3brFlat": -1.6,
@@ -4348,8 +4348,8 @@
     "housePrices": {
       "meanMedianHousePrice": 682000.0,
       "meanMedianUnitPrice": 508500.0,
-      "housePriceScore": -1.1197,
-      "unitPriceScore": -1.2034
+      "housePriceScore": -1.1366,
+      "unitPriceScore": -1.1996
     }
   },
   "Lalor": {
@@ -4384,7 +4384,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.3333,
+        "1brFlat": -1.383,
         "2brFlat": -2.0,
         "2brHouse": -1.4286,
         "3brFlat": -1.79,
@@ -4396,8 +4396,8 @@
     "housePrices": {
       "meanMedianHousePrice": 707860.0,
       "meanMedianUnitPrice": 536800.0,
-      "housePriceScore": -1.0281,
-      "unitPriceScore": -0.9478
+      "housePriceScore": -1.0451,
+      "unitPriceScore": -0.9428
     }
   },
   "Mernda": {
@@ -4423,8 +4423,8 @@
     "housePrices": {
       "meanMedianHousePrice": 713000.0,
       "meanMedianUnitPrice": 494100.0,
-      "housePriceScore": -1.0099,
-      "unitPriceScore": -1.3334
+      "housePriceScore": -1.0269,
+      "unitPriceScore": -1.3303
     }
   },
   "Mill Park": {
@@ -4459,7 +4459,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": -2.0,
         "2brHouse": -1.2857,
         "3brFlat": -1.6,
@@ -4471,8 +4471,8 @@
     "housePrices": {
       "meanMedianHousePrice": 797200.0,
       "meanMedianUnitPrice": 527520.0,
-      "housePriceScore": -0.7117,
-      "unitPriceScore": -1.0316
+      "housePriceScore": -0.7289,
+      "unitPriceScore": -1.027
     }
   },
   "South Morang": {
@@ -4498,8 +4498,8 @@
     "housePrices": {
       "meanMedianHousePrice": 753060.0,
       "meanMedianUnitPrice": 530500.0,
-      "housePriceScore": -0.868,
-      "unitPriceScore": -1.0047
+      "housePriceScore": -0.8851,
+      "unitPriceScore": -1.0
     }
   },
   "Thomastown": {
@@ -4534,7 +4534,7 @@
       "region": "North Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.3333,
+        "1brFlat": -1.383,
         "2brFlat": -2.0,
         "2brHouse": -1.4286,
         "3brFlat": -1.79,
@@ -4546,8 +4546,8 @@
     "housePrices": {
       "meanMedianHousePrice": 728140.0,
       "meanMedianUnitPrice": 520860.0,
-      "housePriceScore": -0.9563,
-      "unitPriceScore": -1.0917
+      "housePriceScore": -0.9733,
+      "unitPriceScore": -1.0875
     }
   },
   "Wollert": {
@@ -4573,8 +4573,8 @@
     "housePrices": {
       "meanMedianHousePrice": 692300.0,
       "meanMedianUnitPrice": 477760.0,
-      "housePriceScore": -1.0832,
-      "unitPriceScore": -1.4809
+      "housePriceScore": -1.1002,
+      "unitPriceScore": -1.4786
     }
   },
   "Beveridge": {
@@ -4600,7 +4600,7 @@
     "housePrices": {
       "meanMedianHousePrice": 650400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.2317,
+      "housePriceScore": -1.2484,
       "unitPriceScore": null
     }
   },
@@ -4697,8 +4697,8 @@
     "housePrices": {
       "meanMedianHousePrice": 721500.0,
       "meanMedianUnitPrice": 477200.0,
-      "housePriceScore": -0.9798,
-      "unitPriceScore": -1.486
+      "housePriceScore": -0.9968,
+      "unitPriceScore": -1.4837
     }
   },
   "Woodstock": {
@@ -4724,7 +4724,7 @@
     "housePrices": {
       "meanMedianHousePrice": 715700.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0004,
+      "housePriceScore": -1.0173,
       "unitPriceScore": null
     }
   },
@@ -4760,7 +4760,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.4,
         "2brHouse": 0.1429,
         "3brFlat": 0.4,
@@ -4808,7 +4808,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 0.76,
         "2brHouse": 0.0,
         "3brFlat": 1.18,
@@ -4821,7 +4821,7 @@
       "meanMedianHousePrice": 2963600.0,
       "meanMedianUnitPrice": 792260.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.359
+      "unitPriceScore": 1.3753
     }
   },
   "Balwyn North": {
@@ -4883,7 +4883,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.1111,
+        "1brFlat": 0.0,
         "2brFlat": 1.0,
         "2brHouse": 1.2857,
         "3brFlat": 1.35,
@@ -4896,7 +4896,7 @@
       "meanMedianHousePrice": 2543200.0,
       "meanMedianUnitPrice": 893500.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 2.2733
+      "unitPriceScore": 2.294
     }
   },
   "Canterbury": {
@@ -4931,7 +4931,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.4,
         "2brHouse": 0.7143,
         "3brFlat": 0.6,
@@ -5006,7 +5006,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.1111,
+        "1brFlat": 0.0,
         "2brFlat": 1.0,
         "2brHouse": 1.2857,
         "3brFlat": 1.35,
@@ -5019,7 +5019,7 @@
       "meanMedianHousePrice": 2375000.0,
       "meanMedianUnitPrice": 711500.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 0.6298
+      "unitPriceScore": 0.6425
     }
   },
   "Hawthorn": {
@@ -5054,7 +5054,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 1.0,
         "2brHouse": 2.0,
         "3brFlat": 1.7,
@@ -5067,7 +5067,7 @@
       "meanMedianHousePrice": 2937500.0,
       "meanMedianUnitPrice": 572900.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": -0.6218
+      "unitPriceScore": -0.6152
     }
   },
   "Hawthorn East": {
@@ -5094,7 +5094,7 @@
       "meanMedianHousePrice": 2712300.0,
       "meanMedianUnitPrice": 614560.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": -0.2456
+      "unitPriceScore": -0.2372
     }
   },
   "Kew": {
@@ -5129,7 +5129,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.7778,
+        "1brFlat": 0.6383,
         "2brFlat": 0.5,
         "2brHouse": 1.3286,
         "3brFlat": 1.7,
@@ -5142,7 +5142,7 @@
       "meanMedianHousePrice": 2824700.0,
       "meanMedianUnitPrice": 845520.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.84
+      "unitPriceScore": 1.8586
     }
   },
   "Kew East": {
@@ -5204,7 +5204,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.4,
         "2brHouse": 0.7143,
         "3brFlat": 0.6,
@@ -5217,7 +5217,7 @@
       "meanMedianHousePrice": 2698000.0,
       "meanMedianUnitPrice": 813800.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.5535
+      "unitPriceScore": 1.5708
     }
   },
   "Surrey Hills": {
@@ -5252,7 +5252,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.4,
         "2brHouse": 0.7143,
         "3brFlat": 0.6,
@@ -5265,7 +5265,7 @@
       "meanMedianHousePrice": 2313480.0,
       "meanMedianUnitPrice": 897600.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 2.3103
+      "unitPriceScore": 2.3312
     }
   },
   "Bayswater": {
@@ -5300,7 +5300,7 @@
       "region": "Outer Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.9333,
+        "1brFlat": -1.0,
         "2brFlat": -1.14,
         "2brHouse": -1.0,
         "3brFlat": -0.9,
@@ -5312,8 +5312,8 @@
     "housePrices": {
       "meanMedianHousePrice": 871200.0,
       "meanMedianUnitPrice": 682900.0,
-      "housePriceScore": -0.4495,
-      "unitPriceScore": 0.3715
+      "housePriceScore": -0.467,
+      "unitPriceScore": 0.3829
     }
   },
   "Boronia": {
@@ -5348,7 +5348,7 @@
       "region": "Outer Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": -1.0,
         "2brHouse": -0.7143,
         "3brFlat": -0.8,
@@ -5360,8 +5360,8 @@
     "housePrices": {
       "meanMedianHousePrice": 847480.0,
       "meanMedianUnitPrice": 665200.0,
-      "housePriceScore": -0.5335,
-      "unitPriceScore": 0.2117
+      "housePriceScore": -0.551,
+      "unitPriceScore": 0.2223
     }
   },
   "Ferntree Gully": {
@@ -5407,8 +5407,8 @@
     "housePrices": {
       "meanMedianHousePrice": 884640.0,
       "meanMedianUnitPrice": 681460.0,
-      "housePriceScore": -0.4019,
-      "unitPriceScore": 0.3585
+      "housePriceScore": -0.4195,
+      "unitPriceScore": 0.3699
     }
   },
   "Knoxfield": {
@@ -5434,8 +5434,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1006700.0,
       "meanMedianUnitPrice": 792060.0,
-      "housePriceScore": 0.0305,
-      "unitPriceScore": 1.3572
+      "housePriceScore": 0.0125,
+      "unitPriceScore": 1.3735
     }
   },
   "Lysterfield": {
@@ -5461,7 +5461,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1365000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.2997,
+      "housePriceScore": 1.2806,
       "unitPriceScore": null
     }
   },
@@ -5508,8 +5508,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1078020.0,
       "meanMedianUnitPrice": 700700.0,
-      "housePriceScore": 0.2831,
-      "unitPriceScore": 0.5322
+      "housePriceScore": 0.2649,
+      "unitPriceScore": 0.5445
     }
   },
   "Sassafras": {
@@ -5535,7 +5535,7 @@
     "housePrices": {
       "meanMedianHousePrice": 931500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.2359,
+      "housePriceScore": -0.2536,
       "unitPriceScore": null
     }
   },
@@ -5583,8 +5583,8 @@
     "housePrices": {
       "meanMedianHousePrice": 969400.0,
       "meanMedianUnitPrice": 827060.0,
-      "housePriceScore": -0.1017,
-      "unitPriceScore": 1.6733
+      "housePriceScore": -0.1195,
+      "unitPriceScore": 1.6911
     }
   },
   "The Basin": {
@@ -5610,7 +5610,7 @@
     "housePrices": {
       "meanMedianHousePrice": 875500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.4343,
+      "housePriceScore": -0.4518,
       "unitPriceScore": null
     }
   },
@@ -5637,8 +5637,8 @@
     "housePrices": {
       "meanMedianHousePrice": 870600.0,
       "meanMedianUnitPrice": 502700.0,
-      "housePriceScore": -0.4516,
-      "unitPriceScore": -1.2557
+      "housePriceScore": -0.4691,
+      "unitPriceScore": -1.2523
     }
   },
   "Wantirna": {
@@ -5685,8 +5685,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1111000.0,
       "meanMedianUnitPrice": 696700.0,
-      "housePriceScore": 0.3999,
-      "unitPriceScore": 0.4961
+      "housePriceScore": 0.3817,
+      "unitPriceScore": 0.5082
     }
   },
   "Wantirna South": {
@@ -5712,8 +5712,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1280400.0,
       "meanMedianUnitPrice": 529800.0,
-      "housePriceScore": 1.0,
-      "unitPriceScore": -1.011
+      "housePriceScore": 0.9812,
+      "unitPriceScore": -1.0064
     }
   },
   "Bulleen": {
@@ -5748,7 +5748,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.0,
+        "1brFlat": 0.8511,
         "2brFlat": 0.9,
         "2brHouse": 0.0,
         "3brFlat": 0.4,
@@ -5760,8 +5760,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1339600.0,
       "meanMedianUnitPrice": 767800.0,
-      "housePriceScore": 1.2097,
-      "unitPriceScore": 1.1382
+      "housePriceScore": 1.1907,
+      "unitPriceScore": 1.1534
     }
   },
   "Doncaster": {
@@ -5796,7 +5796,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.0,
+        "1brFlat": 0.8511,
         "2brFlat": 0.9,
         "2brHouse": 0.0,
         "3brFlat": 0.4,
@@ -5808,8 +5808,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1504600.0,
       "meanMedianUnitPrice": 630480.0,
-      "housePriceScore": 1.7942,
-      "unitPriceScore": -0.1019
+      "housePriceScore": 1.7746,
+      "unitPriceScore": -0.0927
     }
   },
   "Doncaster East": {
@@ -5844,7 +5844,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.7778,
+        "1brFlat": 0.6383,
         "2brFlat": 0.5,
         "2brHouse": -0.5714,
         "3brFlat": 0.15,
@@ -5856,8 +5856,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1589000.0,
       "meanMedianUnitPrice": 855800.0,
-      "housePriceScore": 2.0932,
-      "unitPriceScore": 1.9328
+      "housePriceScore": 2.0733,
+      "unitPriceScore": 1.9519
     }
   },
   "Donvale": {
@@ -5892,7 +5892,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.7778,
+        "1brFlat": 0.6383,
         "2brFlat": 0.5,
         "2brHouse": -0.5714,
         "3brFlat": 0.15,
@@ -5904,8 +5904,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1532000.0,
       "meanMedianUnitPrice": 836500.0,
-      "housePriceScore": 1.8913,
-      "unitPriceScore": 1.7585
+      "housePriceScore": 1.8716,
+      "unitPriceScore": 1.7768
     }
   },
   "Nunawading": {
@@ -5940,7 +5940,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.0,
+        "1brFlat": -0.1064,
         "2brFlat": -0.6,
         "2brHouse": -0.6429,
         "3brFlat": -0.3,
@@ -5952,8 +5952,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1167000.0,
       "meanMedianUnitPrice": 792400.0,
-      "housePriceScore": 0.5983,
-      "unitPriceScore": 1.3603
+      "housePriceScore": 0.5798,
+      "unitPriceScore": 1.3766
     }
   },
   "Park Orchards": {
@@ -6006,8 +6006,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1201460.0,
       "meanMedianUnitPrice": 867000.0,
-      "housePriceScore": 0.7204,
-      "unitPriceScore": 2.034
+      "housePriceScore": 0.7018,
+      "unitPriceScore": 2.0535
     }
   },
   "Templestowe": {
@@ -6042,7 +6042,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.0,
+        "1brFlat": 0.8511,
         "2brFlat": 0.9,
         "2brHouse": 0.0,
         "3brFlat": 0.4,
@@ -6054,8 +6054,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1622900.0,
       "meanMedianUnitPrice": 884660.0,
-      "housePriceScore": 2.2132,
-      "unitPriceScore": 2.1934
+      "housePriceScore": 2.1933,
+      "unitPriceScore": 2.2138
     }
   },
   "Templestowe Lower": {
@@ -6081,7 +6081,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1352000.0,
       "meanMedianUnitPrice": 981060.0,
-      "housePriceScore": 1.2536,
+      "housePriceScore": 1.2346,
       "unitPriceScore": 3.0
     }
   },
@@ -6108,7 +6108,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1298100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.0627,
+      "housePriceScore": 1.0438,
       "unitPriceScore": null
     }
   },
@@ -6160,7 +6160,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1233500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.8339,
+      "housePriceScore": 0.8152,
       "unitPriceScore": null
     }
   },
@@ -6187,8 +6187,8 @@
     "housePrices": {
       "meanMedianHousePrice": 905400.0,
       "meanMedianUnitPrice": 675600.0,
-      "housePriceScore": -0.3284,
-      "unitPriceScore": 0.3056
+      "housePriceScore": -0.346,
+      "unitPriceScore": 0.3167
     }
   },
   "Croydon": {
@@ -6223,7 +6223,7 @@
       "region": "Outer Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6,
+        "1brFlat": -1.6383,
         "2brFlat": -1.0,
         "2brHouse": -0.6429,
         "3brFlat": -0.6,
@@ -6235,8 +6235,8 @@
     "housePrices": {
       "meanMedianHousePrice": 899460.0,
       "meanMedianUnitPrice": 694700.0,
-      "housePriceScore": -0.3494,
-      "unitPriceScore": 0.4781
+      "housePriceScore": -0.367,
+      "unitPriceScore": 0.49
     }
   },
   "Croydon Hills": {
@@ -6262,7 +6262,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1159240.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.5708,
+      "housePriceScore": 0.5524,
       "unitPriceScore": null
     }
   },
@@ -6289,8 +6289,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1043100.0,
       "meanMedianUnitPrice": 724860.0,
-      "housePriceScore": 0.1594,
-      "unitPriceScore": 0.7504
+      "housePriceScore": 0.1414,
+      "unitPriceScore": 0.7637
     }
   },
   "Croydon South": {
@@ -6316,8 +6316,8 @@
     "housePrices": {
       "meanMedianHousePrice": 918900.0,
       "meanMedianUnitPrice": 815080.0,
-      "housePriceScore": -0.2806,
-      "unitPriceScore": 1.5651
+      "housePriceScore": -0.2982,
+      "unitPriceScore": 1.5824
     }
   },
   "Heathmont": {
@@ -6343,8 +6343,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1061100.0,
       "meanMedianUnitPrice": 809300.0,
-      "housePriceScore": 0.2232,
-      "unitPriceScore": 1.5129
+      "housePriceScore": 0.2051,
+      "unitPriceScore": 1.5299
     }
   },
   "Kilsyth": {
@@ -6370,8 +6370,8 @@
     "housePrices": {
       "meanMedianHousePrice": 816300.0,
       "meanMedianUnitPrice": 709960.0,
-      "housePriceScore": -0.644,
-      "unitPriceScore": 0.6159
+      "housePriceScore": -0.6613,
+      "unitPriceScore": 0.6285
     }
   },
   "Kilsyth South": {
@@ -6397,7 +6397,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1142060.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.51,
+      "housePriceScore": 0.4916,
       "unitPriceScore": null
     }
   },
@@ -6433,7 +6433,7 @@
       "region": "Outer Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.1111,
+        "1brFlat": 0.0,
         "2brFlat": -0.6,
         "2brHouse": -0.7143,
         "3brFlat": -0.6,
@@ -6445,8 +6445,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1037600.0,
       "meanMedianUnitPrice": 620280.0,
-      "housePriceScore": 0.1399,
-      "unitPriceScore": -0.194
+      "housePriceScore": 0.1219,
+      "unitPriceScore": -0.1853
     }
   },
   "Ringwood East": {
@@ -6472,8 +6472,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1032500.0,
       "meanMedianUnitPrice": 724200.0,
-      "housePriceScore": 0.1219,
-      "unitPriceScore": 0.7444
+      "housePriceScore": 0.1038,
+      "unitPriceScore": 0.7577
     }
   },
   "Vermont": {
@@ -6508,7 +6508,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.1111,
+        "1brFlat": 1.9149,
         "2brFlat": 0.56,
         "2brHouse": -0.4286,
         "3brFlat": -0.3,
@@ -6520,8 +6520,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1285200.0,
       "meanMedianUnitPrice": 931380.0,
-      "housePriceScore": 1.017,
-      "unitPriceScore": 2.6153
+      "housePriceScore": 0.9982,
+      "unitPriceScore": 2.6377
     }
   },
   "Warranwood": {
@@ -6547,7 +6547,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1311500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.1102,
+      "housePriceScore": 1.0912,
       "unitPriceScore": null
     }
   },
@@ -6583,7 +6583,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.5556,
+        "1brFlat": 0.4255,
         "2brFlat": 0.0,
         "2brHouse": -0.2857,
         "3brFlat": -0.36,
@@ -6595,8 +6595,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1565260.0,
       "meanMedianUnitPrice": 803580.0,
-      "housePriceScore": 2.0091,
-      "unitPriceScore": 1.4613
+      "housePriceScore": 1.9893,
+      "unitPriceScore": 1.478
     }
   },
   "Blackburn North": {
@@ -6622,8 +6622,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1315100.0,
       "meanMedianUnitPrice": 870400.0,
-      "housePriceScore": 1.1229,
-      "unitPriceScore": 2.0647
+      "housePriceScore": 1.104,
+      "unitPriceScore": 2.0844
     }
   },
   "Blackburn South": {
@@ -6649,8 +6649,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1364660.0,
       "meanMedianUnitPrice": 783500.0,
-      "housePriceScore": 1.2985,
-      "unitPriceScore": 1.2799
+      "housePriceScore": 1.2794,
+      "unitPriceScore": 1.2958
     }
   },
   "Box Hill": {
@@ -6685,7 +6685,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.2222,
+        "1brFlat": 1.0638,
         "2brFlat": 1.2,
         "2brHouse": -0.4286,
         "3brFlat": 0.3,
@@ -6697,8 +6697,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1692600.0,
       "meanMedianUnitPrice": 568140.0,
-      "housePriceScore": 2.4601,
-      "unitPriceScore": -0.6648
+      "housePriceScore": 2.44,
+      "unitPriceScore": -0.6584
     }
   },
   "Box Hill North": {
@@ -6724,8 +6724,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1356300.0,
       "meanMedianUnitPrice": 910800.0,
-      "housePriceScore": 1.2689,
-      "unitPriceScore": 2.4295
+      "housePriceScore": 1.2498,
+      "unitPriceScore": 2.451
     }
   },
   "Box Hill South": {
@@ -6751,8 +6751,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1526100.0,
       "meanMedianUnitPrice": 920700.0,
-      "housePriceScore": 1.8704,
-      "unitPriceScore": 2.5189
+      "housePriceScore": 1.8507,
+      "unitPriceScore": 2.5408
     }
   },
   "Burwood": {
@@ -6787,7 +6787,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.4,
         "2brHouse": 0.1429,
         "3brFlat": 0.4,
@@ -6799,8 +6799,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1455180.0,
       "meanMedianUnitPrice": 808620.0,
-      "housePriceScore": 1.6191,
-      "unitPriceScore": 1.5068
+      "housePriceScore": 1.5997,
+      "unitPriceScore": 1.5238
     }
   },
   "Burwood East": {
@@ -6835,7 +6835,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.1111,
+        "1brFlat": 1.9149,
         "2brFlat": 0.56,
         "2brHouse": -0.4286,
         "3brFlat": -0.3,
@@ -6847,8 +6847,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1301700.0,
       "meanMedianUnitPrice": 688200.0,
-      "housePriceScore": 1.0755,
-      "unitPriceScore": 0.4194
+      "housePriceScore": 1.0566,
+      "unitPriceScore": 0.431
     }
   },
   "Forest Hill": {
@@ -6883,7 +6883,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.1111,
+        "1brFlat": 1.9149,
         "2brFlat": 0.56,
         "2brHouse": -0.4286,
         "3brFlat": -0.3,
@@ -6895,8 +6895,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1206120.0,
       "meanMedianUnitPrice": 784860.0,
-      "housePriceScore": 0.7369,
-      "unitPriceScore": 1.2922
+      "housePriceScore": 0.7183,
+      "unitPriceScore": 1.3082
     }
   },
   "Mitcham": {
@@ -6931,7 +6931,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.0,
+        "1brFlat": -0.1064,
         "2brFlat": -0.6,
         "2brHouse": -0.6429,
         "3brFlat": -0.3,
@@ -6943,8 +6943,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1193600.0,
       "meanMedianUnitPrice": 838300.0,
-      "housePriceScore": 0.6925,
-      "unitPriceScore": 1.7748
+      "housePriceScore": 0.674,
+      "unitPriceScore": 1.7931
     }
   },
   "Mont Albert North": {
@@ -6970,7 +6970,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1624380.0,
       "meanMedianUnitPrice": 1202720.0,
-      "housePriceScore": 2.2185,
+      "housePriceScore": 2.1985,
       "unitPriceScore": 3.0
     }
   },
@@ -6997,8 +6997,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1479600.0,
       "meanMedianUnitPrice": 951660.0,
-      "housePriceScore": 1.7056,
-      "unitPriceScore": 2.7984
+      "housePriceScore": 1.6862,
+      "unitPriceScore": 2.8218
     }
   },
   "Belgrave": {
@@ -7024,7 +7024,7 @@
     "housePrices": {
       "meanMedianHousePrice": 808200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6727,
+      "housePriceScore": -0.69,
       "unitPriceScore": null
     }
   },
@@ -7051,7 +7051,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1071620.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.2604,
+      "housePriceScore": 0.2423,
       "unitPriceScore": null
     }
   },
@@ -7103,8 +7103,8 @@
     "housePrices": {
       "meanMedianHousePrice": 896100.0,
       "meanMedianUnitPrice": 693260.0,
-      "housePriceScore": -0.3613,
-      "unitPriceScore": 0.4651
+      "housePriceScore": -0.3789,
+      "unitPriceScore": 0.477
     }
   },
   "Lilydale": {
@@ -7139,7 +7139,7 @@
       "region": "Outer Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6,
+        "1brFlat": -1.6383,
         "2brFlat": -1.0,
         "2brHouse": -0.6429,
         "3brFlat": -0.6,
@@ -7151,8 +7151,8 @@
     "housePrices": {
       "meanMedianHousePrice": 888900.0,
       "meanMedianUnitPrice": 612000.0,
-      "housePriceScore": -0.3868,
-      "unitPriceScore": -0.2687
+      "housePriceScore": -0.4044,
+      "unitPriceScore": -0.2604
     }
   },
   "Montrose": {
@@ -7178,7 +7178,7 @@
     "housePrices": {
       "meanMedianHousePrice": 925800.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.2561,
+      "housePriceScore": -0.2738,
       "unitPriceScore": null
     }
   },
@@ -7205,8 +7205,8 @@
     "housePrices": {
       "meanMedianHousePrice": 863860.0,
       "meanMedianUnitPrice": 693700.0,
-      "housePriceScore": -0.4755,
-      "unitPriceScore": 0.469
+      "housePriceScore": -0.493,
+      "unitPriceScore": 0.4809
     }
   },
   "Mount Evelyn": {
@@ -7232,8 +7232,8 @@
     "housePrices": {
       "meanMedianHousePrice": 831000.0,
       "meanMedianUnitPrice": 759760.0,
-      "housePriceScore": -0.5919,
-      "unitPriceScore": 1.0656
+      "housePriceScore": -0.6093,
+      "unitPriceScore": 1.0804
     }
   },
   "Selby": {
@@ -7259,7 +7259,7 @@
     "housePrices": {
       "meanMedianHousePrice": 826400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6082,
+      "housePriceScore": -0.6256,
       "unitPriceScore": null
     }
   },
@@ -7286,7 +7286,7 @@
     "housePrices": {
       "meanMedianHousePrice": 887500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.3918,
+      "housePriceScore": -0.4093,
       "unitPriceScore": null
     }
   },
@@ -7313,7 +7313,7 @@
     "housePrices": {
       "meanMedianHousePrice": 859520.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.4909,
+      "housePriceScore": -0.5084,
       "unitPriceScore": null
     }
   },
@@ -7340,7 +7340,7 @@
     "housePrices": {
       "meanMedianHousePrice": 669600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.1637,
+      "housePriceScore": -1.1805,
       "unitPriceScore": null
     }
   },
@@ -7431,7 +7431,7 @@
     "housePrices": {
       "meanMedianHousePrice": 776400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.7853,
+      "housePriceScore": -0.8025,
       "unitPriceScore": null
     }
   },
@@ -7458,7 +7458,7 @@
     "housePrices": {
       "meanMedianHousePrice": 835000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.5778,
+      "housePriceScore": -0.5951,
       "unitPriceScore": null
     }
   },
@@ -7535,7 +7535,7 @@
     "housePrices": {
       "meanMedianHousePrice": 591500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.4403,
+      "housePriceScore": -1.4569,
       "unitPriceScore": null
     }
   },
@@ -7562,7 +7562,7 @@
     "housePrices": {
       "meanMedianHousePrice": 911500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.3068,
+      "housePriceScore": -0.3244,
       "unitPriceScore": null
     }
   },
@@ -7604,7 +7604,7 @@
     "housePrices": {
       "meanMedianHousePrice": 992400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.0202,
+      "housePriceScore": -0.0381,
       "unitPriceScore": null
     }
   },
@@ -7696,8 +7696,8 @@
     "housePrices": {
       "meanMedianHousePrice": 782300.0,
       "meanMedianUnitPrice": 613000.0,
-      "housePriceScore": -0.7644,
-      "unitPriceScore": -0.2597
+      "housePriceScore": -0.7816,
+      "unitPriceScore": -0.2514
     }
   },
   "Hoddles Creek": {
@@ -7748,7 +7748,7 @@
     "housePrices": {
       "meanMedianHousePrice": 858500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.4945,
+      "housePriceScore": -0.512,
       "unitPriceScore": null
     }
   },
@@ -7775,7 +7775,7 @@
     "housePrices": {
       "meanMedianHousePrice": 936860.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.2169,
+      "housePriceScore": -0.2346,
       "unitPriceScore": null
     }
   },
@@ -7802,7 +7802,7 @@
     "housePrices": {
       "meanMedianHousePrice": 703520.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0435,
+      "housePriceScore": -1.0604,
       "unitPriceScore": null
     }
   },
@@ -7925,7 +7925,7 @@
     "housePrices": {
       "meanMedianHousePrice": 603260.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.3987,
+      "housePriceScore": -1.4153,
       "unitPriceScore": null
     }
   },
@@ -7952,7 +7952,7 @@
     "housePrices": {
       "meanMedianHousePrice": 806600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6784,
+      "housePriceScore": -0.6956,
       "unitPriceScore": null
     }
   },
@@ -7979,7 +7979,7 @@
     "housePrices": {
       "meanMedianHousePrice": 955000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.1527,
+      "housePriceScore": -0.1704,
       "unitPriceScore": null
     }
   },
@@ -8053,7 +8053,7 @@
     "housePrices": {
       "meanMedianHousePrice": 952500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.1615,
+      "housePriceScore": -0.1793,
       "unitPriceScore": null
     }
   },
@@ -8130,7 +8130,7 @@
     "housePrices": {
       "meanMedianHousePrice": 839960.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.5602,
+      "housePriceScore": -0.5776,
       "unitPriceScore": null
     }
   },
@@ -8412,7 +8412,7 @@
     "housePrices": {
       "meanMedianHousePrice": 910060.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.3119,
+      "housePriceScore": -0.3295,
       "unitPriceScore": null
     }
   },
@@ -8439,7 +8439,7 @@
     "housePrices": {
       "meanMedianHousePrice": 666560.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.1744,
+      "housePriceScore": -1.1913,
       "unitPriceScore": null
     }
   },
@@ -8491,7 +8491,7 @@
     "housePrices": {
       "meanMedianHousePrice": 691500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0861,
+      "housePriceScore": -1.103,
       "unitPriceScore": null
     }
   },
@@ -8518,7 +8518,7 @@
     "housePrices": {
       "meanMedianHousePrice": 869300.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.4563,
+      "housePriceScore": -0.4737,
       "unitPriceScore": null
     }
   },
@@ -8545,8 +8545,8 @@
     "housePrices": {
       "meanMedianHousePrice": 720600.0,
       "meanMedianUnitPrice": 629500.0,
-      "housePriceScore": -0.983,
-      "unitPriceScore": -0.1107
+      "housePriceScore": -1.0,
+      "unitPriceScore": -0.1016
     }
   },
   "Yellingbo": {
@@ -8630,7 +8630,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.0,
+        "1brFlat": 0.8511,
         "2brFlat": 2.0,
         "2brHouse": 1.1429,
         "3brFlat": 2.2,
@@ -8705,7 +8705,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4,
+        "1brFlat": 1.234,
         "2brFlat": 2.6,
         "2brHouse": 2.7143,
         "3brFlat": 3.0,
@@ -8801,7 +8801,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.0,
         "2brHouse": 0.2143,
         "3brFlat": 0.13,
@@ -8813,8 +8813,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1307600.0,
       "meanMedianUnitPrice": 677500.0,
-      "housePriceScore": 1.0964,
-      "unitPriceScore": 0.3227
+      "housePriceScore": 1.0774,
+      "unitPriceScore": 0.3339
     }
   },
   "Hampton": {
@@ -8849,7 +8849,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.0,
+        "1brFlat": 0.8511,
         "2brFlat": 2.0,
         "2brHouse": 1.1429,
         "3brFlat": 2.2,
@@ -8862,7 +8862,7 @@
       "meanMedianHousePrice": 2392000.0,
       "meanMedianUnitPrice": 934100.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 2.6399
+      "unitPriceScore": 2.6624
     }
   },
   "Hampton East": {
@@ -8888,7 +8888,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1471400.0,
       "meanMedianUnitPrice": 1000660.0,
-      "housePriceScore": 1.6766,
+      "housePriceScore": 1.6571,
       "unitPriceScore": 3.0
     }
   },
@@ -8915,8 +8915,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1507200.0,
       "meanMedianUnitPrice": 664720.0,
-      "housePriceScore": 1.8034,
-      "unitPriceScore": 0.2073
+      "housePriceScore": 1.7838,
+      "unitPriceScore": 0.218
     }
   },
   "Sandringham": {
@@ -8943,7 +8943,7 @@
       "meanMedianHousePrice": 2105500.0,
       "meanMedianUnitPrice": 745860.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 0.94
+      "unitPriceScore": 0.9543
     }
   },
   "Beaconsfield": {
@@ -8969,8 +8969,82 @@
     "housePrices": {
       "meanMedianHousePrice": 961260.0,
       "meanMedianUnitPrice": 594660.0,
-      "housePriceScore": -0.1305,
-      "unitPriceScore": -0.4253
+      "housePriceScore": -0.1483,
+      "unitPriceScore": -0.4178
+    }
+  },
+  "Officer": {
+    "postcode": "3809",
+    "lga": "Cardinia",
+    "crimeSuburb": {
+      "totalIncidents": 1155,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2061,
+        "B49 Other theft": 0.1152,
+        "E21 Breach family violence order": 0.0805,
+        "B21 Criminal damage": 0.0736,
+        "B41 Motor vehicle theft": 0.0623
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 4967.7,
+      "year": "2025",
+      "crimeScore": 0.5616
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 726300.0,
+      "meanMedianUnitPrice": 557960.0,
+      "housePriceScore": -0.9798,
+      "unitPriceScore": -0.7508
+    }
+  },
+  "Pakenham": {
+    "postcode": "3810",
+    "lga": "Cardinia",
+    "crimeSuburb": {
+      "totalIncidents": 3683,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.1523,
+        "E21 Breach family violence order": 0.0996,
+        "B43 Steal from a retail store": 0.0847,
+        "B21 Criminal damage": 0.0828,
+        "B49 Other theft": 0.0692
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 4967.7,
+      "year": "2025",
+      "crimeScore": 0.5616
+    },
+    "rent": {
+      "weeklyRent": {
+        "2brFlat": 450,
+        "3brFlat": 500,
+        "2brHouse": 460,
+        "3brHouse": 530,
+        "4brHouse": 590,
+        "all": 540
+      },
+      "region": "South Eastern Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": null,
+        "2brFlat": -2.0,
+        "2brHouse": -1.5714,
+        "3brFlat": -1.8,
+        "3brHouse": -1.2,
+        "4brHouse": -1.2778,
+        "all": -1.2
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 666100.0,
+      "meanMedianUnitPrice": 494700.0,
+      "housePriceScore": -1.1929,
+      "unitPriceScore": -1.3249
     }
   },
   "Avonsleigh": {
@@ -9044,7 +9118,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1260620.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.9299,
+      "housePriceScore": 0.9112,
       "unitPriceScore": null
     }
   },
@@ -9071,7 +9145,7 @@
     "housePrices": {
       "meanMedianHousePrice": 731060.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.9459,
+      "housePriceScore": -0.963,
       "unitPriceScore": null
     }
   },
@@ -9197,7 +9271,7 @@
     "housePrices": {
       "meanMedianHousePrice": 890100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.3826,
+      "housePriceScore": -0.4001,
       "unitPriceScore": null
     }
   },
@@ -9224,7 +9298,7 @@
     "housePrices": {
       "meanMedianHousePrice": 707500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0294,
+      "housePriceScore": -1.0464,
       "unitPriceScore": null
     }
   },
@@ -9323,7 +9397,7 @@
     "housePrices": {
       "meanMedianHousePrice": 780000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.7726,
+      "housePriceScore": -0.7898,
       "unitPriceScore": null
     }
   },
@@ -9375,7 +9449,7 @@
     "housePrices": {
       "meanMedianHousePrice": 914920.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.2947,
+      "housePriceScore": -0.3123,
       "unitPriceScore": null
     }
   },
@@ -9474,8 +9548,8 @@
     "housePrices": {
       "meanMedianHousePrice": 683300.0,
       "meanMedianUnitPrice": 504260.0,
-      "housePriceScore": -1.1151,
-      "unitPriceScore": -1.2416
+      "housePriceScore": -1.132,
+      "unitPriceScore": -1.2381
     }
   },
   "Koo Wee Rup North": {
@@ -9522,7 +9596,7 @@
     "housePrices": {
       "meanMedianHousePrice": 708500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0259,
+      "housePriceScore": -1.0428,
       "unitPriceScore": null
     }
   },
@@ -9564,8 +9638,8 @@
     "housePrices": {
       "meanMedianHousePrice": 585920.0,
       "meanMedianUnitPrice": 467500.0,
-      "housePriceScore": -1.4601,
-      "unitPriceScore": -1.5736
+      "housePriceScore": -1.4766,
+      "unitPriceScore": -1.5717
     }
   },
   "Maryknoll": {
@@ -9738,7 +9812,7 @@
     "housePrices": {
       "meanMedianHousePrice": 733600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.9369,
+      "housePriceScore": -0.954,
       "unitPriceScore": null
     }
   },
@@ -9790,7 +9864,7 @@
     "housePrices": {
       "meanMedianHousePrice": 810500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6645,
+      "housePriceScore": -0.6818,
       "unitPriceScore": null
     }
   },
@@ -10020,8 +10094,8 @@
     "housePrices": {
       "meanMedianHousePrice": 871500.0,
       "meanMedianUnitPrice": 680400.0,
-      "housePriceScore": -0.4485,
-      "unitPriceScore": 0.3489
+      "housePriceScore": -0.466,
+      "unitPriceScore": 0.3603
     }
   },
   "Botanic Ridge": {
@@ -10047,7 +10121,7 @@
     "housePrices": {
       "meanMedianHousePrice": 894500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.367,
+      "housePriceScore": -0.3846,
       "unitPriceScore": null
     }
   },
@@ -10074,7 +10148,7 @@
     "housePrices": {
       "meanMedianHousePrice": 693400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0793,
+      "housePriceScore": -1.0963,
       "unitPriceScore": null
     }
   },
@@ -10101,8 +10175,8 @@
     "housePrices": {
       "meanMedianHousePrice": 730560.0,
       "meanMedianUnitPrice": 563900.0,
-      "housePriceScore": -0.9477,
-      "unitPriceScore": -0.7031
+      "housePriceScore": -0.9648,
+      "unitPriceScore": -0.6969
     }
   },
   "Cranbourne": {
@@ -10137,7 +10211,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.7778,
+        "1brFlat": -0.8511,
         "2brFlat": -1.8,
         "2brHouse": -1.1429,
         "3brFlat": -1.5,
@@ -10149,8 +10223,8 @@
     "housePrices": {
       "meanMedianHousePrice": 673260.0,
       "meanMedianUnitPrice": 486800.0,
-      "housePriceScore": -1.1507,
-      "unitPriceScore": -1.3993
+      "housePriceScore": -1.1675,
+      "unitPriceScore": -1.3966
     }
   },
   "Cranbourne East": {
@@ -10176,8 +10250,8 @@
     "housePrices": {
       "meanMedianHousePrice": 720000.0,
       "meanMedianUnitPrice": 527540.0,
-      "housePriceScore": -0.9851,
-      "unitPriceScore": -1.0314
+      "housePriceScore": -1.0021,
+      "unitPriceScore": -1.0269
     }
   },
   "Cranbourne North": {
@@ -10203,8 +10277,8 @@
     "housePrices": {
       "meanMedianHousePrice": 738100.0,
       "meanMedianUnitPrice": 502460.0,
-      "housePriceScore": -0.921,
-      "unitPriceScore": -1.2579
+      "housePriceScore": -0.9381,
+      "unitPriceScore": -1.2544
     }
   },
   "Cranbourne West": {
@@ -10230,8 +10304,8 @@
     "housePrices": {
       "meanMedianHousePrice": 690000.0,
       "meanMedianUnitPrice": 521040.0,
-      "housePriceScore": -1.0914,
-      "unitPriceScore": -1.0901
+      "housePriceScore": -1.1083,
+      "unitPriceScore": -1.0858
     }
   },
   "Cranbourne South": {
@@ -10257,7 +10331,7 @@
     "housePrices": {
       "meanMedianHousePrice": 755200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.8604,
+      "housePriceScore": -0.8775,
       "unitPriceScore": null
     }
   },
@@ -10284,8 +10358,8 @@
     "housePrices": {
       "meanMedianHousePrice": 609960.0,
       "meanMedianUnitPrice": 549300.0,
-      "housePriceScore": -1.3749,
-      "unitPriceScore": -0.8349
+      "housePriceScore": -1.3916,
+      "unitPriceScore": -0.8294
     }
   },
   "Endeavour Hills": {
@@ -10320,7 +10394,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.8889,
+        "1brFlat": -1.9149,
         "2brFlat": -1.64,
         "2brHouse": -1.3571,
         "3brFlat": -1.3,
@@ -10332,8 +10406,8 @@
     "housePrices": {
       "meanMedianHousePrice": 808800.0,
       "meanMedianUnitPrice": 663200.0,
-      "housePriceScore": -0.6706,
-      "unitPriceScore": 0.1936
+      "housePriceScore": -0.6879,
+      "unitPriceScore": 0.2042
     }
   },
   "Eumemmerring": {
@@ -10359,8 +10433,8 @@
     "housePrices": {
       "meanMedianHousePrice": 676300.0,
       "meanMedianUnitPrice": 587000.0,
-      "housePriceScore": -1.1399,
-      "unitPriceScore": -0.4945
+      "housePriceScore": -1.1568,
+      "unitPriceScore": -0.4873
     }
   },
   "Hallam": {
@@ -10386,8 +10460,8 @@
     "housePrices": {
       "meanMedianHousePrice": 753000.0,
       "meanMedianUnitPrice": 551700.0,
-      "housePriceScore": -0.8682,
-      "unitPriceScore": -0.8133
+      "housePriceScore": -0.8853,
+      "unitPriceScore": -0.8076
     }
   },
   "Hampton Park": {
@@ -10422,7 +10496,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.4889,
+        "1brFlat": -2.4894,
         "2brFlat": -1.6,
         "2brHouse": -1.3571,
         "3brFlat": -1.35,
@@ -10434,8 +10508,8 @@
     "housePrices": {
       "meanMedianHousePrice": 670600.0,
       "meanMedianUnitPrice": 565680.0,
-      "housePriceScore": -1.1601,
-      "unitPriceScore": -0.687
+      "housePriceScore": -1.177,
+      "unitPriceScore": -0.6808
     }
   },
   "Junction Village": {
@@ -10461,7 +10535,7 @@
     "housePrices": {
       "meanMedianHousePrice": 692000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0843,
+      "housePriceScore": -1.1012,
       "unitPriceScore": null
     }
   },
@@ -10488,7 +10562,7 @@
     "housePrices": {
       "meanMedianHousePrice": 806200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6798,
+      "housePriceScore": -0.6971,
       "unitPriceScore": null
     }
   },
@@ -10515,7 +10589,7 @@
     "housePrices": {
       "meanMedianHousePrice": 926160.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.2548,
+      "housePriceScore": -0.2725,
       "unitPriceScore": null
     }
   },
@@ -10551,7 +10625,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.4889,
+        "1brFlat": -2.4894,
         "2brFlat": -1.6,
         "2brHouse": -1.3571,
         "3brFlat": -1.35,
@@ -10563,8 +10637,8 @@
     "housePrices": {
       "meanMedianHousePrice": 761100.0,
       "meanMedianUnitPrice": 578100.0,
-      "housePriceScore": -0.8395,
-      "unitPriceScore": -0.5749
+      "housePriceScore": -0.8567,
+      "unitPriceScore": -0.5681
     }
   },
   "Narre Warren North": {
@@ -10590,7 +10664,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1634500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 2.2543,
+      "housePriceScore": 2.2344,
       "unitPriceScore": null
     }
   },
@@ -10617,8 +10691,8 @@
     "housePrices": {
       "meanMedianHousePrice": 817260.0,
       "meanMedianUnitPrice": 640480.0,
-      "housePriceScore": -0.6406,
-      "unitPriceScore": -0.0116
+      "housePriceScore": -0.6579,
+      "unitPriceScore": -0.002
     }
   },
   "Blind Bight": {
@@ -10644,7 +10718,7 @@
     "housePrices": {
       "meanMedianHousePrice": 725500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.9656,
+      "housePriceScore": -0.9827,
       "unitPriceScore": null
     }
   },
@@ -10771,8 +10845,8 @@
     "housePrices": {
       "meanMedianHousePrice": 892500.0,
       "meanMedianUnitPrice": 741875.0,
-      "housePriceScore": -0.3741,
-      "unitPriceScore": 0.9041
+      "housePriceScore": -0.3916,
+      "unitPriceScore": 0.9181
     }
   },
   "Tooradin": {
@@ -10798,7 +10872,7 @@
     "housePrices": {
       "meanMedianHousePrice": 814200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6514,
+      "housePriceScore": -0.6687,
       "unitPriceScore": null
     }
   },
@@ -10859,7 +10933,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.3333,
+        "1brFlat": -1.383,
         "2brFlat": -2.0,
         "2brHouse": -1.1429,
         "3brFlat": -1.1,
@@ -10871,8 +10945,8 @@
     "housePrices": {
       "meanMedianHousePrice": 729500.0,
       "meanMedianUnitPrice": 417660.0,
-      "housePriceScore": -0.9515,
-      "unitPriceScore": -2.0237
+      "housePriceScore": -0.9685,
+      "unitPriceScore": -2.024
     }
   },
   "Dandenong North": {
@@ -10907,7 +10981,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.8889,
+        "1brFlat": -1.9149,
         "2brFlat": -1.64,
         "2brHouse": -1.3571,
         "3brFlat": -1.3,
@@ -10919,8 +10993,8 @@
     "housePrices": {
       "meanMedianHousePrice": 768000.0,
       "meanMedianUnitPrice": 583040.0,
-      "housePriceScore": -0.8151,
-      "unitPriceScore": -0.5303
+      "housePriceScore": -0.8322,
+      "unitPriceScore": -0.5232
     }
   },
   "Dandenong South": {
@@ -10971,8 +11045,8 @@
     "housePrices": {
       "meanMedianHousePrice": 944040.0,
       "meanMedianUnitPrice": 708560.0,
-      "housePriceScore": -0.1915,
-      "unitPriceScore": 0.6032
+      "housePriceScore": -0.2092,
+      "unitPriceScore": 0.6158
     }
   },
   "Noble Park": {
@@ -11007,7 +11081,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.4444,
+        "1brFlat": -1.4894,
         "2brFlat": -1.1,
         "2brHouse": -1.2857,
         "3brFlat": -1.0,
@@ -11019,8 +11093,8 @@
     "housePrices": {
       "meanMedianHousePrice": 781100.0,
       "meanMedianUnitPrice": 552000.0,
-      "housePriceScore": -0.7687,
-      "unitPriceScore": -0.8105
+      "housePriceScore": -0.7859,
+      "unitPriceScore": -0.8049
     }
   },
   "Noble Park North": {
@@ -11046,8 +11120,8 @@
     "housePrices": {
       "meanMedianHousePrice": 781800.0,
       "meanMedianUnitPrice": 601400.0,
-      "housePriceScore": -0.7662,
-      "unitPriceScore": -0.3645
+      "housePriceScore": -0.7834,
+      "unitPriceScore": -0.3566
     }
   },
   "Springvale": {
@@ -11082,7 +11156,7 @@
       "region": "South Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.4444,
+        "1brFlat": -1.4894,
         "2brFlat": -0.6,
         "2brHouse": -0.8571,
         "3brFlat": -0.3,
@@ -11094,8 +11168,8 @@
     "housePrices": {
       "meanMedianHousePrice": 868300.0,
       "meanMedianUnitPrice": 629900.0,
-      "housePriceScore": -0.4598,
-      "unitPriceScore": -0.1071
+      "housePriceScore": -0.4773,
+      "unitPriceScore": -0.098
     }
   },
   "Springvale South": {
@@ -11121,8 +11195,8 @@
     "housePrices": {
       "meanMedianHousePrice": 827700.0,
       "meanMedianUnitPrice": 640400.0,
-      "housePriceScore": -0.6036,
-      "unitPriceScore": -0.0123
+      "housePriceScore": -0.621,
+      "unitPriceScore": -0.0027
     }
   },
   "Bangholme": {
@@ -11182,7 +11256,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.2222,
+        "1brFlat": -1.2766,
         "2brFlat": -1.6,
         "2brHouse": -1.1429,
         "3brFlat": -1.2,
@@ -11194,8 +11268,8 @@
     "housePrices": {
       "meanMedianHousePrice": 733200.0,
       "meanMedianUnitPrice": 592000.0,
-      "housePriceScore": -0.9384,
-      "unitPriceScore": -0.4493
+      "housePriceScore": -0.9554,
+      "unitPriceScore": -0.4419
     }
   },
   "Frankston": {
@@ -11230,7 +11304,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.8889,
+        "1brFlat": -1.9149,
         "2brFlat": -1.5,
         "2brHouse": -1.1429,
         "3brFlat": -1.2,
@@ -11242,8 +11316,8 @@
     "housePrices": {
       "meanMedianHousePrice": 757500.0,
       "meanMedianUnitPrice": 542500.0,
-      "housePriceScore": -0.8523,
-      "unitPriceScore": -0.8963
+      "housePriceScore": -0.8694,
+      "unitPriceScore": -0.8911
     }
   },
   "Frankston North": {
@@ -11269,8 +11343,8 @@
     "housePrices": {
       "meanMedianHousePrice": 617820.0,
       "meanMedianUnitPrice": 574400.0,
-      "housePriceScore": -1.3471,
-      "unitPriceScore": -0.6083
+      "housePriceScore": -1.3637,
+      "unitPriceScore": -0.6016
     }
   },
   "Frankston South": {
@@ -11296,8 +11370,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1169500.0,
       "meanMedianUnitPrice": 735100.0,
-      "housePriceScore": 0.6072,
-      "unitPriceScore": 0.8429
+      "housePriceScore": 0.5887,
+      "unitPriceScore": 0.8566
     }
   },
   "Langwarrin": {
@@ -11323,8 +11397,8 @@
     "housePrices": {
       "meanMedianHousePrice": 859300.0,
       "meanMedianUnitPrice": 602220.0,
-      "housePriceScore": -0.4917,
-      "unitPriceScore": -0.3571
+      "housePriceScore": -0.5091,
+      "unitPriceScore": -0.3492
     }
   },
   "Sandhurst": {
@@ -11350,7 +11424,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1035760.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.1334,
+      "housePriceScore": 0.1154,
       "unitPriceScore": null
     }
   },
@@ -11386,7 +11460,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.2222,
+        "1brFlat": -1.2766,
         "2brFlat": -1.6,
         "2brHouse": -1.1429,
         "3brFlat": -1.2,
@@ -11398,8 +11472,8 @@
     "housePrices": {
       "meanMedianHousePrice": 848060.0,
       "meanMedianUnitPrice": 625760.0,
-      "housePriceScore": -0.5315,
-      "unitPriceScore": -0.1445
+      "housePriceScore": -0.5489,
+      "unitPriceScore": -0.1356
     }
   },
   "Skye": {
@@ -11425,8 +11499,8 @@
     "housePrices": {
       "meanMedianHousePrice": 793160.0,
       "meanMedianUnitPrice": 584300.0,
-      "housePriceScore": -0.726,
-      "unitPriceScore": -0.5189
+      "housePriceScore": -0.7432,
+      "unitPriceScore": -0.5118
     }
   },
   "Langwarrin South": {
@@ -11486,7 +11560,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.6667,
+        "1brFlat": -0.7447,
         "2brFlat": 0.8,
         "2brHouse": 0.4286,
         "3brFlat": 0.7,
@@ -11498,8 +11572,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1672360.0,
       "meanMedianUnitPrice": 775960.0,
-      "housePriceScore": 2.3885,
-      "unitPriceScore": 1.2118
+      "housePriceScore": 2.3683,
+      "unitPriceScore": 1.2274
     }
   },
   "Bentleigh East": {
@@ -11525,7 +11599,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1491900.0,
       "meanMedianUnitPrice": 974600.0,
-      "housePriceScore": 1.7492,
+      "housePriceScore": 1.7297,
       "unitPriceScore": 3.0
     }
   },
@@ -11561,7 +11635,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.3333,
+        "1brFlat": -0.4255,
         "2brFlat": 0.9,
         "2brHouse": 0.4286,
         "3brFlat": 0.95,
@@ -11573,8 +11647,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1739500.0,
       "meanMedianUnitPrice": 635060.0,
-      "housePriceScore": 2.6263,
-      "unitPriceScore": -0.0605
+      "housePriceScore": 2.606,
+      "unitPriceScore": -0.0512
     }
   },
   "Caulfield": {
@@ -11609,7 +11683,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 1.6,
         "2brHouse": 0.9,
         "3brFlat": 1.3,
@@ -11622,7 +11696,7 @@
       "meanMedianHousePrice": 2276000.0,
       "meanMedianUnitPrice": 789020.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.3298
+      "unitPriceScore": 1.3459
     }
   },
   "Caulfield East": {
@@ -11648,8 +11722,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1736600.0,
       "meanMedianUnitPrice": 654640.0,
-      "housePriceScore": 2.616,
-      "unitPriceScore": 0.1163
+      "housePriceScore": 2.5957,
+      "unitPriceScore": 0.1265
     }
   },
   "Caulfield North": {
@@ -11676,7 +11750,7 @@
       "meanMedianHousePrice": 2416000.0,
       "meanMedianUnitPrice": 659600.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 0.1611
+      "unitPriceScore": 0.1715
     }
   },
   "Caulfield South": {
@@ -11703,7 +11777,7 @@
       "meanMedianHousePrice": 1856700.0,
       "meanMedianUnitPrice": 964300.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 2.9126
+      "unitPriceScore": 2.9365
     }
   },
   "Elsternwick": {
@@ -11738,7 +11812,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.1111,
+        "1brFlat": 0.0,
         "2brFlat": 1.0,
         "2brHouse": 2.1143,
         "3brFlat": 1.2,
@@ -11751,7 +11825,7 @@
       "meanMedianHousePrice": 2027400.0,
       "meanMedianUnitPrice": 706900.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 0.5882
+      "unitPriceScore": 0.6007
     }
   },
   "Gardenvale": {
@@ -11778,7 +11852,7 @@
       "meanMedianHousePrice": 1892960.0,
       "meanMedianUnitPrice": 796760.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 1.3997
+      "unitPriceScore": 1.4162
     }
   },
   "Glen Huntly": {
@@ -11804,8 +11878,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1649100.0,
       "meanMedianUnitPrice": 622960.0,
-      "housePriceScore": 2.3061,
-      "unitPriceScore": -0.1698
+      "housePriceScore": 2.286,
+      "unitPriceScore": -0.161
     }
   },
   "McKinnon": {
@@ -11831,8 +11905,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1825000.0,
       "meanMedianUnitPrice": 825300.0,
-      "housePriceScore": 2.9292,
-      "unitPriceScore": 1.6574
+      "housePriceScore": 2.9086,
+      "unitPriceScore": 1.6751
     }
   },
   "Murrumbeena": {
@@ -11867,7 +11941,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.6667,
+        "1brFlat": -0.7447,
         "2brFlat": 0.4,
         "2brHouse": 0.2857,
         "3brFlat": 0.7,
@@ -11879,8 +11953,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1710300.0,
       "meanMedianUnitPrice": 601600.0,
-      "housePriceScore": 2.5228,
-      "unitPriceScore": -0.3627
+      "housePriceScore": 2.5026,
+      "unitPriceScore": -0.3548
     }
   },
   "Ormond": {
@@ -11906,8 +11980,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1782700.0,
       "meanMedianUnitPrice": 600960.0,
-      "housePriceScore": 2.7793,
-      "unitPriceScore": -0.3684
+      "housePriceScore": 2.7588,
+      "unitPriceScore": -0.3606
     }
   },
   "Aspendale": {
@@ -11942,7 +12016,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.0,
+        "1brFlat": -0.1064,
         "2brFlat": -0.1,
         "2brHouse": -0.2857,
         "3brFlat": -0.05,
@@ -11954,8 +12028,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1302000.0,
       "meanMedianUnitPrice": 884080.0,
-      "housePriceScore": 1.0765,
-      "unitPriceScore": 2.1882
+      "housePriceScore": 1.0576,
+      "unitPriceScore": 2.2085
     }
   },
   "Aspendale Gardens": {
@@ -11981,7 +12055,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1229000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.8179,
+      "housePriceScore": 0.7993,
       "unitPriceScore": null
     }
   },
@@ -12008,8 +12082,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1057400.0,
       "meanMedianUnitPrice": 715500.0,
-      "housePriceScore": 0.2101,
-      "unitPriceScore": 0.6659
+      "housePriceScore": 0.192,
+      "unitPriceScore": 0.6788
     }
   },
   "Braeside": {
@@ -12069,7 +12143,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.0,
+        "1brFlat": -0.1064,
         "2brFlat": -0.1,
         "2brHouse": -0.2857,
         "3brFlat": -0.05,
@@ -12081,8 +12155,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1048700.0,
       "meanMedianUnitPrice": 798100.0,
-      "housePriceScore": 0.1792,
-      "unitPriceScore": 1.4118
+      "housePriceScore": 0.1612,
+      "unitPriceScore": 1.4283
     }
   },
   "Chelsea": {
@@ -12117,7 +12191,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.0,
+        "1brFlat": -0.1064,
         "2brFlat": -0.1,
         "2brHouse": -0.2857,
         "3brFlat": -0.05,
@@ -12129,8 +12203,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1132920.0,
       "meanMedianUnitPrice": 710560.0,
-      "housePriceScore": 0.4776,
-      "unitPriceScore": 0.6213
+      "housePriceScore": 0.4592,
+      "unitPriceScore": 0.6339
     }
   },
   "Chelsea Heights": {
@@ -12156,8 +12230,8 @@
     "housePrices": {
       "meanMedianHousePrice": 954700.0,
       "meanMedianUnitPrice": 777400.0,
-      "housePriceScore": -0.1537,
-      "unitPriceScore": 1.2249
+      "housePriceScore": -0.1715,
+      "unitPriceScore": 1.2405
     }
   },
   "Clarinda": {
@@ -12183,8 +12257,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1034300.0,
       "meanMedianUnitPrice": 768100.0,
-      "housePriceScore": 0.1282,
-      "unitPriceScore": 1.1409
+      "housePriceScore": 0.1102,
+      "unitPriceScore": 1.1561
     }
   },
   "Clayton South": {
@@ -12210,8 +12284,8 @@
     "housePrices": {
       "meanMedianHousePrice": 998180.0,
       "meanMedianUnitPrice": 595500.0,
-      "housePriceScore": 0.0003,
-      "unitPriceScore": -0.4177
+      "housePriceScore": -0.0176,
+      "unitPriceScore": -0.4102
     }
   },
   "Dingley Village": {
@@ -12237,8 +12311,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1116360.0,
       "meanMedianUnitPrice": 753100.0,
-      "housePriceScore": 0.4189,
-      "unitPriceScore": 1.0054
+      "housePriceScore": 0.4006,
+      "unitPriceScore": 1.02
     }
   },
   "Edithvale": {
@@ -12264,8 +12338,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1315040.0,
       "meanMedianUnitPrice": 831000.0,
-      "housePriceScore": 1.1227,
-      "unitPriceScore": 1.7089
+      "housePriceScore": 1.1038,
+      "unitPriceScore": 1.7269
     }
   },
   "Heatherton": {
@@ -12291,7 +12365,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1140000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.5027,
+      "housePriceScore": 0.4843,
       "unitPriceScore": null
     }
   },
@@ -12327,7 +12401,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.6667,
+        "1brFlat": -0.7447,
         "2brFlat": 0.0,
         "2brHouse": 0.4286,
         "3brFlat": 0.4,
@@ -12339,8 +12413,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1340400.0,
       "meanMedianUnitPrice": 638200.0,
-      "housePriceScore": 1.2125,
-      "unitPriceScore": -0.0321
+      "housePriceScore": 1.1935,
+      "unitPriceScore": -0.0227
     }
   },
   "Moorabbin": {
@@ -12366,8 +12440,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1259100.0,
       "meanMedianUnitPrice": 738000.0,
-      "housePriceScore": 0.9245,
-      "unitPriceScore": 0.8691
+      "housePriceScore": 0.9058,
+      "unitPriceScore": 0.8829
     }
   },
   "Moorabbin Airport": {
@@ -12427,7 +12501,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.6667,
+        "1brFlat": -0.7447,
         "2brFlat": 0.0,
         "2brHouse": 0.4286,
         "3brFlat": 0.4,
@@ -12439,8 +12513,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1372000.0,
       "meanMedianUnitPrice": 710600.0,
-      "housePriceScore": 1.3245,
-      "unitPriceScore": 0.6216
+      "housePriceScore": 1.3054,
+      "unitPriceScore": 0.6343
     }
   },
   "Parkdale": {
@@ -12475,7 +12549,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.6667,
+        "1brFlat": -0.7447,
         "2brFlat": 0.0,
         "2brHouse": 0.4286,
         "3brFlat": 0.4,
@@ -12487,8 +12561,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1508580.0,
       "meanMedianUnitPrice": 788160.0,
-      "housePriceScore": 1.8083,
-      "unitPriceScore": 1.322
+      "housePriceScore": 1.7887,
+      "unitPriceScore": 1.3381
     }
   },
   "Patterson Lakes": {
@@ -12514,8 +12588,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1288400.0,
       "meanMedianUnitPrice": 668000.0,
-      "housePriceScore": 1.0283,
-      "unitPriceScore": 0.237
+      "housePriceScore": 1.0095,
+      "unitPriceScore": 0.2477
     }
   },
   "Waterways": {
@@ -12541,7 +12615,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1429600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.5285,
+      "housePriceScore": 1.5092,
       "unitPriceScore": null
     }
   },
@@ -12568,7 +12642,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1497000.0,
       "meanMedianUnitPrice": 1108700.0,
-      "housePriceScore": 1.7673,
+      "housePriceScore": 1.7477,
       "unitPriceScore": 3.0
     }
   },
@@ -12604,7 +12678,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 0.6,
         "2brHouse": 0.0,
         "3brFlat": 0.0,
@@ -12616,8 +12690,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1217000.0,
       "meanMedianUnitPrice": 794000.0,
-      "housePriceScore": 0.7754,
-      "unitPriceScore": 1.3748
+      "housePriceScore": 0.7568,
+      "unitPriceScore": 1.3911
     }
   },
   "Clayton": {
@@ -12652,7 +12726,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.2222,
+        "1brFlat": 1.0638,
         "2brFlat": 0.8,
         "2brHouse": -0.2857,
         "3brFlat": -0.3,
@@ -12664,8 +12738,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1200600.0,
       "meanMedianUnitPrice": 722380.0,
-      "housePriceScore": 0.7173,
-      "unitPriceScore": 0.728
+      "housePriceScore": 0.6988,
+      "unitPriceScore": 0.7412
     }
   },
   "Glen Waverley": {
@@ -12700,7 +12774,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.5556,
+        "1brFlat": 2.3404,
         "2brFlat": 1.8,
         "2brHouse": 0.2857,
         "3brFlat": -0.2,
@@ -12712,8 +12786,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1658480.0,
       "meanMedianUnitPrice": 871860.0,
-      "housePriceScore": 2.3393,
-      "unitPriceScore": 2.0778
+      "housePriceScore": 2.3192,
+      "unitPriceScore": 2.0976
     }
   },
   "Hughesdale": {
@@ -12748,7 +12822,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.6667,
+        "1brFlat": -0.7447,
         "2brFlat": 0.4,
         "2brHouse": 0.2857,
         "3brFlat": 0.7,
@@ -12760,8 +12834,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1395200.0,
       "meanMedianUnitPrice": 671200.0,
-      "housePriceScore": 1.4067,
-      "unitPriceScore": 0.2658
+      "housePriceScore": 1.3875,
+      "unitPriceScore": 0.2768
     }
   },
   "Huntingdale": {
@@ -12787,8 +12861,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1229500.0,
       "meanMedianUnitPrice": 650000.0,
-      "housePriceScore": 0.8197,
-      "unitPriceScore": 0.0744
+      "housePriceScore": 0.801,
+      "unitPriceScore": 0.0844
     }
   },
   "Mount Waverley": {
@@ -12835,7 +12909,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1601180.0,
       "meanMedianUnitPrice": 1067700.0,
-      "housePriceScore": 2.1363,
+      "housePriceScore": 2.1164,
       "unitPriceScore": 3.0
     }
   },
@@ -12871,7 +12945,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 2.5556,
+        "1brFlat": 2.3404,
         "2brFlat": 1.8,
         "2brHouse": 0.2857,
         "3brFlat": -0.2,
@@ -12883,8 +12957,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1090360.0,
       "meanMedianUnitPrice": 834100.0,
-      "housePriceScore": 0.3268,
-      "unitPriceScore": 1.7369
+      "housePriceScore": 0.3086,
+      "unitPriceScore": 1.755
     }
   },
   "Notting Hill": {
@@ -12910,8 +12984,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1189040.0,
       "meanMedianUnitPrice": 415860.0,
-      "housePriceScore": 0.6764,
-      "unitPriceScore": -2.0399
+      "housePriceScore": 0.6578,
+      "unitPriceScore": -2.0403
     }
   },
   "Oakleigh": {
@@ -12946,7 +13020,7 @@
       "region": "Inner Eastern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.4444,
+        "1brFlat": 1.2766,
         "2brFlat": 0.6,
         "2brHouse": 0.0,
         "3brFlat": 0.0,
@@ -12958,8 +13032,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1302800.0,
       "meanMedianUnitPrice": 560400.0,
-      "housePriceScore": 1.0793,
-      "unitPriceScore": -0.7347
+      "housePriceScore": 1.0604,
+      "unitPriceScore": -0.7287
     }
   },
   "Oakleigh East": {
@@ -12985,8 +13059,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1159200.0,
       "meanMedianUnitPrice": 815200.0,
-      "housePriceScore": 0.5707,
-      "unitPriceScore": 1.5662
+      "housePriceScore": 0.5522,
+      "unitPriceScore": 1.5835
     }
   },
   "Oakleigh South": {
@@ -13012,8 +13086,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1196260.0,
       "meanMedianUnitPrice": 789500.0,
-      "housePriceScore": 0.7019,
-      "unitPriceScore": 1.3341
+      "housePriceScore": 0.6834,
+      "unitPriceScore": 1.3503
     }
   },
   "Wheelers Hill": {
@@ -13039,7 +13113,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1426280.0,
       "meanMedianUnitPrice": 973980.0,
-      "housePriceScore": 1.5168,
+      "housePriceScore": 1.4975,
       "unitPriceScore": 3.0
     }
   },
@@ -13066,7 +13140,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1397000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.413,
+      "housePriceScore": 1.3938,
       "unitPriceScore": null
     }
   },
@@ -13093,8 +13167,8 @@
     "housePrices": {
       "meanMedianHousePrice": 729100.0,
       "meanMedianUnitPrice": 648400.0,
-      "housePriceScore": -0.9529,
-      "unitPriceScore": 0.06
+      "housePriceScore": -0.9699,
+      "unitPriceScore": 0.0699
     }
   },
   "Dromana": {
@@ -13129,7 +13203,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.9333,
+        "1brFlat": -1.0,
         "2brFlat": -1.44,
         "2brHouse": -1.1429,
         "3brFlat": -0.8,
@@ -13141,8 +13215,8 @@
     "housePrices": {
       "meanMedianHousePrice": 990000.0,
       "meanMedianUnitPrice": 799400.0,
-      "housePriceScore": -0.0287,
-      "unitPriceScore": 1.4235
+      "housePriceScore": -0.0466,
+      "unitPriceScore": 1.4401
     }
   },
   "McCrae": {
@@ -13168,8 +13242,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1316000.0,
       "meanMedianUnitPrice": 854000.0,
-      "housePriceScore": 1.1261,
-      "unitPriceScore": 1.9166
+      "housePriceScore": 1.1072,
+      "unitPriceScore": 1.9356
     }
   },
   "Mornington": {
@@ -13215,8 +13289,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1041500.0,
       "meanMedianUnitPrice": 773760.0,
-      "housePriceScore": 0.1537,
-      "unitPriceScore": 1.192
+      "housePriceScore": 0.1357,
+      "unitPriceScore": 1.2074
     }
   },
   "Mount Eliza": {
@@ -13242,8 +13316,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1616500.0,
       "meanMedianUnitPrice": 848360.0,
-      "housePriceScore": 2.1906,
-      "unitPriceScore": 1.8656
+      "housePriceScore": 2.1707,
+      "unitPriceScore": 1.8844
     }
   },
   "Mount Martha": {
@@ -13269,8 +13343,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1734500.0,
       "meanMedianUnitPrice": 775700.0,
-      "housePriceScore": 2.6086,
-      "unitPriceScore": 1.2095
+      "housePriceScore": 2.5883,
+      "unitPriceScore": 1.225
     }
   },
   "Portsea": {
@@ -13305,7 +13379,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.9333,
+        "1brFlat": -1.0,
         "2brFlat": -1.44,
         "2brHouse": -1.1429,
         "3brFlat": -0.8,
@@ -13344,8 +13418,8 @@
     "housePrices": {
       "meanMedianHousePrice": 736360.0,
       "meanMedianUnitPrice": 689300.0,
-      "housePriceScore": -0.9272,
-      "unitPriceScore": 0.4293
+      "housePriceScore": -0.9442,
+      "unitPriceScore": 0.441
     }
   },
   "Rye": {
@@ -13371,8 +13445,8 @@
     "housePrices": {
       "meanMedianHousePrice": 964500.0,
       "meanMedianUnitPrice": 702360.0,
-      "housePriceScore": -0.119,
-      "unitPriceScore": 0.5472
+      "housePriceScore": -0.1368,
+      "unitPriceScore": 0.5595
     }
   },
   "Safety Beach": {
@@ -13398,8 +13472,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1152500.0,
       "meanMedianUnitPrice": 898500.0,
-      "housePriceScore": 0.5469,
-      "unitPriceScore": 2.3184
+      "housePriceScore": 0.5285,
+      "unitPriceScore": 2.3394
     }
   },
   "Sorrento": {
@@ -13425,7 +13499,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1826500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 2.9345,
+      "housePriceScore": 2.9139,
       "unitPriceScore": null
     }
   },
@@ -13452,7 +13526,7 @@
     "housePrices": {
       "meanMedianHousePrice": 898500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.3528,
+      "housePriceScore": -0.3704,
       "unitPriceScore": null
     }
   },
@@ -13504,7 +13578,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1321500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.1456,
+      "housePriceScore": 1.1266,
       "unitPriceScore": null
     }
   },
@@ -13531,7 +13605,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1556200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.977,
+      "housePriceScore": 1.9572,
       "unitPriceScore": null
     }
   },
@@ -13558,8 +13632,8 @@
     "housePrices": {
       "meanMedianHousePrice": 725960.0,
       "meanMedianUnitPrice": 631660.0,
-      "housePriceScore": -0.964,
-      "unitPriceScore": -0.0912
+      "housePriceScore": -0.981,
+      "unitPriceScore": -0.082
     }
   },
   "Bittern": {
@@ -13585,8 +13659,8 @@
     "housePrices": {
       "meanMedianHousePrice": 832900.0,
       "meanMedianUnitPrice": 642800.0,
-      "housePriceScore": -0.5852,
-      "unitPriceScore": 0.0094
+      "housePriceScore": -0.6026,
+      "unitPriceScore": 0.0191
     }
   },
   "Boneo": {
@@ -13637,7 +13711,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1640500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 2.2756,
+      "housePriceScore": 2.2556,
       "unitPriceScore": null
     }
   },
@@ -13664,8 +13738,8 @@
     "housePrices": {
       "meanMedianHousePrice": 745000.0,
       "meanMedianUnitPrice": 564300.0,
-      "housePriceScore": -0.8966,
-      "unitPriceScore": -0.6995
+      "housePriceScore": -0.9136,
+      "unitPriceScore": -0.6933
     }
   },
   "Fingal": {
@@ -13691,7 +13765,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1657500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 2.3358,
+      "housePriceScore": 2.3158,
       "unitPriceScore": null
     }
   },
@@ -13727,7 +13801,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6667,
+        "1brFlat": -1.7021,
         "2brFlat": -1.6,
         "2brHouse": -1.0286,
         "3brFlat": -1.3,
@@ -13775,7 +13849,7 @@
       "region": "Mornington Peninsula",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.6667,
+        "1brFlat": -1.7021,
         "2brFlat": -1.6,
         "2brHouse": -1.0286,
         "3brFlat": -1.3,
@@ -13787,8 +13861,8 @@
     "housePrices": {
       "meanMedianHousePrice": 684500.0,
       "meanMedianUnitPrice": 546000.0,
-      "housePriceScore": -1.1109,
-      "unitPriceScore": -0.8647
+      "housePriceScore": -1.1278,
+      "unitPriceScore": -0.8593
     }
   },
   "Main Ridge": {
@@ -13959,7 +14033,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1742500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 2.6369,
+      "housePriceScore": 2.6166,
       "unitPriceScore": null
     }
   },
@@ -14038,7 +14112,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1353500.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.2589,
+      "housePriceScore": 1.2399,
       "unitPriceScore": null
     }
   },
@@ -14065,8 +14139,8 @@
     "housePrices": {
       "meanMedianHousePrice": 824160.0,
       "meanMedianUnitPrice": 633520.0,
-      "housePriceScore": -0.6162,
-      "unitPriceScore": -0.0744
+      "housePriceScore": -0.6335,
+      "unitPriceScore": -0.0652
     }
   },
   "St Andrews Beach": {
@@ -14092,7 +14166,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1382600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 1.362,
+      "housePriceScore": 1.3429,
       "unitPriceScore": null
     }
   },
@@ -14144,8 +14218,8 @@
     "housePrices": {
       "meanMedianHousePrice": 784200.0,
       "meanMedianUnitPrice": 621500.0,
-      "housePriceScore": -0.7577,
-      "unitPriceScore": -0.183
+      "housePriceScore": -0.7749,
+      "unitPriceScore": -0.1742
     }
   },
   "HMAS Cerberus": {
@@ -14205,7 +14279,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 2.0,
         "2brHouse": 3.0,
         "3brFlat": 3.0,
@@ -14218,7 +14292,7 @@
       "meanMedianHousePrice": 2455500.0,
       "meanMedianUnitPrice": 690600.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 0.441
+      "unitPriceScore": 0.4528
     }
   },
   "Kooyong": {
@@ -14245,7 +14319,55 @@
       "meanMedianHousePrice": null,
       "meanMedianUnitPrice": 968700.0,
       "housePriceScore": null,
-      "unitPriceScore": 2.9523
+      "unitPriceScore": 2.9764
+    }
+  },
+  "Malvern": {
+    "postcode": "3144",
+    "lga": "Stonnington",
+    "crimeSuburb": {
+      "totalIncidents": 668,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2413,
+        "B43 Steal from a retail store": 0.1192,
+        "B53 Obtain benefit by deception": 0.0709,
+        "B311 Residential aggravated burglary": 0.0694,
+        "B49 Other theft": 0.0649
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 9532.0,
+      "year": "2025",
+      "crimeScore": -3.0
+    },
+    "rent": {
+      "weeklyRent": {
+        "1brFlat": 450,
+        "2brFlat": 600,
+        "3brFlat": 908,
+        "2brHouse": 790,
+        "3brHouse": 1000,
+        "4brHouse": 1400,
+        "all": 630
+      },
+      "region": "Southern Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": 0.2128,
+        "2brFlat": 1.0,
+        "2brHouse": 3.0,
+        "3brFlat": 2.28,
+        "3brHouse": 3.0,
+        "4brHouse": 3.0,
+        "all": 0.6
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 3151400.0,
+      "meanMedianUnitPrice": 673000.0,
+      "housePriceScore": 3.0,
+      "unitPriceScore": 0.2931
     }
   },
   "Malvern East": {
@@ -14280,7 +14402,7 @@
       "region": "Southern Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 1.0,
+        "1brFlat": 0.8511,
         "2brFlat": 1.0,
         "2brHouse": 1.1429,
         "3brFlat": 1.2,
@@ -14293,7 +14415,55 @@
       "meanMedianHousePrice": 2140020.0,
       "meanMedianUnitPrice": 566700.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": -0.6778
+      "unitPriceScore": -0.6715
+    }
+  },
+  "Prahran": {
+    "postcode": "3181",
+    "lga": "Stonnington",
+    "crimeSuburb": {
+      "totalIncidents": 2387,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2008,
+        "B43 Steal from a retail store": 0.1031,
+        "B49 Other theft": 0.0989,
+        "B21 Criminal damage": 0.083,
+        "B321 Residential non-aggravated burglary": 0.0562
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 9532.0,
+      "year": "2025",
+      "crimeScore": -3.0
+    },
+    "rent": {
+      "weeklyRent": {
+        "1brFlat": 460,
+        "2brFlat": 650,
+        "3brFlat": 950,
+        "2brHouse": 775,
+        "3brHouse": 975,
+        "4brHouse": 1350,
+        "all": 590
+      },
+      "region": "Inner Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": 0.4255,
+        "2brFlat": 2.0,
+        "2brHouse": 2.9286,
+        "3brFlat": 2.7,
+        "3brHouse": 3.0,
+        "4brHouse": 2.9444,
+        "all": -0.2
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 1643500.0,
+      "meanMedianUnitPrice": 528600.0,
+      "housePriceScore": 2.2662,
+      "unitPriceScore": -1.0172
     }
   },
   "Toorak": {
@@ -14328,7 +14498,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.2222,
+        "1brFlat": 0.1064,
         "2brFlat": 2.0,
         "2brHouse": 1.7857,
         "3brFlat": 3.0,
@@ -14341,7 +14511,7 @@
       "meanMedianHousePrice": 5485500.0,
       "meanMedianUnitPrice": 959700.0,
       "housePriceScore": 3.0,
-      "unitPriceScore": 2.871
+      "unitPriceScore": 2.8947
     }
   },
   "Windsor": {
@@ -14376,7 +14546,7 @@
       "region": "Inner Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.5556,
+        "1brFlat": 0.4255,
         "2brFlat": 2.0,
         "2brHouse": 2.9286,
         "3brFlat": 2.7,
@@ -14388,8 +14558,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1428400.0,
       "meanMedianUnitPrice": 552100.0,
-      "housePriceScore": 1.5243,
-      "unitPriceScore": -0.8096
+      "housePriceScore": 1.505,
+      "unitPriceScore": -0.804
     }
   },
   "Albanvale": {
@@ -14415,7 +14585,7 @@
     "housePrices": {
       "meanMedianHousePrice": 622600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.3301,
+      "housePriceScore": -1.3468,
       "unitPriceScore": null
     }
   },
@@ -14442,8 +14612,8 @@
     "housePrices": {
       "meanMedianHousePrice": 742260.0,
       "meanMedianUnitPrice": 315700.0,
-      "housePriceScore": -0.9063,
-      "unitPriceScore": -2.9444
+      "housePriceScore": -0.9233,
+      "unitPriceScore": -2.9492
     }
   },
   "Ardeer": {
@@ -14469,8 +14639,8 @@
     "housePrices": {
       "meanMedianHousePrice": 696320.0,
       "meanMedianUnitPrice": 586800.0,
-      "housePriceScore": -1.069,
-      "unitPriceScore": -0.4963
+      "housePriceScore": -1.0859,
+      "unitPriceScore": -0.4891
     }
   },
   "Brooklyn": {
@@ -14496,8 +14666,8 @@
     "housePrices": {
       "meanMedianHousePrice": 817000.0,
       "meanMedianUnitPrice": 641760.0,
-      "housePriceScore": -0.6415,
-      "unitPriceScore": 0.0
+      "housePriceScore": -0.6588,
+      "unitPriceScore": 0.0096
     }
   },
   "Cairnlea": {
@@ -14523,8 +14693,8 @@
     "housePrices": {
       "meanMedianHousePrice": 898080.0,
       "meanMedianUnitPrice": 408380.0,
-      "housePriceScore": -0.3543,
-      "unitPriceScore": -2.1075
+      "housePriceScore": -0.3719,
+      "unitPriceScore": -2.1082
     }
   },
   "Calder Park": {
@@ -14584,7 +14754,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.3333,
+        "1brFlat": -2.3404,
         "2brFlat": -2.6,
         "2brHouse": -2.1429,
         "3brFlat": -1.98,
@@ -14596,8 +14766,8 @@
     "housePrices": {
       "meanMedianHousePrice": 668800.0,
       "meanMedianUnitPrice": 517460.0,
-      "housePriceScore": -1.1665,
-      "unitPriceScore": -1.1224
+      "housePriceScore": -1.1833,
+      "unitPriceScore": -1.1183
     }
   },
   "Delahey": {
@@ -14623,8 +14793,8 @@
     "housePrices": {
       "meanMedianHousePrice": 662600.0,
       "meanMedianUnitPrice": 523960.0,
-      "housePriceScore": -1.1885,
-      "unitPriceScore": -1.0638
+      "housePriceScore": -1.2053,
+      "unitPriceScore": -1.0593
     }
   },
   "Derrimut": {
@@ -14650,7 +14820,7 @@
     "housePrices": {
       "meanMedianHousePrice": 766100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.8218,
+      "housePriceScore": -0.839,
       "unitPriceScore": null
     }
   },
@@ -14702,7 +14872,7 @@
     "housePrices": {
       "meanMedianHousePrice": 708660.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0253,
+      "housePriceScore": -1.0423,
       "unitPriceScore": null
     }
   },
@@ -14729,13 +14899,13 @@
     "housePrices": {
       "meanMedianHousePrice": 811560.0,
       "meanMedianUnitPrice": 597700.0,
-      "housePriceScore": -0.6608,
-      "unitPriceScore": -0.3979
+      "housePriceScore": -0.6781,
+      "unitPriceScore": -0.3902
     }
   },
   "Keilor East": {
     "postcode": "3033",
-    "lga": "Brimbank",
+    "lga": "Moonee Valley",
     "crimeSuburb": {
       "totalIncidents": 561,
       "topFiveOffenceProportion": {
@@ -14748,9 +14918,9 @@
       "year": "2025"
     },
     "crimeLga": {
-      "ratePer100k": 7366.8,
+      "ratePer100k": 6245.9,
       "year": "2025",
-      "crimeScore": -2.6419
+      "crimeScore": -1.1451
     },
     "rent": {
       "weeklyRent": {
@@ -14765,7 +14935,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": -0.6,
         "2brHouse": -0.7143,
         "3brFlat": -0.57,
@@ -14777,8 +14947,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1020500.0,
       "meanMedianUnitPrice": 720360.0,
-      "housePriceScore": 0.0793,
-      "unitPriceScore": 0.7098
+      "housePriceScore": 0.0614,
+      "unitPriceScore": 0.7229
     }
   },
   "Keilor Lodge": {
@@ -14804,7 +14974,7 @@
     "housePrices": {
       "meanMedianHousePrice": 965160.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.1167,
+      "housePriceScore": -0.1345,
       "unitPriceScore": null
     }
   },
@@ -14856,7 +15026,7 @@
     "housePrices": {
       "meanMedianHousePrice": 820960.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.6275,
+      "housePriceScore": -0.6448,
       "unitPriceScore": null
     }
   },
@@ -14883,7 +15053,7 @@
     "housePrices": {
       "meanMedianHousePrice": 621700.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.3333,
+      "housePriceScore": -1.35,
       "unitPriceScore": null
     }
   },
@@ -14919,7 +15089,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.3333,
+        "1brFlat": -2.3404,
         "2brFlat": -2.6,
         "2brHouse": -2.1429,
         "3brFlat": -1.98,
@@ -14931,8 +15101,8 @@
     "housePrices": {
       "meanMedianHousePrice": 659000.0,
       "meanMedianUnitPrice": 518900.0,
-      "housePriceScore": -1.2012,
-      "unitPriceScore": -1.1094
+      "housePriceScore": -1.218,
+      "unitPriceScore": -1.1053
     }
   },
   "Sunshine": {
@@ -14967,7 +15137,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -2.3333,
+        "1brFlat": -2.3404,
         "2brFlat": -2.8,
         "2brHouse": -1.5714,
         "3brFlat": -1.5,
@@ -14979,8 +15149,8 @@
     "housePrices": {
       "meanMedianHousePrice": 802400.0,
       "meanMedianUnitPrice": 483400.0,
-      "housePriceScore": -0.6932,
-      "unitPriceScore": -1.43
+      "housePriceScore": -0.7105,
+      "unitPriceScore": -1.4274
     }
   },
   "Sunshine North": {
@@ -15006,8 +15176,8 @@
     "housePrices": {
       "meanMedianHousePrice": 745500.0,
       "meanMedianUnitPrice": 563800.0,
-      "housePriceScore": -0.8948,
-      "unitPriceScore": -0.704
+      "housePriceScore": -0.9119,
+      "unitPriceScore": -0.6978
     }
   },
   "Sunshine West": {
@@ -15033,8 +15203,8 @@
     "housePrices": {
       "meanMedianHousePrice": 694200.0,
       "meanMedianUnitPrice": 602300.0,
-      "housePriceScore": -1.0765,
-      "unitPriceScore": -0.3563
+      "housePriceScore": -1.0934,
+      "unitPriceScore": -0.3485
     }
   },
   "Sydenham": {
@@ -15080,8 +15250,8 @@
     "housePrices": {
       "meanMedianHousePrice": 703700.0,
       "meanMedianUnitPrice": 494400.0,
-      "housePriceScore": -1.0429,
-      "unitPriceScore": -1.3307
+      "housePriceScore": -1.0598,
+      "unitPriceScore": -1.3276
     }
   },
   "Taylors Lakes": {
@@ -15107,8 +15277,8 @@
     "housePrices": {
       "meanMedianHousePrice": 942800.0,
       "meanMedianUnitPrice": 583900.0,
-      "housePriceScore": -0.1959,
-      "unitPriceScore": -0.5225
+      "housePriceScore": -0.2136,
+      "unitPriceScore": -0.5154
     }
   },
   "Altona": {
@@ -15143,7 +15313,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.1111,
+        "1brFlat": -1.1702,
         "2brFlat": -1.5,
         "2brHouse": -1.1429,
         "3brFlat": -1.3,
@@ -15155,8 +15325,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1179800.0,
       "meanMedianUnitPrice": 689200.0,
-      "housePriceScore": 0.6436,
-      "unitPriceScore": 0.4284
+      "housePriceScore": 0.6251,
+      "unitPriceScore": 0.4401
     }
   },
   "Altona Meadows": {
@@ -15182,8 +15352,8 @@
     "housePrices": {
       "meanMedianHousePrice": 725400.0,
       "meanMedianUnitPrice": 571360.0,
-      "housePriceScore": -0.966,
-      "unitPriceScore": -0.6357
+      "housePriceScore": -0.983,
+      "unitPriceScore": -0.6292
     }
   },
   "Altona North": {
@@ -15209,8 +15379,8 @@
     "housePrices": {
       "meanMedianHousePrice": 917600.0,
       "meanMedianUnitPrice": 748760.0,
-      "housePriceScore": -0.2852,
-      "unitPriceScore": 0.9662
+      "housePriceScore": -0.3028,
+      "unitPriceScore": 0.9806
     }
   },
   "Laverton": {
@@ -15236,8 +15406,8 @@
     "housePrices": {
       "meanMedianHousePrice": 592100.0,
       "meanMedianUnitPrice": 546900.0,
-      "housePriceScore": -1.4382,
-      "unitPriceScore": -0.8566
+      "housePriceScore": -1.4548,
+      "unitPriceScore": -0.8512
     }
   },
   "Newport": {
@@ -15272,7 +15442,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.4444,
+        "1brFlat": 0.3191,
         "2brFlat": 0.5,
         "2brHouse": 0.1429,
         "3brFlat": 0.45,
@@ -15284,8 +15454,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1307500.0,
       "meanMedianUnitPrice": 779920.0,
-      "housePriceScore": 1.096,
-      "unitPriceScore": 1.2476
+      "housePriceScore": 1.0771,
+      "unitPriceScore": 1.2633
     }
   },
   "Seabrook": {
@@ -15311,7 +15481,7 @@
     "housePrices": {
       "meanMedianHousePrice": 759900.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.8438,
+      "housePriceScore": -0.8609,
       "unitPriceScore": null
     }
   },
@@ -15338,7 +15508,7 @@
     "housePrices": {
       "meanMedianHousePrice": 1194000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": 0.6939,
+      "housePriceScore": 0.6754,
       "unitPriceScore": null
     }
   },
@@ -15365,8 +15535,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1134260.0,
       "meanMedianUnitPrice": 704500.0,
-      "housePriceScore": 0.4823,
-      "unitPriceScore": 0.5666
+      "housePriceScore": 0.464,
+      "unitPriceScore": 0.5789
     }
   },
   "Spotswood": {
@@ -15401,7 +15571,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.4444,
+        "1brFlat": 0.3191,
         "2brFlat": 0.5,
         "2brHouse": 0.1429,
         "3brFlat": 0.45,
@@ -15413,8 +15583,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1199460.0,
       "meanMedianUnitPrice": 789200.0,
-      "housePriceScore": 0.7133,
-      "unitPriceScore": 1.3314
+      "housePriceScore": 0.6947,
+      "unitPriceScore": 1.3475
     }
   },
   "Williamstown": {
@@ -15449,7 +15619,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.3333,
+        "1brFlat": -0.4255,
         "2brFlat": -0.54,
         "2brHouse": 0.4286,
         "3brFlat": -0.1,
@@ -15461,8 +15631,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1555600.0,
       "meanMedianUnitPrice": 801300.0,
-      "housePriceScore": 1.9748,
-      "unitPriceScore": 1.4407
+      "housePriceScore": 1.9551,
+      "unitPriceScore": 1.4574
     }
   },
   "Williamstown North": {
@@ -15488,8 +15658,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1329960.0,
       "meanMedianUnitPrice": 818800.0,
-      "housePriceScore": 1.1756,
-      "unitPriceScore": 1.5987
+      "housePriceScore": 1.1566,
+      "unitPriceScore": 1.6162
     }
   },
   "Braybrook": {
@@ -15515,8 +15685,8 @@
     "housePrices": {
       "meanMedianHousePrice": 734600.0,
       "meanMedianUnitPrice": 621900.0,
-      "housePriceScore": -0.9334,
-      "unitPriceScore": -0.1793
+      "housePriceScore": -0.9505,
+      "unitPriceScore": -0.1706
     }
   },
   "Footscray": {
@@ -15551,7 +15721,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": 0.3333,
+        "1brFlat": 0.2128,
         "2brFlat": 0.2,
         "2brHouse": 0.0429,
         "3brFlat": 0.18,
@@ -15563,8 +15733,8 @@
     "housePrices": {
       "meanMedianHousePrice": 946500.0,
       "meanMedianUnitPrice": 490000.0,
-      "housePriceScore": -0.1828,
-      "unitPriceScore": -1.3704
+      "housePriceScore": -0.2005,
+      "unitPriceScore": -1.3675
     }
   },
   "Kingsville": {
@@ -15590,8 +15760,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1192000.0,
       "meanMedianUnitPrice": 451600.0,
-      "housePriceScore": 0.6869,
-      "unitPriceScore": -1.7172
+      "housePriceScore": 0.6683,
+      "unitPriceScore": -1.716
     }
   },
   "Maidstone": {
@@ -15617,8 +15787,8 @@
     "housePrices": {
       "meanMedianHousePrice": 861800.0,
       "meanMedianUnitPrice": 640700.0,
-      "housePriceScore": -0.4828,
-      "unitPriceScore": -0.0096
+      "housePriceScore": -0.5003,
+      "unitPriceScore": 0.0
     }
   },
   "Maribyrnong": {
@@ -15644,8 +15814,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1220200.0,
       "meanMedianUnitPrice": 483300.0,
-      "housePriceScore": 0.7868,
-      "unitPriceScore": -1.4309
+      "housePriceScore": 0.7681,
+      "unitPriceScore": -1.4283
     }
   },
   "Seddon": {
@@ -15680,7 +15850,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.9333,
+        "1brFlat": -1.0,
         "2brFlat": -0.6,
         "2brHouse": 0.4286,
         "3brFlat": 0.5,
@@ -15692,8 +15862,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1106500.0,
       "meanMedianUnitPrice": 615660.0,
-      "housePriceScore": 0.384,
-      "unitPriceScore": -0.2357
+      "housePriceScore": 0.3657,
+      "unitPriceScore": -0.2272
     }
   },
   "Tottenham": {
@@ -15753,7 +15923,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.5556,
+        "1brFlat": -1.5957,
         "2brFlat": -1.5,
         "2brHouse": -1.0,
         "3brFlat": -0.6,
@@ -15765,8 +15935,8 @@
     "housePrices": {
       "meanMedianHousePrice": 928500.0,
       "meanMedianUnitPrice": 518060.0,
-      "housePriceScore": -0.2465,
-      "unitPriceScore": -1.117
+      "housePriceScore": -0.2642,
+      "unitPriceScore": -1.1129
     }
   },
   "Yarraville": {
@@ -15801,7 +15971,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -0.9333,
+        "1brFlat": -1.0,
         "2brFlat": -0.6,
         "2brHouse": 0.4286,
         "3brFlat": 0.5,
@@ -15813,8 +15983,8 @@
     "housePrices": {
       "meanMedianHousePrice": 1133460.0,
       "meanMedianUnitPrice": 632000.0,
-      "housePriceScore": 0.4795,
-      "unitPriceScore": -0.0881
+      "housePriceScore": 0.4611,
+      "unitPriceScore": -0.0789
     }
   },
   "Aintree": {
@@ -15840,7 +16010,7 @@
     "housePrices": {
       "meanMedianHousePrice": 722100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.9777,
+      "housePriceScore": -0.9947,
       "unitPriceScore": null
     }
   },
@@ -15867,7 +16037,7 @@
     "housePrices": {
       "meanMedianHousePrice": 660040.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.1975,
+      "housePriceScore": -1.2143,
       "unitPriceScore": null
     }
   },
@@ -15894,7 +16064,7 @@
     "housePrices": {
       "meanMedianHousePrice": 556000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.5661,
+      "housePriceScore": -1.5825,
       "unitPriceScore": null
     }
   },
@@ -15921,7 +16091,7 @@
     "housePrices": {
       "meanMedianHousePrice": 776600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.7846,
+      "housePriceScore": -0.8018,
       "unitPriceScore": null
     }
   },
@@ -15948,7 +16118,7 @@
     "housePrices": {
       "meanMedianHousePrice": 765600.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.8236,
+      "housePriceScore": -0.8407,
       "unitPriceScore": null
     }
   },
@@ -15975,8 +16145,8 @@
     "housePrices": {
       "meanMedianHousePrice": 745300.0,
       "meanMedianUnitPrice": 500500.0,
-      "housePriceScore": -0.8955,
-      "unitPriceScore": -1.2756
+      "housePriceScore": -0.9126,
+      "unitPriceScore": -1.2722
     }
   },
   "Cobblebank": {
@@ -16002,7 +16172,7 @@
     "housePrices": {
       "meanMedianHousePrice": 627000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.3146,
+      "housePriceScore": -1.3313,
       "unitPriceScore": null
     }
   },
@@ -16029,7 +16199,7 @@
     "housePrices": {
       "meanMedianHousePrice": 673100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.1513,
+      "housePriceScore": -1.1681,
       "unitPriceScore": null
     }
   },
@@ -16071,7 +16241,7 @@
     "housePrices": {
       "meanMedianHousePrice": 699100.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.0592,
+      "housePriceScore": -1.0761,
       "unitPriceScore": null
     }
   },
@@ -16123,8 +16293,8 @@
     "housePrices": {
       "meanMedianHousePrice": 566100.0,
       "meanMedianUnitPrice": 409260.0,
-      "housePriceScore": -1.5303,
-      "unitPriceScore": -2.0995
+      "housePriceScore": -1.5468,
+      "unitPriceScore": -2.1002
     }
   },
   "Kurunjang": {
@@ -16150,8 +16320,8 @@
     "housePrices": {
       "meanMedianHousePrice": 535600.0,
       "meanMedianUnitPrice": 404800.0,
-      "housePriceScore": -1.6383,
-      "unitPriceScore": -2.1398
+      "housePriceScore": -1.6547,
+      "unitPriceScore": -2.1407
     }
   },
   "Melton": {
@@ -16186,7 +16356,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.8889,
+        "1brFlat": -1.9149,
         "2brFlat": -3.0,
         "2brHouse": -2.7857,
         "3brFlat": -2.8,
@@ -16198,8 +16368,8 @@
     "housePrices": {
       "meanMedianHousePrice": 484960.0,
       "meanMedianUnitPrice": 381300.0,
-      "housePriceScore": -1.8177,
-      "unitPriceScore": -2.352
+      "housePriceScore": -1.8339,
+      "unitPriceScore": -2.3539
     }
   },
   "Melton South": {
@@ -16225,8 +16395,8 @@
     "housePrices": {
       "meanMedianHousePrice": 528900.0,
       "meanMedianUnitPrice": 389500.0,
-      "housePriceScore": -1.6621,
-      "unitPriceScore": -2.2779
+      "housePriceScore": -1.6784,
+      "unitPriceScore": -2.2795
     }
   },
   "Melton West": {
@@ -16252,8 +16422,8 @@
     "housePrices": {
       "meanMedianHousePrice": 539500.0,
       "meanMedianUnitPrice": 433400.0,
-      "housePriceScore": -1.6245,
-      "unitPriceScore": -1.8815
+      "housePriceScore": -1.6409,
+      "unitPriceScore": -1.8811
     }
   },
   "Plumpton": {
@@ -16329,8 +16499,8 @@
     "housePrices": {
       "meanMedianHousePrice": 614020.0,
       "meanMedianUnitPrice": 542800.0,
-      "housePriceScore": -1.3605,
-      "unitPriceScore": -0.8936
+      "housePriceScore": -1.3772,
+      "unitPriceScore": -0.8884
     }
   },
   "Strathtulloh": {
@@ -16356,7 +16526,7 @@
     "housePrices": {
       "meanMedianHousePrice": 632700.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.2944,
+      "housePriceScore": -1.3111,
       "unitPriceScore": null
     }
   },
@@ -16383,8 +16553,8 @@
     "housePrices": {
       "meanMedianHousePrice": 902460.0,
       "meanMedianUnitPrice": 560020.0,
-      "housePriceScore": -0.3388,
-      "unitPriceScore": -0.7381
+      "housePriceScore": -0.3564,
+      "unitPriceScore": -0.7321
     }
   },
   "Thornhill Park": {
@@ -16410,7 +16580,7 @@
     "housePrices": {
       "meanMedianHousePrice": 588000.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.4527,
+      "housePriceScore": -1.4693,
       "unitPriceScore": null
     }
   },
@@ -16437,8 +16607,8 @@
     "housePrices": {
       "meanMedianHousePrice": 660460.0,
       "meanMedianUnitPrice": 496700.0,
-      "housePriceScore": -1.196,
-      "unitPriceScore": -1.3099
+      "housePriceScore": -1.2128,
+      "unitPriceScore": -1.3067
     }
   },
   "Weir Views": {
@@ -16464,7 +16634,7 @@
     "housePrices": {
       "meanMedianHousePrice": 565660.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.5318,
+      "housePriceScore": -1.5483,
       "unitPriceScore": null
     }
   },
@@ -16516,7 +16686,7 @@
     "housePrices": {
       "meanMedianHousePrice": 731200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -0.9454,
+      "housePriceScore": -0.9625,
       "unitPriceScore": null
     }
   },
@@ -16543,7 +16713,7 @@
     "housePrices": {
       "meanMedianHousePrice": 593900.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.4318,
+      "housePriceScore": -1.4484,
       "unitPriceScore": null
     }
   },
@@ -16597,6 +16767,439 @@
       "unitPriceScore": null
     }
   },
+  "Aberfeldie": {
+    "postcode": "3040",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 136,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2574,
+        "E21 Breach family violence order": 0.1324,
+        "B21 Criminal damage": 0.1029,
+        "B41 Motor vehicle theft": 0.1029,
+        "B49 Other theft": 0.0809
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 2011500.0,
+      "meanMedianUnitPrice": null,
+      "housePriceScore": 3.0,
+      "unitPriceScore": null
+    }
+  },
+  "Airport West": {
+    "postcode": "3042",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 849,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2179,
+        "B43 Steal from a retail store": 0.1531,
+        "B49 Other theft": 0.119,
+        "B41 Motor vehicle theft": 0.0883,
+        "B21 Criminal damage": 0.0554
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 938420.0,
+      "meanMedianUnitPrice": null,
+      "housePriceScore": -0.2291,
+      "unitPriceScore": null
+    }
+  },
+  "Ascot Vale": {
+    "postcode": "3032",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 1549,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2699,
+        "B49 Other theft": 0.1123,
+        "B21 Criminal damage": 0.0826,
+        "E21 Breach family violence order": 0.0749,
+        "B43 Steal from a retail store": 0.0639
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": {
+      "weeklyRent": {
+        "1brFlat": 450,
+        "2brFlat": 550,
+        "3brFlat": 730,
+        "2brHouse": 620,
+        "3brHouse": 750,
+        "4brHouse": 995,
+        "all": 575
+      },
+      "region": "North Western Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": 0.2128,
+        "2brFlat": 0.0,
+        "2brHouse": 0.7143,
+        "3brFlat": 0.5,
+        "3brHouse": 1.0,
+        "4brHouse": 0.9722,
+        "all": -0.5
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 1298800.0,
+      "meanMedianUnitPrice": 519600.0,
+      "housePriceScore": 1.0463,
+      "unitPriceScore": -1.0989
+    }
+  },
+  "Avondale Heights": {
+    "postcode": "3034",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 302,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.1755,
+        "E21 Breach family violence order": 0.1192,
+        "B49 Other theft": 0.1026,
+        "B53 Obtain benefit by deception": 0.0762,
+        "B21 Criminal damage": 0.0662
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": {
+      "weeklyRent": {
+        "1brFlat": 450,
+        "2brFlat": 520,
+        "3brFlat": 623,
+        "2brHouse": 520,
+        "3brHouse": 580,
+        "4brHouse": 768,
+        "all": 550
+      },
+      "region": "Outer Western Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": 0.2128,
+        "2brFlat": -0.6,
+        "2brHouse": -0.7143,
+        "3brFlat": -0.57,
+        "3brHouse": -0.7,
+        "4brHouse": -0.2889,
+        "all": -1.0
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 975300.0,
+      "meanMedianUnitPrice": 722100.0,
+      "housePriceScore": -0.0986,
+      "unitPriceScore": 0.7387
+    }
+  },
+  "Essendon": {
+    "postcode": "3040",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 1166,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2813,
+        "B49 Other theft": 0.1166,
+        "B21 Criminal damage": 0.0892,
+        "B41 Motor vehicle theft": 0.0789,
+        "B321 Residential non-aggravated burglary": 0.0403
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": {
+      "weeklyRent": {
+        "1brFlat": 430,
+        "2brFlat": 510,
+        "3brFlat": 650,
+        "2brHouse": 550,
+        "3brHouse": 650,
+        "4brHouse": 895,
+        "all": 550
+      },
+      "region": "North Western Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": -0.2128,
+        "2brFlat": -0.8,
+        "2brHouse": -0.2857,
+        "3brFlat": -0.3,
+        "3brHouse": 0.0,
+        "4brHouse": 0.4167,
+        "all": -1.0
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 1690000.0,
+      "meanMedianUnitPrice": 554500.0,
+      "housePriceScore": 2.4308,
+      "unitPriceScore": -0.7822
+    }
+  },
+  "Essendon Fields": {
+    "postcode": "3041",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 274,
+      "topFiveOffenceProportion": {
+        "B43 Steal from a retail store": 0.3467,
+        "B42 Steal from a motor vehicle": 0.2044,
+        "B41 Motor vehicle theft": 0.0657,
+        "B49 Other theft": 0.0657,
+        "B21 Criminal damage": 0.0547
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "housePriceScore": null,
+      "unitPriceScore": null
+    }
+  },
+  "Essendon North": {
+    "postcode": "3041",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 206,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2233,
+        "B49 Other theft": 0.1311,
+        "B21 Criminal damage": 0.1068,
+        "B41 Motor vehicle theft": 0.0777,
+        "B43 Steal from a retail store": 0.0437
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 1263600.0,
+      "meanMedianUnitPrice": 394300.0,
+      "housePriceScore": 0.9217,
+      "unitPriceScore": -2.2359
+    }
+  },
+  "Essendon West": {
+    "postcode": "3040",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 55,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.3091,
+        "C32 Drug possession": 0.1091,
+        "B21 Criminal damage": 0.0909,
+        "B41 Motor vehicle theft": 0.0727,
+        "A232 Non-FV Common assault": 0.0364
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 1658260.0,
+      "meanMedianUnitPrice": 818500.0,
+      "housePriceScore": 2.3184,
+      "unitPriceScore": 1.6134
+    }
+  },
+  "Moonee Ponds": {
+    "postcode": "3039",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 1383,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2256,
+        "B49 Other theft": 0.1468,
+        "B43 Steal from a retail store": 0.0933,
+        "B21 Criminal damage": 0.0745,
+        "B41 Motor vehicle theft": 0.0477
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": {
+      "weeklyRent": {
+        "1brFlat": 450,
+        "2brFlat": 550,
+        "3brFlat": 730,
+        "2brHouse": 620,
+        "3brHouse": 750,
+        "4brHouse": 995,
+        "all": 575
+      },
+      "region": "North Western Melbourne",
+      "period": "2025-09-30",
+      "rentScore": {
+        "1brFlat": 0.2128,
+        "2brFlat": 0.0,
+        "2brHouse": 0.7143,
+        "3brFlat": 0.5,
+        "3brHouse": 1.0,
+        "4brHouse": 0.9722,
+        "all": -0.5
+      }
+    },
+    "housePrices": {
+      "meanMedianHousePrice": 1504060.0,
+      "meanMedianUnitPrice": 554600.0,
+      "housePriceScore": 1.7727,
+      "unitPriceScore": -0.7813
+    }
+  },
+  "Niddrie": {
+    "postcode": "3042",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 215,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.307,
+        "B21 Criminal damage": 0.1023,
+        "B49 Other theft": 0.0651,
+        "B41 Motor vehicle theft": 0.0512,
+        "B53 Obtain benefit by deception": 0.0512
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 1257560.0,
+      "meanMedianUnitPrice": 753000.0,
+      "housePriceScore": 0.9003,
+      "unitPriceScore": 1.0191
+    }
+  },
+  "Strathmore": {
+    "postcode": "3041",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 311,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.3762,
+        "B41 Motor vehicle theft": 0.1125,
+        "B21 Criminal damage": 0.0547,
+        "B321 Residential non-aggravated burglary": 0.0547,
+        "B49 Other theft": 0.0547
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 1628800.0,
+      "meanMedianUnitPrice": 715000.0,
+      "housePriceScore": 2.2142,
+      "unitPriceScore": 0.6742
+    }
+  },
+  "Strathmore Heights": {
+    "postcode": "3041",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 30,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2,
+        "C32 Drug possession": 0.1667,
+        "B21 Criminal damage": 0.1,
+        "B41 Motor vehicle theft": 0.1,
+        "B49 Other theft": 0.1
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": 944500.0,
+      "meanMedianUnitPrice": null,
+      "housePriceScore": -0.2076,
+      "unitPriceScore": null
+    }
+  },
+  "Travancore": {
+    "postcode": "3032",
+    "lga": "Moonee Valley",
+    "crimeSuburb": {
+      "totalIncidents": 156,
+      "topFiveOffenceProportion": {
+        "B42 Steal from a motor vehicle": 0.2949,
+        "B49 Other theft": 0.1474,
+        "B41 Motor vehicle theft": 0.1218,
+        "B44 Theft of a bicycle": 0.0641,
+        "B321 Residential non-aggravated burglary": 0.0577
+      },
+      "year": "2025"
+    },
+    "crimeLga": {
+      "ratePer100k": 6245.9,
+      "year": "2025",
+      "crimeScore": -1.1451
+    },
+    "rent": null,
+    "housePrices": {
+      "meanMedianHousePrice": null,
+      "meanMedianUnitPrice": 363960.0,
+      "housePriceScore": null,
+      "unitPriceScore": -2.5113
+    }
+  },
   "Hoppers Crossing": {
     "postcode": "3029",
     "lga": "Wyndham",
@@ -16629,7 +17232,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.8889,
+        "1brFlat": -1.9149,
         "2brFlat": -2.9,
         "2brHouse": -2.1429,
         "3brFlat": -2.3,
@@ -16641,8 +17244,8 @@
     "housePrices": {
       "meanMedianHousePrice": 628200.0,
       "meanMedianUnitPrice": 445200.0,
-      "housePriceScore": -1.3103,
-      "unitPriceScore": -1.775
+      "housePriceScore": -1.327,
+      "unitPriceScore": -1.774
     }
   },
   "Laverton North": {
@@ -16693,7 +17296,7 @@
     "housePrices": {
       "meanMedianHousePrice": 619200.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.3422,
+      "housePriceScore": -1.3589,
       "unitPriceScore": null
     }
   },
@@ -16720,7 +17323,7 @@
     "housePrices": {
       "meanMedianHousePrice": 645400.0,
       "meanMedianUnitPrice": null,
-      "housePriceScore": -1.2494,
+      "housePriceScore": -1.2661,
       "unitPriceScore": null
     }
   },
@@ -16747,8 +17350,8 @@
     "housePrices": {
       "meanMedianHousePrice": 787300.0,
       "meanMedianUnitPrice": 551160.0,
-      "housePriceScore": -0.7467,
-      "unitPriceScore": -0.8181
+      "housePriceScore": -0.7639,
+      "unitPriceScore": -0.8125
     }
   },
   "Tarneit": {
@@ -16774,8 +17377,8 @@
     "housePrices": {
       "meanMedianHousePrice": 653160.0,
       "meanMedianUnitPrice": 465700.0,
-      "housePriceScore": -1.2219,
-      "unitPriceScore": -1.5899
+      "housePriceScore": -1.2387,
+      "unitPriceScore": -1.588
     }
   },
   "Werribee": {
@@ -16810,7 +17413,7 @@
       "region": "Outer Western Melbourne",
       "period": "2025-09-30",
       "rentScore": {
-        "1brFlat": -1.8889,
+        "1brFlat": -1.9149,
         "2brFlat": -2.9,
         "2brHouse": -2.1429,
         "3brFlat": -2.3,
@@ -16822,8 +17425,8 @@
     "housePrices": {
       "meanMedianHousePrice": 619100.0,
       "meanMedianUnitPrice": 436700.0,
-      "housePriceScore": -1.3425,
-      "unitPriceScore": -1.8517
+      "housePriceScore": -1.3592,
+      "unitPriceScore": -1.8512
     }
   },
   "Werribee South": {
@@ -16849,8 +17452,8 @@
     "housePrices": {
       "meanMedianHousePrice": 820200.0,
       "meanMedianUnitPrice": 494700.0,
-      "housePriceScore": -0.6302,
-      "unitPriceScore": -1.328
+      "housePriceScore": -0.6475,
+      "unitPriceScore": -1.3249
     }
   },
   "Williams Landing": {
@@ -16876,8 +17479,8 @@
     "housePrices": {
       "meanMedianHousePrice": 812300.0,
       "meanMedianUnitPrice": 428860.0,
-      "housePriceScore": -0.6582,
-      "unitPriceScore": -1.9225
+      "housePriceScore": -0.6755,
+      "unitPriceScore": -1.9223
     }
   },
   "Wyndham Vale": {
@@ -16903,8 +17506,8 @@
     "housePrices": {
       "meanMedianHousePrice": 582200.0,
       "meanMedianUnitPrice": 482800.0,
-      "housePriceScore": -1.4733,
-      "unitPriceScore": -1.4354
+      "housePriceScore": -1.4898,
+      "unitPriceScore": -1.4328
     }
   },
   "Cocoroc": {
