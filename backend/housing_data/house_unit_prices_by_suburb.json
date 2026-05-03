@@ -305,7 +305,7 @@
     "meanMedianUnitPrice": 430300.0
   },
   {
-    "suburb": "Bellfield (Banyule)",
+    "suburb": "Bellfield",
     "meanMedianHousePrice": 996900.0,
     "meanMedianUnitPrice": 756620.0
   },
@@ -1610,7 +1610,7 @@
     "meanMedianUnitPrice": 529460.0
   },
   {
-    "suburb": "Hillside (Melton)",
+    "suburb": "Hillside",
     "meanMedianHousePrice": 805160.0,
     "meanMedianUnitPrice": 556400.0
   },
@@ -1821,11 +1821,11 @@
   },
   {
     "suburb": "Kew East",
-    "meanMedianHousePrice": null,
+    "meanMedianHousePrice": 2201500.0,
     "meanMedianUnitPrice": 975800.0
   },
   {
-    "suburb": "Kew North",
+    "suburb": "Kew East",
     "meanMedianHousePrice": 2201500.0,
     "meanMedianUnitPrice": 877700.0
   },

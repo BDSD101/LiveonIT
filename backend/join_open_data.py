@@ -331,6 +331,18 @@ for cat in CATEGORIES:
             combined[suburb]["rent"]["rentScore"] = {}
         combined[suburb]["rent"]["rentScore"][cat] = cat_scores[i]
 
+
+# --- Rent score average (excludes 1br and 'all') ---
+RENT_SCORE_AVG_KEYS = ['2brFlat', '3brFlat', '2brHouse', '3brHouse', '4brHouse']
+for suburb in suburb_keys:
+    rent = combined[suburb].get("rent")
+    if rent is None:
+        continue
+    scores = rent.get("rentScore") or {}
+    values = [scores[k] for k in RENT_SCORE_AVG_KEYS if scores.get(k) is not None]
+    rent["rentScoreAverage"] = round(sum(values) / len(values), 4) if values else None
+
+
 # --- Crime (LGA rate per 100k, inverted so safer = higher score) ---
 crime_vals = [combined[s]["crimeLga"]["ratePer100k"] if combined[s].get("crimeLga") else None for s in suburb_keys]
 crime_scores = mad_scores(crime_vals, invert=True)
@@ -375,6 +387,7 @@ fieldnames = (
     # + [f"rent_{cat}_rank" for cat in RENT_CATS]
     # + [f"rent_{cat}_percentile" for cat in RENT_CATS]
     + [f"rent_{cat}_score" for cat in RENT_CATS]
+    + ["rent_scoreAverage"]
     + ["meanMedianHousePrice", "meanMedianUnitPrice", "housePriceScore", "unitPriceScore"]
 )
 
@@ -420,6 +433,7 @@ for suburb, data in sorted(combined.items()):
         row[f"rent_{cat}_score"] = (r.get("rentScore") or {}).get(cat, "")
         # row[f"rent_{cat}_rank"] = ranks.get(cat, "")
         # row[f"rent_{cat}_percentile"] = percentiles.get(cat, "")
+    row["rent_scoreAverage"] = (r.get("rentScoreAverage") or "")
 
     # House/unit prices
     hp = data.get("housePrices") or {}

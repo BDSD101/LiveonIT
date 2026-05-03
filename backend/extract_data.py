@@ -225,6 +225,11 @@ def find_sheet(sheet_names: list[str], keywords: list[str]) -> str:
 # HOUSING — EXTRACT
 # =============================================================================
 
+VPSR_SUBURB_SWAP = {"Hillside (Melton)": "Hillside", 
+                    "Bellfield (Banyule)": "Bellfield",
+                    "Kew North": "Kew East",
+}
+                    
 def extract_house_prices(filepath: str, engine: str, period_end: str) -> pd.DataFrame:
     """
     Extract median house (or unit) prices by suburb.
@@ -281,11 +286,19 @@ def extract_house_prices(filepath: str, engine: str, period_end: str) -> pd.Data
         .rename(columns={"Locality": "suburb"})
     )
     df_output["suburb"] = df_output["suburb"].str.title()
+    # Replace all suburbs appearing in VSPR_SUBURB_SWAP keys with their corresponding values for consistency with rent data
+    df_output["suburb"] = df_output["suburb"].replace(VPSR_SUBURB_SWAP)
     return df_output
 
-RENT_SUBURB_SWAP = {"West St Kilda":"St Kilda West", "East St Kilda":"St Kilda East", "CBD":"Melbourne", "St Kilda Rd":"Melbourne", "East Brunswick":"Brunswick East", "East Hawthorn":"Hawthorn East", "Mt Eliza": "Mount Eliza", "Mt Martha": "Mount Martha", "West Brunswick":"Brunswick West"}
-# print(RENT_SUBURB_SWAP.keys())
-# print(RENT_SUBURB_SWAP.values())
+RENT_SUBURB_SWAP = {"West St Kilda":"St Kilda West", 
+                    "East St Kilda":"St Kilda East", 
+                    "CBD":"Melbourne", 
+                    "St Kilda Rd":"Melbourne", 
+                    "East Brunswick":"Brunswick East", 
+                    "East Hawthorn":"Hawthorn East", 
+                    "Mt Eliza": "Mount Eliza", 
+                    "Mt Martha": "Mount Martha", 
+                    "West Brunswick":"Brunswick West"}
 
 def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
     """
@@ -380,12 +393,8 @@ def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
                 except (ValueError, TypeError):
                     pass
 
-
-
             if suburb not in result:
-
                 suburbs = [s.strip() for s in suburb.split("-")]
-                # print("YYYYY", suburbs)
                 new_suburbs = []
                 for s in suburbs:
                     if s in RENT_SUBURB_SWAP.keys():
@@ -405,15 +414,6 @@ def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
                 result[suburb]["weeklyRent"][type_key] = rent
 
     suburb_list = sorted(result.values(), key=lambda x: x["suburbs"][0])
-
-    # for suburb in suburb_list:
-        # print("XXXX", suburb)
-
-#     print("XXXX", suburb)
-# if suburb in RENT_SUBURB_SWAP.keys():
-#     print(f"    Swapped suburb '{suburb}' to '{RENT_SUBURB_SWAP[suburb]}' for consistency")
-#     suburb = RENT_SUBURB_SWAP[suburb]
-
 
     print(f"  Suburb groups extracted: {len(suburb_list)}")
 

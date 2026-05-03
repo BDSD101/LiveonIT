@@ -38,6 +38,7 @@ Add your API key:
 ```
 GOOGLE_MAPS_API_KEY=AIza...
 ```
+Add verification_visualisation/ to .gitignore as it contains large geojson files and html mapping files that might get blocked by git
 
 ### 3. Run Development Server
 ```bash
