@@ -1,149 +1,131 @@
-let map = null; // Holds the one big map instance
-let marker = null; // For the red pin - user selected address - global variable so pins don't accumulate
-let debounceTimer = null; // User stops typing in the search box - this makes it so every keystroke doesn't fire a network request
-let currentResults = []; // Stores address suggestions in the dropdown
-let selectedIndex = -1; // Tracks which search dropdown suggestion is currently highlighted - starts at -1
-let serviceMarkers = []; // To store and then see the services in the map
-let serviceRouteGeojson = null; // For the actual routes to services from the red pin
-let mapReady = false; // Tracks whether the map style has fully loaded (was soliving a timing glitch)
-let activeLoadController = null; // If the user picks another address while network requests are happening, this helps cancel those requests
+const root = getComputedStyle(document.body);
 
-// Guarantees all the elements exist and can be referenced safely (loads everything essentially)
-document.addEventListener('DOMContentLoaded', () => {
-    // Creates the actual map instance around Melbourne
-    map = new maplibregl.Map({
-        container: 'map',
-        style: 'https://tiles.openfreemap.org/styles/bright',
-        center: [144.9631, -37.8136],
-        zoom: 12
-    });
-
-    // Needed for a timing glitch that was happening - layers can be added onto the map after the map is loaded and ready
-    map.once('load', () => {
-        mapReady = true;
-    });
-
-    // Everytime the search box changes with input, this fires
-    // Search fires once the user stops typing for 400ms
-    document.getElementById('query').addEventListener('input', () => {
-        clearTimeout(debounceTimer);
-        const q = document.getElementById('query').value.trim();
-        if (q.length < 3) {
-            // Hide results if query is too short
-            document.getElementById('results').style.display = 'none';
-            return;
-        }
-        debounceTimer = setTimeout(() => search(q), 400);
-    });
-
-    // Keyboard navigation within the search dropdown (Up/Down/Enter/Escape) - stops browser from doing its own movements
-    document.getElementById('query').addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-            document.getElementById('results').style.display = 'none';
-        } else if (e.key === 'ArrowDown') {
-            e.preventDefault(); // Prevent cursor from moving in input
-            if (selectedIndex < currentResults.length - 1) {
-                selectedIndex++;
-                updateSelectionUI();
-            }
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault(); // Prevent cursor from moving in input
-            if (selectedIndex > 0) {
-                selectedIndex--;
-                updateSelectionUI();
-            }
-        // Enter selects highlighted item only and does not reload thd page
-        } else if (e.key === 'Enter') {
-            e.preventDefault(); // Prevent form submit if there was one
-            if (selectedIndex >= 0 && selectedIndex < currentResults.length) {
-                select(currentResults[selectedIndex]);
-            }
-        }
-    });
-
-    // Swap the button icon when fullscreen state changes (covers different browsers)
-    document.addEventListener('fullscreenchange', onFullscreenChange);
-    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
-    document.addEventListener('mozfullscreenchange', onFullscreenChange);
-});
-
-// Toggles the map wrapper in and out of fullscreen - MapLibre automatically resizes the canvas 
-function toggleFullscreen() {
-    const wrapper = document.querySelector('.map-wrapper');
-    // Checks if we are in fullscreen first
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        // If not in fullscreen, enter fullscreen here — use vendor prefix for Safari
-        if (wrapper.requestFullscreen) {
-            wrapper.requestFullscreen();
-        } else if (wrapper.webkitRequestFullscreen) {
-            wrapper.webkitRequestFullscreen();
-        }
-    } else {
-        // Otherwise exit fullscreen here
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
+const CONFIG = {
+  categories: [
+    {
+      id: 'health', label: 'Health Services', color: root.getPropertyValue('--colour-health'), icon: 'heart-pulse', services: [
+        { id: 'doctor', label: 'Doctor / GP', type: 'doctor', icon: 'stethoscope' },
+        { id: 'pharmacy', label: 'Pharmacy', type: 'pharmacy', icon: 'pill' },
+        { id: 'dentist', label: 'Dentist', type: 'dentist', icon: 'smile' },
+        { id: 'gym', label: 'Gym / Fitness', type: 'gym', icon: 'dumbbell' },
+      ]
+    },
+    {
+      id: 'food', label: 'Food and Essentials', color: root.getPropertyValue('--colour-food'), icon: 'shopping-basket', services: [
+        { id: 'supermarket', label: 'Supermarket', type: 'supermarket', icon: 'shopping-cart' },
+        { id: 'bakery', label: 'Bakery', type: 'bakery', icon: 'croissant' },
+        { id: 'convenience', label: 'Convenience', type: 'convenience_store', icon: 'store' },
+        { id: 'shopping', label: 'General Shopping', type: 'shopping_mall', icon: 'shopping-bag' },
+      ]
+    },
+    {
+      id: 'connectivity', label: 'Connectivity', color: root.getPropertyValue('--colour-connectivity'), icon: 'bus-front', services: [
+        { id: 'train', label: 'Train Station', type: 'train_station', icon: 'train-front' },
+        { id: 'bus', label: 'Bus / Tram Stop', type: 'transit_station', icon: 'bus-front' },
+        { id: 'post', label: 'Post Office', type: 'post_office', icon: 'mail' },
+        { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' },
+        { id: 'atm', label: 'ATM', type: 'atm', icon: 'credit-card' },
+      ]
+    },
+    {
+      id: 'parks', label: 'Parks and Nature', color: root.getPropertyValue('--colour-parks'), icon: 'trees', services: [
+        { id: 'park', label: 'Parks', type: 'park', icon: 'trees' },
+      ]
+    },
+    {
+      id: 'dining', label: 'Dining and Social', color: root.getPropertyValue('--colour-dining'), icon: 'utensils', services: [
+        { id: 'cafe', label: 'Cafe', type: 'cafe', icon: 'coffee' },
+        { id: 'restaurant', label: 'Restaurant', type: 'restaurant', icon: 'utensils' },
+        { id: 'bar', label: 'Bar / Pub', type: 'bar', icon: 'beer' },
+      ]
+    },
+    {
+      id: 'education', label: 'Education', color: root.getPropertyValue('--colour-education'), icon: 'school', services: [
+        { id: 'childcare', label: 'Childcare', type: 'childcare', icon: 'baby' },
+        { id: 'kindergarten', label: 'Kindergarten', type: 'kindergarten', icon: 'blocks' },
+        { id: 'primary', label: 'Primary School', type: 'primary_school', icon: 'school' },
+        { id: 'secondary', label: 'Secondary School', type: 'secondary_school', icon: 'school' },
+        { id: 'library', label: 'Library', type: 'library', icon: 'book' },
+      ]
+    },
+    {
+      id: 'other', label: 'Other Services', color: root.getPropertyValue('--colour-other'), icon: 'users', services: [
+        { id: 'community', label: 'Community Centre', type: 'community', icon: 'users' },
+      ]
     }
+  ]
+};
+
+// ── State ──
+let map, marker, radiusCircle, debounceTimer, currentPos, currentAddress = '';
+let serviceMarkers = [], servicePolylines = [];
+let selectedServices = new Set(['doctor', 'supermarket', 'train', 'bus', 'park']);
+let openCategories = new Set();
+let history = JSON.parse(sessionStorage.getItem('history') || '[]');
+let lastScore = null;
+
+// ── Google Maps bootstrap ──
+async function loadGoogleMaps() {
+  try {
+    const res = await fetch('/api/config');
+    if (!res.ok) throw new Error('Config unavailable');
+    const { key } = await res.json();
+    if (!key) throw new Error('Key missing');
+    const s = document.createElement('script');
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  } catch (e) {
+    console.error('Failed to load config', e);
+    document.getElementById('score-desc').textContent = 'Unable to initialise maps.';
+  }
 }
 
-// Swaps the expand/collapse icon to reflect the current fullscreen state
-function onFullscreenChange() {
-    // Are we in fullscreen now?
-    const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
-    // If in fullscreen, expand icon gets hidden
-    document.getElementById('fs-expand-icon').style.display  = isFullscreen ? 'none'  : 'block';
-    // If not in fullscreen, collapse icon gets hidden
-    document.getElementById('fs-collapse-icon').style.display = isFullscreen ? 'block' : 'none';
-    // Tell MapLibre the container has resized so it redraws at the correct dimensions
-    map.resize();
+function initApp() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: -37.8136, lng: 144.9631 },
+    zoom: 12,
+    disableDefaultUI: true,
+    zoomControl: true,
+    styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] }]
+  });
+  renderFilters();
+  renderHistory();
+  lucide.createIcons();
+  checkUrlParams();
 }
 
-// This function highlights what is selected in the dropdown via mouse hover
-function updateSelectionUI() {
-    // First grab ever list item
-    const listItems = document.querySelectorAll('#results li');
-    // Loop through each list item, with 'i' being its position (0, 1, 2, etc.)
-    listItems.forEach((li, i) => {
-        // If this item's index matches the currently selected index, highlight it
-        if (i === selectedIndex) {
-            li.classList.add('selected');
-        // Otherwise make sure it's not highlighted (remove the class if it was there)
-        } else {
-            li.classList.remove('selected');
-        }
-    });
+// ── Helpers ──
+function formatDistance(m) {
+  if (typeof m !== 'number' || !Number.isFinite(m)) return 'n/a';
+  return m >= 1000 ? `${(m / 1000).toFixed(1)} km` : `${Math.round(m)} m`;
 }
 
-// We clear the shown services - and routes - when a user types a new address
-function clearServiceMarkers() {
-    serviceMarkers.forEach(marker => marker.remove());
-    serviceMarkers = [];
-    clearServiceRoute();
+function getScoreColor(score) {
+  if (score >= 7.5) return { text: 'text-emerald-600', barBg: 'bg-emerald-500', light: 'bg-emerald-50', border: 'border-emerald-100' };
+  if (score >= 5.0) return { text: 'text-amber-600', barBg: 'bg-amber-500', light: 'bg-amber-50', border: 'border-amber-100' };
+  return { text: 'text-rose-600', barBg: 'bg-rose-500', light: 'bg-rose-50', border: 'border-rose-100' };
 }
 
-// Clears all route layers and sources 
-function clearServiceRoute() {
-    const style = map.getStyle();
-    if (!style) return;
-
-    // Removes 'service-route-line' layers which are those route lines on the map
-    style.layers
-        .filter(l => l.id.startsWith('service-route-line-'))
-        .forEach(l => map.removeLayer(l.id));
-
-    // Removes source layers which are essentially the coordinates for those route lines to be drawn
-    Object.keys(style.sources)
-        .filter(s => s.startsWith('service-route-'))
-        .forEach(s => map.removeSource(s));
+function getScoreLabel(score) {
+  if (score >= 8.5) return 'Excellent';
+  if (score >= 7.0) return 'Very Good';
+  if (score >= 5.5) return 'Good';
+  if (score >= 4.0) return 'Fair';
+  if (score >= 2.5) return 'Below Average';
+  return 'Poor';
 }
 
-// Removes the "no services" banner if it exists - used when user types new address, selects address, etc.
-function clearServiceBanner() {
-    const existing = document.getElementById('service-banner');
-    if (existing) existing.remove();
-}
+function getScoreDescription(score, walkability) {
+  if (!walkability) {
+    if (score >= 8) return 'Exceptional walkable neighbourhood.';
+    if (score >= 5) return 'Good liveability with some gaps.';
+    return 'Limited walkable services.';
+  }
+  const s = walkability.selection;
+  const suburb = walkability.suburb;
+  const parts = [];
 
 // Shows a user-facing message above the legend when services fail to load (usually due to too many network requests)
 function showServiceBanner(message, isError) {
@@ -171,328 +153,278 @@ function showServiceBanner(message, isError) {
     legend.parentNode.insertBefore(banner, legend);
 }
 
-// We can't launch all the network requests at once, so we need a pause or 'sleep' between batches of requests
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  if (s.abundance.score >= 7) parts.push('good variety');
+  else if (s.abundance.score < 3) parts.push('limited choice');
+
+  if (suburb?.crimeScore !== null && suburb.crimeScore >= 7) parts.push('safe area');
+  if (suburb?.housePriceScore !== null && suburb.housePriceScore >= 7) parts.push('affordable');
+
+  return `${getScoreLabel(score)} — ${parts.join(', ')}.`;
 }
 
-// If a service is within 200m just choose it regardless of if there are closer services of that type - for efficiency
-const EARLY_ACCEPT_DISTANCE = 200;
+// ── Score breakdown ──
+function renderWalkabilityBreakdown(walkability) {
+  const container = document.getElementById('score-breakdown');
+  const note = document.getElementById('score-threshold-note');
 
-// No services estimated - Valhalla does walking path to each service - use this only if straight path to service is wanted
-const ESTIMATE_ONLY_CATEGORIES = new Set();
+  if (!walkability) {
+    container.innerHTML = '<p class="text-xs text-slate-400 text-center">Search an address to see breakdown.</p>';
+    note.textContent = 'Based on your selected services';
+    return;
+  }
 
-// Walking speed assumption - 4.8km/h
-const WALK_SPEED_M_PER_MIN = 80; // ~4.8 km/h
-const ROUTE_DETOUR_FACTOR = 1.3; // Assumes walking distance is 30% longer than straight line path, due to street corners, etc.
+  const s = walkability.selection;
+  const suburb = walkability.suburb;
+  note.textContent = 'Based on your selected services · 800 m threshold';
+  container.innerHTML = '';
 
-// Function to get the walking route and time to each service through Valhalla
-// Retries up to 2 times if server returns error
-// Accepts an 'AbortSignal' so in-flight requests can be cancelled when the user picks a new address
-async function getWalkingRouteAndTime(fromLat, fromLon, toLat, toLon, retries = 2, signal = null) {
-    // Build the Valhalla request - two locations, pedestrian for walking route, and meters unit
-    const body = {
-        locations: [
-            { lon: fromLon, lat: fromLat },
-            { lon: toLon,   lat: toLat   }
-        ],
-        costing: "pedestrian",
-        directions_options: { units: "meters" }
+  function tag(score, thresholds) {
+    if (score === null || score === undefined) return 'No data available';
+    for (const [min, label] of thresholds) { if (score >= min) return label; }
+    return thresholds[thresholds.length - 1][1];
+  }
+
+  const components = [
+    {
+      label: 'Closest Services',
+      icon: 'map-pin',
+      score: s.nearest.score,
+      weight: 85,
+      tagText: tag(s.nearest.score, [[8, 'Almost everything nearby'], [6, 'Most essentials within reach'], [4, 'Some services nearby'], [2, 'Limited access'], [0, 'Most services too far']]),
+      tooltip: 'How close is the nearest of each service you selected? Services within a 5-minute walk score highest, decaying to zero at 20 minutes.',
+    },
+    {
+      label: 'Errand Walk',
+      icon: 'route',
+      score: s.errandTrip.score,
+      weight: 5,
+      tagText: tag(s.errandTrip.score, [[8, 'Quick loop on foot'], [5, 'Walkable with some effort'], [2, 'Long walk needed'], [0, 'Not practical on foot']]),
+      tooltip: 'Could you walk a single loop from home through your regular services and back? Shorter, more efficient loops score higher.',
+    },
+    {
+      label: 'Choice & Variety',
+      icon: 'layers',
+      score: s.abundance.score,
+      weight: 5,
+      tagText: tag(s.abundance.score, [[8, 'Lots of choice'], [5, 'Decent variety'], [2, 'Limited options'], [0, 'Very few options']]),
+      tooltip: 'Are there multiple options for each service? More nearby supermarkets, cafes, and transport stops means better choice.',
+    },
+    {
+      label: 'Housing Cost',
+      icon: 'home',
+      score: suburb?.housePriceScore ?? null,
+      weight: 2.5,
+      tagText: suburb?.housePriceScore != null
+        ? `${tag(suburb.housePriceScore, [[8, 'Very affordable'], [6, 'Reasonably priced'], [4, 'Moderate pricing'], [0, 'Expensive area']])} · ${suburb.name}`
+        : 'No data available',
+      tooltip: 'How affordable is housing in this suburb compared to Greater Melbourne? Based on median house and unit prices.',
+    },
+    {
+      label: 'Safety',
+      icon: 'shield',
+      score: suburb?.crimeScore ?? null,
+      weight: 2.5,
+      tagText: suburb?.crimeScore != null
+        ? `${tag(suburb.crimeScore, [[8, 'Very safe area'], [6, 'Generally safe'], [4, 'Average safety'], [0, 'Higher crime rates']])} · ${suburb.name}`
+        : 'No data available',
+      tooltip: 'How does this suburb compare on reported crime? Based on Crime Statistics Agency data for the local government area.',
+    },
+  ];
+
+  components.forEach(comp => {
+    const sc = comp.score;
+    const has = sc !== null && sc !== undefined;
+    const c = has ? getScoreColor(sc) : { text: 'text-slate-400', barBg: 'bg-slate-200', light: 'bg-slate-50', border: 'border-slate-100' };
+    const display = has ? sc.toFixed(1) : '—';
+    const bar = has ? (sc * 10) : 0;
+
+    const row = document.createElement('div');
+    row.className = `p-3 rounded-lg border ${c.border} ${c.light}`;
+    row.innerHTML = `
+      <div class="flex items-center justify-between gap-2 mb-1.5">
+        <div class="flex items-center gap-1.5">
+          <i data-lucide="${comp.icon}" class="w-3.5 h-3.5 ${c.text}"></i>
+          <span class="text-[11px] font-bold text-slate-700">${comp.label}</span>
+          <span class="text-[9px] font-medium text-slate-400">${comp.weight}%</span>
+          <span class="tip-wrap relative cursor-help">
+            <i data-lucide="info" class="w-3 h-3 text-slate-300 hover:text-slate-500 transition-colors"></i>
+            <span class="tip-box absolute z-50 left-1/2 -translate-x-1/2 bottom-full mb-2 w-52 px-3 py-2 text-[10px] leading-relaxed text-white bg-slate-800 rounded-lg shadow-xl font-normal pointer-events-none">
+              ${comp.tooltip}
+              <span class="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800"></span>
+            </span>
+          </span>
+        </div>
+        <span class="text-[12px] font-black ${c.text} font-inter">${display}</span>
+      </div>
+      <div class="h-1 w-full bg-white/60 rounded-full overflow-hidden mb-1.5">
+        <div class="h-full ${c.barBg} rounded-full transition-all duration-700" style="width:${bar}%"></div>
+      </div>
+      <div class="text-[10px] text-slate-500 leading-tight font-medium">${comp.tagText}</div>
+    `;
+    container.appendChild(row);
+  });
+
+  lucide.createIcons();
+}
+
+// ── Services Found list ──
+function renderServicesFound(services) {
+  const container = document.getElementById('services-found-list');
+  if (!services || !services.length) {
+    container.innerHTML = '<p class="text-center py-6 text-slate-400 text-xs font-inter">No services found for selected filters.</p>';
+    return;
+  }
+
+  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id, catLabel: c.label, catIcon: c.icon })));
+  const grouped = {};
+  services.forEach(s => {
+    const conf = allSvc.find(c => c.type === s.type && c.catId === s.catId);
+    const catLabel = conf?.catLabel || s.catId;
+    const catColor = conf?.catColor || '#64748b';
+    const catIcon = conf?.catIcon || 'circle';
+    if (!grouped[catLabel]) grouped[catLabel] = { color: catColor, icon: catIcon, items: [] };
+    grouped[catLabel].items.push(s);
+  });
+
+  container.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4';
+
+  Object.entries(grouped).forEach(([catLabel, group]) => {
+    const card = document.createElement('div');
+    card.className = 'border border-slate-100 rounded-lg p-4 bg-slate-50/50';
+
+    const header = `
+      <div class="flex items-center gap-2 mb-3">
+        <i data-lucide="${group.icon}" class="w-4 h-4" style="color:${group.color}"></i>
+        <span class="text-[11px] font-bold uppercase tracking-widest text-slate-600">${catLabel}</span>
+        <span class="text-[10px] text-slate-400 font-inter">${group.items.length} found</span>
+      </div>
+    `;
+
+    const rows = group.items
+      .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
+      .map(s => {
+        const dist = typeof s.walkingDistanceMeters === 'number' ? formatDistance(s.walkingDistanceMeters) : '—';
+        const dur = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
+        const within = s.withinThreshold;
+        const dotColor = within ? 'bg-emerald-400' : (typeof s.walkingDistanceMeters === 'number' ? 'bg-amber-400' : 'bg-slate-300');
+        return `
+          <div class="flex items-center justify-between py-1.5 border-b border-slate-100 last:border-0">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-1.5 h-1.5 rounded-full ${dotColor} flex-shrink-0"></span>
+              <span class="text-[12px] font-medium text-slate-700 truncate">${s.name}</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-inter flex-shrink-0 ml-3">${dist}${dur ? ' · ' + dur : ''}</span>
+          </div>
+        `;
+      }).join('');
+
+    card.innerHTML = header + `<div>${rows}</div>`;
+    grid.appendChild(card);
+  });
+
+  container.appendChild(grid);
+  lucide.createIcons();
+}
+
+// ── Alerts ──
+function showAlert(serviceName, distance) {
+  const container = document.getElementById('alert-container');
+  const div = document.createElement('div');
+  div.className = 'bg-white/95 backdrop-blur-sm border-l-4 border-amber-500 p-3 rounded-lg shadow-xl flex items-start gap-3 pointer-events-auto transform translate-x-8 opacity-0 transition-all duration-300';
+  div.innerHTML = `
+    <div class="mt-0.5"><i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500"></i></div>
+    <div class="flex-1">
+      <div class="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-0.5">Over 800 m</div>
+      <div class="text-[11px] font-bold text-slate-800 leading-tight">${serviceName} is ${formatDistance(distance)} away</div>
+    </div>
+    <button onclick="this.parentElement.remove()" class="text-slate-300 hover:text-slate-500"><i data-lucide="x" class="w-3 h-3"></i></button>
+  `;
+  container.appendChild(div);
+  lucide.createIcons();
+  setTimeout(() => div.classList.remove('translate-x-8', 'opacity-0'), 10);
+  setTimeout(() => { if (div.parentElement) { div.classList.add('opacity-0', 'scale-95'); setTimeout(() => div.remove(), 300); } }, 6000);
+}
+
+// ── Filters ──
+function renderFilters() {
+  const container = document.getElementById('filter-container');
+  container.innerHTML = '';
+  CONFIG.categories.forEach(cat => {
+    const isOpen = openCategories.has(cat.id);
+    const group = document.createElement('div');
+    group.className = 'border border-slate-100 rounded-lg overflow-hidden mb-1';
+
+    const header = document.createElement('div');
+    header.className = 'flex items-center justify-between p-3 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors';
+    header.innerHTML = `
+      <div class="flex items-center gap-2">
+        <i data-lucide="${cat.icon}" class="w-4 h-4" style="color:${cat.color}"></i>
+        <span class="text-xs font-bold uppercase tracking-tight text-slate-700">${cat.label}</span>
+      </div>
+      <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 transition-transform duration-200" style="transform:${isOpen ? 'rotate(180deg)' : 'rotate(0deg)'}"></i>
+    `;
+
+    const list = document.createElement('div');
+    list.className = `${isOpen ? '' : 'hidden'} p-2 space-y-1 bg-white border-t border-slate-50`;
+
+    header.onclick = () => {
+      if (openCategories.has(cat.id)) openCategories.delete(cat.id);
+      else openCategories.add(cat.id);
+      renderFilters();
     };
 
-    // Try up to (retries + 1) times — so with 2 retries, that's 3 attempts max
-    for (let attempt = 0; attempt <= retries; attempt++) {
-        try {
-            // Sends routing request to Valhalla server - 'signal' var is an AbortSignal if new address is selected
-            const res = await fetch("https://valhalla1.openstreetmap.de/route", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-                signal
-            });
-
-            // If rate-limited (429) or server error (5**), retry after backoff
-            // The delay doubles each time - first retry waits 300ms, second waits 600ms - "exponential backoff"
-            if (res.status === 429 || res.status >= 500) {
-                if (attempt < retries) {
-                    await sleep(300 * Math.pow(2, attempt)); // 300ms, 600ms
-                    continue;
-                }
-                // If we've exhausted all retries, give up with an error
-                throw new Error(`Valhalla returned ${res.status} after ${retries + 1} attempts`);
-            }
-
-            // Parse the JSON response from Valhalla
-            const data = await res.json();
-
-            // Safety check — if the response doesn't contain a valid route, bail out
-            if (!data.trip?.legs?.length) throw new Error("No walking route found");
-
-            // Extract the first (and only) leg of the route - a leg is from A to B
-            const leg = data.trip.legs[0];
-            // Valhalla returns distance in km - convert to meters and round
-            const distanceMeters = Math.round(leg.summary.length * 1000); // km -> m
-            // Valhalla returns time in seconds — convert to minutes, minimum 1 minute, so never "0" minutes
-            const durationMinutes = Math.max(1, Math.round(leg.summary.time / 60));
-
-            // Decode the route which comes as an encoded polyline shape
-            const geometry = {
-                type: "LineString",
-                coordinates: decodePolyline(leg.shape)
-            };
-
-            // Return all three pieces of info that we need
-            return { durationMinutes, distanceMeters, geometry };
-        } catch (e) {
-            // If the request was intentionally aborted (user picked a new address), stop immediately
-            if (e.name === 'AbortError') throw e;
-            // For any other error, retry if we have attempts still remaining
-            if (attempt < retries) {
-                await sleep(300 * Math.pow(2, attempt));
-                continue;
-            }
-            throw e;
-        }
-    }
-}
-
-// This function is not used for now - ignore it - only for straight point-to-point route lines
-function estimateWalkingResult(fromLat, fromLon, toLat, toLon, straightLineMeters) {
-    const adjustedDistance = Math.round(straightLineMeters * ROUTE_DETOUR_FACTOR);
-    const durationMinutes = Math.max(1, Math.round(adjustedDistance / WALK_SPEED_M_PER_MIN));
-    const geometry = {
-        type: "LineString",
-        coordinates: [[fromLon, fromLat], [toLon, toLat]]
-    };
-    return { durationMinutes, distanceMeters: adjustedDistance, geometry };
-}
-
-// Decodes Valhalla's encoded polyline string into an array of [lng, lat] coordinates
-function decodePolyline(encoded) {
-    const coords = []; // Will hold the decoded [lng, lat] pairs
-    let index = 0; // Current position in the encoded string
-    let lat = 0; // Running latitude total (values are deltas, not absolute)
-    let lng = 0; // Running longitude total
-
-    // Each iteration of this loop decodes one coordinate pair (lat + lng)
-    while (index < encoded.length) {
-
-        // Read characters one at a time, extract 5 bits from each, and assemble them into a single integer
-        // The loop continues until a character signals "end of this number" (< 0x20) (32 hexadecimal - 5 bits - below 32 is last character)
-        let b, shift = 0, result = 0;
-        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-        // If the last bit is 1, the number is negative — apply two's complement
-        lat += (result & 1) ? ~(result >> 1) : (result >> 1);
-
-        // Decode longitude (same process) 
-        shift = 0; result = 0;
-        do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
-        lng += (result & 1) ? ~(result >> 1) : (result >> 1);
-
-        // Divide by 1,000,000 to convert back to decimal degrees
-        // Push as [lng, lat] since that's what GeoJSON/MapLibre expects
-        coords.push([lng / 1e6, lat / 1e6]);
-    }
-
-    return coords;
-}
-
-// Creates line from address pin to service marker
-function drawServiceRoute(geometry, routeId) {
-    // Create unique IDs for this route's source and layer so multiple routes can exist on the map at the same time 
-    // Otherwise would just overwrite routes drawn to services
-    const sourceId = `service-route-${routeId}`;
-    const layerId  = `service-route-line-${routeId}`;
-
-    // If this route was already drawn (from a previous load), clean it up before redrawing
-    // Layer must be removed before its source
-    if (map.getLayer(layerId))  map.removeLayer(layerId);
-    if (map.getSource(sourceId)) map.removeSource(sourceId);
-
-    // The full list of coordinates that make up the walking path
-    const allCoords = geometry.coordinates;
-
-    // Adds to the map - start the source with just the first two coordinates so the layer exists
-    map.addSource(sourceId, {
-        type: 'geojson',
-        data: {
-            type: 'Feature',
-            geometry: { type: 'LineString', coordinates: allCoords.slice(0, 2) }
-        }
+    cat.services.forEach(svc => {
+      const item = document.createElement('div');
+      item.className = 'flex items-center justify-between p-2 rounded-md cursor-pointer hover:bg-slate-50 transition-colors group';
+      const checked = selectedServices.has(svc.id);
+      item.innerHTML = `
+        <div class="flex items-center gap-2">
+          <i data-lucide="${svc.icon}" class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600"></i>
+          <span class="text-[13px] font-medium text-slate-600">${svc.label}</span>
+        </div>
+        <div class="w-4 h-4 rounded border transition-all flex items-center justify-center ${checked ? 'border-transparent' : 'border-slate-300'}" style="background:${checked ? cat.color : 'transparent'}">
+          <i data-lucide="check" class="w-2.5 h-2.5 text-white ${checked ? '' : 'hidden'}"></i>
+        </div>
+      `;
+      item.onclick = (e) => {
+        e.stopPropagation();
+        if (selectedServices.has(svc.id)) selectedServices.delete(svc.id);
+        else selectedServices.add(svc.id);
+        renderFilters();
+        if (currentPos) loadServices(currentPos.lat, currentPos.lng);
+      };
+      list.appendChild(item);
     });
 
-    // Single solid line layer — no dasharray, so MapLibre never drops it (was dropping dashed lines for some reason)
-    map.addLayer({
-        id: layerId,
-        type: 'line',
-        source: sourceId,
-        paint: {
-            'line-color': '#004071',
-            'line-width': 3,
-            'line-opacity': 0.85
-        }
-    });
-
-    // Time (ms) for the full route to draw — slow reveal (wanted an animation)
-    const duration = 2000; 
-    const start = performance.now(); 
-    const total = allCoords.length;
-
-    // This function runs on every animation frame (~60 times per second)
-    function animateRoute(timestamp) {
-        // How many milliseconds have passed since the animation started
-        const elapsed  = timestamp - start;
-        // Linear progress from 0 to 1 (clamped so it never exceeds 1)
-        const progress = Math.min(elapsed / duration, 1);
-
-        // Line starts fast then slows down as it approaches the destination
-        // Natural "arriving" feel rather than a constant speed
-        const eased = 1 - Math.pow(1 - progress, 3);
-
-        // How many coordinate points to reveal — always at least 2
-        const revealed = Math.max(2, Math.round(eased * total));
-
-        // Update the source data - line visually grows on map as more points included
-        const source = map.getSource(sourceId);
-        if (source) {
-            source.setData({
-                type: 'Feature',
-                geometry: { type: 'LineString', coordinates: allCoords.slice(0, revealed) }
-            });
-        }
-
-        // If we haven't reached the end, request another frame
-        if (progress < 1) {
-            requestAnimationFrame(animateRoute);
-        } else {
-            // Animation complete — write the full geometry once and stop
-            if (source) {
-                source.setData({ type: 'Feature', geometry });
-            }
-        }
-    }
-
-    // Kick off the animation loop — the browser will call the animateRoute function on the next available frame 
-    requestAnimationFrame(animateRoute);
+    group.appendChild(header);
+    group.appendChild(list);
+    container.appendChild(group);
+  });
+  lucide.createIcons();
 }
 
-// Progress bar helpers — controls the thin red bar at the top of the map
-function showProgress() {
-    // Grab the progress bar element from the DOM
-    const bar = document.getElementById('progress-bar');
-    // Turn off CSS transitions temporarily so the reset to 0% happens instantly
-    // Without this, the bar would animate backwards to zero before going forward
-    bar.style.transition = 'none';
-    // Reset the bar to its starting state: zero width and fully visible
-    bar.style.width = '0%';
-    bar.style.opacity = '1';
-    // Small delay so the browser registers the reset before animating
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            // Progress bar movement to give a natural 'loading' feeling
-            bar.style.transition = 'width 2.5s cubic-bezier(0.1, 0.6, 0.4, 1)';
-            // Progress bar goes to 85% and then 100% once services and routes load
-            bar.style.width = '85%';
-        });
-    });
-}
+// ── History (with scores) ──
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  if (!history.length) {
+    list.innerHTML = '<p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>';
+    return;
+  }
+  list.innerHTML = '';
+  history.forEach(item => {
+    const hasScore = typeof item.score === 'number';
+    const scoreColor = hasScore ? getScoreColor(item.score) : null;
 
-// Completes the progress loading bar (continuation of function above)
-function completeProgress() {
-    // Grab the progress bar element again
-    const bar = document.getElementById('progress-bar');
-    // Quick 0.3s transition to jump from wherever it is (up to 85%) to 100% - looks natural
-    bar.style.transition = 'width 0.3s ease';
-    bar.style.width = '100%';
-    // Wait 350ms (just after the width animation finishes) then fade the bar out over 0.4s so it doesn't just disappear
-    setTimeout(() => {
-        bar.style.transition = 'opacity 0.4s ease';
-        bar.style.opacity = '0';
-    }, 350);
-}
-
-// Finds closest service to walk to (out of all candidates for a specific service type)
-async function resolveCategory(category, label, icon, candidates, lat, lon, signal) {
-    // If there are no candidates for this service (or category), nothing to do
-    if (!candidates.length) return null;
-
-    // Sort by straight-line distance so we check the closest first
-    candidates.sort((a, b) => a.straightLineDistance - b.straightLineDistance);
-
-    // Skip this as no estimates used
-    if (ESTIMATE_ONLY_CATEGORIES.has(category)) {
-        const { el, straightLineDistance } = candidates[0];
-        const routeInfo = estimateWalkingResult(lat, lon, el.lat, el.lon, straightLineDistance);
-        return { label, icon, el, routeInfo };
-    }
-
-    // Keep top 3 candidates to limit API calls
-    const top = candidates.slice(0, 3);
-
-    // Early-accept: if the closest candidate by crow-flies is very near (<200m) we route only that one (efficiency)
-    const earlyAccept = top[0].straightLineDistance <= EARLY_ACCEPT_DISTANCE;
-    const toRoute = earlyAccept ? [top[0]] : top;
-
-    // Get walking routes one at a time (not in parallel) to be gentle on the public Valhalla server
-    const valid = [];
-    for (const { el } of toRoute) {
-        // Bail immediately if user has selected a new address
-        if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-
-        try {
-            // Ask Valhalla for the actual walking route and time
-            const routeInfo = await getWalkingRouteAndTime(lat, lon, el.lat, el.lon, 2, signal);
-            valid.push({ el, routeInfo });
-
-            // In early-accept mode we only needed one route — got it, so stop
-            if (earlyAccept) break;
-        } catch (e) {
-            // For errors or manual stops
-            if (e.name === 'AbortError') throw e;
-            console.error(`Failed to get walking route for ${label}:`, e);
-        }
-    }
-    // If every candidate failed to route, this category has no result
-    if (!valid.length) return null;
-
-    // Pick the fastest walk
-    valid.sort((a, b) => a.routeInfo.durationMinutes - b.routeInfo.durationMinutes);
-    const { el, routeInfo } = valid[0];
-
-    // Return the winning candidate with its label, icon, location, and route info
-    return { label, icon, el, routeInfo };
-}
-
-// Main function for the whole app - finds nearby services through OSM, calculates routes, puts everything on the map
-async function loadNearbyServices(lat, lon) {
-    // Cancel any in-flight load from a previous address selection
-    if (activeLoadController) activeLoadController.abort();
-    // For more cancellation if needed
-    activeLoadController = new AbortController();
-    const signal = activeLoadController.signal;
-
-    // Clean the map from previous search if needed
-    clearServiceMarkers();
-    clearServiceRoute();
-    clearServiceBanner();
-    // Start the progress bar animation at the top of the map
-    showProgress();
-
-    // To build the Overpass API query
-    // Nodes are points and ways are shapes of multiple points (needed for some train stations)
-    const query = `
-        [out:json];
-        (
-        node["shop"="supermarket"](around:800,${lat},${lon});
-        node["amenity"="pharmacy"](around:800,${lat},${lon});
-        node["amenity"="clinic"](around:800,${lat},${lon});
-        node["amenity"="doctors"](around:800,${lat},${lon});
-        node["highway"="bus_stop"](around:800,${lat},${lon});
-        node["railway"="station"](around:800,${lat},${lon});
-        way["railway"="station"](around:800,${lat},${lon}); 
-        node["amenity"="post_office"](around:800,${lat},${lon});
-        );
-        out body center;
+    const div = document.createElement('div');
+    div.className = 'p-3 bg-slate-50 border border-slate-100 rounded-lg cursor-pointer hover:border-[#004071] hover:bg-white transition-all group flex items-center gap-3';
+    div.innerHTML = `
+      <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 group-hover:text-[#004071] flex-shrink-0"></i>
+      <div class="flex-1 min-w-0">
+        <div class="text-xs font-semibold text-slate-600 truncate">${item.display_name}</div>
+      </div>
+      ${hasScore ? `<span class="text-[11px] font-black ${scoreColor.text} font-inter flex-shrink-0">${item.score.toFixed(1)}</span>` : ''}
     `;
 
     try {
@@ -720,7 +652,14 @@ async function loadNearbyServices(lat, lon) {
     }
 }
 
-// Searches for addresses using Nomantim
+// ── Search ──
+document.getElementById('query').addEventListener('input', (e) => {
+  clearTimeout(debounceTimer);
+  const q = e.target.value.trim();
+  if (q.length < 3) { document.getElementById('results').classList.add('hidden'); return; }
+  debounceTimer = setTimeout(() => search(q), 400);
+});
+
 async function search(q) {
     // This is for actually displaying the address suggestions
     const list = document.getElementById('results');
@@ -827,84 +766,170 @@ async function search(q) {
     }
 }
 
-// Function for when the user picks an address - moves map, draws pin, draws shaded boundary, etc.
-function select(item) {
-    // Convert the coordinates from strings to numbers — Nominatim returns them as strings in the JSON response
-    const lat = parseFloat(item.lat);
-    const lon = parseFloat(item.lon);
+function select(item, updateHistory = true) {
+  currentPos = { lat: parseFloat(item.lat), lng: parseFloat(item.lon) };
+  currentAddress = item.display_name || '';
+  document.getElementById('query').value = item.display_name;
+  document.getElementById('results').classList.add('hidden');
+  map.panTo(currentPos);
+  map.setZoom(15);
 
-    // Put the selected address text into the search box so the user can see what they picked
-    document.getElementById('query').value = item.display_name;
-    // Hide the dropdown since they've made their choice
-    document.getElementById('results').style.display = 'none';
+  if (marker) marker.setMap(null);
+  marker = new google.maps.Marker({
+    position: currentPos, map,
+    icon: { path: google.maps.SymbolPath.CIRCLE, fillColor: '#c0392b', fillOpacity: 1, strokeWeight: 2, strokeColor: '#fff', scale: 8 }
+  });
 
-    // Remove any warning/error banner left over from a previous search
-    clearServiceBanner();
+  if (radiusCircle) radiusCircle.setMap(null);
+  radiusCircle = new google.maps.Circle({
+    strokeColor: '#004071', strokeOpacity: 0.1, strokeWeight: 1,
+    fillColor: '#004071', fillOpacity: 0.05, map, center: currentPos, radius: 800
+  });
 
-    // Smoothly animate the map camera to the selected location at zoom 15
-    map.flyTo({ center: [lon, lat], zoom: 15 });
-    // Set map field of view to the selected location +/- 0.0072 degrees (roughly 800m) to give some context around the point
-    map.fitBounds([[lon - 0.0072, lat - 0.0072], [lon + 0.0072, lat + 0.0072]], { padding: 20 });
+  if (updateHistory) {
+    lastScore = null;
+    history = [{ ...item, score: null }, ...history.filter(i => i.display_name !== item.display_name)].slice(0, 5);
+    sessionStorage.setItem('history', JSON.stringify(history));
+    renderHistory();
+  }
 
-    // If there's already a pin from a previous selection, remove it so we don't accumulate multiple pins on the map
-    if (marker) marker.remove();
+  loadServices(currentPos.lat, currentPos.lng);
+}
 
-    // Drop a new red pin at the selected address
-    marker = new maplibregl.Marker({ color: '#c0392b' })
-        .setLngLat([lon, lat])
-        .addTo(map);
+// ── Main analysis ──
+async function loadServices(lat, lon) {
+  serviceMarkers.forEach(m => m.setMap(null));
+  servicePolylines.forEach(p => p.setMap(null));
+  serviceMarkers = [];
+  servicePolylines = [];
+  document.getElementById('alert-container').innerHTML = '';
 
-    // Use Turf.js to create a GeoJSON circle with an 800m radius around the selected point
-    const circle = turf.circle([lon, lat], 800, { steps: 64, units: 'meters' });
+  const bar = document.getElementById('progress-bar');
+  bar.style.opacity = '1';
+  bar.style.width = '30%';
 
-    // Helper that adds the radius circle and then kicks off service loading
-    function addCircleAndLoad() {
-        // Without this the shaded 800m boundary does not change with a different typed address
-        if (map.getLayer('radius-circle-fill')) map.removeLayer('radius-circle-fill');
-        if (map.getLayer('radius-circle-outline')) map.removeLayer('radius-circle-outline');
-        if (map.getSource('radius-circle')) map.removeSource('radius-circle');
+  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id, catLabel: c.label })));
+  const types = Array.from(selectedServices).map(id => {
+    const s = allSvc.find(sv => sv.id === id);
+    return s ? `${s.catId}:${s.type}` : null;
+  }).filter(Boolean);
 
-        // We register the circle polygon as a GeoJSON data source
-        map.addSource('radius-circle', {
-            type: 'geojson',
-            data: circle
-        });
+  if (!types.length) {
+    document.getElementById('score-value').textContent = '--';
+    document.getElementById('score-value').className = 'text-6xl font-extrabold text-[#004071] mb-1';
+    document.getElementById('score-bar').style.width = '0%';
+    document.getElementById('score-desc').textContent = 'Select at least one service to see your score.';
+    renderWalkabilityBreakdown(null);
+    renderServicesFound([]);
+    bar.style.opacity = '0';
+    return;
+  }
 
-        // Draw the circle as a semi-transparent blue fill — this is the shaded area showing the 800m search zone
-        map.addLayer({
-            id: 'radius-circle-fill',
-            type: 'fill',
-            source: 'radius-circle',
-            maxzoom: 24,
-            paint: {
-                'fill-color': '#4A90E2',
-                'fill-opacity': 0.15
-            }
-        });
+  try {
+    const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
+    if (!res.ok) throw new Error('Failed');
+    const data = await res.json();
+    const services = Array.isArray(data.services) ? data.services : [];
+    const walkability = data.walkability || null;
 
-        // Outline ring for the 800m circle — renders as a separate line layer so it stays visible at all zoom levels 
-        if (map.getLayer('radius-circle-outline')) map.removeLayer('radius-circle-outline');
-        map.addLayer({
-            id: 'radius-circle-outline',
-            type: 'line',
-            source: 'radius-circle',
-            maxzoom: 24,
-            paint: {
-                'line-color': '#4A90E2',
-                'line-width': 1.5,
-                'line-opacity': 0.4
-            }
-        });
+    // Use SELECTION score (personalised to user's chosen filters)
+    const score = walkability?.selection?.score ?? Number(data.index || 0);
+    const colors = getScoreColor(score);
 
-        // After loading the layer we can load the services within the layer
-        loadNearbyServices(lat, lon);
+    document.getElementById('score-value').textContent = score.toFixed(1);
+    document.getElementById('score-value').className = `text-6xl font-extrabold mb-1 ${colors.text}`;
+    document.getElementById('score-bar').style.width = (score * 10) + '%';
+    document.getElementById('score-bar').className = `h-full ${colors.barBg} rounded-full w-0 transition-all duration-1000`;
+    document.getElementById('score-desc').textContent = getScoreDescription(score, walkability);
+
+    renderWalkabilityBreakdown(walkability);
+
+    // Update history with score
+    if (currentAddress && history.length > 0 && history[0].display_name === currentAddress) {
+      history[0].score = score;
+      sessionStorage.setItem('history', JSON.stringify(history));
+      renderHistory();
     }
 
-    // Guard against a loading order bug that was occuring -
-    // If the map style isn't loaded yet, wait for the 'load' event before trying to add sources and layers
-    if (mapReady) {
-        addCircleAndLoad();
-    } else {
-        map.once('load', addCircleAndLoad);
-    }
+    bar.style.width = '70%';
+
+    // Draw routes to nearest per type
+    const nearestPerType = Object.values(
+      services.reduce((acc, s) => {
+        if (!acc[s.type] || s.walkingDistanceMeters < acc[s.type].walkingDistanceMeters) acc[s.type] = s;
+        return acc;
+      }, {})
+    );
+
+    // Render services found (only nearest per type — what's on the map)
+    renderServicesFound(nearestPerType);
+
+    nearestPerType.forEach(async (s) => {
+      const conf = allSvc.find(c => c.type === s.type && c.catId === s.catId) || { catColor: '#64748b', label: s.type };
+      if (typeof s.walkingDistanceMeters === 'number' && s.walkingDistanceMeters > 800) {
+        showAlert(conf.label || conf.catLabel, s.walkingDistanceMeters);
+      }
+
+      const m = new google.maps.Marker({
+        position: { lat: s.lat, lng: s.lon }, map,
+        icon: {
+          path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z',
+          fillColor: conf.catColor, fillOpacity: 1, strokeWeight: 2, strokeColor: '#FFFFFF', scale: 1.5,
+          anchor: new google.maps.Point(12, 22)
+        },
+        title: s.name
+      });
+
+      const distLabel = typeof s.walkingDistanceMeters === 'number' ? `${formatDistance(s.walkingDistanceMeters)} walk` : '';
+      const durLabel = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
+      const info = new google.maps.InfoWindow({
+        content: `<div class="p-2 font-inter"><div class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:${conf.catColor}">${conf.label || conf.catLabel}</div><div class="text-sm font-bold">${s.name}</div><div class="text-[11px] text-slate-500 mt-1">${distLabel}${durLabel ? ' · ' + durLabel : ''}</div></div>`
+      });
+      m.addListener('click', () => info.open(map, m));
+      serviceMarkers.push(m);
+
+      try {
+        const rRes = await fetch(`/api/route?sLat=${lat}&sLon=${lon}&eLat=${s.lat}&eLon=${s.lon}`);
+        if (!rRes.ok) return;
+        const rData = await rRes.json();
+        if (!rData.polyline) return;
+        const path = google.maps.geometry.encoding.decodePath(rData.polyline);
+        const poly = new google.maps.Polyline({ path: [], geodesic: true, strokeColor: conf.catColor, strokeOpacity: 0.7, strokeWeight: 4, map });
+        servicePolylines.push(poly);
+        let step = 0;
+        const total = 40;
+        const iv = setInterval(() => {
+          step++;
+          poly.setPath(path.slice(0, Math.ceil((step / total) * path.length)));
+          if (step >= total) clearInterval(iv);
+        }, 25);
+      } catch (e) { console.error('Route error', e); }
+    });
+
+    bar.style.width = '100%';
+    setTimeout(() => { bar.style.opacity = '0'; bar.style.width = '0'; }, 600);
+
+  } catch (e) {
+    console.error(e);
+    bar.style.opacity = '0';
+    document.getElementById('score-desc').textContent = 'Analysis failed. Please try again.';
+    renderWalkabilityBreakdown(null);
+    renderServicesFound([]);
+  }
+}
+
+// ── Boot ──
+window.onload = loadGoogleMaps;
+
+function checkUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  const lat = params.get('lat');
+  const lon = params.get('lon');
+  if (q) {
+    document.getElementById('query').value = q;
+    if (lat && lon) select({ display_name: q, lat, lon });
+    else search(q);
+    window.history.replaceState({}, '', '/dashboard.html');
+  }
 }
