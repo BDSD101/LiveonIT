@@ -78,7 +78,8 @@ async function loadGoogleMaps() {
     document.head.appendChild(s);
   } catch (e) {
     console.error('Failed to load config', e);
-    document.getElementById('score-desc').textContent = 'Unable to initialise maps.';
+    const sd = document.getElementById('score-desc');
+    if (sd) sd.textContent = 'Unable to initialise maps.';
   }
 }
 
@@ -92,7 +93,7 @@ function initApp() {
   });
   renderFilters();
   renderHistory();
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined') lucide.createIcons();
   checkUrlParams();
 }
 
@@ -166,6 +167,7 @@ function showServiceBanner(message, isError) {
 function renderWalkabilityBreakdown(walkability) {
   const container = document.getElementById('score-breakdown');
   const note = document.getElementById('score-threshold-note');
+  if (!container || !note) return;
 
   if (!walkability) {
     container.innerHTML = '<p class="text-xs text-slate-400 text-center">Search an address to see breakdown.</p>';
@@ -264,12 +266,13 @@ function renderWalkabilityBreakdown(walkability) {
     container.appendChild(row);
   });
 
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 // ── Services Found list ──
 function renderServicesFound(services) {
   const container = document.getElementById('services-found-list');
+  if (!container) return;
   if (!services || !services.length) {
     container.innerHTML = '<p class="text-center py-6 text-slate-400 text-xs font-inter">No services found for selected filters.</p>';
     return;
@@ -325,12 +328,13 @@ function renderServicesFound(services) {
   });
 
   container.appendChild(grid);
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 // ── Alerts ──
 function showAlert(serviceName, distance) {
   const container = document.getElementById('alert-container');
+  if (!container) return;
   const div = document.createElement('div');
   div.className = 'bg-white/95 backdrop-blur-sm border-l-4 border-amber-500 p-3 rounded-lg shadow-xl flex items-start gap-3 pointer-events-auto transform translate-x-8 opacity-0 transition-all duration-300';
   div.innerHTML = `
@@ -342,7 +346,7 @@ function showAlert(serviceName, distance) {
     <button onclick="this.parentElement.remove()" class="text-slate-300 hover:text-slate-500"><i data-lucide="x" class="w-3 h-3"></i></button>
   `;
   container.appendChild(div);
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined') lucide.createIcons();
   setTimeout(() => div.classList.remove('translate-x-8', 'opacity-0'), 10);
   setTimeout(() => { if (div.parentElement) { div.classList.add('opacity-0', 'scale-95'); setTimeout(() => div.remove(), 300); } }, 6000);
 }
@@ -350,6 +354,7 @@ function showAlert(serviceName, distance) {
 // ── Filters ──
 function renderFilters() {
   const container = document.getElementById('filter-container');
+  if (!container) return;
   container.innerHTML = '';
   CONFIG.categories.forEach(cat => {
     const isOpen = openCategories.has(cat.id);
@@ -402,12 +407,13 @@ function renderFilters() {
     group.appendChild(list);
     container.appendChild(group);
   });
-  lucide.createIcons();
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 // ── History (with scores) ──
 function renderHistory() {
   const list = document.getElementById('history-list');
+  if (!list) return;
   if (!history.length) {
     list.innerHTML = '<p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>';
     return;
@@ -426,230 +432,10 @@ function renderHistory() {
       </div>
       ${hasScore ? `<span class="text-[11px] font-black ${scoreColor.text} font-inter flex-shrink-0">${item.score.toFixed(1)}</span>` : ''}
     `;
-
-    try {
-        // Send the query to the Overpass API - queries OSM data
-        const res = await fetch('https://overpass-api.de/api/interpreter', {
-            method: 'POST',
-            body: query,
-            signal
-        });
-
-        // Parse the JSON response containing all matching places
-        const data = await res.json();
-        // Create a Turf.js point for the user's address — used to calculate straight-line distances to each service
-        const origin = turf.point([lon, lat]);
-
-        // Stores up to 3 candidates per category (w/ icons for categories), sorted by straight-line distance
-        // Walking routes are then fetched for all candidates and the fastest walk is chosen
-        const candidateServices = {
-            supermarket: {label: 'Supermarket', icon: '🛒', candidates: [] },
-            pharmacy: { label: 'Pharmacy', icon: '💊', candidates: [] },
-            clinic: { label: 'Health Clinic', icon: '🏥', candidates: [] },
-            bus_stop: { label: 'Bus Stop', icon: '🚌', candidates: [] },
-            train_station: { label: 'Train Station', icon: '🚆', candidates: [] },
-            post_office: { label: 'Post Office', icon: '📮', candidates: [] },
-        };
-
-        // Loop through every place that Overpass returned and sort it into the correct category bucket
-        data.elements.forEach((el) => {
-            // Get the coordinates — nodes have lat/lon directly
-            // Ways (polygons) store their center point in el.center instead
-            const elLat = el.lat ?? el.center?.lat;
-            const elLon = el.lon ?? el.center?.lon;
-            // Skip elements that somehow have no coordinates
-            if (!elLat || !elLon) return;
-
-            // Calculate straight-line distance from the user's address to this service using Turf.js
-            const point = turf.point([elLon, elLat]);
-            const distance = turf.distance(origin, point, { units: 'meters' });
-            // Some may still be further than the 800m radius
-            if (distance > 800) return;
-
-            // Figure out which category this place belongs to based on its OSM tags
-            let category = null;
-
-            if (el.tags?.shop === 'supermarket') category = 'supermarket';
-            else if (el.tags?.amenity === 'pharmacy') category = 'pharmacy';
-            else if (el.tags?.amenity === 'clinic' || el.tags?.amenity === 'doctors') category = 'clinic';
-            else if (el.tags?.highway === 'bus_stop') category = 'bus_stop';
-            else if (el.tags?.railway === 'station') category = 'train_station';
-            else if (el.tags?.amenity === 'post_office') category = 'post_office';
-
-             // If it doesn't match any category (shouldn't happen but just in case), skip
-            if (!category) return;
-
-            // Add this place to its category's candidate list along with its straight-line distance (used later for sorting and early-accept)
-            candidateServices[category].candidates.push({ el: { ...el, lat: elLat, lon: elLon }, straightLineDistance: distance });
-        });
-
-        // Sort categories by candidate count ascending 
-        // Categories with fewercandidates resolve faster, getting markers on the map sooner for quicker visual feedback to the user
-        const categoryEntries = Object.entries(candidateServices)
-            .sort((a, b) => a[1].candidates.length - b[1].candidates.length);
-
-        // Process 3 categories at a time with an 80ms gap between batches
-        // This prevents flooding the Valhalla server with too many simultaneous routing requests
-        const BATCH_SIZE = 3;
-        const BATCH_DELAY_MS = 80;
-
-        // Array to store each category's result in the correct position
-        const categoryResults = new Array(categoryEntries.length);
-
-        // Process categories in batches of 3
-        for (let i = 0; i < categoryEntries.length; i += BATCH_SIZE) {
-            // Bail if the user has already picked a new address
-            if (signal.aborted) return;
-
-            // Grab the next batch of up to 3 categories
-            const batch = categoryEntries.slice(i, i + BATCH_SIZE);
-
-            // Resolve all categories in this batch simultaneously
-            // Promise.allSettled waits for all to finish and never throws
-            const batchResults = await Promise.allSettled(
-                batch.map(([category, { label, icon, candidates }]) =>
-                    resolveCategory(category, label, icon, candidates, lat, lon, signal)
-                )
-            );
-
-            // Store each result at the right index in the master results array
-            batchResults.forEach((result, j) => {
-                categoryResults[i + j] = result;
-            });
-
-            // Pause 80ms before launching the next batch to spread the load on the Valhalla server
-            // Skip the delay after the last batch
-            if (i + BATCH_SIZE < categoryEntries.length) {
-                await sleep(BATCH_DELAY_MS);
-            }
-        }
-
-        // Final abort check — we don't waste resources rendering 'stale' results
-        if (signal.aborted) return;
-
-        // All routing is done — snap the progress bar to 100% and fade it out
-        completeProgress();
-
-        // Track how many categories successfully resolved for user feedback messages
-        let servicesRendered = 0;
-        let categoriesWithCandidates = 0;
-
-        categoryEntries.forEach(([, { candidates }]) => {
-            if (candidates.length) categoriesWithCandidates++;
-        });
-
-        // This is where we put everything on the map
-        categoryResults.forEach(result => {
-            // Skip failed or empty categories
-            if (!result || result.status !== 'fulfilled' || !result.value) return;
-
-            // Destructure the winning candidate for this category (get label, icon, etc.)
-            const { label, icon, el, routeInfo } = result.value;
-            servicesRendered++;
-
-            // Build the custom marker element 
-            const markerEl = document.createElement('div');
-
-            // innerEl is the visible content — the emoji icon and walk time badge
-            // This is the element that gets the entrance animation
-            // It's nested inside markerEl so the animation is isolated from MapLibre's transforms
-            const innerEl = document.createElement('div');
-            innerEl.style.display = 'flex';
-            innerEl.style.alignItems = 'center';
-            innerEl.style.gap = '6px';
-
-            // The emoji icon inside a white circle with a subtle border and shadow
-            const pinEl = document.createElement('div');
-            pinEl.textContent = icon;
-            pinEl.style.fontSize = '20px';
-            pinEl.style.lineHeight = '1';
-            pinEl.style.display = 'flex';
-            pinEl.style.alignItems = 'center';
-            pinEl.style.justifyContent = 'center';
-            pinEl.style.width = '24px';
-            pinEl.style.height = '24px';
-            pinEl.style.background = 'white';
-            pinEl.style.border = '1px solid #D0D5DD';
-            pinEl.style.borderRadius = '50%';
-            pinEl.style.boxShadow = '0 1px 4px rgba(0,0,0,0.12)';
-
-            // The walk time badge — a small pill showing for example "5m" next to the icon
-            const badgeEl = document.createElement('div');
-            badgeEl.textContent = ` ${routeInfo.durationMinutes}m `;
-            badgeEl.style.fontFamily = "'DM Sans', sans-serif";
-            badgeEl.style.fontSize = '11px';
-            badgeEl.style.fontWeight = '600';
-            badgeEl.style.background = 'white';
-            badgeEl.style.color = '#1A1A2E';
-            badgeEl.style.border = '1px solid #D0D5DD';
-            badgeEl.style.borderRadius = '999px';
-            badgeEl.style.padding = '2px 6px';
-            badgeEl.style.boxShadow = '0 1px 4px rgba(0,0,0,0.12)';
-
-            // Assemble the marker: icon + badge into innerEl, innerEl into markerEl
-            innerEl.appendChild(pinEl);
-            innerEl.appendChild(badgeEl);
-            markerEl.appendChild(innerEl);
-
-            // Entrance animation setup - start invisible and shifted down 8px 
-            // The animation will fade in and slide up into place
-            innerEl.style.opacity = '0';
-            innerEl.style.transform = 'translateY(8px)';
-            innerEl.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-
-            // Icons appear immediately — pop up into place before routes start drawing
-            setTimeout(() => {
-                innerEl.style.opacity = '1';
-                innerEl.style.transform = 'translateY(0)';
-                // Remove the transition after it fires so pan/zoom never triggers it again (fixes a bug that was occuring)
-                setTimeout(() => {
-                    innerEl.style.transition = 'none';
-                }, 450);
-            }, 0);
-
-            // Route drawing starts after the icon entrance has finished (500ms)
-            // The user sees all destinations first then watches the paths draw toward them
-            const routeId = `${el.lat}_${el.lon}`.replace(/\./g, '_');
-            setTimeout(() => {
-                drawServiceRoute(routeInfo.geometry, routeId);
-            }, 500);
-
-            // Register our custom element as a marker, place it at the service's coordinates, 
-            // Attach a popup that shows details when clicked (like a tooltip)
-            const newMarker = new maplibregl.Marker({ element: markerEl })
-                .setLngLat([el.lon, el.lat])
-                .setPopup(
-                    new maplibregl.Popup({ offset: 25 }).setHTML(`
-                        <strong>${label}</strong><br>
-                        ${el.tags?.name || 'Unnamed'}<br>
-                        ${routeInfo.durationMinutes} min walk<br>
-                        ${routeInfo.distanceMeters} m route distance
-                    `)
-                )
-                .addTo(map);
-
-            // Store the marker so it can be removed later when the user picks a different address
-            serviceMarkers.push(newMarker);
-        });
-
-        // User feedback when results are missing (red box text above the legend and below the map)
-        if (servicesRendered === 0 && categoriesWithCandidates > 0) {
-            showServiceBanner('Routes couldn\u2019t be loaded \u2014 the routing server may be busy. Try again in a few seconds.', true);
-        } else if (servicesRendered === 0 && categoriesWithCandidates === 0) {
-            showServiceBanner('No services found within 800\u2009m of this address.', false);
-        } else if (servicesRendered < categoriesWithCandidates) {
-            showServiceBanner(`Some service routes couldn\u2019t be loaded. ${servicesRendered} of ${categoriesWithCandidates} categories shown.`, false);
-        }
-
-    } catch (e) {
-        // Silently ignore aborted requests — the new address load is already in progress
-        if (e.name === 'AbortError') return;
-
-        console.error('Failed to load nearby services:', e);
-        // Complete the progress bar even if the Overpass fetch itself failed
-        completeProgress();
-        showServiceBanner('Failed to search for nearby services. Please try again.', true);
-    }
+    div.onclick = () => select(item, false);
+    list.appendChild(div);
+  });
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 // ── Search ──
@@ -748,7 +534,6 @@ async function search(q) {
             // When the mouse hovers over this suggestion, update the selected index so the UI can visually highlight it
             li.onmouseenter = () => {
                 selectedIndex = index;
-                updateSelectionUI();
             };
 
             // Add the new list item into the dropdown list on the page
@@ -802,7 +587,8 @@ async function loadServices(lat, lon) {
   servicePolylines.forEach(p => p.setMap(null));
   serviceMarkers = [];
   servicePolylines = [];
-  document.getElementById('alert-container').innerHTML = '';
+  const alertContainer = document.getElementById('alert-container');
+  if (alertContainer) alertContainer.innerHTML = '';
 
   const bar = document.getElementById('progress-bar');
   bar.style.opacity = '1';
@@ -814,11 +600,17 @@ async function loadServices(lat, lon) {
     return s ? `${s.catId}:${s.type}` : null;
   }).filter(Boolean);
 
+  const scoreValueEl = document.getElementById('score-value');
+  const scoreBarEl = document.getElementById('score-bar');
+  const scoreDescEl = document.getElementById('score-desc');
+
   if (!types.length) {
-    document.getElementById('score-value').textContent = '--';
-    document.getElementById('score-value').className = 'text-6xl font-extrabold text-[#004071] mb-1';
-    document.getElementById('score-bar').style.width = '0%';
-    document.getElementById('score-desc').textContent = 'Select at least one service to see your score.';
+    if (scoreValueEl) {
+      scoreValueEl.textContent = '--';
+      scoreValueEl.className = 'text-6xl font-extrabold text-[#004071] mb-1';
+    }
+    if (scoreBarEl) scoreBarEl.style.width = '0%';
+    if (scoreDescEl) scoreDescEl.textContent = 'Select at least one service to see your score.';
     renderWalkabilityBreakdown(null);
     renderServicesFound([]);
     bar.style.opacity = '0';
@@ -836,11 +628,15 @@ async function loadServices(lat, lon) {
     const score = walkability?.selection?.score ?? Number(data.index || 0);
     const colors = getScoreColor(score);
 
-    document.getElementById('score-value').textContent = score.toFixed(1);
-    document.getElementById('score-value').className = `text-6xl font-extrabold mb-1 ${colors.text}`;
-    document.getElementById('score-bar').style.width = (score * 10) + '%';
-    document.getElementById('score-bar').className = `h-full ${colors.barBg} rounded-full w-0 transition-all duration-1000`;
-    document.getElementById('score-desc').textContent = getScoreDescription(score, walkability);
+    if (scoreValueEl) {
+      scoreValueEl.textContent = score.toFixed(1);
+      scoreValueEl.className = `text-6xl font-extrabold mb-1 ${colors.text}`;
+    }
+    if (scoreBarEl) {
+      scoreBarEl.style.width = (score * 10) + '%';
+      scoreBarEl.className = `h-full ${colors.barBg} rounded-full w-0 transition-all duration-1000`;
+    }
+    if (scoreDescEl) scoreDescEl.textContent = getScoreDescription(score, walkability);
 
     renderWalkabilityBreakdown(walkability);
 
@@ -912,7 +708,7 @@ async function loadServices(lat, lon) {
   } catch (e) {
     console.error(e);
     bar.style.opacity = '0';
-    document.getElementById('score-desc').textContent = 'Analysis failed. Please try again.';
+    if (scoreDescEl) scoreDescEl.textContent = 'Analysis failed. Please try again.';
     renderWalkabilityBreakdown(null);
     renderServicesFound([]);
   }
