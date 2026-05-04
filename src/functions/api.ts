@@ -179,7 +179,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
         locationRestriction: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: 50000.0,
           },
         },
       },
@@ -260,7 +260,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
         locationBias: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: 50000.0,
           },
         },
       },

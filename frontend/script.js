@@ -115,51 +115,59 @@ function formatDistance(meters) {
   return `${Math.round(meters)} m`;
 }
 
-function getScoreDescription(index, breakdown, numFilters) {
-  const n = numFilters || 0;
+function getScoreDescription(index, withinCount, totalSelected) {
+  const n = totalSelected || 0;
   if (n === 0) return 'Select service filters to personalise your score.';
-  const met = breakdown?.summary?.categoriesMetWithin800m;
-  const total = breakdown?.summary?.totalCategories;
-  if (typeof met === 'number' && typeof total === 'number') {
-    return `${met} of your ${n} selected service${n !== 1 ? 's' : ''} ${met === 1 ? 'is' : 'are'} within 800m.`;
-  }
-  if (index >= 8) return 'All selected services are within easy walking distance!';
-  if (index >= 5) return 'Most selected services are accessible on foot.';
-  return 'Some selected services fall outside the 800m threshold.';
+  if (withinCount === n) return `All ${n} selected service${n !== 1 ? 's are' : ' is'} within 800m.`;
+  if (withinCount === 0) return `None of your ${n} selected services are within 800m.`;
+  return `${withinCount} of your ${n} selected service${n !== 1 ? 's are' : ' is'} within 800m.`;
 }
 
-function renderScoreBreakdown(breakdown) {
+function renderScoreBreakdown(services) {
   const container = document.getElementById('score-breakdown');
   const thresholdNote = document.getElementById('score-threshold-note');
-  if (!breakdown || !Array.isArray(breakdown.categories)) {
+  if (!services || !Array.isArray(services) || services.length === 0) {
     container.innerHTML = '<p class="text-xs text-slate-400 text-center">Score breakdown unavailable.</p>';
     thresholdNote.textContent = 'Threshold: 800m walking distance';
     return;
   }
 
-  thresholdNote.textContent = `Threshold: ${breakdown.walkableThresholdMeters || 800}m walking distance`;
+  thresholdNote.textContent = `Threshold: 800m walking distance`;
   container.innerHTML = '';
 
-  breakdown.categories
-    .sort((a, b) => b.weight - a.weight)
-    .slice(0, 3)
-    .forEach(cat => {
-      const statusLabel = cat.status === 'met' ? 'Within 800m' : (cat.status === 'partial' ? 'Over limit' : 'Missing');
-      const nearest = cat.nearestService?.name || 'No nearby match';
-      const distance = cat.walkingDistanceMeters == null ? '—' : formatDistance(cat.walkingDistanceMeters);
-      const duration = cat.walkingDurationMinutes == null ? '' : ` • ${cat.walkingDurationMinutes} min`;
+  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id })));
 
-      const statusClass = cat.status === 'met'
-        ? 'text-emerald-700 bg-emerald-50 border-emerald-100'
-        : (cat.status === 'partial'
-          ? 'text-amber-700 bg-amber-50 border-amber-100'
-          : 'text-rose-700 bg-rose-50 border-rose-100');
+  services
+    .sort((a, b) => (a.walkingDistanceMeters || 999999) - (b.walkingDistanceMeters || 999999))
+    .slice(0, 5)
+    .forEach(cat => {
+      const svcConf = allSvc.find(conf => conf.type === cat.type && conf.catId === cat.catId) || { label: cat.type };
+      const dist = cat.walkingDistanceMeters;
+      
+      let statusLabel, statusClass;
+      if (dist == null) {
+        statusLabel = 'Missing';
+        statusClass = 'text-rose-700 bg-rose-50 border-rose-100';
+      } else if (dist <= 800) {
+        statusLabel = 'Within 800m';
+        statusClass = 'text-emerald-700 bg-emerald-50 border-emerald-100';
+      } else if (dist <= 2000) {
+        statusLabel = 'Over limit';
+        statusClass = 'text-amber-700 bg-amber-50 border-amber-100';
+      } else {
+        statusLabel = 'Too far';
+        statusClass = 'text-rose-700 bg-rose-50 border-rose-100';
+      }
+
+      const nearest = cat.name || 'No nearby match';
+      const distance = dist == null ? '—' : formatDistance(dist);
+      const duration = cat.walkingDurationMinutes == null ? '' : ` • ${cat.walkingDurationMinutes} min`;
 
       const row = document.createElement('div');
       row.className = 'p-2 rounded-lg border border-slate-100 bg-slate-50';
       row.innerHTML = `
       <div class="flex items-center justify-between gap-2">
-        <span class="text-[11px] font-bold text-slate-700">${cat.label}</span>
+        <span class="text-[11px] font-bold text-slate-700">${svcConf.label}</span>
         <span class="text-[10px] px-1.5 py-0.5 rounded-full border font-bold ${statusClass}">${statusLabel}</span>
       </div>
       <div class="mt-1 text-[11px] text-slate-500 leading-tight">${nearest}</div>
@@ -338,10 +346,14 @@ async function loadServices(lat, lon) {
     // Use personalised_index: simple binary score — services within 800m = full points
     const rawScore = data.personalised_index ?? data.walkability?.selection?.score ?? data.index ?? 0;
     const index = Number(rawScore);
+
+    // Count how many of the returned (selected) services are within 800m
+    const withinCount = services.filter(s => typeof s.walkingDistanceMeters === 'number' && s.walkingDistanceMeters <= 800).length;
+
     document.getElementById('score-value').textContent = index.toFixed(1);
     document.getElementById('score-bar').style.width = (index * 10) + '%';
-    document.getElementById('score-desc').textContent = getScoreDescription(index, data.breakdown, selectedServices.size);
-    renderScoreBreakdown(data.breakdown);
+    document.getElementById('score-desc').textContent = getScoreDescription(index, withinCount, selectedServices.size);
+    renderScoreBreakdown(services);
     bar.style.width = '70%';
 
     // Save score to history
