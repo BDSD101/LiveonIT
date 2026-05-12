@@ -319,6 +319,11 @@
   </footer>
 
   <script>
+    // Determine API URL based on environment
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
+
     // Initialize Lucide icons
     lucide.createIcons();
 
@@ -395,7 +400,8 @@
       list.innerHTML = '<li class="text-slate-400 italic pointer-events-none">Searching...</li>';
 
       try {
-        const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+        const res = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(q)}`);
+
         if (!res.ok) throw new Error('Search failed');
         const data = await res.json();
         list.innerHTML = '';
