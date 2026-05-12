@@ -2,6 +2,7 @@
   "Carlton": {
     "postcode": "3053",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2673,
       "topFiveOffenceProportion": {
@@ -51,6 +52,7 @@
   "Carlton North": {
     "postcode": "3054",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 441,
       "topFiveOffenceProportion": {
@@ -100,6 +102,7 @@
   "Docklands": {
     "postcode": "3008",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 3070,
       "topFiveOffenceProportion": {
@@ -146,6 +149,7 @@
   "East Melbourne": {
     "postcode": "3002",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1030,
       "topFiveOffenceProportion": {
@@ -194,6 +198,7 @@
   "Flemington": {
     "postcode": "3031",
     "lga": "Moonee Valley",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1324,
       "topFiveOffenceProportion": {
@@ -243,6 +248,7 @@
   "Kensington": {
     "postcode": "3031",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1097,
       "topFiveOffenceProportion": {
@@ -292,6 +298,7 @@
   "Melbourne": {
     "postcode": "3004",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 18456,
       "topFiveOffenceProportion": {
@@ -338,6 +345,7 @@
   "North Melbourne": {
     "postcode": "3051",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1908,
       "topFiveOffenceProportion": {
@@ -387,6 +395,7 @@
   "Parkville": {
     "postcode": "3052",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 985,
       "topFiveOffenceProportion": {
@@ -436,6 +445,7 @@
   "Port Melbourne": {
     "postcode": "3207",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2403,
       "topFiveOffenceProportion": {
@@ -485,6 +495,7 @@
   "Southbank": {
     "postcode": "3006",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 3771,
       "topFiveOffenceProportion": {
@@ -531,6 +542,7 @@
   "South Wharf": {
     "postcode": "3006",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 376,
       "topFiveOffenceProportion": {
@@ -556,6 +568,7 @@
   "South Yarra": {
     "postcode": "3141",
     "lga": "Stonnington",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2889,
       "topFiveOffenceProportion": {
@@ -605,6 +618,7 @@
   "West Melbourne": {
     "postcode": "3003",
     "lga": "Melbourne",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1246,
       "topFiveOffenceProportion": {
@@ -654,6 +668,7 @@
   "Albert Park": {
     "postcode": "3206",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 687,
       "topFiveOffenceProportion": {
@@ -703,6 +718,7 @@
   "Balaclava": {
     "postcode": "3183",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 632,
       "topFiveOffenceProportion": {
@@ -730,6 +746,7 @@
   "Elwood": {
     "postcode": "3184",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 847,
       "topFiveOffenceProportion": {
@@ -779,6 +796,7 @@
   "Middle Park": {
     "postcode": "3206",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 260,
       "topFiveOffenceProportion": {
@@ -828,6 +846,7 @@
   "Ripponlea": {
     "postcode": "3185",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 98,
       "topFiveOffenceProportion": {
@@ -855,6 +874,7 @@
   "St Kilda": {
     "postcode": "3182",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 3366,
       "topFiveOffenceProportion": {
@@ -904,6 +924,7 @@
   "St Kilda East": {
     "postcode": "3183",
     "lga": "Glen Eira",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 628,
       "topFiveOffenceProportion": {
@@ -953,6 +974,7 @@
   "St Kilda West": {
     "postcode": "3182",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 259,
       "topFiveOffenceProportion": {
@@ -1002,6 +1024,7 @@
   "South Melbourne": {
     "postcode": "3205",
     "lga": "Port Phillip",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2856,
       "topFiveOffenceProportion": {
@@ -1050,6 +1073,7 @@
   "Abbotsford": {
     "postcode": "3067",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1280,
       "topFiveOffenceProportion": {
@@ -1099,6 +1123,7 @@
   "Alphington": {
     "postcode": "3078",
     "lga": "Darebin",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 407,
       "topFiveOffenceProportion": {
@@ -1148,6 +1173,7 @@
   "Burnley": {
     "postcode": "3121",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 178,
       "topFiveOffenceProportion": {
@@ -1195,6 +1221,7 @@
   "Clifton Hill": {
     "postcode": "3068",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 575,
       "topFiveOffenceProportion": {
@@ -1244,6 +1271,7 @@
   "Collingwood": {
     "postcode": "3066",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2134,
       "topFiveOffenceProportion": {
@@ -1293,6 +1321,7 @@
   "Cremorne": {
     "postcode": "3121",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 384,
       "topFiveOffenceProportion": {
@@ -1320,6 +1349,7 @@
   "Fairfield": {
     "postcode": "3078",
     "lga": "Darebin",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 524,
       "topFiveOffenceProportion": {
@@ -1369,6 +1399,7 @@
   "Fitzroy": {
     "postcode": "3065",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2417,
       "topFiveOffenceProportion": {
@@ -1417,6 +1448,7 @@
   "Fitzroy North": {
     "postcode": "3068",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1064,
       "topFiveOffenceProportion": {
@@ -1466,6 +1498,7 @@
   "Princes Hill": {
     "postcode": "3054",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 236,
       "topFiveOffenceProportion": {
@@ -1493,6 +1526,7 @@
   "Richmond": {
     "postcode": "3121",
     "lga": "Yarra",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 3863,
       "topFiveOffenceProportion": {
@@ -1542,6 +1576,7 @@
   "Bellfield": {
     "postcode": "3081",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 198,
       "topFiveOffenceProportion": {
@@ -1569,6 +1604,7 @@
   "Briar Hill": {
     "postcode": "3088",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 71,
       "topFiveOffenceProportion": {
@@ -1596,6 +1632,7 @@
   "Bundoora": {
     "postcode": "3083",
     "lga": "Whittlesea",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 2294,
       "topFiveOffenceProportion": {
@@ -1645,6 +1682,7 @@
   "Eaglemont": {
     "postcode": "3084",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 171,
       "topFiveOffenceProportion": {
@@ -1672,6 +1710,7 @@
   "Eltham": {
     "postcode": "3095",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 645,
       "topFiveOffenceProportion": {
@@ -1721,6 +1760,7 @@
   "Eltham North": {
     "postcode": "3095",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 79,
       "topFiveOffenceProportion": {
@@ -1748,6 +1788,7 @@
   "Greensborough": {
     "postcode": "3088",
     "lga": "Nillumbik",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1121,
       "topFiveOffenceProportion": {
@@ -1797,6 +1838,7 @@
   "Heidelberg": {
     "postcode": "3084",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1675,
       "topFiveOffenceProportion": {
@@ -1846,6 +1888,7 @@
   "Heidelberg Heights": {
     "postcode": "3081",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 658,
       "topFiveOffenceProportion": {
@@ -1873,6 +1916,7 @@
   "Heidelberg West": {
     "postcode": "3081",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 999,
       "topFiveOffenceProportion": {
@@ -1922,6 +1966,7 @@
   "Ivanhoe": {
     "postcode": "3079",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1098,
       "topFiveOffenceProportion": {
@@ -1971,6 +2016,7 @@
   "Ivanhoe East": {
     "postcode": "3079",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 156,
       "topFiveOffenceProportion": {
@@ -2020,6 +2066,7 @@
   "Lower Plenty": {
     "postcode": "3093",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 99,
       "topFiveOffenceProportion": {
@@ -2047,6 +2094,7 @@
   "Macleod": {
     "postcode": "3085",
     "lga": "Darebin",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 308,
       "topFiveOffenceProportion": {
@@ -2074,6 +2122,7 @@
   "Montmorency": {
     "postcode": "3094",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 126,
       "topFiveOffenceProportion": {
@@ -2123,6 +2172,7 @@
   "Rosanna": {
     "postcode": "3084",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 291,
       "topFiveOffenceProportion": {
@@ -2150,6 +2200,7 @@
   "St Helena": {
     "postcode": "3088",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 83,
       "topFiveOffenceProportion": {
@@ -2177,6 +2228,7 @@
   "Viewbank": {
     "postcode": "3084",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 116,
       "topFiveOffenceProportion": {
@@ -2204,6 +2256,7 @@
   "Watsonia": {
     "postcode": "3087",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 366,
       "topFiveOffenceProportion": {
@@ -2231,6 +2284,7 @@
   "Watsonia North": {
     "postcode": "3087",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 128,
       "topFiveOffenceProportion": {
@@ -2258,6 +2312,7 @@
   "Yallambie": {
     "postcode": "3085",
     "lga": "Banyule",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 86,
       "topFiveOffenceProportion": {
@@ -2285,6 +2340,7 @@
   "Coburg": {
     "postcode": "3058",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 2025,
       "topFiveOffenceProportion": {
@@ -2334,6 +2390,7 @@
   "Coburg North": {
     "postcode": "3058",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 952,
       "topFiveOffenceProportion": {
@@ -2383,6 +2440,7 @@
   "Kingsbury": {
     "postcode": "3083",
     "lga": "Darebin",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 370,
       "topFiveOffenceProportion": {
@@ -2410,6 +2468,7 @@
   "Northcote": {
     "postcode": "3070",
     "lga": "Darebin",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1560,
       "topFiveOffenceProportion": {
@@ -2459,6 +2518,7 @@
   "Preston": {
     "postcode": "3072",
     "lga": "Darebin",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 5014,
       "topFiveOffenceProportion": {
@@ -2508,6 +2568,7 @@
   "Reservoir": {
     "postcode": "3073",
     "lga": "Darebin",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 4144,
       "topFiveOffenceProportion": {
@@ -2557,6 +2618,7 @@
   "Thornbury": {
     "postcode": "3071",
     "lga": "Darebin",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1291,
       "topFiveOffenceProportion": {
@@ -2606,6 +2668,7 @@
   "Attwood": {
     "postcode": "3049",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 112,
       "topFiveOffenceProportion": {
@@ -2633,6 +2696,7 @@
   "Broadmeadows": {
     "postcode": "3047",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2857,
       "topFiveOffenceProportion": {
@@ -2682,6 +2746,7 @@
   "Campbellfield": {
     "postcode": "3061",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1253,
       "topFiveOffenceProportion": {
@@ -2709,6 +2774,7 @@
   "Coolaroo": {
     "postcode": "3048",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 550,
       "topFiveOffenceProportion": {
@@ -2736,6 +2802,7 @@
   "Craigieburn": {
     "postcode": "3064",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3283,
       "topFiveOffenceProportion": {
@@ -2784,6 +2851,7 @@
   "Dallas": {
     "postcode": "3047",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 394,
       "topFiveOffenceProportion": {
@@ -2811,6 +2879,7 @@
   "Diggers Rest": {
     "postcode": "3427",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 337,
       "topFiveOffenceProportion": {
@@ -2838,6 +2907,7 @@
   "Gladstone Park": {
     "postcode": "3043",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 424,
       "topFiveOffenceProportion": {
@@ -2886,6 +2956,7 @@
   "Greenvale": {
     "postcode": "3059",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 742,
       "topFiveOffenceProportion": {
@@ -2913,6 +2984,7 @@
   "Jacana": {
     "postcode": "3047",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 156,
       "topFiveOffenceProportion": {
@@ -2940,6 +3012,7 @@
   "Kalkallo": {
     "postcode": "3064",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 450,
       "topFiveOffenceProportion": {
@@ -2967,6 +3040,7 @@
   "Keilor": {
     "postcode": "3036",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 197,
       "topFiveOffenceProportion": {
@@ -3012,6 +3086,7 @@
   "Meadow Heights": {
     "postcode": "3048",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 706,
       "topFiveOffenceProportion": {
@@ -3039,6 +3114,7 @@
   "Melbourne Airport": {
     "postcode": "3045",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1047,
       "topFiveOffenceProportion": {
@@ -3064,6 +3140,7 @@
   "Mickleham": {
     "postcode": "3064",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1001,
       "topFiveOffenceProportion": {
@@ -3091,6 +3168,7 @@
   "Roxburgh Park": {
     "postcode": "3064",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 950,
       "topFiveOffenceProportion": {
@@ -3140,6 +3218,7 @@
   "Somerton": {
     "postcode": "3062",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 298,
       "topFiveOffenceProportion": {
@@ -3165,6 +3244,7 @@
   "Sunbury": {
     "postcode": "3429",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2112,
       "topFiveOffenceProportion": {
@@ -3213,6 +3293,7 @@
   "Tullamarine": {
     "postcode": "3043",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 948,
       "topFiveOffenceProportion": {
@@ -3261,6 +3342,7 @@
   "Westmeadows": {
     "postcode": "3049",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 385,
       "topFiveOffenceProportion": {
@@ -3288,6 +3370,7 @@
   "Bulla": {
     "postcode": "3428",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 118,
       "topFiveOffenceProportion": {
@@ -3313,6 +3396,7 @@
   "Clarkefield": {
     "postcode": "3430",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 37,
       "topFiveOffenceProportion": {
@@ -3338,6 +3422,7 @@
   "Oaklands Junction": {
     "postcode": "3063",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 33,
       "topFiveOffenceProportion": {
@@ -3363,6 +3448,7 @@
   "Wildwood": {
     "postcode": "3429",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 33,
       "topFiveOffenceProportion": {
@@ -3388,6 +3474,7 @@
   "Yuroke": {
     "postcode": "3063",
     "lga": "Hume",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 17,
       "topFiveOffenceProportion": {
@@ -3413,6 +3500,7 @@
   "Brunswick": {
     "postcode": "3056",
     "lga": "Merri-bek",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2311,
       "topFiveOffenceProportion": {
@@ -3462,6 +3550,7 @@
   "Brunswick East": {
     "postcode": "3057",
     "lga": "Merri-bek",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 820,
       "topFiveOffenceProportion": {
@@ -3511,6 +3600,7 @@
   "Brunswick West": {
     "postcode": "3055",
     "lga": "Merri-bek",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 995,
       "topFiveOffenceProportion": {
@@ -3560,6 +3650,7 @@
   "Fawkner": {
     "postcode": "3060",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 827,
       "topFiveOffenceProportion": {
@@ -3609,6 +3700,7 @@
   "Glenroy": {
     "postcode": "3046",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1589,
       "topFiveOffenceProportion": {
@@ -3658,6 +3750,7 @@
   "Gowanbrae": {
     "postcode": "3043",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 48,
       "topFiveOffenceProportion": {
@@ -3685,6 +3778,7 @@
   "Hadfield": {
     "postcode": "3046",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 459,
       "topFiveOffenceProportion": {
@@ -3712,6 +3806,7 @@
   "Oak Park": {
     "postcode": "3046",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 232,
       "topFiveOffenceProportion": {
@@ -3761,6 +3856,7 @@
   "Pascoe Vale": {
     "postcode": "3044",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 848,
       "topFiveOffenceProportion": {
@@ -3810,6 +3906,7 @@
   "Pascoe Vale South": {
     "postcode": "3044",
     "lga": "Merri-bek",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 468,
       "topFiveOffenceProportion": {
@@ -3859,6 +3956,7 @@
   "Diamond Creek": {
     "postcode": "3089",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 338,
       "topFiveOffenceProportion": {
@@ -3886,6 +3984,7 @@
   "Doreen": {
     "postcode": "3754",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 761,
       "topFiveOffenceProportion": {
@@ -3913,6 +4012,7 @@
   "Hurstbridge": {
     "postcode": "3099",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 74,
       "topFiveOffenceProportion": {
@@ -3962,6 +4062,7 @@
   "North Warrandyte": {
     "postcode": "3113",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 36,
       "topFiveOffenceProportion": {
@@ -3987,6 +4088,7 @@
   "Plenty": {
     "postcode": "3090",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 111,
       "topFiveOffenceProportion": {
@@ -4012,6 +4114,7 @@
   "Research": {
     "postcode": "3095",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 55,
       "topFiveOffenceProportion": {
@@ -4061,6 +4164,7 @@
   "Wattle Glen": {
     "postcode": "3096",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 27,
       "topFiveOffenceProportion": {
@@ -4088,6 +4192,7 @@
   "Arthurs Creek": {
     "postcode": "3099",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 10,
       "topFiveOffenceProportion": {
@@ -4113,6 +4218,7 @@
   "Bend of Islands": {
     "postcode": "3097",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 2567.5,
@@ -4128,6 +4234,7 @@
   "Christmas Hills": {
     "postcode": "3775",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 11,
       "topFiveOffenceProportion": {
@@ -4153,6 +4260,7 @@
   "Cottles Bridge": {
     "postcode": "3099",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 10,
       "topFiveOffenceProportion": {
@@ -4178,6 +4286,7 @@
   "Kangaroo Ground": {
     "postcode": "3097",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 31,
       "topFiveOffenceProportion": {
@@ -4203,6 +4312,7 @@
   "Kinglake": {
     "postcode": "3763",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 51,
       "topFiveOffenceProportion": {
@@ -4230,6 +4340,7 @@
   "Kinglake West": {
     "postcode": "3778",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 20,
       "topFiveOffenceProportion": {
@@ -4255,6 +4366,7 @@
   "Nutfield": {
     "postcode": "3099",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -4279,6 +4391,7 @@
   "Panton Hill": {
     "postcode": "3759",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 14,
       "topFiveOffenceProportion": {
@@ -4304,6 +4417,7 @@
   "St Andrews": {
     "postcode": "3761",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 18,
       "topFiveOffenceProportion": {
@@ -4329,6 +4443,7 @@
   "Smiths Gully": {
     "postcode": "3760",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3,
       "topFiveOffenceProportion": {
@@ -4351,6 +4466,7 @@
   "Strathewen": {
     "postcode": "3099",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2,
       "topFiveOffenceProportion": {
@@ -4373,6 +4489,7 @@
   "Watsons Creek": {
     "postcode": "3097",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2,
       "topFiveOffenceProportion": {
@@ -4394,6 +4511,7 @@
   "Yan Yean": {
     "postcode": "3755",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 11,
       "topFiveOffenceProportion": {
@@ -4419,6 +4537,7 @@
   "Yarrambat": {
     "postcode": "3091",
     "lga": "Nillumbik",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 43,
       "topFiveOffenceProportion": {
@@ -4444,6 +4563,7 @@
   "Donnybrook": {
     "postcode": "3064",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 461,
       "topFiveOffenceProportion": {
@@ -4471,6 +4591,7 @@
   "Epping": {
     "postcode": "3076",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3353,
       "topFiveOffenceProportion": {
@@ -4520,6 +4641,7 @@
   "Lalor": {
     "postcode": "3075",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1174,
       "topFiveOffenceProportion": {
@@ -4569,6 +4691,7 @@
   "Mernda": {
     "postcode": "3754",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1142,
       "topFiveOffenceProportion": {
@@ -4596,6 +4719,7 @@
   "Mill Park": {
     "postcode": "3082",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1328,
       "topFiveOffenceProportion": {
@@ -4645,6 +4769,7 @@
   "South Morang": {
     "postcode": "3752",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1086,
       "topFiveOffenceProportion": {
@@ -4672,6 +4797,7 @@
   "Thomastown": {
     "postcode": "3074",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2087,
       "topFiveOffenceProportion": {
@@ -4721,6 +4847,7 @@
   "Wollert": {
     "postcode": "3750",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1109,
       "topFiveOffenceProportion": {
@@ -4748,6 +4875,7 @@
   "Beveridge": {
     "postcode": "3753",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 535,
       "topFiveOffenceProportion": {
@@ -4775,6 +4903,7 @@
   "Eden Park": {
     "postcode": "3757",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 20,
       "topFiveOffenceProportion": {
@@ -4800,6 +4929,7 @@
   "Humevale": {
     "postcode": "3757",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 8,
       "topFiveOffenceProportion": {
@@ -4825,6 +4955,7 @@
   "Whittlesea": {
     "postcode": "3757",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 231,
       "topFiveOffenceProportion": {
@@ -4873,6 +5004,7 @@
   "Woodstock": {
     "postcode": "3755",
     "lga": "Whittlesea",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -4900,6 +5032,7 @@
   "Ashburton": {
     "postcode": "3147",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 460,
       "topFiveOffenceProportion": {
@@ -4949,6 +5082,7 @@
   "Balwyn": {
     "postcode": "3103",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 610,
       "topFiveOffenceProportion": {
@@ -4998,6 +5132,7 @@
   "Balwyn North": {
     "postcode": "3104",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 577,
       "topFiveOffenceProportion": {
@@ -5025,6 +5160,7 @@
   "Camberwell": {
     "postcode": "3124",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1152,
       "topFiveOffenceProportion": {
@@ -5074,6 +5210,7 @@
   "Canterbury": {
     "postcode": "3126",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 226,
       "topFiveOffenceProportion": {
@@ -5123,6 +5260,7 @@
   "Deepdene": {
     "postcode": "3103",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 96,
       "topFiveOffenceProportion": {
@@ -5150,6 +5288,7 @@
   "Glen Iris": {
     "postcode": "3146",
     "lga": "Stonnington",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 975,
       "topFiveOffenceProportion": {
@@ -5199,6 +5338,7 @@
   "Hawthorn": {
     "postcode": "3122",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1593,
       "topFiveOffenceProportion": {
@@ -5248,6 +5388,7 @@
   "Hawthorn East": {
     "postcode": "3123",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 867,
       "topFiveOffenceProportion": {
@@ -5297,6 +5438,7 @@
   "Kew": {
     "postcode": "3101",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1335,
       "topFiveOffenceProportion": {
@@ -5346,6 +5488,7 @@
   "Kew East": {
     "postcode": "3102",
     "lga": "Boroondara",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 285,
       "topFiveOffenceProportion": {
@@ -5373,6 +5516,7 @@
   "Mont Albert": {
     "postcode": "3127",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 361,
       "topFiveOffenceProportion": {
@@ -5422,6 +5566,7 @@
   "Surrey Hills": {
     "postcode": "3127",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 435,
       "topFiveOffenceProportion": {
@@ -5471,6 +5616,7 @@
   "Bayswater": {
     "postcode": "3153",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 881,
       "topFiveOffenceProportion": {
@@ -5520,6 +5666,7 @@
   "Boronia": {
     "postcode": "3155",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1441,
       "topFiveOffenceProportion": {
@@ -5569,6 +5716,7 @@
   "Ferntree Gully": {
     "postcode": "3156",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1245,
       "topFiveOffenceProportion": {
@@ -5617,6 +5765,7 @@
   "Knoxfield": {
     "postcode": "3180",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 327,
       "topFiveOffenceProportion": {
@@ -5644,6 +5793,7 @@
   "Lysterfield": {
     "postcode": "3156",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 131,
       "topFiveOffenceProportion": {
@@ -5671,6 +5821,7 @@
   "Rowville": {
     "postcode": "3178",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1195,
       "topFiveOffenceProportion": {
@@ -5719,6 +5870,7 @@
   "Sassafras": {
     "postcode": "3787",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 26,
       "topFiveOffenceProportion": {
@@ -5746,6 +5898,7 @@
   "Scoresby": {
     "postcode": "3179",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 359,
       "topFiveOffenceProportion": {
@@ -5795,6 +5948,7 @@
   "The Basin": {
     "postcode": "3154",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 174,
       "topFiveOffenceProportion": {
@@ -5822,6 +5976,7 @@
   "Upper Ferntree Gully": {
     "postcode": "3156",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 216,
       "topFiveOffenceProportion": {
@@ -5849,6 +6004,7 @@
   "Wantirna": {
     "postcode": "3152",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 626,
       "topFiveOffenceProportion": {
@@ -5898,6 +6054,7 @@
   "Wantirna South": {
     "postcode": "3152",
     "lga": "Knox",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1429,
       "topFiveOffenceProportion": {
@@ -5925,6 +6082,7 @@
   "Bulleen": {
     "postcode": "3105",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 417,
       "topFiveOffenceProportion": {
@@ -5974,6 +6132,7 @@
   "Doncaster": {
     "postcode": "3108",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1662,
       "topFiveOffenceProportion": {
@@ -6023,6 +6182,7 @@
   "Doncaster East": {
     "postcode": "3109",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 766,
       "topFiveOffenceProportion": {
@@ -6072,6 +6232,7 @@
   "Donvale": {
     "postcode": "3111",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 221,
       "topFiveOffenceProportion": {
@@ -6121,6 +6282,7 @@
   "Nunawading": {
     "postcode": "3131",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 639,
       "topFiveOffenceProportion": {
@@ -6170,6 +6332,7 @@
   "Park Orchards": {
     "postcode": "3114",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 64,
       "topFiveOffenceProportion": {
@@ -6197,6 +6360,7 @@
   "Ringwood North": {
     "postcode": "3134",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 223,
       "topFiveOffenceProportion": {
@@ -6224,6 +6388,7 @@
   "Templestowe": {
     "postcode": "3106",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 423,
       "topFiveOffenceProportion": {
@@ -6273,6 +6438,7 @@
   "Templestowe Lower": {
     "postcode": "3107",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 369,
       "topFiveOffenceProportion": {
@@ -6300,6 +6466,7 @@
   "Warrandyte": {
     "postcode": "3113",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 128,
       "topFiveOffenceProportion": {
@@ -6327,6 +6494,7 @@
   "Warrandyte South": {
     "postcode": "3134",
     "lga": "Manningham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 9,
       "topFiveOffenceProportion": {
@@ -6352,6 +6520,7 @@
   "Wonga Park": {
     "postcode": "3115",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 49,
       "topFiveOffenceProportion": {
@@ -6379,6 +6548,7 @@
   "Bayswater North": {
     "postcode": "3153",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 688,
       "topFiveOffenceProportion": {
@@ -6406,6 +6576,7 @@
   "Croydon": {
     "postcode": "3136",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1588,
       "topFiveOffenceProportion": {
@@ -6455,6 +6626,7 @@
   "Croydon Hills": {
     "postcode": "3136",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 65,
       "topFiveOffenceProportion": {
@@ -6482,6 +6654,7 @@
   "Croydon North": {
     "postcode": "3136",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 171,
       "topFiveOffenceProportion": {
@@ -6509,6 +6682,7 @@
   "Croydon South": {
     "postcode": "3136",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 154,
       "topFiveOffenceProportion": {
@@ -6536,6 +6710,7 @@
   "Heathmont": {
     "postcode": "3135",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 295,
       "topFiveOffenceProportion": {
@@ -6563,6 +6738,7 @@
   "Kilsyth": {
     "postcode": "3137",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 513,
       "topFiveOffenceProportion": {
@@ -6590,6 +6766,7 @@
   "Kilsyth South": {
     "postcode": "3137",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 74,
       "topFiveOffenceProportion": {
@@ -6617,6 +6794,7 @@
   "Ringwood": {
     "postcode": "3134",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2937,
       "topFiveOffenceProportion": {
@@ -6666,6 +6844,7 @@
   "Ringwood East": {
     "postcode": "3135",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 489,
       "topFiveOffenceProportion": {
@@ -6693,6 +6872,7 @@
   "Vermont": {
     "postcode": "3133",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 347,
       "topFiveOffenceProportion": {
@@ -6742,6 +6922,7 @@
   "Warranwood": {
     "postcode": "3134",
     "lga": "Maroondah",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 53,
       "topFiveOffenceProportion": {
@@ -6769,6 +6950,7 @@
   "Blackburn": {
     "postcode": "3130",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 749,
       "topFiveOffenceProportion": {
@@ -6818,6 +7000,7 @@
   "Blackburn North": {
     "postcode": "3130",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 204,
       "topFiveOffenceProportion": {
@@ -6845,6 +7028,7 @@
   "Blackburn South": {
     "postcode": "3130",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 447,
       "topFiveOffenceProportion": {
@@ -6872,6 +7056,7 @@
   "Box Hill": {
     "postcode": "3128",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1834,
       "topFiveOffenceProportion": {
@@ -6921,6 +7106,7 @@
   "Box Hill North": {
     "postcode": "3129",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 402,
       "topFiveOffenceProportion": {
@@ -6948,6 +7134,7 @@
   "Box Hill South": {
     "postcode": "3128",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 506,
       "topFiveOffenceProportion": {
@@ -6975,6 +7162,7 @@
   "Burwood": {
     "postcode": "3125",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 804,
       "topFiveOffenceProportion": {
@@ -7024,6 +7212,7 @@
   "Burwood East": {
     "postcode": "3151",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 780,
       "topFiveOffenceProportion": {
@@ -7073,6 +7262,7 @@
   "Forest Hill": {
     "postcode": "3131",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 776,
       "topFiveOffenceProportion": {
@@ -7122,6 +7312,7 @@
   "Mitcham": {
     "postcode": "3132",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 795,
       "topFiveOffenceProportion": {
@@ -7171,6 +7362,7 @@
   "Mont Albert North": {
     "postcode": "3129",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 144,
       "topFiveOffenceProportion": {
@@ -7198,6 +7390,7 @@
   "Vermont South": {
     "postcode": "3133",
     "lga": "Whitehorse",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 540,
       "topFiveOffenceProportion": {
@@ -7225,6 +7418,7 @@
   "Belgrave": {
     "postcode": "3160",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 170,
       "topFiveOffenceProportion": {
@@ -7252,6 +7446,7 @@
   "Belgrave Heights": {
     "postcode": "3160",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 18,
       "topFiveOffenceProportion": {
@@ -7279,6 +7474,7 @@
   "Belgrave South": {
     "postcode": "3160",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 50,
       "topFiveOffenceProportion": {
@@ -7304,6 +7500,7 @@
   "Chirnside Park": {
     "postcode": "3116",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 673,
       "topFiveOffenceProportion": {
@@ -7331,6 +7528,7 @@
   "Lilydale": {
     "postcode": "3140",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1192,
       "topFiveOffenceProportion": {
@@ -7380,6 +7578,7 @@
   "Montrose": {
     "postcode": "3765",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 183,
       "topFiveOffenceProportion": {
@@ -7407,6 +7606,7 @@
   "Mooroolbark": {
     "postcode": "3138",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 802,
       "topFiveOffenceProportion": {
@@ -7434,6 +7634,7 @@
   "Mount Evelyn": {
     "postcode": "3796",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 228,
       "topFiveOffenceProportion": {
@@ -7461,6 +7662,7 @@
   "Selby": {
     "postcode": "3159",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 41,
       "topFiveOffenceProportion": {
@@ -7488,6 +7690,7 @@
   "Tecoma": {
     "postcode": "3160",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 52,
       "topFiveOffenceProportion": {
@@ -7515,6 +7718,7 @@
   "Upwey": {
     "postcode": "3158",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 188,
       "topFiveOffenceProportion": {
@@ -7542,6 +7746,7 @@
   "Badger Creek": {
     "postcode": "3777",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 60,
       "topFiveOffenceProportion": {
@@ -7569,6 +7774,7 @@
   "Beenak": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 3669.3,
@@ -7584,6 +7790,7 @@
   "Big Pats Creek": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 4,
       "topFiveOffenceProportion": {
@@ -7608,6 +7815,7 @@
   "Cambarville": {
     "postcode": "3779",
     "lga": "Yarra Ranges",
+    "bcarrRing": "None",
     "crimeSuburb": {
       "totalIncidents": 7,
       "topFiveOffenceProportion": {
@@ -7633,6 +7841,7 @@
   "Chum Creek": {
     "postcode": "3777",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 11,
       "topFiveOffenceProportion": {
@@ -7660,6 +7869,7 @@
   "Coldstream": {
     "postcode": "3770",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 80,
       "topFiveOffenceProportion": {
@@ -7687,6 +7897,7 @@
   "Dixons Creek": {
     "postcode": "3775",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 16,
       "topFiveOffenceProportion": {
@@ -7712,6 +7923,7 @@
   "Don Valley": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -7737,6 +7949,7 @@
   "East Warburton": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 32,
       "topFiveOffenceProportion": {
@@ -7764,6 +7977,7 @@
   "Emerald": {
     "postcode": "3782",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 161,
       "topFiveOffenceProportion": {
@@ -7791,6 +8005,7 @@
   "Fernshaw": {
     "postcode": "3778",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 3669.3,
@@ -7806,6 +8021,7 @@
   "Ferny Creek": {
     "postcode": "3786",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 22,
       "topFiveOffenceProportion": {
@@ -7833,6 +8049,7 @@
   "Gilderoy": {
     "postcode": "3797",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 3669.3,
@@ -7848,6 +8065,7 @@
   "Gladysdale": {
     "postcode": "3797",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 9,
       "topFiveOffenceProportion": {
@@ -7873,6 +8091,7 @@
   "Gruyere": {
     "postcode": "3770",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 34,
       "topFiveOffenceProportion": {
@@ -7898,6 +8117,7 @@
   "Healesville": {
     "postcode": "3777",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 325,
       "topFiveOffenceProportion": {
@@ -7925,6 +8145,7 @@
   "Hoddles Creek": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 23,
       "topFiveOffenceProportion": {
@@ -7950,6 +8171,7 @@
   "Kallista": {
     "postcode": "3791",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 22,
       "topFiveOffenceProportion": {
@@ -7977,6 +8199,7 @@
   "Kalorama": {
     "postcode": "3766",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 24,
       "topFiveOffenceProportion": {
@@ -8004,6 +8227,7 @@
   "Launching Place": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 67,
       "topFiveOffenceProportion": {
@@ -8031,6 +8255,7 @@
   "Macclesfield": {
     "postcode": "3782",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -8056,6 +8281,7 @@
   "Matlock": {
     "postcode": "3723",
     "lga": "Yarra Ranges",
+    "bcarrRing": "None",
     "crimeSuburb": {
       "totalIncidents": 1,
       "topFiveOffenceProportion": {
@@ -8077,6 +8303,7 @@
   "McMahons Creek": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "None",
     "crimeSuburb": {
       "totalIncidents": 15,
       "topFiveOffenceProportion": {
@@ -8102,6 +8329,7 @@
   "Menzies Creek": {
     "postcode": "3159",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 15,
       "topFiveOffenceProportion": {
@@ -8127,6 +8355,7 @@
   "Millgrove": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 57,
       "topFiveOffenceProportion": {
@@ -8154,6 +8383,7 @@
   "Monbulk": {
     "postcode": "3793",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 110,
       "topFiveOffenceProportion": {
@@ -8181,6 +8411,7 @@
   "Mount Dandenong": {
     "postcode": "3767",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 44,
       "topFiveOffenceProportion": {
@@ -8208,6 +8439,7 @@
   "Mount Toolebewong": {
     "postcode": "3777",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2,
       "topFiveOffenceProportion": {
@@ -8230,6 +8462,7 @@
   "Narre Warren East": {
     "postcode": "3804",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -8255,6 +8488,7 @@
   "Olinda": {
     "postcode": "3788",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 73,
       "topFiveOffenceProportion": {
@@ -8282,6 +8516,7 @@
   "Powelltown": {
     "postcode": "3797",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -8307,6 +8542,7 @@
   "Reefton": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "None",
     "crimeSuburb": {
       "totalIncidents": 11,
       "topFiveOffenceProportion": {
@@ -8332,6 +8568,7 @@
   "Seville": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 69,
       "topFiveOffenceProportion": {
@@ -8359,6 +8596,7 @@
   "Seville East": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 14,
       "topFiveOffenceProportion": {
@@ -8384,6 +8622,7 @@
   "Sherbrooke": {
     "postcode": "3789",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 9,
       "topFiveOffenceProportion": {
@@ -8409,6 +8648,7 @@
   "Silvan": {
     "postcode": "3795",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 44,
       "topFiveOffenceProportion": {
@@ -8434,6 +8674,7 @@
   "Steels Creek": {
     "postcode": "3775",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3,
       "topFiveOffenceProportion": {
@@ -8455,6 +8696,7 @@
   "Tarrawarra": {
     "postcode": "3775",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1,
       "topFiveOffenceProportion": {
@@ -8476,6 +8718,7 @@
   "The Patch": {
     "postcode": "3792",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -8501,6 +8744,7 @@
   "Three Bridges": {
     "postcode": "3797",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -8526,6 +8770,7 @@
   "Toolangi": {
     "postcode": "3777",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 14,
       "topFiveOffenceProportion": {
@@ -8551,6 +8796,7 @@
   "Toorongo": {
     "postcode": "3833",
     "lga": "Yarra Ranges",
+    "bcarrRing": "None",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 3669.3,
@@ -8566,6 +8812,7 @@
   "Tremont": {
     "postcode": "3785",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 4,
       "topFiveOffenceProportion": {
@@ -8589,6 +8836,7 @@
   "Wandin East": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 10,
       "topFiveOffenceProportion": {
@@ -8614,6 +8862,7 @@
   "Wandin North": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 84,
       "topFiveOffenceProportion": {
@@ -8641,6 +8890,7 @@
   "Warburton": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 84,
       "topFiveOffenceProportion": {
@@ -8668,6 +8918,7 @@
   "Wesburn": {
     "postcode": "3799",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 27,
       "topFiveOffenceProportion": {
@@ -8693,6 +8944,7 @@
   "Woori Yallock": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 81,
       "topFiveOffenceProportion": {
@@ -8720,6 +8972,7 @@
   "Yarra Glen": {
     "postcode": "3775",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 76,
       "topFiveOffenceProportion": {
@@ -8747,6 +9000,7 @@
   "Yarra Junction": {
     "postcode": "3797",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 124,
       "topFiveOffenceProportion": {
@@ -8774,6 +9028,7 @@
   "Yellingbo": {
     "postcode": "3139",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -8799,6 +9054,7 @@
   "Yering": {
     "postcode": "3770",
     "lga": "Yarra Ranges",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 4,
       "topFiveOffenceProportion": {
@@ -8823,6 +9079,7 @@
   "Beaumaris": {
     "postcode": "3193",
     "lga": "Bayside",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 343,
       "topFiveOffenceProportion": {
@@ -8872,6 +9129,7 @@
   "Black Rock": {
     "postcode": "3193",
     "lga": "Bayside",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 171,
       "topFiveOffenceProportion": {
@@ -8899,6 +9157,7 @@
   "Brighton": {
     "postcode": "3186",
     "lga": "Bayside",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1193,
       "topFiveOffenceProportion": {
@@ -8948,6 +9207,7 @@
   "Brighton East": {
     "postcode": "3187",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 596,
       "topFiveOffenceProportion": {
@@ -8997,6 +9257,7 @@
   "Cheltenham": {
     "postcode": "3192",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1901,
       "topFiveOffenceProportion": {
@@ -9046,6 +9307,7 @@
   "Hampton": {
     "postcode": "3188",
     "lga": "Bayside",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 636,
       "topFiveOffenceProportion": {
@@ -9095,6 +9357,7 @@
   "Hampton East": {
     "postcode": "3188",
     "lga": "Bayside",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 342,
       "topFiveOffenceProportion": {
@@ -9122,6 +9385,7 @@
   "Highett": {
     "postcode": "3190",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 835,
       "topFiveOffenceProportion": {
@@ -9149,6 +9413,7 @@
   "Sandringham": {
     "postcode": "3191",
     "lga": "Bayside",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 455,
       "topFiveOffenceProportion": {
@@ -9176,6 +9441,7 @@
   "Beaconsfield": {
     "postcode": "3807",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 508,
       "topFiveOffenceProportion": {
@@ -9203,6 +9469,7 @@
   "Officer": {
     "postcode": "3809",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1155,
       "topFiveOffenceProportion": {
@@ -9230,6 +9497,7 @@
   "Pakenham": {
     "postcode": "3810",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3683,
       "topFiveOffenceProportion": {
@@ -9278,6 +9546,7 @@
   "Avonsleigh": {
     "postcode": "3782",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 4,
       "topFiveOffenceProportion": {
@@ -9301,6 +9570,7 @@
   "Bayles": {
     "postcode": "3981",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 22,
       "topFiveOffenceProportion": {
@@ -9326,6 +9596,7 @@
   "Beaconsfield Upper": {
     "postcode": "3808",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 28,
       "topFiveOffenceProportion": {
@@ -9353,6 +9624,7 @@
   "Bunyip": {
     "postcode": "3815",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 86,
       "topFiveOffenceProportion": {
@@ -9380,6 +9652,7 @@
   "Bunyip North": {
     "postcode": "3815",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 4,
       "topFiveOffenceProportion": {
@@ -9404,6 +9677,7 @@
   "Caldermeade": {
     "postcode": "3984",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 46,
       "topFiveOffenceProportion": {
@@ -9429,6 +9703,7 @@
   "Cardinia": {
     "postcode": "3978",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 44,
       "topFiveOffenceProportion": {
@@ -9454,6 +9729,7 @@
   "Catani": {
     "postcode": "3981",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 7,
       "topFiveOffenceProportion": {
@@ -9479,6 +9755,7 @@
   "Clematis": {
     "postcode": "3782",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 15,
       "topFiveOffenceProportion": {
@@ -9506,6 +9783,7 @@
   "Cockatoo": {
     "postcode": "3781",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 146,
       "topFiveOffenceProportion": {
@@ -9533,6 +9811,7 @@
   "Cora Lynn": {
     "postcode": "3814",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3,
       "topFiveOffenceProportion": {
@@ -9556,6 +9835,7 @@
   "Dalmore": {
     "postcode": "3981",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -9581,6 +9861,7 @@
   "Dewhurst": {
     "postcode": "3809",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -9605,6 +9886,7 @@
   "Garfield": {
     "postcode": "3814",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 63,
       "topFiveOffenceProportion": {
@@ -9632,6 +9914,7 @@
   "Garfield North": {
     "postcode": "3814",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 10,
       "topFiveOffenceProportion": {
@@ -9657,6 +9940,7 @@
   "Gembrook": {
     "postcode": "3783",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 80,
       "topFiveOffenceProportion": {
@@ -9684,6 +9968,7 @@
   "Guys Hill": {
     "postcode": "3807",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -9709,6 +9994,7 @@
   "Heath Hill": {
     "postcode": "3981",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3,
       "topFiveOffenceProportion": {
@@ -9732,6 +10018,7 @@
   "Iona": {
     "postcode": "3815",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -9756,6 +10043,7 @@
   "Koo Wee Rup": {
     "postcode": "3981",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 210,
       "topFiveOffenceProportion": {
@@ -9783,6 +10071,7 @@
   "Koo Wee Rup North": {
     "postcode": "3891",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1,
       "topFiveOffenceProportion": {
@@ -9804,6 +10093,7 @@
   "Lang Lang": {
     "postcode": "3984",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 130,
       "topFiveOffenceProportion": {
@@ -9831,6 +10121,7 @@
   "Lang Lang East": {
     "postcode": "3894",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 4967.7,
@@ -9846,6 +10137,7 @@
   "Longwarry": {
     "postcode": "3816",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 162,
       "topFiveOffenceProportion": {
@@ -9873,6 +10165,7 @@
   "Maryknoll": {
     "postcode": "3812",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 9,
       "topFiveOffenceProportion": {
@@ -9898,6 +10191,7 @@
   "Modella": {
     "postcode": "3816",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 7,
       "topFiveOffenceProportion": {
@@ -9923,6 +10217,7 @@
   "Monomeith": {
     "postcode": "3984",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 7,
       "topFiveOffenceProportion": {
@@ -9948,6 +10243,7 @@
   "Mount Burnett": {
     "postcode": "3781",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -9972,6 +10268,7 @@
   "Nangana": {
     "postcode": "3781",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3,
       "topFiveOffenceProportion": {
@@ -9995,6 +10292,7 @@
   "Nar Nar Goon": {
     "postcode": "3812",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 64,
       "topFiveOffenceProportion": {
@@ -10020,6 +10318,7 @@
   "Nar Nar Goon North": {
     "postcode": "3812",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 35,
       "topFiveOffenceProportion": {
@@ -10047,6 +10346,7 @@
   "Nyora": {
     "postcode": "3987",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 68,
       "topFiveOffenceProportion": {
@@ -10072,6 +10372,7 @@
   "Officer South": {
     "postcode": "3809",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 25,
       "topFiveOffenceProportion": {
@@ -10099,6 +10400,7 @@
   "Pakenham South": {
     "postcode": "3810",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -10124,6 +10426,7 @@
   "Pakenham Upper": {
     "postcode": "3810",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 26,
       "topFiveOffenceProportion": {
@@ -10149,6 +10452,7 @@
   "Rythdale": {
     "postcode": "3810",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -10172,6 +10476,7 @@
   "Tonimbuk": {
     "postcode": "3815",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 4967.7,
@@ -10187,6 +10492,7 @@
   "Tynong": {
     "postcode": "3813",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 20,
       "topFiveOffenceProportion": {
@@ -10212,6 +10518,7 @@
   "Tynong North": {
     "postcode": "3813",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 35,
       "topFiveOffenceProportion": {
@@ -10237,6 +10544,7 @@
   "Vervale": {
     "postcode": "3814",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1,
       "topFiveOffenceProportion": {
@@ -10258,6 +10566,7 @@
   "Yannathan": {
     "postcode": "3894",
     "lga": "Cardinia",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 6,
       "topFiveOffenceProportion": {
@@ -10282,6 +10591,7 @@
   "Berwick": {
     "postcode": "3806",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2479,
       "topFiveOffenceProportion": {
@@ -10330,6 +10640,7 @@
   "Botanic Ridge": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 229,
       "topFiveOffenceProportion": {
@@ -10357,6 +10668,7 @@
   "Clyde": {
     "postcode": "3978",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 901,
       "topFiveOffenceProportion": {
@@ -10384,6 +10696,7 @@
   "Clyde North": {
     "postcode": "3978",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1916,
       "topFiveOffenceProportion": {
@@ -10411,6 +10724,7 @@
   "Cranbourne": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3240,
       "topFiveOffenceProportion": {
@@ -10460,6 +10774,7 @@
   "Cranbourne East": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1095,
       "topFiveOffenceProportion": {
@@ -10487,6 +10802,7 @@
   "Cranbourne North": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1265,
       "topFiveOffenceProportion": {
@@ -10514,6 +10830,7 @@
   "Cranbourne West": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1115,
       "topFiveOffenceProportion": {
@@ -10541,6 +10858,7 @@
   "Cranbourne South": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 173,
       "topFiveOffenceProportion": {
@@ -10568,6 +10886,7 @@
   "Doveton": {
     "postcode": "3177",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1238,
       "topFiveOffenceProportion": {
@@ -10595,6 +10914,7 @@
   "Endeavour Hills": {
     "postcode": "3802",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1116,
       "topFiveOffenceProportion": {
@@ -10644,6 +10964,7 @@
   "Eumemmerring": {
     "postcode": "3177",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 297,
       "topFiveOffenceProportion": {
@@ -10671,6 +10992,7 @@
   "Hallam": {
     "postcode": "3803",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1220,
       "topFiveOffenceProportion": {
@@ -10698,6 +11020,7 @@
   "Hampton Park": {
     "postcode": "3976",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1272,
       "topFiveOffenceProportion": {
@@ -10747,6 +11070,7 @@
   "Junction Village": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 62,
       "topFiveOffenceProportion": {
@@ -10774,6 +11098,7 @@
   "Lynbrook": {
     "postcode": "3975",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 552,
       "topFiveOffenceProportion": {
@@ -10801,6 +11126,7 @@
   "Lyndhurst": {
     "postcode": "3975",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 385,
       "topFiveOffenceProportion": {
@@ -10828,6 +11154,7 @@
   "Narre Warren": {
     "postcode": "3805",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2771,
       "topFiveOffenceProportion": {
@@ -10877,6 +11204,7 @@
   "Narre Warren North": {
     "postcode": "3804",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 252,
       "topFiveOffenceProportion": {
@@ -10904,6 +11232,7 @@
   "Narre Warren South": {
     "postcode": "3805",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 908,
       "topFiveOffenceProportion": {
@@ -10931,6 +11260,7 @@
   "Blind Bight": {
     "postcode": "3980",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 15,
       "topFiveOffenceProportion": {
@@ -10958,6 +11288,7 @@
   "Cannons Creek": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 34,
       "topFiveOffenceProportion": {
@@ -10983,6 +11314,7 @@
   "Devon Meadows": {
     "postcode": "3977",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 80,
       "topFiveOffenceProportion": {
@@ -11008,6 +11340,7 @@
   "Harkaway": {
     "postcode": "3806",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 20,
       "topFiveOffenceProportion": {
@@ -11033,6 +11366,7 @@
   "Lysterfield South": {
     "postcode": "3156",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 29,
       "topFiveOffenceProportion": {
@@ -11058,6 +11392,7 @@
   "Pearcedale": {
     "postcode": "3912",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 116,
       "topFiveOffenceProportion": {
@@ -11085,6 +11420,7 @@
   "Tooradin": {
     "postcode": "3980",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 140,
       "topFiveOffenceProportion": {
@@ -11112,6 +11448,7 @@
   "Warneet": {
     "postcode": "3980",
     "lga": "Casey",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 16,
       "topFiveOffenceProportion": {
@@ -11137,6 +11474,7 @@
   "Dandenong": {
     "postcode": "3175",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 7406,
       "topFiveOffenceProportion": {
@@ -11186,6 +11524,7 @@
   "Dandenong North": {
     "postcode": "3175",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1235,
       "topFiveOffenceProportion": {
@@ -11235,6 +11574,7 @@
   "Dandenong South": {
     "postcode": "3175",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1286,
       "topFiveOffenceProportion": {
@@ -11260,6 +11600,7 @@
   "Keysborough": {
     "postcode": "3173",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1443,
       "topFiveOffenceProportion": {
@@ -11287,6 +11628,7 @@
   "Noble Park": {
     "postcode": "3174",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2095,
       "topFiveOffenceProportion": {
@@ -11336,6 +11678,7 @@
   "Noble Park North": {
     "postcode": "3174",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 562,
       "topFiveOffenceProportion": {
@@ -11363,6 +11706,7 @@
   "Springvale": {
     "postcode": "3171",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2514,
       "topFiveOffenceProportion": {
@@ -11412,6 +11756,7 @@
   "Springvale South": {
     "postcode": "3172",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 532,
       "topFiveOffenceProportion": {
@@ -11439,6 +11784,7 @@
   "Bangholme": {
     "postcode": "3175",
     "lga": "Greater Dandenong",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 58,
       "topFiveOffenceProportion": {
@@ -11464,6 +11810,7 @@
   "Carrum Downs": {
     "postcode": "3201",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1759,
       "topFiveOffenceProportion": {
@@ -11513,6 +11860,7 @@
   "Frankston": {
     "postcode": "3199",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 6816,
       "topFiveOffenceProportion": {
@@ -11562,6 +11910,7 @@
   "Frankston North": {
     "postcode": "3200",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 518,
       "topFiveOffenceProportion": {
@@ -11589,6 +11938,7 @@
   "Frankston South": {
     "postcode": "3199",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 597,
       "topFiveOffenceProportion": {
@@ -11616,6 +11966,7 @@
   "Langwarrin": {
     "postcode": "3910",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 806,
       "topFiveOffenceProportion": {
@@ -11643,6 +11994,7 @@
   "Sandhurst": {
     "postcode": "3977",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 118,
       "topFiveOffenceProportion": {
@@ -11670,6 +12022,7 @@
   "Seaford": {
     "postcode": "3198",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1911,
       "topFiveOffenceProportion": {
@@ -11719,6 +12072,7 @@
   "Skye": {
     "postcode": "3977",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 327,
       "topFiveOffenceProportion": {
@@ -11746,6 +12100,7 @@
   "Langwarrin South": {
     "postcode": "3911",
     "lga": "Frankston",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 39,
       "topFiveOffenceProportion": {
@@ -11771,6 +12126,7 @@
   "Bentleigh": {
     "postcode": "3204",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 716,
       "topFiveOffenceProportion": {
@@ -11820,6 +12176,7 @@
   "Bentleigh East": {
     "postcode": "3165",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 981,
       "topFiveOffenceProportion": {
@@ -11847,6 +12204,7 @@
   "Carnegie": {
     "postcode": "3163",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 818,
       "topFiveOffenceProportion": {
@@ -11896,6 +12254,7 @@
   "Caulfield": {
     "postcode": "3162",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 292,
       "topFiveOffenceProportion": {
@@ -11945,6 +12304,7 @@
   "Caulfield East": {
     "postcode": "3145",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 311,
       "topFiveOffenceProportion": {
@@ -11972,6 +12332,7 @@
   "Caulfield North": {
     "postcode": "3161",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 722,
       "topFiveOffenceProportion": {
@@ -11999,6 +12360,7 @@
   "Caulfield South": {
     "postcode": "3162",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 410,
       "topFiveOffenceProportion": {
@@ -12026,6 +12388,7 @@
   "Elsternwick": {
     "postcode": "3185",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 617,
       "topFiveOffenceProportion": {
@@ -12075,6 +12438,7 @@
   "Gardenvale": {
     "postcode": "3185",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 63,
       "topFiveOffenceProportion": {
@@ -12102,6 +12466,7 @@
   "Glen Huntly": {
     "postcode": "3163",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 296,
       "topFiveOffenceProportion": {
@@ -12129,6 +12494,7 @@
   "McKinnon": {
     "postcode": "3204",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 186,
       "topFiveOffenceProportion": {
@@ -12156,6 +12522,7 @@
   "Murrumbeena": {
     "postcode": "3163",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 418,
       "topFiveOffenceProportion": {
@@ -12205,6 +12572,7 @@
   "Ormond": {
     "postcode": "3204",
     "lga": "Glen Eira",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 242,
       "topFiveOffenceProportion": {
@@ -12232,6 +12600,7 @@
   "Aspendale": {
     "postcode": "3195",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 280,
       "topFiveOffenceProportion": {
@@ -12281,6 +12650,7 @@
   "Aspendale Gardens": {
     "postcode": "3195",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 137,
       "topFiveOffenceProportion": {
@@ -12308,6 +12678,7 @@
   "Bonbeach": {
     "postcode": "3196",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 233,
       "topFiveOffenceProportion": {
@@ -12335,6 +12706,7 @@
   "Braeside": {
     "postcode": "3195",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 227,
       "topFiveOffenceProportion": {
@@ -12360,6 +12732,7 @@
   "Carrum": {
     "postcode": "3197",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 206,
       "topFiveOffenceProportion": {
@@ -12409,6 +12782,7 @@
   "Chelsea": {
     "postcode": "3196",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 541,
       "topFiveOffenceProportion": {
@@ -12458,6 +12832,7 @@
   "Chelsea Heights": {
     "postcode": "3196",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 276,
       "topFiveOffenceProportion": {
@@ -12485,6 +12860,7 @@
   "Clarinda": {
     "postcode": "3169",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 256,
       "topFiveOffenceProportion": {
@@ -12512,6 +12888,7 @@
   "Clayton South": {
     "postcode": "3169",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 971,
       "topFiveOffenceProportion": {
@@ -12539,6 +12916,7 @@
   "Dingley Village": {
     "postcode": "3172",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 356,
       "topFiveOffenceProportion": {
@@ -12566,6 +12944,7 @@
   "Edithvale": {
     "postcode": "3196",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 170,
       "topFiveOffenceProportion": {
@@ -12593,6 +12972,7 @@
   "Heatherton": {
     "postcode": "3202",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 166,
       "topFiveOffenceProportion": {
@@ -12620,6 +13000,7 @@
   "Mentone": {
     "postcode": "3194",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 738,
       "topFiveOffenceProportion": {
@@ -12669,6 +13050,7 @@
   "Moorabbin": {
     "postcode": "3189",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1216,
       "topFiveOffenceProportion": {
@@ -12696,6 +13078,7 @@
   "Moorabbin Airport": {
     "postcode": "3194",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 209,
       "topFiveOffenceProportion": {
@@ -12721,6 +13104,7 @@
   "Mordialloc": {
     "postcode": "3195",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 562,
       "topFiveOffenceProportion": {
@@ -12770,6 +13154,7 @@
   "Parkdale": {
     "postcode": "3195",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 372,
       "topFiveOffenceProportion": {
@@ -12819,6 +13204,7 @@
   "Patterson Lakes": {
     "postcode": "3197",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 332,
       "topFiveOffenceProportion": {
@@ -12846,6 +13232,7 @@
   "Waterways": {
     "postcode": "3195",
     "lga": "Kingston",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 54,
       "topFiveOffenceProportion": {
@@ -12873,6 +13260,7 @@
   "Ashwood": {
     "postcode": "3147",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 520,
       "topFiveOffenceProportion": {
@@ -12900,6 +13288,7 @@
   "Chadstone": {
     "postcode": "3148",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 854,
       "topFiveOffenceProportion": {
@@ -12949,6 +13338,7 @@
   "Clayton": {
     "postcode": "3168",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1914,
       "topFiveOffenceProportion": {
@@ -12998,6 +13388,7 @@
   "Glen Waverley": {
     "postcode": "3150",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 2052,
       "topFiveOffenceProportion": {
@@ -13047,6 +13438,7 @@
   "Hughesdale": {
     "postcode": "3166",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 380,
       "topFiveOffenceProportion": {
@@ -13096,6 +13488,7 @@
   "Huntingdale": {
     "postcode": "3166",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 146,
       "topFiveOffenceProportion": {
@@ -13123,6 +13516,7 @@
   "Mount Waverley": {
     "postcode": "3149",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1548,
       "topFiveOffenceProportion": {
@@ -13172,6 +13566,7 @@
   "Mulgrave": {
     "postcode": "3170",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1274,
       "topFiveOffenceProportion": {
@@ -13221,6 +13616,7 @@
   "Notting Hill": {
     "postcode": "3168",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 222,
       "topFiveOffenceProportion": {
@@ -13248,6 +13644,7 @@
   "Oakleigh": {
     "postcode": "3166",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1480,
       "topFiveOffenceProportion": {
@@ -13297,6 +13694,7 @@
   "Oakleigh East": {
     "postcode": "3166",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 249,
       "topFiveOffenceProportion": {
@@ -13324,6 +13722,7 @@
   "Oakleigh South": {
     "postcode": "3167",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 535,
       "topFiveOffenceProportion": {
@@ -13351,6 +13750,7 @@
   "Wheelers Hill": {
     "postcode": "3150",
     "lga": "Monash",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 600,
       "topFiveOffenceProportion": {
@@ -13378,6 +13778,7 @@
   "Blairgowrie": {
     "postcode": "3942",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 105,
       "topFiveOffenceProportion": {
@@ -13405,6 +13806,7 @@
   "Capel Sound": {
     "postcode": "3940",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 267,
       "topFiveOffenceProportion": {
@@ -13432,6 +13834,7 @@
   "Dromana": {
     "postcode": "3936",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 628,
       "topFiveOffenceProportion": {
@@ -13481,6 +13884,7 @@
   "McCrae": {
     "postcode": "3938",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 171,
       "topFiveOffenceProportion": {
@@ -13508,6 +13912,7 @@
   "Mornington": {
     "postcode": "3931",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1580,
       "topFiveOffenceProportion": {
@@ -13556,6 +13961,7 @@
   "Mount Eliza": {
     "postcode": "3930",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 459,
       "topFiveOffenceProportion": {
@@ -13604,6 +14010,7 @@
   "Mount Martha": {
     "postcode": "3934",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 338,
       "topFiveOffenceProportion": {
@@ -13652,6 +14059,7 @@
   "Portsea": {
     "postcode": "3944",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 30,
       "topFiveOffenceProportion": {
@@ -13701,6 +14109,7 @@
   "Rosebud": {
     "postcode": "3939",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1373,
       "topFiveOffenceProportion": {
@@ -13728,6 +14137,7 @@
   "Rye": {
     "postcode": "3941",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 431,
       "topFiveOffenceProportion": {
@@ -13755,6 +14165,7 @@
   "Safety Beach": {
     "postcode": "3936",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 280,
       "topFiveOffenceProportion": {
@@ -13782,6 +14193,7 @@
   "Sorrento": {
     "postcode": "3943",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 138,
       "topFiveOffenceProportion": {
@@ -13809,6 +14221,7 @@
   "Tootgarook": {
     "postcode": "3941",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 178,
       "topFiveOffenceProportion": {
@@ -13836,6 +14249,7 @@
   "Arthurs Seat": {
     "postcode": "3936",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 19,
       "topFiveOffenceProportion": {
@@ -13861,6 +14275,7 @@
   "Balnarring": {
     "postcode": "3926",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 104,
       "topFiveOffenceProportion": {
@@ -13888,6 +14303,7 @@
   "Balnarring Beach": {
     "postcode": "3926",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 26,
       "topFiveOffenceProportion": {
@@ -13915,6 +14331,7 @@
   "Baxter": {
     "postcode": "3911",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 250,
       "topFiveOffenceProportion": {
@@ -13942,6 +14359,7 @@
   "Bittern": {
     "postcode": "3918",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 124,
       "topFiveOffenceProportion": {
@@ -13969,6 +14387,7 @@
   "Boneo": {
     "postcode": "3939",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 21,
       "topFiveOffenceProportion": {
@@ -13994,6 +14413,7 @@
   "Cape Schanck": {
     "postcode": "3939",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 17,
       "topFiveOffenceProportion": {
@@ -14021,6 +14441,7 @@
   "Crib Point": {
     "postcode": "3919",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 169,
       "topFiveOffenceProportion": {
@@ -14048,6 +14469,7 @@
   "Fingal": {
     "postcode": "3939",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 29,
       "topFiveOffenceProportion": {
@@ -14075,6 +14497,7 @@
   "Flinders": {
     "postcode": "3929",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 46,
       "topFiveOffenceProportion": {
@@ -14124,6 +14547,7 @@
   "Hastings": {
     "postcode": "3915",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1296,
       "topFiveOffenceProportion": {
@@ -14173,6 +14597,7 @@
   "Main Ridge": {
     "postcode": "3928",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 13,
       "topFiveOffenceProportion": {
@@ -14198,6 +14623,7 @@
   "Merricks": {
     "postcode": "3916",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2,
       "topFiveOffenceProportion": {
@@ -14220,6 +14646,7 @@
   "Merricks Beach": {
     "postcode": "3926",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 5,
       "topFiveOffenceProportion": {
@@ -14243,6 +14670,7 @@
   "Merricks North": {
     "postcode": "3926",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 28,
       "topFiveOffenceProportion": {
@@ -14268,6 +14696,7 @@
   "Moorooduc": {
     "postcode": "3933",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 73,
       "topFiveOffenceProportion": {
@@ -14293,6 +14722,7 @@
   "Point Leo": {
     "postcode": "3916",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 7,
       "topFiveOffenceProportion": {
@@ -14318,6 +14748,7 @@
   "Red Hill": {
     "postcode": "3937",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 18,
       "topFiveOffenceProportion": {
@@ -14345,6 +14776,7 @@
   "Red Hill South": {
     "postcode": "3937",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 6,
       "topFiveOffenceProportion": {
@@ -14370,6 +14802,7 @@
   "Shoreham": {
     "postcode": "3916",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 18,
       "topFiveOffenceProportion": {
@@ -14397,6 +14830,7 @@
   "Somers": {
     "postcode": "3927",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 72,
       "topFiveOffenceProportion": {
@@ -14424,6 +14858,7 @@
   "Somerville": {
     "postcode": "3912",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 513,
       "topFiveOffenceProportion": {
@@ -14451,6 +14886,7 @@
   "St Andrews Beach": {
     "postcode": "3941",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 17,
       "topFiveOffenceProportion": {
@@ -14478,6 +14914,7 @@
   "Tuerong": {
     "postcode": "3915",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 26,
       "topFiveOffenceProportion": {
@@ -14503,6 +14940,7 @@
   "Tyabb": {
     "postcode": "3913",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 122,
       "topFiveOffenceProportion": {
@@ -14530,6 +14968,7 @@
   "HMAS Cerberus": {
     "postcode": "3920",
     "lga": "Mornington Peninsula",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 6,
       "topFiveOffenceProportion": {
@@ -14555,6 +14994,7 @@
   "Armadale": {
     "postcode": "3143",
     "lga": "Stonnington",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 612,
       "topFiveOffenceProportion": {
@@ -14604,6 +15044,7 @@
   "Kooyong": {
     "postcode": "3144",
     "lga": "Stonnington",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 76,
       "topFiveOffenceProportion": {
@@ -14631,6 +15072,7 @@
   "Malvern": {
     "postcode": "3144",
     "lga": "Stonnington",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 668,
       "topFiveOffenceProportion": {
@@ -14680,6 +15122,7 @@
   "Malvern East": {
     "postcode": "3145",
     "lga": "Stonnington",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 2291,
       "topFiveOffenceProportion": {
@@ -14729,6 +15172,7 @@
   "Prahran": {
     "postcode": "3181",
     "lga": "Stonnington",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 2387,
       "topFiveOffenceProportion": {
@@ -14778,6 +15222,7 @@
   "Toorak": {
     "postcode": "3142",
     "lga": "Stonnington",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 776,
       "topFiveOffenceProportion": {
@@ -14827,6 +15272,7 @@
   "Windsor": {
     "postcode": "3181",
     "lga": "Stonnington",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1114,
       "topFiveOffenceProportion": {
@@ -14876,6 +15322,7 @@
   "Albanvale": {
     "postcode": "3021",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 188,
       "topFiveOffenceProportion": {
@@ -14903,6 +15350,7 @@
   "Albion": {
     "postcode": "3020",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 394,
       "topFiveOffenceProportion": {
@@ -14930,6 +15378,7 @@
   "Ardeer": {
     "postcode": "3022",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 275,
       "topFiveOffenceProportion": {
@@ -14957,6 +15406,7 @@
   "Brooklyn": {
     "postcode": "3012",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 324,
       "topFiveOffenceProportion": {
@@ -14984,6 +15434,7 @@
   "Cairnlea": {
     "postcode": "3023",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 385,
       "topFiveOffenceProportion": {
@@ -15011,6 +15462,7 @@
   "Calder Park": {
     "postcode": "3037",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 33,
       "topFiveOffenceProportion": {
@@ -15036,6 +15488,7 @@
   "Deer Park": {
     "postcode": "3023",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1180,
       "topFiveOffenceProportion": {
@@ -15085,6 +15538,7 @@
   "Delahey": {
     "postcode": "3037",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 249,
       "topFiveOffenceProportion": {
@@ -15112,6 +15566,7 @@
   "Derrimut": {
     "postcode": "3026",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 651,
       "topFiveOffenceProportion": {
@@ -15139,6 +15594,7 @@
   "Hillside": {
     "postcode": "3037",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 393,
       "topFiveOffenceProportion": {
@@ -15166,6 +15622,7 @@
   "Kealba": {
     "postcode": "3021",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 210,
       "topFiveOffenceProportion": {
@@ -15193,6 +15650,7 @@
   "Keilor Downs": {
     "postcode": "3038",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 490,
       "topFiveOffenceProportion": {
@@ -15220,6 +15678,7 @@
   "Keilor East": {
     "postcode": "3033",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 561,
       "topFiveOffenceProportion": {
@@ -15269,6 +15728,7 @@
   "Keilor Lodge": {
     "postcode": "3038",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 23,
       "topFiveOffenceProportion": {
@@ -15296,6 +15756,7 @@
   "Keilor North": {
     "postcode": "3036",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 22,
       "topFiveOffenceProportion": {
@@ -15321,6 +15782,7 @@
   "Keilor Park": {
     "postcode": "3042",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 216,
       "topFiveOffenceProportion": {
@@ -15348,6 +15810,7 @@
   "Kings Park": {
     "postcode": "3021",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 313,
       "topFiveOffenceProportion": {
@@ -15375,6 +15838,7 @@
   "St Albans": {
     "postcode": "3021",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 3173,
       "topFiveOffenceProportion": {
@@ -15424,6 +15888,7 @@
   "Sunshine": {
     "postcode": "3020",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 2536,
       "topFiveOffenceProportion": {
@@ -15473,6 +15938,7 @@
   "Sunshine North": {
     "postcode": "3020",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1088,
       "topFiveOffenceProportion": {
@@ -15500,6 +15966,7 @@
   "Sunshine West": {
     "postcode": "3020",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1088,
       "topFiveOffenceProportion": {
@@ -15527,6 +15994,7 @@
   "Sydenham": {
     "postcode": "3037",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 477,
       "topFiveOffenceProportion": {
@@ -15575,6 +16043,7 @@
   "Taylors Lakes": {
     "postcode": "3038",
     "lga": "Brimbank",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1044,
       "topFiveOffenceProportion": {
@@ -15602,6 +16071,7 @@
   "Altona": {
     "postcode": "3018",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 605,
       "topFiveOffenceProportion": {
@@ -15651,6 +16121,7 @@
   "Altona Meadows": {
     "postcode": "3028",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 881,
       "topFiveOffenceProportion": {
@@ -15678,6 +16149,7 @@
   "Altona North": {
     "postcode": "3025",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1288,
       "topFiveOffenceProportion": {
@@ -15705,6 +16177,7 @@
   "Laverton": {
     "postcode": "3028",
     "lga": "Wyndham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 646,
       "topFiveOffenceProportion": {
@@ -15732,6 +16205,7 @@
   "Newport": {
     "postcode": "3015",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 735,
       "topFiveOffenceProportion": {
@@ -15781,6 +16255,7 @@
   "Seabrook": {
     "postcode": "3028",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 120,
       "topFiveOffenceProportion": {
@@ -15808,6 +16283,7 @@
   "Seaholme": {
     "postcode": "3018",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 102,
       "topFiveOffenceProportion": {
@@ -15835,6 +16311,7 @@
   "South Kingsville": {
     "postcode": "3015",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 81,
       "topFiveOffenceProportion": {
@@ -15862,6 +16339,7 @@
   "Spotswood": {
     "postcode": "3015",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 424,
       "topFiveOffenceProportion": {
@@ -15911,6 +16389,7 @@
   "Williamstown": {
     "postcode": "3016",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 941,
       "topFiveOffenceProportion": {
@@ -15960,6 +16439,7 @@
   "Williamstown North": {
     "postcode": "3016",
     "lga": "Hobsons Bay",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 208,
       "topFiveOffenceProportion": {
@@ -15987,6 +16467,7 @@
   "Braybrook": {
     "postcode": "3019",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1277,
       "topFiveOffenceProportion": {
@@ -16014,6 +16495,7 @@
   "Footscray": {
     "postcode": "3011",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 3617,
       "topFiveOffenceProportion": {
@@ -16063,6 +16545,7 @@
   "Kingsville": {
     "postcode": "3012",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 188,
       "topFiveOffenceProportion": {
@@ -16090,6 +16573,7 @@
   "Maidstone": {
     "postcode": "3012",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 797,
       "topFiveOffenceProportion": {
@@ -16117,6 +16601,7 @@
   "Maribyrnong": {
     "postcode": "3032",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1893,
       "topFiveOffenceProportion": {
@@ -16144,6 +16629,7 @@
   "Seddon": {
     "postcode": "3011",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 380,
       "topFiveOffenceProportion": {
@@ -16193,6 +16679,7 @@
   "Tottenham": {
     "postcode": "3012",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 147,
       "topFiveOffenceProportion": {
@@ -16218,6 +16705,7 @@
   "West Footscray": {
     "postcode": "3012",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 749,
       "topFiveOffenceProportion": {
@@ -16267,6 +16755,7 @@
   "Yarraville": {
     "postcode": "3013",
     "lga": "Maribyrnong",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1004,
       "topFiveOffenceProportion": {
@@ -16316,6 +16805,7 @@
   "Aintree": {
     "postcode": "3336",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 343,
       "topFiveOffenceProportion": {
@@ -16343,6 +16833,7 @@
   "Bonnie Brook": {
     "postcode": "3335",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 313,
       "topFiveOffenceProportion": {
@@ -16370,6 +16861,7 @@
   "Brookfield": {
     "postcode": "3338",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 379,
       "topFiveOffenceProportion": {
@@ -16397,6 +16889,7 @@
   "Burnside": {
     "postcode": "3023",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 218,
       "topFiveOffenceProportion": {
@@ -16424,6 +16917,7 @@
   "Burnside Heights": {
     "postcode": "3023",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 133,
       "topFiveOffenceProportion": {
@@ -16451,6 +16945,7 @@
   "Caroline Springs": {
     "postcode": "3023",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 981,
       "topFiveOffenceProportion": {
@@ -16478,6 +16973,7 @@
   "Cobblebank": {
     "postcode": "3338",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 157,
       "topFiveOffenceProportion": {
@@ -16505,6 +17001,7 @@
   "Deanside": {
     "postcode": "3336",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 270,
       "topFiveOffenceProportion": {
@@ -16532,6 +17029,7 @@
   "Fieldstone": {
     "postcode": "3024",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": null,
     "crimeLga": {
       "ratePer100k": 5388.3,
@@ -16547,6 +17045,7 @@
   "Fraser Rise": {
     "postcode": "3336",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 574,
       "topFiveOffenceProportion": {
@@ -16574,6 +17073,7 @@
   "Grangefields": {
     "postcode": "3335",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 413,
       "topFiveOffenceProportion": {
@@ -16599,6 +17099,7 @@
   "Harkness": {
     "postcode": "3337",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 444,
       "topFiveOffenceProportion": {
@@ -16626,6 +17127,7 @@
   "Kurunjang": {
     "postcode": "3337",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 468,
       "topFiveOffenceProportion": {
@@ -16653,6 +17155,7 @@
   "Melton": {
     "postcode": "3337",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1603,
       "topFiveOffenceProportion": {
@@ -16702,6 +17205,7 @@
   "Melton South": {
     "postcode": "3338",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1035,
       "topFiveOffenceProportion": {
@@ -16729,6 +17233,7 @@
   "Melton West": {
     "postcode": "3337",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 908,
       "topFiveOffenceProportion": {
@@ -16756,6 +17261,7 @@
   "Plumpton": {
     "postcode": "3335",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 8,
       "topFiveOffenceProportion": {
@@ -16781,6 +17287,7 @@
   "Ravenhall": {
     "postcode": "3023",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 553,
       "topFiveOffenceProportion": {
@@ -16806,6 +17313,7 @@
   "Rockbank": {
     "postcode": "3335",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 559,
       "topFiveOffenceProportion": {
@@ -16833,6 +17341,7 @@
   "Strathtulloh": {
     "postcode": "3338",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 361,
       "topFiveOffenceProportion": {
@@ -16860,6 +17369,7 @@
   "Taylors Hill": {
     "postcode": "3037",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 310,
       "topFiveOffenceProportion": {
@@ -16887,6 +17397,7 @@
   "Thornhill Park": {
     "postcode": "3335",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 396,
       "topFiveOffenceProportion": {
@@ -16914,6 +17425,7 @@
   "Truganina": {
     "postcode": "3029",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2476,
       "topFiveOffenceProportion": {
@@ -16941,6 +17453,7 @@
   "Weir Views": {
     "postcode": "3338",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 359,
       "topFiveOffenceProportion": {
@@ -16968,6 +17481,7 @@
   "Exford": {
     "postcode": "3338",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 26,
       "topFiveOffenceProportion": {
@@ -16993,6 +17507,7 @@
   "Eynesbury": {
     "postcode": "3338",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 282,
       "topFiveOffenceProportion": {
@@ -17020,6 +17535,7 @@
   "Mount Cottrell": {
     "postcode": "3024",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 132,
       "topFiveOffenceProportion": {
@@ -17047,6 +17563,7 @@
   "Parwan": {
     "postcode": "3340",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 51,
       "topFiveOffenceProportion": {
@@ -17072,6 +17589,7 @@
   "Toolern Vale": {
     "postcode": "3337",
     "lga": "Melton",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 61,
       "topFiveOffenceProportion": {
@@ -17097,6 +17615,7 @@
   "Aberfeldie": {
     "postcode": "3040",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 136,
       "topFiveOffenceProportion": {
@@ -17124,6 +17643,7 @@
   "Airport West": {
     "postcode": "3042",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 849,
       "topFiveOffenceProportion": {
@@ -17151,6 +17671,7 @@
   "Ascot Vale": {
     "postcode": "3032",
     "lga": "Moonee Valley",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1549,
       "topFiveOffenceProportion": {
@@ -17200,6 +17721,7 @@
   "Avondale Heights": {
     "postcode": "3034",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 302,
       "topFiveOffenceProportion": {
@@ -17249,6 +17771,7 @@
   "Essendon": {
     "postcode": "3040",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 1166,
       "topFiveOffenceProportion": {
@@ -17298,6 +17821,7 @@
   "Essendon Fields": {
     "postcode": "3041",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 274,
       "topFiveOffenceProportion": {
@@ -17323,6 +17847,7 @@
   "Essendon North": {
     "postcode": "3041",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 206,
       "topFiveOffenceProportion": {
@@ -17350,6 +17875,7 @@
   "Essendon West": {
     "postcode": "3040",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 55,
       "topFiveOffenceProportion": {
@@ -17377,6 +17903,7 @@
   "Moonee Ponds": {
     "postcode": "3039",
     "lga": "Moonee Valley",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 1383,
       "topFiveOffenceProportion": {
@@ -17426,6 +17953,7 @@
   "Niddrie": {
     "postcode": "3042",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 215,
       "topFiveOffenceProportion": {
@@ -17453,6 +17981,7 @@
   "Strathmore": {
     "postcode": "3041",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 311,
       "topFiveOffenceProportion": {
@@ -17480,6 +18009,7 @@
   "Strathmore Heights": {
     "postcode": "3041",
     "lga": "Moonee Valley",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 30,
       "topFiveOffenceProportion": {
@@ -17507,6 +18037,7 @@
   "Travancore": {
     "postcode": "3032",
     "lga": "Moonee Valley",
+    "bcarrRing": "Inner",
     "crimeSuburb": {
       "totalIncidents": 156,
       "topFiveOffenceProportion": {
@@ -17534,6 +18065,7 @@
   "Hoppers Crossing": {
     "postcode": "3029",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3095,
       "topFiveOffenceProportion": {
@@ -17583,6 +18115,7 @@
   "Laverton North": {
     "postcode": "3026",
     "lga": "Wyndham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 645,
       "topFiveOffenceProportion": {
@@ -17608,6 +18141,7 @@
   "Mambourin": {
     "postcode": "3024",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 295,
       "topFiveOffenceProportion": {
@@ -17635,6 +18169,7 @@
   "Manor Lakes": {
     "postcode": "3024",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 699,
       "topFiveOffenceProportion": {
@@ -17662,6 +18197,7 @@
   "Point Cook": {
     "postcode": "3030",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 2432,
       "topFiveOffenceProportion": {
@@ -17689,6 +18225,7 @@
   "Tarneit": {
     "postcode": "3029",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 3562,
       "topFiveOffenceProportion": {
@@ -17716,6 +18253,7 @@
   "Werribee": {
     "postcode": "3030",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 4114,
       "topFiveOffenceProportion": {
@@ -17765,6 +18303,7 @@
   "Werribee South": {
     "postcode": "3030",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 175,
       "topFiveOffenceProportion": {
@@ -17792,6 +18331,7 @@
   "Williams Landing": {
     "postcode": "3027",
     "lga": "Wyndham",
+    "bcarrRing": "Middle",
     "crimeSuburb": {
       "totalIncidents": 566,
       "topFiveOffenceProportion": {
@@ -17819,6 +18359,7 @@
   "Wyndham Vale": {
     "postcode": "3024",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 1224,
       "topFiveOffenceProportion": {
@@ -17846,6 +18387,7 @@
   "Cocoroc": {
     "postcode": "3030",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 8,
       "topFiveOffenceProportion": {
@@ -17871,6 +18413,7 @@
   "Little River": {
     "postcode": "3211",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 201,
       "topFiveOffenceProportion": {
@@ -17896,6 +18439,7 @@
   "Quandong": {
     "postcode": "3340",
     "lga": "Wyndham",
+    "bcarrRing": "Outer",
     "crimeSuburb": {
       "totalIncidents": 17,
       "topFiveOffenceProportion": {
