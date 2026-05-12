@@ -3,44 +3,527 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Suburb Overview | 20-Minute Neighbourhood Explorer</title>
+  <title>Suburb Leaderboard | 20-Minute Neighbourhood Explorer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Ring colour tokens */
+    :root {
+      --ring-inner:  #c51b7d;
+      --ring-middle: #4d9221;
+      --ring-outer:  #2166ac;
+    }
+
+    /* Score bar fill colours per ring */
+    .bar-inner  { background: var(--ring-inner); }
+    .bar-middle { background: var(--ring-middle); }
+    .bar-outer  { background: var(--ring-outer); }
+
+    /* Rank badge colours */
+    .rank-1 { background: #FFD700; color: #5a4000; }
+    .rank-2 { background: #C0C0C0; color: #3a3a3a; }
+    .rank-3 { background: #cd7f32; color: #3a1a00; }
+    .rank-n { background: #f1f5f9; color: #64748b; }
+
+    /* Score bar container */
+    .score-bar-track {
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 9999px;
+      overflow: hidden;
+      flex: 1;
+    }
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0%;
+    }
+
+    /* Leaderboard row hover */
+    .lb-row {
+      transition: background 0.15s;
+    }
+    .lb-row:hover {
+      background: #f8fafc;
+    }
+
+    /* Tab active state */
+    .tab-btn.active {
+      color: #004071;
+      border-bottom: 2px solid #004071;
+    }
+    .tab-btn {
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    /* Skeleton pulse */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .skeleton {
+      animation: pulse 1.5s ease-in-out infinite;
+      background: #e2e8f0;
+      border-radius: 4px;
+    }
+
+    /* Status dot */
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 <body class="bg-[#F8F9FA] text-slate-900 min-h-screen flex flex-col">
 
   <!-- Header -->
   <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-center">
-    <div class="flex items-center gap-3">
-    </div>
     <nav class="hidden md:flex items-center gap-6">
       <a href="/" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Home</a>
       <a href="/dashboard.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Map</a>
-      <a href="/suburb.html" class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5 transition-colors">Suburb Overview</a>
+      <a href="/suburb.html" class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5">Suburb Overview</a>
       <a href="/about.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">About</a>
-      <a href="/supporting_data.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Supporting Data</a>
     </nav>
   </header>
 
-  <main class="flex-1 max-w-7xl mx-auto px-6 py-16 md:py-20 w-full flex items-center justify-center text-center">
-    <div>
-      <h2 class="text-3xl font-extrabold mb-4 text-slate-900">Suburb Overview</h2>
-      <p class="text-[#536070] text-lg">Coming Soon</p>
-    </div>
+  <!-- Main layout: left panel (1/3) + right panel (2/3) -->
+  <main class="flex-1 flex overflow-hidden" style="height: calc(100vh - 64px);">
+
+    <!-- ── LEFT PANEL: Leaderboard ───────────────────────────────────────── -->
+    <aside class="w-1/3 min-w-[320px] max-w-[480px] flex flex-col border-r border-slate-200 bg-white overflow-y-auto flex-shrink-0">
+
+      <!-- Panel header -->
+      <div class="px-5 pt-6 pb-4 border-b border-slate-100 flex-shrink-0">
+        <div class="flex items-center gap-2 mb-1">
+          <i data-lucide="trophy" class="w-4 h-4 text-[#004071]"></i>
+          <h1 class="text-sm font-bold font-inter uppercase tracking-widest text-[#004071]">Suburb Leaderboard</h1>
+        </div>
+        <p class="text-xs text-[#536070] leading-relaxed">
+          Walkability scores for Melbourne suburbs by city ring, sampled across 5 random points per suburb.
+        </p>
+
+        <!-- Service types legend -->
+        <div class="mt-3 flex flex-wrap gap-1.5">
+          <span class="text-[10px] font-semibold font-inter uppercase tracking-wide text-slate-400 self-center mr-1">Scoring:</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-50 text-blue-700">🛒 Food</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-red-50 text-red-700">🏥 Health</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-pink-50 text-pink-700">🚆 Transit</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-50 text-green-700">🌳 Parks</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-yellow-50 text-yellow-700">🎓 Education</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600">🏘 Community</span>
+        </div>
+
+        <!-- Status row -->
+        <div class="mt-3 flex items-center gap-2">
+          <div id="status-dot" class="status-dot bg-slate-300"></div>
+          <span id="status-text" class="text-[11px] text-slate-400 font-inter">Ready to run</span>
+          <button id="run-btn" class="ml-auto flex items-center gap-1.5 px-3 py-1.5 bg-[#004071] hover:bg-[#003060] text-white text-xs font-bold font-inter rounded-lg transition-colors">
+            <i data-lucide="play" class="w-3 h-3"></i>
+            Run Analysis
+          </button>
+        </div>
+
+        <!-- Debug / API call counter -->
+        <div class="mt-2 flex items-center gap-2">
+          <span class="text-[10px] font-bold font-inter uppercase tracking-wide px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">DEBUG — Inner only</span>
+          <span class="text-[10px] text-slate-400 font-inter ml-auto">API calls: <span id="api-call-count" class="font-bold text-slate-600">0</span></span>
+        </div>
+
+        <!-- Progress bar -->
+        <div id="progress-wrap" class="mt-2 hidden">
+          <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+            <div id="progress-bar" class="h-full bg-[#004071] rounded-full transition-all duration-300" style="width:0%"></div>
+          </div>
+          <div id="progress-label" class="text-[10px] text-slate-400 font-inter mt-1"></div>
+        </div>
+      </div>
+
+      <!-- Ring tabs -->
+      <div class="flex border-b border-slate-100 px-5 gap-4 flex-shrink-0">
+        <button class="tab-btn active py-3 text-xs font-bold font-inter uppercase tracking-widest" data-ring="Inner" style="color: var(--ring-inner); border-color: var(--ring-inner);">
+          Inner <span class="ml-1 opacity-60" id="tab-count-Inner"></span>
+        </button>
+        <button class="tab-btn py-3 text-xs font-bold font-inter uppercase tracking-widest text-slate-400" data-ring="Middle">
+          Middle <span class="ml-1 opacity-60" id="tab-count-Middle"></span>
+        </button>
+        <button class="tab-btn py-3 text-xs font-bold font-inter uppercase tracking-widest text-slate-400" data-ring="Outer">
+          Outer <span class="ml-1 opacity-60" id="tab-count-Outer"></span>
+        </button>
+      </div>
+
+      <!-- Leaderboard content -->
+      <div class="flex-1 px-4 py-3">
+        <div id="lb-Inner"  class="lb-panel space-y-1"></div>
+        <div id="lb-Middle" class="lb-panel space-y-1 hidden"></div>
+        <div id="lb-Outer"  class="lb-panel space-y-1 hidden"></div>
+      </div>
+    </aside>
+
+    <!-- ── RIGHT PANEL: Heatmap placeholder ──────────────────────────────── -->
+    <section class="flex-1 flex items-center justify-center bg-[#F8F9FA] relative">
+      <div class="text-center select-none">
+        <div class="w-16 h-16 rounded-2xl bg-slate-200 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="map" class="w-8 h-8 text-slate-400"></i>
+        </div>
+        <p class="text-sm font-semibold text-slate-400 font-inter">Heatmap Coming Soon</p>
+        <p class="text-xs text-slate-300 font-inter mt-1">Walkability intensity across Melbourne</p>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="bg-white py-10 px-6 border-t border-slate-200 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex gap-6 text-sm font-medium text-[#536070] font-inter">
-        <a class="hover:text-[#004071] transition-colors" href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods" target="_blank" rel="noopener">Vic Gov Policy</a>
-        <a class="hover:text-[#004071] transition-colors" href="/dashboard.html">Dashboard</a>
-      </div>
-    </div>
-  </footer>
-
   <script>
+    // ── Config ────────────────────────────────────────────────────────────────
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
+
+    const LEADERBOARD_TYPES = [
+      'food:supermarket',
+      'food:convenience_store',
+      'health:doctor',
+      'health:pharmacy',
+      'connectivity:train_station',
+      'connectivity:transit_station',
+      'parks:park',
+      'education:primary_school',
+      'education:secondary_school',
+      'education:library',
+      'community:community',
+    ].join(',');
+
+    const N_SAMPLES    = 5;    // points per suburb
+    const TOP_N        = 10;   // suburbs shown per ring
+    const DEBUG_INNER_ONLY = true;  // ← set false to run all rings
+    const RINGS        = DEBUG_INNER_ONLY ? ['Inner'] : ['Inner', 'Middle', 'Outer'];
+    const RING_COLOURS = { Inner: '#c51b7d', Middle: '#4d9221', Outer: '#2166ac' };
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let geojsonFeatures = [];
+    let results = { Inner: [], Middle: [], Outer: [] };
+    let activeRing = 'Inner';
+    let running = false;
+    let apiCallCount = 0;
+
+    // ── Geometry helpers ─────────────────────────────────────────────────────
+
+    // Returns a flat list of [lng, lat] rings from Polygon or MultiPolygon
+    function getRings(geometry) {
+      if (geometry.type === 'Polygon') return geometry.coordinates;
+      if (geometry.type === 'MultiPolygon') {
+        // Use the largest polygon (by coordinate count) for sampling
+        return geometry.coordinates.reduce((best, poly) =>
+          poly[0].length > best[0].length ? poly : best
+        );
+      }
+      return [];
+    }
+
+    // Compute bounding box of a ring
+    function bbox(ring) {
+      let minLng = Infinity, maxLng = -Infinity, minLat = Infinity, maxLat = -Infinity;
+      for (const [lng, lat] of ring) {
+        if (lng < minLng) minLng = lng;
+        if (lng > maxLng) maxLng = lng;
+        if (lat < minLat) minLat = lat;
+        if (lat > maxLat) maxLat = lat;
+      }
+      return { minLng, maxLng, minLat, maxLat };
+    }
+
+    // Ray-casting point-in-polygon (handles holes via winding, good enough for suburb polygons)
+    function pointInRing(lng, lat, ring) {
+      let inside = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i];
+        const [xj, yj] = ring[j];
+        const intersect = ((yi > lat) !== (yj > lat)) &&
+          (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    function pointInPolygon(lng, lat, rings) {
+      // Must be inside outer ring
+      if (!pointInRing(lng, lat, rings[0])) return false;
+      // Must not be inside any hole
+      for (let i = 1; i < rings.length; i++) {
+        if (pointInRing(lng, lat, rings[i])) return false;
+      }
+      return true;
+    }
+
+    // Sample N random points within a GeoJSON feature's geometry
+    function samplePoints(geometry, n) {
+      const rings = getRings(geometry);
+      if (!rings.length) return [];
+      const outerRing = rings[0];
+      const box = bbox(outerRing);
+      const points = [];
+      let attempts = 0;
+      const maxAttempts = n * 100;
+      while (points.length < n && attempts < maxAttempts) {
+        attempts++;
+        const lng = box.minLng + Math.random() * (box.maxLng - box.minLng);
+        const lat = box.minLat + Math.random() * (box.maxLat - box.minLat);
+        if (pointInPolygon(lng, lat, rings)) {
+          points.push({ lat, lng });
+        }
+      }
+      return points;
+    }
+
+    // ── API ───────────────────────────────────────────────────────────────────
+    async function fetchScore(lat, lng) {
+      const url = `${API_URL}/api/nearby-services?lat=${lat}&lon=${lng}&types=${encodeURIComponent(LEADERBOARD_TYPES)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      apiCallCount++;
+      document.getElementById('api-call-count').textContent = apiCallCount;
+      const data = await res.json();
+      return data.index ?? 0;
+    }
+
+    // ── UI helpers ────────────────────────────────────────────────────────────
+    function setStatus(text, colour = '#94a3b8') {
+      document.getElementById('status-text').textContent = text;
+      document.getElementById('status-dot').style.background = colour;
+    }
+
+    function setProgress(pct, label = '') {
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = label;
+    }
+
+    function rankBadgeClass(rank) {
+      if (rank === 1) return 'rank-1';
+      if (rank === 2) return 'rank-2';
+      if (rank === 3) return 'rank-3';
+      return 'rank-n';
+    }
+
+    function scoreColour(score) {
+      if (score >= 7) return '#22c55e';
+      if (score >= 5) return '#f59e0b';
+      if (score >= 3) return '#f97316';
+      return '#ef4444';
+    }
+
+    function renderSkeletons(panelId, count = 10) {
+      const panel = document.getElementById(panelId);
+      panel.innerHTML = Array.from({ length: count }, (_, i) => `
+        <div class="lb-row flex items-center gap-3 px-2 py-2.5 rounded-lg">
+          <div class="skeleton w-7 h-7 rounded-md flex-shrink-0"></div>
+          <div class="flex-1 space-y-1.5">
+            <div class="skeleton h-3 w-2/3 rounded"></div>
+            <div class="skeleton h-2 w-full rounded"></div>
+          </div>
+          <div class="skeleton h-5 w-10 rounded flex-shrink-0"></div>
+        </div>
+      `).join('');
+    }
+
+    function renderLeaderboard(ring) {
+      const panel = document.getElementById(`lb-${ring}`);
+      const data = results[ring];
+      const colour = RING_COLOURS[ring];
+
+      if (!data.length) {
+        panel.innerHTML = `<p class="text-center py-8 text-xs text-slate-400 font-inter">No results yet. Click Run Analysis.</p>`;
+        return;
+      }
+
+      panel.innerHTML = data.map((item, i) => {
+        const rank = i + 1;
+        const badgeClass = rankBadgeClass(rank);
+        const barPct = Math.min(100, (item.avg / 10) * 100).toFixed(1);
+        const rangeLow = item.min.toFixed(1);
+        const rangeHigh = item.max.toFixed(1);
+
+        return `
+          <div class="lb-row flex items-center gap-3 px-2 py-2.5 rounded-lg">
+            <!-- Rank badge -->
+            <div class="w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-bold flex-shrink-0 ${badgeClass}">
+              ${rank}
+            </div>
+
+            <!-- Name + bar + range -->
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-xs font-semibold text-slate-800 truncate">${item.suburb}</span>
+                <span class="text-xs font-bold flex-shrink-0" style="color: ${scoreColour(item.avg)}">${item.avg.toFixed(1)}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="score-bar-track">
+                  <div class="score-bar-fill" style="width:${barPct}%; background:${colour};"></div>
+                </div>
+                <span class="text-[10px] text-slate-400 font-inter flex-shrink-0 w-[60px] text-right">${rangeLow}–${rangeHigh}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateTabCounts() {
+      for (const ring of RINGS) {
+        const el = document.getElementById(`tab-count-${ring}`);
+        el.textContent = results[ring].length ? `(${results[ring].length})` : '';
+      }
+    }
+
+    // ── Tab switching ─────────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeRing = btn.dataset.ring;
+
+        // Update tab styles
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('active');
+          b.style.color = '';
+          b.style.borderColor = '';
+          b.classList.add('text-slate-400');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('text-slate-400');
+        btn.style.color = RING_COLOURS[activeRing];
+        btn.style.borderColor = RING_COLOURS[activeRing];
+
+        // Show/hide panels
+        document.querySelectorAll('.lb-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById(`lb-${activeRing}`).classList.remove('hidden');
+      });
+    });
+
+    // ── Main analysis runner ──────────────────────────────────────────────────
+    async function runAnalysis() {
+      if (running) return;
+      running = true;
+
+      document.getElementById('run-btn').disabled = true;
+      document.getElementById('run-btn').innerHTML = `
+        <svg class="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"/>
+          <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round" class="opacity-75"/>
+        </svg>
+        Running…
+      `;
+      document.getElementById('progress-wrap').classList.remove('hidden');
+
+      // Reset API call counter
+      apiCallCount = 0;
+      document.getElementById('api-call-count').textContent = '0';
+
+      // Render skeletons on all panels
+      for (const ring of RINGS) {
+        renderSkeletons(`lb-${ring}`);
+      }
+
+      setStatus('Loading suburb boundaries…', '#f59e0b');
+      setProgress(0);
+
+      // Load GeoJSON if not already loaded
+      if (!geojsonFeatures.length) {
+        try {
+          const res = await fetch('/melbourne_suburbs_rings.geojson');
+          const gj = await res.json();
+          geojsonFeatures = gj.features.filter(f =>
+            RINGS.includes(f.properties.bcarrRing)
+          );
+        } catch (e) {
+          setStatus('Failed to load suburb boundaries', '#ef4444');
+          running = false;
+          resetRunBtn();
+          return;
+        }
+      }
+
+      // Group features by ring
+      const byRing = {};
+      for (const ring of RINGS) {
+        byRing[ring] = geojsonFeatures.filter(f => f.properties.bcarrRing === ring);
+      }
+
+      const totalSuburbs = geojsonFeatures.length;
+      const totalPoints  = totalSuburbs * N_SAMPLES;
+      let completed = 0;
+
+      // Accumulate scores per suburb per ring
+      const ringScores = { Inner: [], Middle: [], Outer: [] };
+
+      for (const ring of RINGS) {
+        const features = byRing[ring];
+        setStatus(`Scoring ${ring} suburbs…`, '#f59e0b');
+
+        for (const feature of features) {
+          const suburbName = feature.properties.suburb;
+          const points = samplePoints(feature.geometry, N_SAMPLES);
+
+          if (!points.length) {
+            completed += N_SAMPLES;
+            continue;
+          }
+
+          const scores = [];
+          for (const pt of points) {
+            try {
+              const score = await fetchScore(pt.lat, pt.lng);
+              scores.push(score);
+            } catch {
+              // skip failed points
+            }
+            completed++;
+            const pct = Math.round((completed / totalPoints) * 100);
+            setProgress(pct, `${suburbName} — ${pct}% complete`);
+          }
+
+          if (scores.length) {
+            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+            const min = Math.min(...scores);
+            const max = Math.max(...scores);
+            ringScores[ring].push({ suburb: suburbName, avg, min, max, scores });
+          }
+        }
+
+        // Sort descending and keep top N
+        ringScores[ring].sort((a, b) => b.avg - a.avg);
+        results[ring] = ringScores[ring].slice(0, TOP_N);
+
+        // Render this ring's results as they come in
+        renderLeaderboard(ring);
+        updateTabCounts();
+      }
+
+      setStatus('Analysis complete', '#22c55e');
+      setProgress(100, '');
+      document.getElementById('status-dot').style.background = '#22c55e';
+
+      running = false;
+      resetRunBtn();
+    }
+
+    function resetRunBtn() {
+      const btn = document.getElementById('run-btn');
+      btn.disabled = false;
+      btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> Re-run`;
+      lucide.createIcons();
+    }
+
+    document.getElementById('run-btn').addEventListener('click', runAnalysis);
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    // Render empty state on all panels
+    for (const ring of RINGS) {
+      document.getElementById(`lb-${ring}`).innerHTML =
+        `<p class="text-center py-8 text-xs text-slate-400 font-inter">Click <strong>Run Analysis</strong> to score suburbs.</p>`;
+    }
+
     lucide.createIcons();
   </script>
 </body>

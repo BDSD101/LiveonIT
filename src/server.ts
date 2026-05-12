@@ -10,6 +10,22 @@ const server = http.createServer(async (req: IncomingMessage, res: ServerRespons
   if (req.method === 'GET') {
     const rawUrl = req.url || '/';
     const urlPath = rawUrl === '/' ? '/index.html' : rawUrl.split('?')[0];
+
+    // Serve GeoJSON files from backend/geojson_files directory
+    if (urlPath.endsWith('.geojson')) {
+      const geoPath = path.join(__dirname, 'geojson_files', path.basename(urlPath));
+      console.log('[GeoJSON] __dirname:', __dirname);
+      console.log('[GeoJSON] Looking for file at:', geoPath);
+      console.log('[GeoJSON] File exists:', fs.existsSync(geoPath));
+
+      if (fs.existsSync(geoPath) && fs.statSync(geoPath).isFile()) {
+        const content = fs.readFileSync(geoPath);
+        res.writeHead(200, { 'Content-Type': 'application/geo+json' });
+        res.end(content);
+        return;
+      }
+    }
+
     const filePath = path.join(__dirname, '../frontend', urlPath);
 
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
@@ -71,6 +87,8 @@ const server = http.createServer(async (req: IncomingMessage, res: ServerRespons
     }
   });
 });
+
+
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server → http://0.0.0.0:${PORT}`);
