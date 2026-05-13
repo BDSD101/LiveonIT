@@ -290,7 +290,8 @@
       document.getElementById('api-call-count').textContent = apiCallCount;
       const data = await res.json();
       console.log('Full API response:', JSON.stringify(data).slice(0, 500));
-      const score = data.walkability?.neighbourhood?.score ?? data.index ?? 0;
+      // const score = data.walkability?.neighbourhood?.score ?? data.index ?? 0;
+      const score = data.walkability.neighbourhood.score;
       console.log(`Score received: ${score}`, data.walkability?.neighbourhood);
       return score;
     }
@@ -476,42 +477,12 @@
             continue;
           }
 
-          // const scores = [];
-          // for (const pt of points) {
-          //   try {
-          //     const score = await fetchScore(pt.lat, pt.lng);
-          //     scores.push(score);
-          //   } catch {
-          //     // skip failed points
-          //   }
-          //   completed++;
-          //   const pct = Math.round((completed / totalPoints) * 100);
-          //   setProgress(pct, `${suburbName} — ${pct}% complete`);
-          // }
-
           const scores = (await Promise.all(
             points.map(pt => fetchScore(pt.lat, pt.lng).catch(() => null))
           )).filter(s => s !== null);
           completed += points.length;
           const pct = Math.round((completed / totalPoints) * 100);
           setProgress(pct, `${suburbName} — ${pct}% complete`);
-
-      //     if (scores.length) {
-      //       const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-      //       const min = Math.min(...scores);
-      //       const max = Math.max(...scores);
-      //       ringScores[ring].push({ suburb: suburbName, avg, min, max, scores });
-      //     }
-      //   }
-
-      //   // Sort descending and keep top N
-      //   ringScores[ring].sort((a, b) => b.avg - a.avg);
-      //   results[ring] = ringScores[ring].slice(0, TOP_N);
-
-      //   // Render this ring's results as they come in
-      //   renderLeaderboard(ring);
-      //   updateTabCounts();
-      // }
 
           if (scores.length) {
             const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
