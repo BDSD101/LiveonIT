@@ -6,7 +6,7 @@ import {
   CandidateService,
   LocationAnalysis,
   // SeedAnalysis,
-  // CORE_ANALYSIS_ITEMS,
+  CORE_ANALYSIS_ITEMS,
   // SUBURB_SEED_POINTS,
   // buildScoreBreakdown,
   // buildLeaderboard,
