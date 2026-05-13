@@ -508,7 +508,8 @@ async function loadServices(lat, lon) {
     const walkability = data.walkability || null;
 
     // Use SELECTION score (personalised to user's chosen filters)
-    const score = walkability?.selection?.score ?? Number(data.index || 0);
+    // const score = walkability?.selection?.score ?? Number(data.index || 0);
+    const score = walkability.selection.score;
     const colors = getScoreColor(score);
 
     document.getElementById('score-value').textContent = score.toFixed(1);
