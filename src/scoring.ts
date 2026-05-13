@@ -105,7 +105,7 @@ export const IDEAL_WALKING_MINUTES = 5;
 // };
 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy', 'hospital','dentist'],
+  health: ['doctor', 'pharmacy','dentist'],
   food: ['supermarket', 'convenience_store'],
   connectivity: ['train_station', 'transit_station', 'post_office', 'bank','atm'],
   parks: ['park'],
@@ -113,6 +113,17 @@ export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
   education: ['childcare', 'kindergarten', 'primary_school', 'secondary_school', 'library'],
   fitness: ['gym'],
   community: ['community'],
+};
+
+export const LEADERBOARD_PLACE_TYPES: Record<string, string[]> = {
+  // health:       ['doctor'],
+  food:         ['supermarket'],
+  // connectivity: ['train_station', 'transit_station'],
+  // parks:        ['park'],
+  // dining:       [],
+  // education:    ['childcare', 'kindergarten', 'primary_school', 'secondary_school'],
+  // fitness:      [],
+  // community:    ['community'],
 };
 
 export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
@@ -168,7 +179,7 @@ export const SERVICE_FREQUENCY: Record<string, VisitFrequency> = {
   pharmacy:           'low',
   dentist:            'rare',
   doctor:             'rare',
-  hospital:           'rare',
+  // hospital:           'rare',
 };
 
 export const FREQUENCY_WEIGHTS: Record<VisitFrequency, number> = {
@@ -220,7 +231,7 @@ export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefine
 }
 
 export const PLACE_TYPE_UPGRADE_COUNT: Record<string, number> = {
-  hospital: 20,
+  // hospital: 20,
   doctor:   10,
   gym:      10,
   park:     20,
@@ -237,10 +248,10 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
       useTextSearch: true,
       textQuery: 'GP',
     } : {}),
-    ...(type === 'hospital' ? {
-      useTextSearch: true,
-      textQuery: 'hospital',
-    } : {}),
+    // ...(type === 'hospital' ? {
+    //   useTextSearch: true,
+    //   textQuery: 'hospital',
+    // } : {}),
     ...(type === 'post_office' ? {
       useTextSearch: true,
       textQuery: 'LPO',
@@ -632,8 +643,10 @@ export function scoreAbundance(
 
   // Only consider selected types for the reference benchmark when restrictToTypes is set
   const refTypes = restrictToTypes
-    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
-    : Object.values(CORE_CATEGORY_TYPES).flat();
+    // ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    // : Object.values(CORE_CATEGORY_TYPES).flat();
+    ? Array.from(restrictToTypes)
+    : [...new Set(allCandidates.map(c => c.type))];
 
   let referenceWeightedOptions = 0;
   for (const type of refTypes) {
@@ -670,8 +683,10 @@ export function scoreNearestServices(
 
   // Only score against selected types when restrictToTypes is provided
   const allTypes = restrictToTypes
-    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
-    : Object.values(CORE_CATEGORY_TYPES).flat();
+    // ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    // : Object.values(CORE_CATEGORY_TYPES).flat();
+    ? Array.from(restrictToTypes)
+    : [...new Set(allCandidates.map(c => c.type))];
 
   let weightedScore = 0;
   let maxPossibleScore = 0;
