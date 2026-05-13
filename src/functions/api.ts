@@ -5,12 +5,12 @@ import {
   RequestedItem,
   CandidateService,
   LocationAnalysis,
-  SeedAnalysis,
-  CORE_ANALYSIS_ITEMS,
-  SUBURB_SEED_POINTS,
-  buildScoreBreakdown,
-  buildLeaderboard,
-  buildHeatmap,
+  // SeedAnalysis,
+  // CORE_ANALYSIS_ITEMS,
+  // SUBURB_SEED_POINTS,
+  // buildScoreBreakdown,
+  // buildLeaderboard,
+  // buildHeatmap,
   WALKABLE_THRESHOLD_METERS,
   buildErrandCandidateMap,
   scoreErrandTripExact,
@@ -385,10 +385,11 @@ async function analyzeLocation(
   radius: number = RADIUS_DASHBOARD,
 ): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
-  const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
+  // const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
 
   const foundArrays = await Promise.all(
-    lookupItems.map(item =>
+    // lookupItems.map(item =>
+    displayItems.map(item =>
       item.useTextSearch
         ? findPlacesByText(originLat, originLon, item)
         : findPlacesByType(originLat, originLon, item, radius)
@@ -414,7 +415,7 @@ async function analyzeLocation(
     console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
   }
 
-  const { breakdown, index } = buildScoreBreakdown(byKey);
+  // const { breakdown, index } = buildScoreBreakdown(byKey);
 
   // --- Walkability scores (zero extra API calls) ---
 
@@ -482,8 +483,8 @@ async function analyzeLocation(
 
   return {
     services,
-    index,
-    breakdown,
+    // index,
+    // breakdown,
     walkability: {
       neighbourhood: {
         score: neighbourhoodScore,
@@ -510,24 +511,24 @@ async function analyzeLocation(
   };
 }
 
-async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
-  const cacheKey = 'seed_analyses_v2';
-  const cached = getCached<SeedAnalysis[]>(cacheKey);
-  if (cached) return cached;
+// async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
+//   const cacheKey = 'seed_analyses_v2';
+//   const cached = getCached<SeedAnalysis[]>(cacheKey);
+//   if (cached) return cached;
 
-  const analyses: SeedAnalysis[] = [];
-  for (const point of SUBURB_SEED_POINTS) {
-    try {
-      const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
-      analyses.push({ ...point, index: analysis.index });
-    } catch (err) {
-      console.error(`Failed seed analysis for ${point.name}`, err);
-    }
-  }
+//   const analyses: SeedAnalysis[] = [];
+//   for (const point of SUBURB_SEED_POINTS) {
+//     try {
+//       const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
+//       analyses.push({ ...point, index: analysis.index });
+//     } catch (err) {
+//       console.error(`Failed seed analysis for ${point.name}`, err);
+//     }
+//   }
 
-  setCached(cacheKey, analyses, CACHE_TTL_MS.seedAnalytics);
-  return analyses;
-}
+//   setCached(cacheKey, analyses, CACHE_TTL_MS.seedAnalytics);
+//   return analyses;
+// }
 
 // --- Main Lambda Handler ---
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -556,23 +557,23 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
-      try {
-        const analyses = await getSeedAnalyses();
-        return jsonResponse(200, buildLeaderboard(analyses));
-      } catch {
-        return jsonResponse(500, { error: 'Failed to derive leaderboard' });
-      }
-    }
+    // if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
+    //   try {
+    //     const analyses = await getSeedAnalyses();
+    //     return jsonResponse(200, buildLeaderboard(analyses));
+    //   } catch {
+    //     return jsonResponse(500, { error: 'Failed to derive leaderboard' });
+    //   }
+    // }
 
-    if (routePath === '/api/heatmap' && httpMethod === 'GET') {
-      try {
-        const analyses = await getSeedAnalyses();
-        return jsonResponse(200, buildHeatmap(analyses));
-      } catch {
-        return jsonResponse(500, { error: 'Failed to derive heatmap data' });
-      }
-    }
+    // if (routePath === '/api/heatmap' && httpMethod === 'GET') {
+    //   try {
+    //     const analyses = await getSeedAnalyses();
+    //     return jsonResponse(200, buildHeatmap(analyses));
+    //   } catch {
+    //     return jsonResponse(500, { error: 'Failed to derive heatmap data' });
+    //   }
+    // }
 
     if (routePath === '/api/search' && httpMethod === 'GET') {
       const q = (event.queryStringParameters?.q || '').trim();
