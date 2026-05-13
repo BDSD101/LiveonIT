@@ -291,7 +291,7 @@
       document.getElementById('api-call-count').textContent = apiCallCount;
       const data = await res.json();
 
-      // console.log('Full API response:', JSON.stringify(data).slice(0, 500));
+      console.log('Full API response:', JSON.stringify(data).slice(0, 500));
       const n = data.walkability?.neighbourhood;
       console.log(`[NEIGHBOURHOOD] nearest:${n?.nearest?.score} errand:${n?.errandTrip?.score} abundance:${n?.abundance?.score} composite:${n?.score}`);
 
