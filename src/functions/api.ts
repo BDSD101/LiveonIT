@@ -30,7 +30,7 @@ const CACHE_TTL_MS = {
   place: 1000 * 60 * 60 * 8,
   route: 1000 * 60 * 60 * 8,
   analysis: 1000 * 60 * 15,
-  seedAnalytics: 1000 * 60 * 60 * 8,
+  // seedAnalytics: 1000 * 60 * 60 * 8,
 };
 
 type CacheEntry<T> = {
