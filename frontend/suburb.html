@@ -470,18 +470,25 @@
             continue;
           }
 
-          const scores = [];
-          for (const pt of points) {
-            try {
-              const score = await fetchScore(pt.lat, pt.lng);
-              scores.push(score);
-            } catch {
-              // skip failed points
-            }
-            completed++;
-            const pct = Math.round((completed / totalPoints) * 100);
-            setProgress(pct, `${suburbName} — ${pct}% complete`);
-          }
+          // const scores = [];
+          // for (const pt of points) {
+          //   try {
+          //     const score = await fetchScore(pt.lat, pt.lng);
+          //     scores.push(score);
+          //   } catch {
+          //     // skip failed points
+          //   }
+          //   completed++;
+          //   const pct = Math.round((completed / totalPoints) * 100);
+          //   setProgress(pct, `${suburbName} — ${pct}% complete`);
+          // }
+
+          const scores = (await Promise.all(
+            points.map(pt => fetchScore(pt.lat, pt.lng).catch(() => null))
+          )).filter(s => s !== null);
+          completed += points.length;
+          const pct = Math.round((completed / totalPoints) * 100);
+          setProgress(pct, `${suburbName} — ${pct}% complete`);
 
           if (scores.length) {
             const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
