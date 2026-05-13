@@ -23,7 +23,7 @@ import {
   getSuburbData
 } from '../scoring';
 
-
+const RADIUS_DASHBOARD = 2000;
 const CACHE_MAX_ENTRIES = 500;
 const CACHE_TTL_MS = {
   search: 1000 * 60 * 60 * 8,
@@ -151,12 +151,13 @@ function uniqueItems(items: RequestedItem[]): RequestedItem[] {
   return unique;
 }
 
-async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem): Promise<CandidateService[]> {
+async function findPlacesByType(originLat: number, originLon: number, item: RequestedItem, radius: number = RADIUS_DASHBOARD): Promise<CandidateService[]> {
   const cacheKey = [
     'places',
     toCoordKey(originLat),
     toCoordKey(originLon),
     item.type,
+    radius,
   ].join('_');
 
   const cached = getCached<CandidateService[]>(cacheKey);
@@ -173,7 +174,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
         locationRestriction: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: radius,
           },
         },
       },
@@ -252,7 +253,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
         locationBias: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: RADIUS_DASHBOARD,
           },
         },
       },
@@ -381,6 +382,7 @@ async function analyzeLocation(
   originLon: number,
   requestedItems: RequestedItem[],
   formattedAddress?: string,
+  radius: number = RADIUS_DASHBOARD,
 ): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
   const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
@@ -389,7 +391,7 @@ async function analyzeLocation(
     lookupItems.map(item =>
       item.useTextSearch
         ? findPlacesByText(originLat, originLon, item)
-        : findPlacesByType(originLat, originLon, item)
+        : findPlacesByType(originLat, originLon, item, radius)
     )
   );
 
@@ -609,17 +611,19 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         ? decodeURIComponent(event.queryStringParameters.address)
         : undefined;
 
+      const radius = Number(event.queryStringParameters?.radius) || RADIUS_DASHBOARD;
       const analysisCacheKey = [
         'analysis',
         toCoordKey(lat),
         toCoordKey(lon),
+        radius,
         requestedItems.map((i) => i.key).sort().join('|'),
       ].join('_');
 
       const cached = getCached<LocationAnalysis>(analysisCacheKey);
       if (cached) return jsonResponse(200, cached);
 
-      const analysis = await analyzeLocation(lat, lon, requestedItems, formattedAddress);
+      const analysis = await analyzeLocation(lat, lon, requestedItems, formattedAddress, radius);
       setCached(analysisCacheKey, analysis, CACHE_TTL_MS.analysis);
       return jsonResponse(200, analysis);
     }
@@ -671,7 +675,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
       const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
       const query = event.queryStringParameters?.query;
-      const radius = Number(event.queryStringParameters?.radius) || 2000;
+      const radius = Number(event.queryStringParameters?.radius) || RADIUS_DASHBOARD;
 
       if (!lat || !lon) {
         return jsonResponse(400, { error: 'Missing lat or lon' });

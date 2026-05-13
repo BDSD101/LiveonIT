@@ -185,21 +185,22 @@
 
     const LEADERBOARD_TYPES = [
       'food:supermarket',
-      'food:convenience_store',
-      'health:doctor',
-      'health:pharmacy',
-      'connectivity:train_station',
-      'connectivity:transit_station',
-      'parks:park',
-      'education:primary_school',
-      'education:secondary_school',
-      'education:library',
-      'community:community',
+      // 'health:doctor',
+      // 'connectivity:train_station',
+      // 'connectivity:transit_station',
+      // 'parks:park',
+      // 'education:childcare',
+      // 'education:primary_school',
+      // 'education:secondary_school',
+      // 'education:library',
+      // 'community:community',
     ].join(',');
 
-    const N_SAMPLES    = 5;    // points per suburb
+    const RADIUS_LEADERBOARD = 800;
+    const N_SAMPLES    = 1;    // points per suburb
     const TOP_N        = 10;   // suburbs shown per ring
     const DEBUG_INNER_ONLY = true;  // ← set false to run all rings
+    const DEBUG_SUBURB_LIMIT = 5;  // set to Infinity for full run
     const RINGS        = DEBUG_INNER_ONLY ? ['Inner'] : ['Inner', 'Middle', 'Outer'];
     const RING_COLOURS = { Inner: '#c51b7d', Middle: '#4d9221', Outer: '#2166ac' };
 
@@ -281,13 +282,17 @@
 
     // ── API ───────────────────────────────────────────────────────────────────
     async function fetchScore(lat, lng) {
-      const url = `${API_URL}/api/nearby-services?lat=${lat}&lon=${lng}&types=${encodeURIComponent(LEADERBOARD_TYPES)}`;
+      // const url = `${API_URL}/api/nearby-services?lat=${lat}&lon=${lng}&types=${encodeURIComponent(LEADERBOARD_TYPES)}`;
+      const url = `${API_URL}/api/nearby-services?lat=${lat}&lon=${lng}&types=${encodeURIComponent(LEADERBOARD_TYPES)}&radius=${RADIUS_LEADERBOARD}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       apiCallCount++;
       document.getElementById('api-call-count').textContent = apiCallCount;
       const data = await res.json();
-      return data.index ?? 0;
+      console.log('Full API response:', JSON.stringify(data).slice(0, 500));
+      const score = data.walkability?.neighbourhood?.score ?? data.index ?? 0;
+      console.log(`Score received: ${score}`, data.walkability?.neighbourhood);
+      return score;
     }
 
     // ── UI helpers ────────────────────────────────────────────────────────────
@@ -458,12 +463,13 @@
       const ringScores = { Inner: [], Middle: [], Outer: [] };
 
       for (const ring of RINGS) {
-        const features = byRing[ring];
+        const features = byRing[ring].slice(0, DEBUG_SUBURB_LIMIT);
         setStatus(`Scoring ${ring} suburbs…`, '#f59e0b');
 
         for (const feature of features) {
           const suburbName = feature.properties.suburb;
           const points = samplePoints(feature.geometry, N_SAMPLES);
+          console.log(`${suburbName}: sampled ${points.length} / ${N_SAMPLES} points`);
 
           if (!points.length) {
             completed += N_SAMPLES;
@@ -490,21 +496,36 @@
           const pct = Math.round((completed / totalPoints) * 100);
           setProgress(pct, `${suburbName} — ${pct}% complete`);
 
+      //     if (scores.length) {
+      //       const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      //       const min = Math.min(...scores);
+      //       const max = Math.max(...scores);
+      //       ringScores[ring].push({ suburb: suburbName, avg, min, max, scores });
+      //     }
+      //   }
+
+      //   // Sort descending and keep top N
+      //   ringScores[ring].sort((a, b) => b.avg - a.avg);
+      //   results[ring] = ringScores[ring].slice(0, TOP_N);
+
+      //   // Render this ring's results as they come in
+      //   renderLeaderboard(ring);
+      //   updateTabCounts();
+      // }
+
           if (scores.length) {
             const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
             const min = Math.min(...scores);
             const max = Math.max(...scores);
             ringScores[ring].push({ suburb: suburbName, avg, min, max, scores });
           }
+
+          // Re-render leaderboard after each suburb
+          ringScores[ring].sort((a, b) => b.avg - a.avg);
+          results[ring] = ringScores[ring].slice(0, TOP_N);
+          renderLeaderboard(ring);
+          updateTabCounts();
         }
-
-        // Sort descending and keep top N
-        ringScores[ring].sort((a, b) => b.avg - a.avg);
-        results[ring] = ringScores[ring].slice(0, TOP_N);
-
-        // Render this ring's results as they come in
-        renderLeaderboard(ring);
-        updateTabCounts();
       }
 
       setStatus('Analysis complete', '#22c55e');
