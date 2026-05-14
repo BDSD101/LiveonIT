@@ -512,6 +512,7 @@ export type SuburbResult = {
   max: number;
   scores: number[];
   sampledPoints: number;
+  sampleCoords: Array<{ lat: number; lon: number; score: number }>;
 };
 
 export type LeaderboardData = {
@@ -575,22 +576,56 @@ export async function generateLeaderboard(
 
       // Score each sample point — run concurrently but cap at 5 at a time
       // to avoid hammering OSRM/PostGIS
+      // const CONCURRENCY = 2;
+      // const scores: number[] = [];
+
+      // for (let i = 0; i < points.length; i += CONCURRENCY) {
+      //   const batch = points.slice(i, i + CONCURRENCY);
+      //   const batchScores = await Promise.all(
+      //     batch.map(pt => scorePoint(pool, pt.lat, pt.lon).catch(() => null))
+      //   );
+      //   scores.push(...batchScores.filter((s): s is number => s !== null));
+      // }
+
+      // if (scores.length) {
+      //   const avg = Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2));
+      //   const min = Number(Math.min(...scores).toFixed(2));
+      //   const max = Number(Math.max(...scores).toFixed(2));
+
+      //   // Build coord+score pairs — scores[i] corresponds to points[i]
+      //   const sampleCoords = scores.map((score, i) => ({
+      //     lat: points[i].lat,
+      //     lon: points[i].lon,
+      //     score,
+      //   }));
+
+      //   suburbs.push({ suburb: suburbName, ring, avg, min, max, scores, sampledPoints: scores.length, sampleCoords });
+
+      // }
       const CONCURRENCY = 2;
-      const scores: number[] = [];
+      const scoredPoints: Array<{ lat: number; lon: number; score: number }> = [];
 
       for (let i = 0; i < points.length; i += CONCURRENCY) {
         const batch = points.slice(i, i + CONCURRENCY);
-        const batchScores = await Promise.all(
-          batch.map(pt => scorePoint(pool, pt.lat, pt.lon).catch(() => null))
+        const batchResults = await Promise.all(
+          batch.map(pt => scorePoint(pool, pt.lat, pt.lon)
+            .then(score => ({ lat: pt.lat, lon: pt.lon, score }))
+            .catch(() => null)
+          )
         );
-        scores.push(...batchScores.filter((s): s is number => s !== null));
+        scoredPoints.push(...batchResults.filter((s): s is { lat: number; lon: number; score: number } => s !== null));
       }
 
-      if (scores.length) {
+      if (scoredPoints.length) {
+        const scores = scoredPoints.map(p => p.score);
         const avg = Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2));
         const min = Number(Math.min(...scores).toFixed(2));
         const max = Number(Math.max(...scores).toFixed(2));
-        suburbs.push({ suburb: suburbName, ring, avg, min, max, scores, sampledPoints: scores.length });
+        suburbs.push({
+          suburb: suburbName, ring, avg, min, max, scores,
+          sampledPoints: scoredPoints.length,
+          sampleCoords: scoredPoints,
+        });
       }
 
       done++;
