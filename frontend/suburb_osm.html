@@ -208,14 +208,37 @@
 
     // These mirror LEADERBOARD_PLACE_TYPES in scoring.ts
     // Update both places when you add more types
+    // const LEADERBOARD_SERVICE_LABELS = {
+    //   'food:supermarket': { label: 'Supermarket', emoji: '🛒', bg: 'bg-blue-50', text: 'text-blue-700' },
+    //   // Uncomment as you expand LEADERBOARD_PLACE_TYPES:
+    //   // 'health:doctor':           { label: 'Doctor / GP',      emoji: '🏥', bg: 'bg-red-50',    text: 'text-red-700'    },
+    //   // 'connectivity:train_station': { label: 'Train Station', emoji: '🚆', bg: 'bg-pink-50',   text: 'text-pink-700'   },
+    //   // 'connectivity:transit_station': { label: 'Bus / Tram',  emoji: '🚌', bg: 'bg-orange-50', text: 'text-orange-700' },
+    //   // 'parks:park':              { label: 'Park',             emoji: '🌳', bg: 'bg-green-50',  text: 'text-green-700'  },
+    // };
+
     const LEADERBOARD_SERVICE_LABELS = {
-      'food:supermarket': { label: 'Supermarket', emoji: '🛒', bg: 'bg-blue-50', text: 'text-blue-700' },
-      // Uncomment as you expand LEADERBOARD_PLACE_TYPES:
-      // 'health:doctor':           { label: 'Doctor / GP',      emoji: '🏥', bg: 'bg-red-50',    text: 'text-red-700'    },
-      // 'connectivity:train_station': { label: 'Train Station', emoji: '🚆', bg: 'bg-pink-50',   text: 'text-pink-700'   },
-      // 'connectivity:transit_station': { label: 'Bus / Tram',  emoji: '🚌', bg: 'bg-orange-50', text: 'text-orange-700' },
-      // 'parks:park':              { label: 'Park',             emoji: '🌳', bg: 'bg-green-50',  text: 'text-green-700'  },
+      'food:supermarket':              { label: 'Supermarket',      emoji: '🛒', bg: 'bg-blue-50',   text: 'text-blue-700'   },
+      'health:doctor':                 { label: 'Doctor / GP',      emoji: '🏥', bg: 'bg-red-50',    text: 'text-red-700'    },
+      'health:clinic':                 { label: 'Clinic',           emoji: '🏥', bg: 'bg-red-50',    text: 'text-red-700'    },
+      'health:pharmacy':               { label: 'Pharmacy',         emoji: '💊', bg: 'bg-red-50',    text: 'text-red-700'    },
+      'health:dentist':                { label: 'Dentist',          emoji: '🦷', bg: 'bg-red-50',    text: 'text-red-700'    },
+      'connectivity:train_station':    { label: 'Train Station',    emoji: '🚆', bg: 'bg-pink-50',   text: 'text-pink-700'   },
+      'connectivity:transit_station':  { label: 'Bus / Tram',       emoji: '🚌', bg: 'bg-pink-50',   text: 'text-pink-700'   },
+      'parks:park':                    { label: 'Park',             emoji: '🌳', bg: 'bg-green-50',  text: 'text-green-700'  },
+      'dining:cafe':                   { label: 'Cafe',             emoji: '☕', bg: 'bg-yellow-50', text: 'text-yellow-700' },
+      'dining:restaurant':             { label: 'Restaurant',       emoji: '🍽️', bg: 'bg-yellow-50', text: 'text-yellow-700' },
+      'dining:bar':                    { label: 'Bar / Pub',        emoji: '🍺', bg: 'bg-yellow-50', text: 'text-yellow-700' },
+      'fitness:gym':                   { label: 'Gym',              emoji: '🏋️', bg: 'bg-orange-50', text: 'text-orange-700' },
+      'education:childcare':           { label: 'Childcare',        emoji: '👶', bg: 'bg-purple-50', text: 'text-purple-700' },
+      'education:kindergarten':        { label: 'Kindergarten',     emoji: '🧒', bg: 'bg-purple-50', text: 'text-purple-700' },
+      'education:primary_school':      { label: 'Primary School',   emoji: '🎒', bg: 'bg-purple-50', text: 'text-purple-700' },
+      'education:secondary_school':    { label: 'Secondary School', emoji: '🎓', bg: 'bg-purple-50', text: 'text-purple-700' },
+      'education:library':             { label: 'Library',          emoji: '📚', bg: 'bg-purple-50', text: 'text-purple-700' },
+      'community:community':           { label: 'Community Centre', emoji: '🏘️', bg: 'bg-slate-100', text: 'text-slate-600'  },
     };
+
+
 
     const TOP_N        = 10;
     const RINGS        = ['Inner', 'Middle', 'Outer'];

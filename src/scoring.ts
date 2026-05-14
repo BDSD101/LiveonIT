@@ -117,14 +117,14 @@ export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
 };
 
 export const LEADERBOARD_PLACE_TYPES: Record<string, string[]> = {
-  // health:       ['doctor'],
+  health:       ['doctor', 'clinic', 'pharmacy'],
   food:         ['supermarket'],
-  // connectivity: ['train_station', 'transit_station'],
-  // parks:        ['park'],
+  connectivity: ['train_station', 'transit_station'],
+  parks:        ['park'],
   // dining:       [],
-  // education:    ['childcare', 'kindergarten', 'primary_school', 'secondary_school'],
+  education:    ['childcare', 'kindergarten', 'primary_school', 'secondary_school'],
   // fitness:      [],
-  // community:    ['community'],
+  community:    ['community'],
 };
 
 export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {

@@ -42,31 +42,62 @@ export const LEADERBOARD_FILE = path.join(__dirname, '../leaderboard.json');
 // Only covers LEADERBOARD_PLACE_TYPES — expand here when you add more types
 // ---------------------------------------------------------------------------
 
+// type OsmWhereClause = {
+//   column: string;
+//   value: string;
+// };
+
+// const OSM_TYPE_MAP: Record<string, OsmWhereClause> = {
+//   supermarket:     { column: 'shop',    value: 'supermarket' },
+//   // Extend as you uncomment more LEADERBOARD_PLACE_TYPES:
+//   // doctor:          { column: 'amenity', value: 'doctors' },
+//   // train_station:   { column: 'railway', value: 'station' },
+//   // transit_station: { column: 'highway', value: 'bus_stop' },
+//   // park:            { column: 'leisure', value: 'park' },
+//   // pharmacy:        { column: 'amenity', value: 'pharmacy' },
+//   // cafe:            { column: 'amenity', value: 'cafe' },
+//   // restaurant:      { column: 'amenity', value: 'restaurant' },
+//   // bar:             { column: 'amenity', value: 'bar' },
+//   // gym:             { column: 'leisure', value: 'fitness_centre' },
+//   // childcare:       { column: 'amenity', value: 'childcare' },
+//   // kindergarten:    { column: 'amenity', value: 'kindergarten' },
+//   // primary_school:  { column: 'amenity', value: 'school' },
+//   // secondary_school:{ column: 'amenity', value: 'school' },
+//   // library:         { column: 'amenity', value: 'library' },
+//   // post_office:     { column: 'amenity', value: 'post_office' },
+//   // bank:            { column: 'amenity', value: 'bank' },
+//   // atm:             { column: 'amenity', value: 'atm' },
+// };
+
+
 type OsmWhereClause = {
   column: string;
   value: string;
+  table?: 'point' | 'polygon';
 };
 
 const OSM_TYPE_MAP: Record<string, OsmWhereClause> = {
-  supermarket:     { column: 'shop',    value: 'supermarket' },
-  // Extend as you uncomment more LEADERBOARD_PLACE_TYPES:
-  // doctor:          { column: 'amenity', value: 'doctors' },
-  // train_station:   { column: 'railway', value: 'station' },
-  // transit_station: { column: 'highway', value: 'bus_stop' },
-  // park:            { column: 'leisure', value: 'park' },
-  // pharmacy:        { column: 'amenity', value: 'pharmacy' },
-  // cafe:            { column: 'amenity', value: 'cafe' },
-  // restaurant:      { column: 'amenity', value: 'restaurant' },
-  // bar:             { column: 'amenity', value: 'bar' },
-  // gym:             { column: 'leisure', value: 'fitness_centre' },
-  // childcare:       { column: 'amenity', value: 'childcare' },
-  // kindergarten:    { column: 'amenity', value: 'kindergarten' },
-  // primary_school:  { column: 'amenity', value: 'school' },
-  // secondary_school:{ column: 'amenity', value: 'school' },
-  // library:         { column: 'amenity', value: 'library' },
-  // post_office:     { column: 'amenity', value: 'post_office' },
-  // bank:            { column: 'amenity', value: 'bank' },
-  // atm:             { column: 'amenity', value: 'atm' },
+  supermarket:      { column: 'shop',    value: 'supermarket' },
+  doctor:           { column: 'amenity', value: 'doctors' },
+  clinic:           { column: 'amenity', value: 'clinic' },
+  pharmacy:         { column: 'amenity', value: 'pharmacy' },
+  dentist:          { column: 'amenity', value: 'dentist' },
+  train_station:    { column: 'railway', value: 'station' },
+  transit_station:  { column: 'highway', value: 'bus_stop' },
+  park:             { column: 'leisure', value: 'park', table: 'polygon' },
+  cafe:             { column: 'amenity', value: 'cafe' },
+  restaurant:       { column: 'amenity', value: 'restaurant' },
+  bar:              { column: 'amenity', value: 'bar' },
+  gym:              { column: 'leisure', value: 'fitness_centre' },
+  childcare:        { column: 'amenity', value: 'childcare' },
+  kindergarten:     { column: 'amenity', value: 'kindergarten' },
+  primary_school:   { column: 'amenity', value: 'school' },
+  secondary_school: { column: 'amenity', value: 'school' },
+  library:          { column: 'amenity', value: 'library' },
+  post_office:      { column: 'amenity', value: 'post_office' },
+  bank:             { column: 'amenity', value: 'bank' },
+  atm:              { column: 'amenity', value: 'atm' },
+  community:        { column: 'amenity', value: 'community_centre' },
 };
 
 // Name-based allowlist filters (mirrors scoring.ts PLACE_TYPE_NAME_ALLOWLIST)
@@ -95,6 +126,127 @@ function getLeaderboardItems(): LeaderboardItem[] {
 // PostGIS query — find amenities near a point
 // ---------------------------------------------------------------------------
 
+// async function findNearbyOsm(
+//   pool: Pool,
+//   lat: number,
+//   lon: number,
+//   item: LeaderboardItem,
+//   radiusMeters = WALKABLE_THRESHOLD_METERS,
+//   limit = 5,
+// ): Promise<Array<{ name: string; lat: number; lon: number }>> {
+//   const osm = OSM_TYPE_MAP[item.type];
+//   if (!osm) {
+//     console.warn(`[OSM] No tag mapping for type: ${item.type}`);
+//     return [];
+//   }
+
+//   try {
+//     const result = await pool.query(
+//       `SELECT
+//          name,
+//          ST_Y(ST_Transform(way, 4326)) AS lat,
+//          ST_X(ST_Transform(way, 4326)) AS lon
+//        FROM planet_osm_point
+//        WHERE ${osm.column} = $1
+//          AND name IS NOT NULL
+//          AND ST_DWithin(
+//            ST_Transform(way, 4326)::geography,
+//            ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography,
+//            $4
+//          )
+//        ORDER BY ST_Distance(
+//          ST_Transform(way, 4326)::geography,
+//          ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography
+//        )
+//        LIMIT $5`,
+//       [osm.value, lon, lat, radiusMeters, limit]
+//     );
+
+//     const allowlist = NAME_ALLOWLIST[item.type];
+//     const blocklist = NAME_BLOCKLIST[item.type] ?? [];
+
+//     return result.rows
+//       .filter(r => {
+//         const name = (r.name ?? '').toLowerCase();
+//         if (blocklist.some(w => name.includes(w))) return false;
+//         if (allowlist && allowlist.length > 0 && !allowlist.some(w => name.includes(w))) return false;
+//         return true;
+//       })
+//       .map(r => ({ name: r.name, lat: Number(r.lat), lon: Number(r.lon) }));
+
+//   } catch (err: any) {
+//     console.error(`[OSM ERROR] ${item.type}:`, err.message);
+//     return [];
+//   }
+// }
+
+// async function findNearbyOsm(
+//   pool: Pool,
+//   lat: number,
+//   lon: number,
+//   item: LeaderboardItem,
+//   radiusMeters = WALKABLE_THRESHOLD_METERS,
+//   limit = 5,
+// ): Promise<Array<{ name: string; lat: number; lon: number }>> {
+//   const osm = OSM_TYPE_MAP[item.type];
+//   if (!osm) {
+//     console.warn(`[OSM] No tag mapping for type: ${item.type}`);
+//     return [];
+//   }
+
+//   const table = osm.table === 'polygon' ? 'planet_osm_polygon' : 'planet_osm_point';
+//   const allowlist = NAME_ALLOWLIST[item.type];
+//   const blocklist = NAME_BLOCKLIST[item.type] ?? [];
+
+//   try {
+//     // transit_station needs both bus_stop and tram_stop
+//     const whereClause = item.type === 'transit_station'
+//       ? `(highway = 'bus_stop' OR railway = 'tram_stop')`
+//       : `${osm.column} = '${osm.value}'`;
+
+//     // secondary_school needs name filtering since it shares amenity=school with primary
+//     const schoolFilter = item.type === 'secondary_school'
+//       ? `AND (name ILIKE '%secondary%' OR name ILIKE '%high%' OR name ILIKE '%college%')`
+//       : item.type === 'primary_school'
+//       ? `AND name NOT ILIKE '%secondary%' AND name NOT ILIKE '%high%' AND name NOT ILIKE '%college%'`
+//       : '';
+
+//     const result = await pool.query(
+//       `SELECT
+//          COALESCE(name, $1) as name,
+//          ST_Y(ST_Transform(ST_Centroid(way), 4326)) AS lat,
+//          ST_X(ST_Transform(ST_Centroid(way), 4326)) AS lon
+//        FROM ${table}
+//        WHERE ${whereClause}
+//          ${schoolFilter}
+//          AND ST_DWithin(
+//            ST_Transform(way, 4326)::geography,
+//            ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography,
+//            $4
+//          )
+//        ORDER BY ST_Distance(
+//          ST_Transform(way, 4326)::geography,
+//          ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography
+//        )
+//        LIMIT $5`,
+//       [item.type, lon, lat, radiusMeters, limit]
+//     );
+
+//     return result.rows
+//       .filter(r => {
+//         const name = (r.name ?? '').toLowerCase();
+//         if (blocklist.some(w => name.includes(w))) return false;
+//         if (allowlist && allowlist.length > 0 && !allowlist.some(w => name.includes(w))) return false;
+//         return true;
+//       })
+//       .map(r => ({ name: r.name, lat: Number(r.lat), lon: Number(r.lon) }));
+
+//   } catch (err: any) {
+//     console.error(`[OSM ERROR] ${item.type}:`, err.message);
+//     return [];
+//   }
+// }
+
 async function findNearbyOsm(
   pool: Pool,
   lat: number,
@@ -109,30 +261,49 @@ async function findNearbyOsm(
     return [];
   }
 
+  const table = osm.table === 'polygon' ? 'planet_osm_polygon' : 'planet_osm_point';
+  const allowlist = NAME_ALLOWLIST[item.type];
+  const blocklist = NAME_BLOCKLIST[item.type] ?? [];
+
   try {
+    // transit_station needs both bus_stop and tram_stop
+    const whereClause = item.type === 'transit_station'
+      ? `(highway = 'bus_stop' OR railway = 'tram_stop')`
+      : `${osm.column} = '${osm.value}'`;
+
+    // secondary_school needs name filtering since it shares amenity=school with primary
+    const schoolFilter = item.type === 'secondary_school'
+      ? `AND (name ILIKE '%secondary%' OR name ILIKE '%high%' OR name ILIKE '%college%')`
+      : item.type === 'primary_school'
+      ? `AND name NOT ILIKE '%secondary%' AND name NOT ILIKE '%high%' AND name NOT ILIKE '%college%'`
+      : '';
+
     const result = await pool.query(
-      `SELECT
-         name,
-         ST_Y(ST_Transform(way, 4326)) AS lat,
-         ST_X(ST_Transform(way, 4326)) AS lon
-       FROM planet_osm_point
-       WHERE ${osm.column} = $1
-         AND name IS NOT NULL
+      `SELECT DISTINCT ON (
+           ROUND(ST_Y(ST_Transform(ST_Centroid(way), 4326))::numeric, 4),
+           ROUND(ST_X(ST_Transform(ST_Centroid(way), 4326))::numeric, 4)
+         )
+         COALESCE(name, $1) as name,
+         ST_Y(ST_Transform(ST_Centroid(way), 4326)) AS lat,
+         ST_X(ST_Transform(ST_Centroid(way), 4326)) AS lon
+       FROM ${table}
+       WHERE ${whereClause}
+         ${schoolFilter}
          AND ST_DWithin(
            ST_Transform(way, 4326)::geography,
            ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography,
            $4
          )
-       ORDER BY ST_Distance(
-         ST_Transform(way, 4326)::geography,
-         ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography
-       )
+       ORDER BY
+         ROUND(ST_Y(ST_Transform(ST_Centroid(way), 4326))::numeric, 4),
+         ROUND(ST_X(ST_Transform(ST_Centroid(way), 4326))::numeric, 4),
+         ST_Distance(
+           ST_Transform(way, 4326)::geography,
+           ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography
+         )
        LIMIT $5`,
-      [osm.value, lon, lat, radiusMeters, limit]
+      [item.type, lon, lat, radiusMeters, limit]
     );
-
-    const allowlist = NAME_ALLOWLIST[item.type];
-    const blocklist = NAME_BLOCKLIST[item.type] ?? [];
 
     return result.rows
       .filter(r => {
