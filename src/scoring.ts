@@ -101,18 +101,18 @@ export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> 
   dining: { label: 'Dining and Social', weight: 2 },
   education: { label: 'Education and Learning', weight: 2 },
   fitness: { label: 'Fitness and Recreation', weight: 1 },
-  community: { label: 'Community Services', weight: 1 },
+  community: { label: 'Community and Errands', weight: 1 },
 };
 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
   health: ['doctor', 'pharmacy', 'hospital','dentist'],
   food: ['supermarket', 'convenience_store'],
-  connectivity: ['train_station', 'transit_station', 'post_office', 'bank','atm'],
+  connectivity: ['train_station', 'transit_station'],
   parks: ['park'],
   dining: ['cafe', 'restaurant', 'bar'],
   education: ['childcare', 'kindergarten', 'primary_school', 'secondary_school', 'library'],
   fitness: ['gym'],
-  community: ['community'],
+  community: ['community', 'post_office', 'bank', 'atm'],
 };
 
 export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
@@ -483,6 +483,14 @@ export function scoreErrandTripGreedy(
   const counts = candidateLists.map(l => l.length);
   const totalCombinations = counts.reduce((a, b) => a * b, 1);
 
+  // Single category requested → perfect score (just home to that one service)
+  if (categories.length === 1) {
+    const best = candidateLists[0].reduce((a, b) =>
+      haversineMeters(homeLat, homeLon, a.lat, a.lon) < haversineMeters(homeLat, homeLon, b.lat, b.lon) ? a : b
+    );
+    return { score: 10, totalDistanceMeters: 0, meanEdgeMeters: 0, optimalPath: [home, best], selectedCandidates: [best], missingCategories, excludedCategories: [] };
+  }
+
   let bestDistance = Infinity;
   let bestPath: ErrandNode[] = [];
   let bestSelection: ErrandNode[] = [];
@@ -495,33 +503,39 @@ export function scoreErrandTripGreedy(
       remaining = Math.floor(remaining / counts[i]);
     }
 
-    const unvisited = [...selected];
-    const path: ErrandNode[] = [home];
-    let current = home;
-    let totalDist = 0;
+    // Try each service as the starting node to find the best inter-service ordering
+    for (let startIdx = 0; startIdx < selected.length; startIdx++) {
+      const unvisited = selected.filter((_, i) => i !== startIdx);
+      const path: ErrandNode[] = [selected[startIdx]];
+      let current = selected[startIdx];
+      let interDist = 0;
 
-    while (unvisited.length > 0) {
-      let nearestIdx = 0;
-      let nearestDist = Infinity;
-      for (let i = 0; i < unvisited.length; i++) {
-        const d = haversineMeters(current.lat, current.lon, unvisited[i].lat, unvisited[i].lon);
-        if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
+      while (unvisited.length > 0) {
+        let nearestIdx = 0;
+        let nearestDist = Infinity;
+        for (let i = 0; i < unvisited.length; i++) {
+          const d = haversineMeters(current.lat, current.lon, unvisited[i].lat, unvisited[i].lon);
+          if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
+        }
+        current = unvisited.splice(nearestIdx, 1)[0];
+        path.push(current);
+        interDist += nearestDist;
       }
-      current = unvisited.splice(nearestIdx, 1)[0];
-      path.push(current);
-      totalDist += nearestDist;
-    }
 
-    if (totalDist < bestDistance) {
-      bestDistance = totalDist;
-      bestPath = path;
-      bestSelection = selected;
+      if (interDist < bestDistance) {
+        bestDistance = interDist;
+        bestPath = [home, ...path];
+        bestSelection = selected;
+      }
     }
   }
 
   const walkingDistance = bestDistance * circuityFactor;
-  const totalEdges = scorableCategories.length + missingCategories.length;
-  const meanEdgeMeters = (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges;
+  const interServiceEdges = scorableCategories.length - 1;
+  const totalEdges = interServiceEdges + missingCategories.length;
+  const meanEdgeMeters = totalEdges > 0
+    ? (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges
+    : 0;
   const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
 
   return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
@@ -560,6 +574,14 @@ export function scoreErrandTripExact(
 
   const candidateLists = scorableCategories.map(c => candidatesByCategory.get(c)!);
 
+  // Single category requested → perfect score (just home to that one service)
+  if (categories.length === 1) {
+    const best = candidateLists[0].reduce((a, b) =>
+      haversineMeters(homeLat, homeLon, a.lat, a.lon) < haversineMeters(homeLat, homeLon, b.lat, b.lon) ? a : b
+    );
+    return { score: 10, totalDistanceMeters: 0, meanEdgeMeters: 0, optimalPath: [home, best], selectedCandidates: [best], missingCategories, excludedCategories: [] };
+  }
+
   function permutations<T>(arr: T[]): T[][] {
     if (arr.length <= 1) return [arr];
     return arr.flatMap((item, i) =>
@@ -586,8 +608,9 @@ export function scoreErrandTripExact(
       selected.push(candidateLists[i][remaining % counts[i]]);
       remaining = Math.floor(remaining / counts[i]);
     }
+    // Score only inter-service distances (exclude home→first leg)
     for (const perm of permutations(selected)) {
-      const dist = pathDistance([home, ...perm]);
+      const dist = pathDistance([...perm]);
       if (dist < bestDistance) {
         bestDistance = dist;
         bestPath = [home, ...perm];
@@ -597,8 +620,11 @@ export function scoreErrandTripExact(
   }
 
   const walkingDistance = bestDistance * circuityFactor;
-  const totalEdges = scorableCategories.length + missingCategories.length;
-  const meanEdgeMeters = (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges;
+  const interServiceEdges = scorableCategories.length - 1;
+  const totalEdges = interServiceEdges + missingCategories.length;
+  const meanEdgeMeters = totalEdges > 0
+    ? (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges
+    : 0;
   const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
 
   return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
@@ -613,21 +639,19 @@ export function scoreAbundance(
   thresholdMeters = WALKABLE_THRESHOLD_METERS,
   restrictToTypes?: Set<string>,
 ): { score: number; totalWeightedOptions: number; referenceWeightedOptions: number } {
-  const proximityDecay = (meters: number) => Math.max(0, 1 - meters / thresholdMeters);
-
   let totalWeightedOptions = 0;
   for (const c of allCandidates) {
     if (c.walkingDistanceMeters === null || c.walkingDistanceMeters > thresholdMeters) continue;
     const freq = SERVICE_FREQUENCY[c.type];
     if (!freq) continue;
-    totalWeightedOptions += FREQUENCY_WEIGHTS[freq] * proximityDecay(c.walkingDistanceMeters);
+    totalWeightedOptions += FREQUENCY_WEIGHTS[freq];
   }
 
-  const REFERENCE_CONFIG: Record<VisitFrequency, { count: number; distanceMeters: number }> = {
-    high:   { count: 5, distanceMeters: 200 },
-    medium: { count: 3, distanceMeters: 300 },
-    low:    { count: 1, distanceMeters: 400 },
-    rare:   { count: 1, distanceMeters: 400 },
+  const REFERENCE_COUNT: Record<VisitFrequency, number> = {
+    high:   3,
+    medium: 3,
+    low:    3,
+    rare:   3,
   };
 
   // Only consider selected types for the reference benchmark when restrictToTypes is set
@@ -639,8 +663,7 @@ export function scoreAbundance(
   for (const type of refTypes) {
     const freq = SERVICE_FREQUENCY[type];
     if (!freq) continue;
-    const ref = REFERENCE_CONFIG[freq];
-    referenceWeightedOptions += ref.count * FREQUENCY_WEIGHTS[freq] * proximityDecay(ref.distanceMeters);
+    referenceWeightedOptions += REFERENCE_COUNT[freq] * FREQUENCY_WEIGHTS[freq];
   }
 
   const score = referenceWeightedOptions > 0
@@ -659,6 +682,7 @@ export function scoreNearestServices(
   restrictToTypes?: Set<string>,
 ): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
 
+  // Find nearest per type with no distance cutoff — we need location to award penalties too
   const nearestByType = new Map<string, CandidateService>();
   for (const c of allCandidates) {
     if (c.walkingDistanceMeters === null) continue;
@@ -668,7 +692,6 @@ export function scoreNearestServices(
     }
   }
 
-  // Only score against selected types when restrictToTypes is provided
   const allTypes = restrictToTypes
     ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
     : Object.values(CORE_CATEGORY_TYPES).flat();
@@ -684,22 +707,31 @@ export function scoreNearestServices(
     maxPossibleScore += weight;
 
     const nearest = nearestByType.get(type);
-    if (!nearest) {
-      perType.push({ type, frequencyWeight: weight, distanceFactor: 0, contribution: 0 });
-      continue;
-    }
+    let distanceFactor: number;
 
-    const distanceFactor = nearest.walkingDurationMinutes !== null
-      ? calculateDistanceFactor(nearest.walkingDurationMinutes)
-      : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+    if (!nearest) {
+      // Not found anywhere — maximum penalty
+      distanceFactor = -1;
+    } else if ((nearest.walkingDistanceMeters ?? Infinity) <= thresholdMeters) {
+      // Within threshold: positive factor, 1 at 0 m decaying to 0 at threshold
+      distanceFactor = nearest.walkingDurationMinutes !== null
+        ? calculateDistanceFactor(nearest.walkingDurationMinutes)
+        : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+    } else {
+      // Beyond threshold: negative penalty proportional to how far past the circle
+      const excess = Math.min(1, ((nearest.walkingDistanceMeters ?? thresholdMeters) - thresholdMeters) / thresholdMeters);
+      distanceFactor = -excess;
+    }
 
     const contribution = weight * distanceFactor;
     weightedScore += contribution;
     perType.push({ type, frequencyWeight: weight, distanceFactor, contribution });
   }
 
+  // Normalise from [-maxPossible, +maxPossible] → [0, 10]
+  // This ensures within-circle selections push the score up and outside-circle push it down
   const score = maxPossibleScore > 0
-    ? Math.min(10, Number(((weightedScore / maxPossibleScore) * 10).toFixed(1)))
+    ? Math.max(0, Math.min(10, Number((((weightedScore / maxPossibleScore) + 1) * 5).toFixed(1))))
     : 0;
 
   return { score, perType };

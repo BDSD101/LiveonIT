@@ -30,6 +30,7 @@ const CACHE_TTL_MS = {
   place: 1000 * 60 * 60 * 8,
   route: 1000 * 60 * 60 * 8,
   analysis: 1000 * 60 * 15,
+  neighbourhood: 1000 * 60 * 60 * 8,
   seedAnalytics: 1000 * 60 * 60 * 8,
 };
 
@@ -173,7 +174,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
         locationRestriction: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: 5000.0,
           },
         },
       },
@@ -195,7 +196,6 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
     }));
 
     const filtered = item.filter ? mapped.filter(item.filter) : mapped;
-    console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
     const results = filtered.slice(0, item.upgradeCount ?? 5);
 
     const seen = new Set<string>();
@@ -252,7 +252,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
         locationBias: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: 5000.0,
           },
         },
       },
@@ -274,7 +274,6 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
     }));
 
     const filtered = item.filter ? mapped.filter(item.filter) : mapped;
-    console.log(`[TEXT SEARCH] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
 
     const seen = new Set<string>();
     const deduped = filtered
@@ -333,10 +332,13 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
   if (!worthUpgrading.length) return results;
 
   const BATCH_SIZE = 25;
+  const batches: CandidateService[][] = [];
   for (let i = 0; i < worthUpgrading.length; i += BATCH_SIZE) {
-    const batch = worthUpgrading.slice(i, i + BATCH_SIZE);
-    const destinations = batch.map(c => `${c.lat},${c.lon}`).join('|');
+    batches.push(worthUpgrading.slice(i, i + BATCH_SIZE));
+  }
 
+  await Promise.all(batches.map(async (batch) => {
+    const destinations = batch.map(c => `${c.lat},${c.lon}`).join('|');
     try {
       trackApiCall('distanceMatrix');
       const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
@@ -372,8 +374,30 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     } catch (err) {
       console.error('[MATRIX ERROR]', err);
     }
-  }
+  }));
   return results;
+}
+
+// Fetch and enrich all CORE_ANALYSIS_ITEMS for a location, cached by (lat,lon).
+// This is the expensive step (Places API + Distance Matrix). Subsequent calls with
+// different service selections reuse the cached enriched candidates instead of
+// re-hitting the APIs.
+async function getNeighbourhoodEnriched(originLat: number, originLon: number): Promise<CandidateService[]> {
+  const cacheKey = `nb_${toCoordKey(originLat)}_${toCoordKey(originLon)}`;
+  const cached = getCached<CandidateService[]>(cacheKey);
+  if (cached) return cached;
+
+  const foundArrays = await Promise.all(
+    CORE_ANALYSIS_ITEMS.map(item =>
+      item.useTextSearch
+        ? findPlacesByText(originLat, originLon, item)
+        : findPlacesByType(originLat, originLon, item)
+    )
+  );
+  const allCandidates = foundArrays.flat();
+  const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
+  setCached(cacheKey, enriched, CACHE_TTL_MS.neighbourhood);
+  return enriched;
 }
 
 async function analyzeLocation(
@@ -383,18 +407,26 @@ async function analyzeLocation(
   formattedAddress?: string,
 ): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
-  const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
 
-  const foundArrays = await Promise.all(
-    lookupItems.map(item =>
-      item.useTextSearch
-        ? findPlacesByText(originLat, originLon, item)
-        : findPlacesByType(originLat, originLon, item)
-    )
-  );
+  // Reuse the location-level neighbourhood cache; only fetch extra types the
+  // user selected that aren't already in CORE_ANALYSIS_ITEMS (e.g. bakery).
+  const coreTypes = new Set(CORE_ANALYSIS_ITEMS.map(i => i.type));
+  const extraItems = displayItems.filter(di => !coreTypes.has(di.type));
 
-  const allCandidates = foundArrays.flat();
-  const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
+  const nbEnriched = await getNeighbourhoodEnriched(originLat, originLon);
+
+  let enriched = nbEnriched;
+  if (extraItems.length > 0) {
+    const extraArrays = await Promise.all(
+      extraItems.map(item =>
+        item.useTextSearch
+          ? findPlacesByText(originLat, originLon, item)
+          : findPlacesByType(originLat, originLon, item)
+      )
+    );
+    const extraEnriched = await enrichWithWalkingMetrics(originLat, originLon, extraArrays.flat());
+    enriched = [...nbEnriched, ...extraEnriched];
+  }
 
   const byKey = new Map<string, CandidateService[]>();
   for (const service of enriched) {
@@ -406,10 +438,6 @@ async function analyzeLocation(
       .sort((a, b) => (a.walkingDistanceMeters ?? 999999) - (b.walkingDistanceMeters ?? 999999))
       .slice(0, 3)
     );
-  }
-
-  for (const [key, candidates] of byKey.entries()) {
-    console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
   }
 
   const { breakdown, index } = buildScoreBreakdown(byKey);
