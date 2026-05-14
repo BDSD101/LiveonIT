@@ -73,7 +73,7 @@ export const LEADERBOARD_FILE = path.join(__dirname, '../leaderboard.json');
 type OsmWhereClause = {
   column: string;
   value: string;
-  table?: 'point' | 'polygon';
+  table?: 'point' | 'polygon' | 'line';
 };
 
 const OSM_TYPE_MAP: Record<string, OsmWhereClause> = {
@@ -82,7 +82,7 @@ const OSM_TYPE_MAP: Record<string, OsmWhereClause> = {
   clinic:           { column: 'amenity', value: 'clinic' },
   pharmacy:         { column: 'amenity', value: 'pharmacy' },
   dentist:          { column: 'amenity', value: 'dentist' },
-  train_station:    { column: 'railway', value: 'station' },
+  train_station:    { column: 'railway', value: 'station', table: 'line' },
   transit_station:  { column: 'highway', value: 'bus_stop' },
   park:             { column: 'leisure', value: 'park', table: 'polygon' },
   cafe:             { column: 'amenity', value: 'cafe' },
@@ -261,7 +261,9 @@ async function findNearbyOsm(
     return [];
   }
 
-  const table = osm.table === 'polygon' ? 'planet_osm_polygon' : 'planet_osm_point';
+  const table = osm.table === 'polygon' ? 'planet_osm_polygon' 
+            : osm.table === 'line'    ? 'planet_osm_line'
+            : 'planet_osm_point';
   const allowlist = NAME_ALLOWLIST[item.type];
   const blocklist = NAME_BLOCKLIST[item.type] ?? [];
 
@@ -280,8 +282,8 @@ async function findNearbyOsm(
 
     const result = await pool.query(
       `SELECT DISTINCT ON (
-           ROUND(ST_Y(ST_Transform(ST_Centroid(way), 4326))::numeric, 4),
-           ROUND(ST_X(ST_Transform(ST_Centroid(way), 4326))::numeric, 4)
+           ROUND(ST_Y(ST_Transform(ST_Centroid(way), 4326))::numeric, 3),
+           ROUND(ST_X(ST_Transform(ST_Centroid(way), 4326))::numeric, 3)
          )
          COALESCE(name, $1) as name,
          ST_Y(ST_Transform(ST_Centroid(way), 4326)) AS lat,
@@ -295,8 +297,8 @@ async function findNearbyOsm(
            $4
          )
        ORDER BY
-         ROUND(ST_Y(ST_Transform(ST_Centroid(way), 4326))::numeric, 4),
-         ROUND(ST_X(ST_Transform(ST_Centroid(way), 4326))::numeric, 4),
+         ROUND(ST_Y(ST_Transform(ST_Centroid(way), 4326))::numeric, 3),
+         ROUND(ST_X(ST_Transform(ST_Centroid(way), 4326))::numeric, 3),
          ST_Distance(
            ST_Transform(way, 4326)::geography,
            ST_SetSRID(ST_MakePoint($2, $3), 4326)::geography
