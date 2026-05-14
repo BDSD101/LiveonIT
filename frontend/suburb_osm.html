@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suburb Leaderboard (OSM) | 20-Minute Neighbourhood Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --ring-inner:  #c51b7d;
+      --ring-middle: #4d9221;
+      --ring-outer:  #2166ac;
+    }
+    .bar-inner  { background: var(--ring-inner); }
+    .bar-middle { background: var(--ring-middle); }
+    .bar-outer  { background: var(--ring-outer); }
+    .rank-1 { background: #FFD700; color: #5a4000; }
+    .rank-2 { background: #C0C0C0; color: #3a3a3a; }
+    .rank-3 { background: #cd7f32; color: #3a1a00; }
+    .rank-n { background: #f1f5f9; color: #64748b; }
+    .score-bar-track {
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 9999px;
+      overflow: hidden;
+      flex: 1;
+    }
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0%;
+    }
+    .lb-row { transition: background 0.15s; }
+    .lb-row:hover { background: #f8fafc; }
+    .tab-btn.active {
+      color: #004071;
+      border-bottom: 2px solid #004071;
+    }
+    .tab-btn {
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .skeleton {
+      animation: pulse 1.5s ease-in-out infinite;
+      background: #e2e8f0;
+      border-radius: 4px;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .osm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+  </style>
+</head>
+<body class="bg-[#F8F9FA] text-slate-900 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-center">
+    <nav class="hidden md:flex items-center gap-6">
+      <a href="/" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Home</a>
+      <a href="/dashboard.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Map</a>
+      <!-- <a href="/suburb.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Suburb Overview</a> -->
+      <a href="/suburb_osm.html" class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5">Suburb Overview</a>
+      <a href="/supporting_data.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Supporting Data</a>
+      <a href="/about.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">About</a>
+    </nav>
+  </header>
+
+  <main class="flex-1 flex overflow-hidden" style="height: calc(100vh - 64px);">
+
+    <!-- ── LEFT PANEL: Leaderboard ─────────────────────────────────────────── -->
+    <aside class="w-1/3 min-w-[320px] max-w-[480px] flex flex-col border-r border-slate-200 bg-white overflow-y-auto flex-shrink-0">
+
+      <!-- Panel header -->
+      <div class="px-5 pt-6 pb-4 border-b border-slate-100 flex-shrink-0">
+
+        <div class="flex items-center gap-2 mb-1">
+          <i data-lucide="trophy" class="w-4 h-4 text-[#004071]"></i>
+          <h1 class="text-sm font-bold font-inter uppercase tracking-widest text-[#004071]">Suburb Leaderboard</h1>
+          <span class="osm-badge ml-auto">
+            <i data-lucide="database" class="w-3 h-3"></i>
+            OSM + OSRM
+          </span>
+        </div>
+
+        <p class="text-xs text-[#536070] leading-relaxed mt-1">
+          Walkability scores derived from OpenStreetMap amenity data and local OSRM walking routes.
+          Results are saved to a file — no API costs.
+        </p>
+
+        <!-- Service types in use -->
+        <div class="mt-3 flex flex-wrap gap-1.5" id="service-tags">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Samples per suburb control -->
+        <div class="mt-3 flex items-center gap-3">
+          <label class="text-[10px] font-bold font-inter uppercase tracking-wide text-slate-400">Samples / suburb</label>
+          <input
+            id="samples-input"
+            type="number"
+            min="1" max="20" value="10"
+            class="w-16 text-center text-xs font-bold border border-slate-200 rounded px-2 py-1 font-inter focus:outline-none focus:ring-2 focus:ring-[#004071]"
+          />
+          <span class="text-[10px] text-slate-400 font-inter">(max 20)</span>
+        </div>
+
+        <!-- Status row -->
+        <div class="mt-3 flex items-center gap-2">
+          <div id="status-dot" class="status-dot bg-slate-300"></div>
+          <span id="status-text" class="text-[11px] text-slate-400 font-inter">Checking for saved data…</span>
+          <div class="ml-auto flex gap-2">
+            <button id="generate-btn"
+              class="flex items-center gap-1.5 px-3 py-1.5 bg-[#004071] hover:bg-[#003060] text-white text-xs font-bold font-inter rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+              <i data-lucide="play" class="w-3 h-3"></i>
+              Generate
+            </button>
+            <button id="refresh-btn"
+              class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold font-inter rounded-lg transition-colors hidden">
+              <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Generated at timestamp -->
+        <div id="generated-at-row" class="mt-2 hidden">
+          <span class="text-[10px] text-slate-400 font-inter">
+            Last generated: <span id="generated-at" class="font-semibold text-slate-500"></span>
+            &nbsp;·&nbsp;
+            <span id="generated-samples" class="font-semibold text-slate-500"></span> samples/suburb
+          </span>
+        </div>
+
+        <!-- Progress bar (shown during generation) -->
+        <div id="progress-wrap" class="mt-3 hidden">
+          <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+            <div id="progress-bar" class="h-full bg-[#004071] rounded-full transition-all duration-300" style="width:0%"></div>
+          </div>
+          <div id="progress-label" class="text-[10px] text-slate-400 font-inter mt-1"></div>
+        </div>
+
+      </div>
+
+      <!-- Ring tabs -->
+      <div class="flex border-b border-slate-100 px-5 gap-4 flex-shrink-0">
+        <button class="tab-btn active py-3 text-xs font-bold font-inter uppercase tracking-widest" data-ring="Inner" style="color: var(--ring-inner); border-color: var(--ring-inner);">
+          Inner <span class="ml-1 opacity-60" id="tab-count-Inner"></span>
+        </button>
+        <button class="tab-btn py-3 text-xs font-bold font-inter uppercase tracking-widest text-slate-400" data-ring="Middle">
+          Middle <span class="ml-1 opacity-60" id="tab-count-Middle"></span>
+        </button>
+        <button class="tab-btn py-3 text-xs font-bold font-inter uppercase tracking-widest text-slate-400" data-ring="Outer">
+          Outer <span class="ml-1 opacity-60" id="tab-count-Outer"></span>
+        </button>
+      </div>
+
+      <!-- Leaderboard content -->
+      <div class="flex-1 px-4 py-3">
+        <div id="lb-Inner"  class="lb-panel space-y-1"></div>
+        <div id="lb-Middle" class="lb-panel space-y-1 hidden"></div>
+        <div id="lb-Outer"  class="lb-panel space-y-1 hidden"></div>
+      </div>
+
+    </aside>
+
+    <!-- ── RIGHT PANEL: Placeholder for future heatmap ────────────────────── -->
+    <section class="flex-1 flex items-center justify-center bg-[#F8F9FA] relative">
+      <div class="text-center select-none">
+        <div class="w-16 h-16 rounded-2xl bg-slate-200 flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="map" class="w-8 h-8 text-slate-400"></i>
+        </div>
+        <p class="text-sm font-semibold text-slate-400 font-inter">Heatmap Coming Soon</p>
+        <p class="text-xs text-slate-300 font-inter mt-1">Walkability intensity across Melbourne</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ── Config ────────────────────────────────────────────────────────────────
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
+
+    // These mirror LEADERBOARD_PLACE_TYPES in scoring.ts
+    // Update both places when you add more types
+    const LEADERBOARD_SERVICE_LABELS = {
+      'food:supermarket': { label: 'Supermarket', emoji: '🛒', bg: 'bg-blue-50', text: 'text-blue-700' },
+      // Uncomment as you expand LEADERBOARD_PLACE_TYPES:
+      // 'health:doctor':           { label: 'Doctor / GP',      emoji: '🏥', bg: 'bg-red-50',    text: 'text-red-700'    },
+      // 'connectivity:train_station': { label: 'Train Station', emoji: '🚆', bg: 'bg-pink-50',   text: 'text-pink-700'   },
+      // 'connectivity:transit_station': { label: 'Bus / Tram',  emoji: '🚌', bg: 'bg-orange-50', text: 'text-orange-700' },
+      // 'parks:park':              { label: 'Park',             emoji: '🌳', bg: 'bg-green-50',  text: 'text-green-700'  },
+    };
+
+    const TOP_N        = 10;
+    const RINGS        = ['Inner', 'Middle', 'Outer'];
+    const RING_COLOURS = { Inner: '#c51b7d', Middle: '#4d9221', Outer: '#2166ac' };
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let results      = { Inner: [], Middle: [], Outer: [] };
+    let activeRing   = 'Inner';
+    let generating   = false;
+    let pollInterval = null;
+
+    // ── Render service tags ───────────────────────────────────────────────────
+    function renderServiceTags() {
+      const container = document.getElementById('service-tags');
+      container.innerHTML =
+        '<span class="text-[10px] font-semibold font-inter uppercase tracking-wide text-slate-400 self-center mr-1">Scoring:</span>' +
+        Object.values(LEADERBOARD_SERVICE_LABELS).map(s =>
+          `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium ${s.bg} ${s.text}">${s.emoji} ${s.label}</span>`
+        ).join('');
+    }
+
+    // ── Leaderboard rendering ─────────────────────────────────────────────────
+    function scoreColour(score) {
+      if (score >= 7) return '#22c55e';
+      if (score >= 5) return '#f59e0b';
+      if (score >= 3) return '#f97316';
+      return '#ef4444';
+    }
+
+    function rankBadgeClass(rank) {
+      if (rank === 1) return 'rank-1';
+      if (rank === 2) return 'rank-2';
+      if (rank === 3) return 'rank-3';
+      return 'rank-n';
+    }
+
+    function renderLeaderboard(ring) {
+      const panel  = document.getElementById(`lb-${ring}`);
+      const data   = results[ring];
+      const colour = RING_COLOURS[ring];
+
+      if (!data.length) {
+        panel.innerHTML = `<p class="text-center py-8 text-xs text-slate-400 font-inter">No results yet.</p>`;
+        return;
+      }
+
+      panel.innerHTML = data.map((item, i) => {
+        const rank     = i + 1;
+        const barPct   = Math.min(100, (item.avg / 10) * 100).toFixed(1);
+        const rangeLow = item.min.toFixed(1);
+        const rangeHi  = item.max.toFixed(1);
+        return `
+          <div class="lb-row flex items-center gap-3 px-2 py-2.5 rounded-lg">
+            <div class="w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-bold flex-shrink-0 ${rankBadgeClass(rank)}">${rank}</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="text-xs font-semibold text-slate-800 truncate">${item.suburb}</span>
+                <span class="text-xs font-bold flex-shrink-0" style="color:${scoreColour(item.avg)}">${item.avg.toFixed(1)}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="score-bar-track">
+                  <div class="score-bar-fill" style="width:${barPct}%; background:${colour};"></div>
+                </div>
+                <span class="text-[10px] text-slate-400 font-inter flex-shrink-0 w-[60px] text-right">${rangeLow}–${rangeHi}</span>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function renderAllRings() {
+      for (const ring of RINGS) renderLeaderboard(ring);
+      updateTabCounts();
+    }
+
+    function updateTabCounts() {
+      for (const ring of RINGS) {
+        const el = document.getElementById(`tab-count-${ring}`);
+        el.textContent = results[ring].length ? `(${results[ring].length})` : '';
+      }
+    }
+
+    function renderSkeletons(panelId, count = TOP_N) {
+      document.getElementById(panelId).innerHTML = Array.from({ length: count }, () => `
+        <div class="lb-row flex items-center gap-3 px-2 py-2.5 rounded-lg">
+          <div class="skeleton w-7 h-7 rounded-md flex-shrink-0"></div>
+          <div class="flex-1 space-y-1.5">
+            <div class="skeleton h-3 w-2/3 rounded"></div>
+            <div class="skeleton h-2 w-full rounded"></div>
+          </div>
+          <div class="skeleton h-5 w-10 rounded flex-shrink-0"></div>
+        </div>`).join('');
+    }
+
+    // ── Load data from file (via GET /api/leaderboard) ────────────────────────
+    function populateFromData(data) {
+      results = { Inner: [], Middle: [], Outer: [] };
+
+      for (const item of data.suburbs) {
+        const ring = item.ring;
+        if (!results[ring]) continue;
+        results[ring].push(item);
+      }
+
+      for (const ring of RINGS) {
+        results[ring].sort((a, b) => b.avg - a.avg);
+        results[ring] = results[ring].slice(0, TOP_N);
+      }
+
+      renderAllRings();
+
+      // Show metadata
+      const genAt = new Date(data.generatedAt);
+      document.getElementById('generated-at').textContent =
+        genAt.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      document.getElementById('generated-samples').textContent = data.samplesPerSuburb;
+      document.getElementById('generated-at-row').classList.remove('hidden');
+      document.getElementById('refresh-btn').classList.remove('hidden');
+    }
+
+    async function loadSavedLeaderboard() {
+      try {
+        const res = await fetch(`${API_URL}/api/leaderboard`);
+        const json = await res.json();
+
+        if (json.status === 'not_generated') {
+          setStatus('No saved data — click Generate to build.', '#f59e0b');
+          for (const ring of RINGS) {
+            document.getElementById(`lb-${ring}`).innerHTML =
+              `<p class="text-center py-8 text-xs text-slate-400 font-inter">Click <strong>Generate</strong> to score suburbs.</p>`;
+          }
+          return;
+        }
+
+        if (json.status === 'ready') {
+          populateFromData(json.data);
+          setStatus(`Loaded ${json.data.suburbs.length} suburbs from saved file.`, '#22c55e');
+        }
+      } catch (e) {
+        setStatus('Could not reach server.', '#ef4444');
+      }
+    }
+
+    // ── Generation ────────────────────────────────────────────────────────────
+    async function startGeneration() {
+      if (generating) return;
+      generating = true;
+
+      const samples = Math.min(20, Math.max(1, Number(document.getElementById('samples-input').value) || 10));
+
+      document.getElementById('generate-btn').disabled = true;
+      document.getElementById('generate-btn').innerHTML = `
+        <svg class="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"/>
+          <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round" class="opacity-75"/>
+        </svg> Generating…`;
+      document.getElementById('progress-wrap').classList.remove('hidden');
+
+      for (const ring of RINGS) renderSkeletons(`lb-${ring}`);
+      setStatus('Generation started…', '#f59e0b');
+      setProgress(0, '');
+
+      try {
+        const res = await fetch(`${API_URL}/api/leaderboard/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ samplesPerSuburb: samples }),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        // Poll progress
+        pollInterval = setInterval(pollProgress, 500);
+
+      } catch (e) {
+        setStatus('Failed to start generation.', '#ef4444');
+        resetGenerateBtn();
+        generating = false;
+      }
+    }
+
+    async function pollProgress() {
+      try {
+        const res  = await fetch(`${API_URL}/api/leaderboard/progress`);
+        const json = await res.json();
+
+        const pct = json.total > 0 ? Math.round((json.done / json.total) * 100) : 0;
+        setProgress(pct, json.currentSuburb ? `${json.currentSuburb} — ${pct}%` : `${pct}%`);
+        setStatus(`Scoring… ${json.done}/${json.total || '?'} suburbs (${pct}%)`, '#f59e0b');
+
+        if (json.error) {
+          clearInterval(pollInterval);
+          setStatus(`Error: ${json.error}`, '#ef4444');
+          resetGenerateBtn();
+          generating = false;
+          return;
+        }
+
+        // Incrementally update leaderboard with latest suburb result
+        if (json.latestSuburb) {
+          const item = json.latestSuburb;
+          const ring = item.ring;
+          if (results[ring] !== undefined) {
+            results[ring] = results[ring].filter(r => r.suburb !== item.suburb);
+            results[ring].push(item);
+            results[ring].sort((a, b) => b.avg - a.avg);
+            results[ring] = results[ring].slice(0, TOP_N);
+            renderLeaderboard(ring);
+            updateTabCounts();
+          }
+        }
+
+        if (!json.running && json.done > 0) {
+          clearInterval(pollInterval);
+          setProgress(100, 'Complete');
+          setStatus(`Done — ${json.done} suburbs scored.`, '#22c55e');
+          resetGenerateBtn();
+          generating = false;
+        }
+      } catch (e) {
+        // Server busy — keep polling silently
+      }
+    }
+
+    function setStatus(text, colour = '#94a3b8') {
+      document.getElementById('status-text').textContent = text;
+      document.getElementById('status-dot').style.background = colour;
+    }
+
+    function setProgress(pct, label = '') {
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = label;
+    }
+
+    function resetGenerateBtn() {
+      const btn = document.getElementById('generate-btn');
+      btn.disabled = false;
+      btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3 h-3"></i> Re-generate`;
+      lucide.createIcons();
+      document.getElementById('progress-wrap').classList.add('hidden');
+    }
+
+    // ── Tab switching ─────────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeRing = btn.dataset.ring;
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.classList.remove('active');
+          b.style.color = '';
+          b.style.borderColor = '';
+          b.classList.add('text-slate-400');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('text-slate-400');
+        btn.style.color = RING_COLOURS[activeRing];
+        btn.style.borderColor = RING_COLOURS[activeRing];
+        document.querySelectorAll('.lb-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById(`lb-${activeRing}`).classList.remove('hidden');
+      });
+    });
+
+    // ── Button events ─────────────────────────────────────────────────────────
+    document.getElementById('generate-btn').addEventListener('click', startGeneration);
+    document.getElementById('refresh-btn').addEventListener('click', loadSavedLeaderboard);
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    renderServiceTags();
+    lucide.createIcons();
+
+    // Check if generation is already running on the server
+    fetch(`${API_URL}/api/leaderboard/progress`)
+      .then(r => r.json())
+      .then(json => {
+        if (json.running) {
+          // Resume polling
+          generating = true;
+          document.getElementById('generate-btn').disabled = true;
+          document.getElementById('generate-btn').innerHTML = `
+            <svg class="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"/>
+              <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round" class="opacity-75"/>
+            </svg> Generating…`;
+          document.getElementById('progress-wrap').classList.remove('hidden');
+          setStatus(`Resuming… ${json.done}/${json.total || '?'} suburbs`, '#f59e0b');
+          pollInterval = setInterval(pollProgress, 500);
+        } else {
+          loadSavedLeaderboard();
+        }
+      })
+      .catch(() => loadSavedLeaderboard());
+
+
+  </script>
+</body>
+</html>

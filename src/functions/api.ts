@@ -1,5 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
+import path from 'path';
 
 import {
   RequestedItem,
@@ -22,6 +23,16 @@ import {
   resolveHousePriceScore,
   getSuburbData
 } from '../scoring';
+
+import {
+  leaderboardFileExists,
+  readLeaderboardFile,
+  generateLeaderboard,
+  scorePoint,
+  // LEADERBOARD_FILE,
+} from '../leaderboard';
+
+import { Pool } from 'pg';
 
 const RADIUS_DASHBOARD = 2000;
 const CACHE_MAX_ENTRIES = 500;
@@ -53,6 +64,7 @@ const apiCallCounts: Record<string, number> = {
   directions: 0,
 };
 
+
 function trackApiCall(type: keyof typeof apiCallCounts) {
   apiCallCounts[type]++;
   console.log(`[API Call] ${type} | totals:`, apiCallCounts);
@@ -64,6 +76,24 @@ function getGoogleMapsApiKey(): string {
   if (!key) throw new Error('Missing GOOGLE_MAPS_API_KEY');
   return key;
 }
+
+
+function getOsmPool(): Pool {
+  return new Pool({
+    host:     process.env.OSM_DB_HOST     || process.env.DB_HOST     || 'localhost',
+    port:     Number(process.env.OSM_DB_PORT  || process.env.DB_PORT  || 5432),
+    database: process.env.OSM_DB_NAME     || 'postgres',
+    user:     process.env.OSM_DB_USER     || process.env.DB_USER     || 'localuser',
+    password: process.env.OSM_DB_PASSWORD || process.env.DB_PASSWORD || 'localpassword',
+    ssl:      process.env.OSM_DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+    max: 4,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 10000,
+  });
+}
+
+const GEOJSON_PATH = path.join(__dirname, '../../backend/geojson_files/melbourne_suburbs_rings.geojson');
+
 
 function getCached<T>(key: string): T | undefined {
   const entry = cache.get(key);
@@ -530,6 +560,15 @@ async function analyzeLocation(
 //   return analyses;
 // }
 
+const leaderboardProgress = {
+  running: false,
+  done: 0,
+  total: 0,
+  currentSuburb: '',
+  error: null as string | null,
+  latestSuburb: null as null | { suburb: string; ring: string; avg: number; min: number; max: number },
+};
+
 // --- Main Lambda Handler ---
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { httpMethod } = event;
@@ -732,6 +771,71 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }));
 
       return jsonResponse(200, { type, query, total: results.length, results });
+    }
+
+    // ── GET /api/leaderboard — return saved file or not-generated status ──────
+    if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
+      if (!leaderboardFileExists()) {
+        return jsonResponse(200, { status: 'not_generated' });
+      }
+      const data = readLeaderboardFile();
+      if (!data) return jsonResponse(500, { error: 'Failed to read leaderboard file' });
+      return jsonResponse(200, { status: 'ready', data });
+    }
+
+    // ── POST /api/leaderboard/generate — run full generation, stream progress ─
+    if (routePath === '/api/leaderboard/generate' && httpMethod === 'POST') {
+      const body = event.body ? JSON.parse(event.body) : {};
+      const samplesPerSuburb = Math.min(Number(body.samplesPerSuburb) || 10, 20);
+
+      // Track progress in memory so /api/leaderboard/progress can poll it
+      leaderboardProgress.running = true;
+      leaderboardProgress.done = 0;
+      leaderboardProgress.total = 0;
+      leaderboardProgress.currentSuburb = '';
+      leaderboardProgress.error = null;
+
+      // Run async — don't await so the HTTP response returns immediately
+      generateLeaderboard(
+        GEOJSON_PATH,
+        samplesPerSuburb,
+        (done, total, suburb, latest) => {
+          leaderboardProgress.done = done;
+          leaderboardProgress.total = total;
+          leaderboardProgress.currentSuburb = suburb;
+          leaderboardProgress.latestSuburb = latest ?? null;
+        },
+      )
+        .then(() => {
+          leaderboardProgress.running = false;
+        })
+        .catch(err => {
+          console.error('[LEADERBOARD GENERATE ERROR]', err);
+          leaderboardProgress.running = false;
+          leaderboardProgress.error = err.message;
+        });
+
+      return jsonResponse(202, { status: 'started', samplesPerSuburb });
+    }
+
+    // ── GET /api/leaderboard/progress — poll generation progress ─────────────
+    if (routePath === '/api/leaderboard/progress' && httpMethod === 'GET') {
+      return jsonResponse(200, { ...leaderboardProgress });
+    }
+
+    // ── GET /api/leaderboard/score — score a single point via OSM + OSRM ──────
+    // Used by suburb_osm.html during live per-point generation
+    if (routePath === '/api/leaderboard/score' && httpMethod === 'GET') {
+      const lat = parseCoordinate(event.queryStringParameters?.lat, 'lat');
+      const lon = parseCoordinate(event.queryStringParameters?.lon, 'lon');
+
+      const pool = getOsmPool();
+      try {
+        const score = await scorePoint(pool, lat, lon);
+        return jsonResponse(200, { score });
+      } finally {
+        await pool.end();
+      }
     }
 
     return jsonResponse(404, { error: 'Not Found' });

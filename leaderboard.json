@@ -1,0 +1,7000 @@
+{
+  "generatedAt": "2026-05-14T12:21:54.066Z",
+  "samplesPerSuburb": 3,
+  "suburbs": [
+    {
+      "suburb": "Abbotsford",
+      "ring": "Inner",
+      "avg": 5.63,
+      "min": 5,
+      "max": 6.3,
+      "scores": [
+        5,
+        6.3,
+        5.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Aberfeldie",
+      "ring": "Middle",
+      "avg": 5.43,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        6.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Aintree",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Airport West",
+      "ring": "Middle",
+      "avg": 8.27,
+      "min": 7.6,
+      "max": 9,
+      "scores": [
+        8.2,
+        9,
+        7.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Albanvale",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Albert Park",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Albion",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Alphington",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Altona",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Altona Meadows",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Altona North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ardeer",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Armadale",
+      "ring": "Inner",
+      "avg": 2.1,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        0,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Arthurs Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Arthurs Seat",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ascot Vale",
+      "ring": "Inner",
+      "avg": 5.67,
+      "min": 0,
+      "max": 8.8,
+      "scores": [
+        0,
+        8.2,
+        8.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ashburton",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ashwood",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Aspendale",
+      "ring": "Middle",
+      "avg": 2.5,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        0,
+        7.5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Aspendale Gardens",
+      "ring": "Middle",
+      "avg": 4.87,
+      "min": 0,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Attwood",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Avondale Heights",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Avonsleigh",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Badger Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Balaclava",
+      "ring": "Inner",
+      "avg": 8.53,
+      "min": 6.3,
+      "max": 9.7,
+      "scores": [
+        9.7,
+        6.3,
+        9.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Balnarring",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Balnarring Beach",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Balwyn",
+      "ring": "Middle",
+      "avg": 2.73,
+      "min": 0,
+      "max": 8.2,
+      "scores": [
+        0,
+        0,
+        8.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Balwyn North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bangholme",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Baxter",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bayles",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bayswater",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bayswater North",
+      "ring": "Outer",
+      "avg": 3.17,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Beaconsfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Beaconsfield Upper",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Beaumaris",
+      "ring": "Middle",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        0,
+        0,
+        3.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Beenak",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Belgrave",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Belgrave Heights",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Belgrave South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bellfield",
+      "ring": "Middle",
+      "avg": 4.2,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        6.9,
+        0,
+        5.7
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bend of Islands",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bentleigh",
+      "ring": "Middle",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        3.8,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bentleigh East",
+      "ring": "Middle",
+      "avg": 2.73,
+      "min": 0,
+      "max": 8.2,
+      "scores": [
+        8.2,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Berwick",
+      "ring": "Outer",
+      "avg": 2.93,
+      "min": 0,
+      "max": 8.8,
+      "scores": [
+        0,
+        8.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Beveridge",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Big Pats Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bittern",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Black Rock",
+      "ring": "Middle",
+      "avg": 4.17,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        6.9,
+        0,
+        5.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Blackburn",
+      "ring": "Middle",
+      "avg": 2.93,
+      "min": 0,
+      "max": 8.8,
+      "scores": [
+        0,
+        8.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Blackburn North",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        0,
+        5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Blackburn South",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Blairgowrie",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Blind Bight",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bonbeach",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Boneo",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bonnie Brook",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Boronia",
+      "ring": "Outer",
+      "avg": 1.9,
+      "min": 0,
+      "max": 5.7,
+      "scores": [
+        0,
+        5.7,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Botanic Ridge",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Box Hill",
+      "ring": "Middle",
+      "avg": 4.47,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        3.9,
+        0,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Box Hill North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Box Hill South",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Braeside",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Braybrook",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Briar Hill",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brighton",
+      "ring": "Middle",
+      "avg": 1.5,
+      "min": 0,
+      "max": 4.5,
+      "scores": [
+        0,
+        0,
+        4.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brighton East",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Broadmeadows",
+      "ring": "Outer",
+      "avg": 3.23,
+      "min": 0,
+      "max": 9.7,
+      "scores": [
+        9.7,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brookfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brooklyn",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brunswick",
+      "ring": "Inner",
+      "avg": 5.97,
+      "min": 0,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        8.3,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brunswick East",
+      "ring": "Inner",
+      "avg": 9.1,
+      "min": 8.3,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        8.3,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Brunswick West",
+      "ring": "Inner",
+      "avg": 4.37,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        0,
+        5.6,
+        7.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bulla",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bulleen",
+      "ring": "Middle",
+      "avg": 1.9,
+      "min": 0,
+      "max": 5.7,
+      "scores": [
+        0,
+        5.7,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bundoora",
+      "ring": "Middle",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        0,
+        3.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bunyip",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Bunyip North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Burnley",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Burnside",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Burnside Heights",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Burwood",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        0,
+        5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Burwood East",
+      "ring": "Middle",
+      "avg": 7.8,
+      "min": 6.9,
+      "max": 8.3,
+      "scores": [
+        8.2,
+        6.9,
+        8.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cairnlea",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Calder Park",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Caldermeade",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Camberwell",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        0,
+        0,
+        5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Campbellfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cannons Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Canterbury",
+      "ring": "Middle",
+      "avg": 5.03,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        0,
+        5.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cape Schanck",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Capel Sound",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cardinia",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Carlton",
+      "ring": "Inner",
+      "avg": 9.57,
+      "min": 9.5,
+      "max": 9.6,
+      "scores": [
+        9.5,
+        9.6,
+        9.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Carlton North",
+      "ring": "Inner",
+      "avg": 4.37,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        5.6,
+        0,
+        7.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Carnegie",
+      "ring": "Middle",
+      "avg": 4.63,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        0,
+        4.4,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Caroline Springs",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Carrum",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Carrum Downs",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Catani",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Caulfield",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        0,
+        5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Caulfield East",
+      "ring": "Middle",
+      "avg": 2.33,
+      "min": 0,
+      "max": 5.7,
+      "scores": [
+        0,
+        1.3,
+        5.7
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Caulfield North",
+      "ring": "Middle",
+      "avg": 5.7,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        7.6,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Caulfield South",
+      "ring": "Middle",
+      "avg": 3.13,
+      "min": 0,
+      "max": 9.4,
+      "scores": [
+        9.4,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Chadstone",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Chelsea",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Chelsea Heights",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cheltenham",
+      "ring": "Middle",
+      "avg": 2.5,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        7.5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Chirnside Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Christmas Hills",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Chum Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clarinda",
+      "ring": "Middle",
+      "avg": 1.07,
+      "min": 0,
+      "max": 3.2,
+      "scores": [
+        0,
+        0,
+        3.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clarkefield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clayton",
+      "ring": "Middle",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        3.8,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clayton South",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clematis",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clifton Hill",
+      "ring": "Inner",
+      "avg": 6.5,
+      "min": 4.5,
+      "max": 8.2,
+      "scores": [
+        8.2,
+        4.5,
+        6.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clyde",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Clyde North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cobblebank",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Coburg",
+      "ring": "Middle",
+      "avg": 2.77,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        0,
+        0.8,
+        7.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Coburg North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cockatoo",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cocoroc",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Coldstream",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Collingwood",
+      "ring": "Inner",
+      "avg": 8.5,
+      "min": 7,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        7,
+        8.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Coolaroo",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cora Lynn",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cottles Bridge",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Craigieburn",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cranbourne",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cranbourne East",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cranbourne North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cranbourne South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cranbourne West",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Cremorne",
+      "ring": "Inner",
+      "avg": 9.3,
+      "min": 8.8,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        8.8,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Crib Point",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Croydon",
+      "ring": "Outer",
+      "avg": 2.53,
+      "min": 0,
+      "max": 7.6,
+      "scores": [
+        0,
+        0,
+        7.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Croydon Hills",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Croydon North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Croydon South",
+      "ring": "Outer",
+      "avg": 5,
+      "min": 0,
+      "max": 9.4,
+      "scores": [
+        5.6,
+        0,
+        9.4
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dallas",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dalmore",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dandenong",
+      "ring": "Outer",
+      "avg": 3.4,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        3.9,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dandenong North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dandenong South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Deanside",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Deepdene",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Deer Park",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Delahey",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Derrimut",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Devon Meadows",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dewhurst",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Diamond Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Diggers Rest",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dingley Village",
+      "ring": "Middle",
+      "avg": 3.17,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dixons Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Docklands",
+      "ring": "Inner",
+      "avg": 7.17,
+      "min": 6.4,
+      "max": 7.6,
+      "scores": [
+        6.4,
+        7.5,
+        7.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Don Valley",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Doncaster",
+      "ring": "Middle",
+      "avg": 3.23,
+      "min": 0,
+      "max": 9.7,
+      "scores": [
+        0,
+        9.7,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Doncaster East",
+      "ring": "Middle",
+      "avg": 3.2,
+      "min": 0,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Donnybrook",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Donvale",
+      "ring": "Middle",
+      "avg": 0.47,
+      "min": 0,
+      "max": 1.4,
+      "scores": [
+        1.4,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Doreen",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Doveton",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Dromana",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Eaglemont",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "East Melbourne",
+      "ring": "Inner",
+      "avg": 4.37,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        7.5,
+        0,
+        5.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "East Warburton",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Eden Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Edithvale",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Elsternwick",
+      "ring": "Middle",
+      "avg": 6.3,
+      "min": 5.7,
+      "max": 6.9,
+      "scores": [
+        5.7,
+        6.9,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Eltham",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Eltham North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Elwood",
+      "ring": "Inner",
+      "avg": 5.43,
+      "min": 4.4,
+      "max": 6.3,
+      "scores": [
+        6.3,
+        4.4,
+        5.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Emerald",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Endeavour Hills",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Epping",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Essendon",
+      "ring": "Middle",
+      "avg": 2.1,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        6.3,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Essendon Fields",
+      "ring": "Middle",
+      "avg": 2.93,
+      "min": 0,
+      "max": 8.8,
+      "scores": [
+        0,
+        8.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Essendon North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Essendon West",
+      "ring": "Middle",
+      "avg": 2.27,
+      "min": 0,
+      "max": 6.8,
+      "scores": [
+        0,
+        6.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Eumemmerring",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Exford",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Eynesbury",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fairfield",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fawkner",
+      "ring": "Middle",
+      "avg": 4.4,
+      "min": 0,
+      "max": 8.2,
+      "scores": [
+        5,
+        0,
+        8.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fernshaw",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ferntree Gully",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ferny Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fingal",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fitzroy",
+      "ring": "Inner",
+      "avg": 7.37,
+      "min": 5.7,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        5.7,
+        6.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fitzroy North",
+      "ring": "Inner",
+      "avg": 3.17,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        0,
+        0,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Flemington",
+      "ring": "Inner",
+      "avg": 6.97,
+      "min": 4.5,
+      "max": 8.2,
+      "scores": [
+        8.2,
+        8.2,
+        4.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Flinders",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Footscray",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Forest Hill",
+      "ring": "Middle",
+      "avg": 3.2,
+      "min": 0,
+      "max": 9.6,
+      "scores": [
+        0,
+        9.6,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Frankston",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Frankston North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Frankston South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Fraser Rise",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gardenvale",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Garfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Garfield North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gembrook",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gilderoy",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gladstone Park",
+      "ring": "Outer",
+      "avg": 2.77,
+      "min": 0,
+      "max": 8.3,
+      "scores": [
+        8.3,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gladysdale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Glen Huntly",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Glen Iris",
+      "ring": "Middle",
+      "avg": 5.27,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        6.3,
+        9.5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Glen Waverley",
+      "ring": "Middle",
+      "avg": 2.1,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        0,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Glenroy",
+      "ring": "Middle",
+      "avg": 3.57,
+      "min": 0,
+      "max": 7.6,
+      "scores": [
+        0,
+        3.1,
+        7.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gowanbrae",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Grangefields",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Greensborough",
+      "ring": "Middle",
+      "avg": 4.2,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        0,
+        6.9,
+        5.7
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Greenvale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Gruyere",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Guys Hill",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hadfield",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hallam",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hampton",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hampton East",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hampton Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Harkaway",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Harkness",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hastings",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hawthorn",
+      "ring": "Middle",
+      "avg": 5.67,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        7.5,
+        0,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hawthorn East",
+      "ring": "Middle",
+      "avg": 5.33,
+      "min": 0,
+      "max": 9.7,
+      "scores": [
+        9.7,
+        0,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Healesville",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Heath Hill",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Heatherton",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Heathmont",
+      "ring": "Outer",
+      "avg": 2.77,
+      "min": 0,
+      "max": 8.3,
+      "scores": [
+        0,
+        8.3,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Heidelberg",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Heidelberg Heights",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Heidelberg West",
+      "ring": "Middle",
+      "avg": 2.13,
+      "min": 0,
+      "max": 6.4,
+      "scores": [
+        6.4,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Highett",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hillside",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "HMAS Cerberus",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hoddles Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hoppers Crossing",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hughesdale",
+      "ring": "Middle",
+      "avg": 2.73,
+      "min": 0,
+      "max": 8.2,
+      "scores": [
+        8.2,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Humevale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Huntingdale",
+      "ring": "Middle",
+      "avg": 6.9,
+      "min": 5.6,
+      "max": 9.5,
+      "scores": [
+        5.6,
+        9.5,
+        5.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Hurstbridge",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Iona",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ivanhoe",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ivanhoe East",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Jacana",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Junction Village",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kalkallo",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kallista",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kalorama",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kangaroo Ground",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kealba",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keilor",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keilor Downs",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keilor East",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keilor Lodge",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keilor North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keilor Park",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kensington",
+      "ring": "Inner",
+      "avg": 6.3,
+      "min": 3.8,
+      "max": 8.2,
+      "scores": [
+        3.8,
+        8.2,
+        6.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kew",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kew East",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Keysborough",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kilsyth",
+      "ring": "Outer",
+      "avg": 2.3,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        0,
+        6.9,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kilsyth South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kinglake",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kinglake West",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kings Park",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kingsbury",
+      "ring": "Middle",
+      "avg": 7.8,
+      "min": 7.6,
+      "max": 8.2,
+      "scores": [
+        7.6,
+        7.6,
+        8.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kingsville",
+      "ring": "Middle",
+      "avg": 2.3,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        6.9,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Knoxfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Koo Wee Rup",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Koo Wee Rup North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kooyong",
+      "ring": "Middle",
+      "avg": 4.4,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        6.3,
+        6.9,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Kurunjang",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lalor",
+      "ring": "Outer",
+      "avg": 1.97,
+      "min": 0,
+      "max": 5.6,
+      "scores": [
+        5.6,
+        0.3,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lang Lang",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lang Lang East",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Langwarrin",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Langwarrin South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Launching Place",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Laverton",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Laverton North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lilydale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Little River",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Longwarry",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lower Plenty",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lynbrook",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lyndhurst",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lysterfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Lysterfield South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Macclesfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Macleod",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Maidstone",
+      "ring": "Middle",
+      "avg": 2.1,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        0,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Main Ridge",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Malvern",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Malvern East",
+      "ring": "Middle",
+      "avg": 2.3,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        6.9,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mambourin",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Manor Lakes",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Maribyrnong",
+      "ring": "Middle",
+      "avg": 4.63,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        4.4,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Maryknoll",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "McCrae",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "McKinnon",
+      "ring": "Middle",
+      "avg": 2.3,
+      "min": 0,
+      "max": 6.9,
+      "scores": [
+        0,
+        0,
+        6.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Meadow Heights",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Melbourne",
+      "ring": "Inner",
+      "avg": 8.03,
+      "min": 6.3,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        6.3,
+        8.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Melbourne Airport",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Melton",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Melton South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Melton West",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mentone",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Menzies Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mernda",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Merricks",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Merricks Beach",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Merricks North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mickleham",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Middle Park",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mill Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Millgrove",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mitcham",
+      "ring": "Middle",
+      "avg": 3.17,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        9.5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Modella",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Monbulk",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Monomeith",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mont Albert",
+      "ring": "Middle",
+      "avg": 3.73,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        6.3,
+        4.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mont Albert North",
+      "ring": "Middle",
+      "avg": 1.67,
+      "min": 0,
+      "max": 5,
+      "scores": [
+        0,
+        0,
+        5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Montmorency",
+      "ring": "Middle",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        0,
+        0,
+        3.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Montrose",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Moonee Ponds",
+      "ring": "Inner",
+      "avg": 5.67,
+      "min": 3.8,
+      "max": 8.2,
+      "scores": [
+        3.8,
+        5,
+        8.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Moorabbin",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Moorabbin Airport",
+      "ring": "Middle",
+      "avg": 2.93,
+      "min": 0,
+      "max": 8.8,
+      "scores": [
+        8.8,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Moorooduc",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mooroolbark",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mordialloc",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mornington",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Burnett",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Cottrell",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Dandenong",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Eliza",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Evelyn",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Martha",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Toolebewong",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mount Waverley",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Mulgrave",
+      "ring": "Middle",
+      "avg": 0.3,
+      "min": 0,
+      "max": 0.9,
+      "scores": [
+        0.9,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Murrumbeena",
+      "ring": "Middle",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        3.8,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Nangana",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Nar Nar Goon",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Nar Nar Goon North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Narre Warren",
+      "ring": "Outer",
+      "avg": 3.2,
+      "min": 0,
+      "max": 9.6,
+      "scores": [
+        0,
+        0,
+        9.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Narre Warren East",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Narre Warren North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Narre Warren South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Newport",
+      "ring": "Middle",
+      "avg": 0.07,
+      "min": 0,
+      "max": 0.2,
+      "scores": [
+        0,
+        0,
+        0.2
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Niddrie",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Noble Park",
+      "ring": "Outer",
+      "avg": 4.8,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        0,
+        4.9,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Noble Park North",
+      "ring": "Outer",
+      "avg": 3.43,
+      "min": 0,
+      "max": 8.8,
+      "scores": [
+        1.5,
+        0,
+        8.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "North Melbourne",
+      "ring": "Inner",
+      "avg": 7.97,
+      "min": 6.9,
+      "max": 9.5,
+      "scores": [
+        7.5,
+        9.5,
+        6.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "North Warrandyte",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Northcote",
+      "ring": "Inner",
+      "avg": 3.77,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        5,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Notting Hill",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Nunawading",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Nutfield",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Nyora",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Oak Park",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Oaklands Junction",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Oakleigh",
+      "ring": "Middle",
+      "avg": 4,
+      "min": 0,
+      "max": 8.9,
+      "scores": [
+        8.9,
+        3.1,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Oakleigh East",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Oakleigh South",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Officer",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Officer South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Olinda",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ormond",
+      "ring": "Middle",
+      "avg": 7.5,
+      "min": 5.6,
+      "max": 9.4,
+      "scores": [
+        7.5,
+        5.6,
+        9.4
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Pakenham",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Pakenham South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Pakenham Upper",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Panton Hill",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Park Orchards",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Parkdale",
+      "ring": "Middle",
+      "avg": 3.2,
+      "min": 0,
+      "max": 9.6,
+      "scores": [
+        0,
+        0,
+        9.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Parkville",
+      "ring": "Inner",
+      "avg": 7.8,
+      "min": 4.4,
+      "max": 9.5,
+      "scores": [
+        4.4,
+        9.5,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Parwan",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Pascoe Vale",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Pascoe Vale South",
+      "ring": "Middle",
+      "avg": 6.9,
+      "min": 5,
+      "max": 8.2,
+      "scores": [
+        8.2,
+        7.5,
+        5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Patterson Lakes",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Pearcedale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Plenty",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Plumpton",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Point Cook",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Point Leo",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Port Melbourne",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Portsea",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Powelltown",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Prahran",
+      "ring": "Inner",
+      "avg": 7.5,
+      "min": 6.8,
+      "max": 8.8,
+      "scores": [
+        6.9,
+        8.8,
+        6.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Preston",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Princes Hill",
+      "ring": "Inner",
+      "avg": 2.33,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        3.2,
+        3.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Quandong",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ravenhall",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Red Hill",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Red Hill South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Research",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Reservoir",
+      "ring": "Middle",
+      "avg": 4,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        0,
+        6.3,
+        5.7
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Richmond",
+      "ring": "Inner",
+      "avg": 7.97,
+      "min": 5.6,
+      "max": 9.5,
+      "scores": [
+        5.6,
+        9.5,
+        8.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ringwood",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ringwood East",
+      "ring": "Outer",
+      "avg": 5.7,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        7.6,
+        0,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ringwood North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Ripponlea",
+      "ring": "Inner",
+      "avg": 9.1,
+      "min": 8.2,
+      "max": 9.6,
+      "scores": [
+        9.5,
+        8.2,
+        9.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Rockbank",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Rosanna",
+      "ring": "Middle",
+      "avg": 4.23,
+      "min": 0,
+      "max": 8.3,
+      "scores": [
+        8.3,
+        0,
+        4.4
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Rosebud",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Rowville",
+      "ring": "Outer",
+      "avg": 1.27,
+      "min": 0,
+      "max": 3.8,
+      "scores": [
+        0,
+        3.8,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Roxburgh Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Rye",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Rythdale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Safety Beach",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sandhurst",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sandringham",
+      "ring": "Middle",
+      "avg": 2.1,
+      "min": 0,
+      "max": 6.3,
+      "scores": [
+        6.3,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sassafras",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Scoresby",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Seabrook",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Seaford",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Seaholme",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Seddon",
+      "ring": "Middle",
+      "avg": 8.6,
+      "min": 7.5,
+      "max": 9.5,
+      "scores": [
+        8.8,
+        7.5,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Selby",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Seville",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Seville East",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sherbrooke",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Shoreham",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Silvan",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Skye",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Smiths Gully",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Somers",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Somerton",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Somerville",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sorrento",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "South Kingsville",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "South Melbourne",
+      "ring": "Inner",
+      "avg": 7.03,
+      "min": 5,
+      "max": 9.7,
+      "scores": [
+        9.7,
+        6.4,
+        5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "South Morang",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "South Wharf",
+      "ring": "Inner",
+      "avg": 6.93,
+      "min": 6.3,
+      "max": 7.6,
+      "scores": [
+        6.9,
+        6.3,
+        7.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "South Yarra",
+      "ring": "Inner",
+      "avg": 7.63,
+      "min": 6.4,
+      "max": 9.6,
+      "scores": [
+        9.6,
+        6.4,
+        6.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Southbank",
+      "ring": "Inner",
+      "avg": 9,
+      "min": 8.4,
+      "max": 9.6,
+      "scores": [
+        8.4,
+        9.6,
+        9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Spotswood",
+      "ring": "Middle",
+      "avg": 4.8,
+      "min": 0,
+      "max": 9.4,
+      "scores": [
+        0,
+        5,
+        9.4
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Springvale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Springvale South",
+      "ring": "Outer",
+      "avg": 6.93,
+      "min": 6.3,
+      "max": 8.2,
+      "scores": [
+        8.2,
+        6.3,
+        6.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Albans",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Andrews",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Andrews Beach",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Helena",
+      "ring": "Middle",
+      "avg": 5.9,
+      "min": 3.1,
+      "max": 9.6,
+      "scores": [
+        3.1,
+        5,
+        9.6
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Kilda",
+      "ring": "Inner",
+      "avg": 7.4,
+      "min": 5.6,
+      "max": 8.3,
+      "scores": [
+        8.3,
+        5.6,
+        8.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Kilda East",
+      "ring": "Inner",
+      "avg": 4.23,
+      "min": 0,
+      "max": 8.2,
+      "scores": [
+        0,
+        8.2,
+        4.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "St Kilda West",
+      "ring": "Inner",
+      "avg": 5.03,
+      "min": 0,
+      "max": 8.2,
+      "scores": [
+        0,
+        8.2,
+        6.9
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Steels Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Strathewen",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Strathmore",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Strathmore Heights",
+      "ring": "Middle",
+      "avg": 0.9,
+      "min": 0,
+      "max": 2.7,
+      "scores": [
+        0,
+        2.7,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Strathtulloh",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sunbury",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sunshine",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sunshine North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sunshine West",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Surrey Hills",
+      "ring": "Middle",
+      "avg": 1.87,
+      "min": 0,
+      "max": 5.6,
+      "scores": [
+        0,
+        5.6,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Sydenham",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tarneit",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tarrawarra",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Taylors Hill",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Taylors Lakes",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tecoma",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Templestowe",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Templestowe Lower",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "The Basin",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "The Patch",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Thomastown",
+      "ring": "Outer",
+      "avg": 2.6,
+      "min": 0,
+      "max": 6.4,
+      "scores": [
+        6.4,
+        1.4,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Thornbury",
+      "ring": "Middle",
+      "avg": 2.5,
+      "min": 0,
+      "max": 7.5,
+      "scores": [
+        7.5,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Thornhill Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Three Bridges",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tonimbuk",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Toolangi",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Toolern Vale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tooradin",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Toorak",
+      "ring": "Inner",
+      "avg": 5.5,
+      "min": 0,
+      "max": 8.3,
+      "scores": [
+        0,
+        8.2,
+        8.3
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tootgarook",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tottenham",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Travancore",
+      "ring": "Inner",
+      "avg": 7.53,
+      "min": 5.6,
+      "max": 9.5,
+      "scores": [
+        5.6,
+        7.5,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tremont",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Truganina",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tuerong",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tullamarine",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tyabb",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tynong",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Tynong North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Upper Ferntree Gully",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Upwey",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Vermont",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Vermont South",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Vervale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Viewbank",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wandin East",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wandin North",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wantirna",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wantirna South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Warburton",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Warneet",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Warrandyte",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Warrandyte South",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Warranwood",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Waterways",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Watsonia",
+      "ring": "Middle",
+      "avg": 5.03,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        5.6,
+        0,
+        9.5
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Watsonia North",
+      "ring": "Middle",
+      "avg": 2.07,
+      "min": 0,
+      "max": 6.2,
+      "scores": [
+        6.2,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Watsons Creek",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wattle Glen",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Weir Views",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Werribee",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Werribee South",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wesburn",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "West Footscray",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "West Melbourne",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Westmeadows",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wheelers Hill",
+      "ring": "Middle",
+      "avg": 1.9,
+      "min": 0,
+      "max": 5.7,
+      "scores": [
+        0,
+        0,
+        5.7
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Whittlesea",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wildwood",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Williams Landing",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Williamstown",
+      "ring": "Middle",
+      "avg": 3.17,
+      "min": 0,
+      "max": 9.5,
+      "scores": [
+        0,
+        9.5,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Williamstown North",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Windsor",
+      "ring": "Inner",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wollert",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wonga Park",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Woodstock",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Woori Yallock",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Wyndham Vale",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yallambie",
+      "ring": "Middle",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yan Yean",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yannathan",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yarra Glen",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yarra Junction",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yarrambat",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yarraville",
+      "ring": "Middle",
+      "avg": 2.27,
+      "min": 0,
+      "max": 6.8,
+      "scores": [
+        0,
+        0,
+        6.8
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yellingbo",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yering",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    },
+    {
+      "suburb": "Yuroke",
+      "ring": "Outer",
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "sampledPoints": 3
+    }
+  ]
+}
