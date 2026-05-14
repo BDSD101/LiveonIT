@@ -122,7 +122,8 @@ export const LEADERBOARD_PLACE_TYPES: Record<string, string[]> = {
   connectivity: ['train_station', 'transit_station'],
   parks:        ['park'],
   dining:       ['cafe', 'restaurant'],
-  education:    ['childcare', 'kindergarten', 'primary_school', 'secondary_school'],
+  // education:    ['childcare', 'kindergarten', 'primary_school', 'secondary_school'],
+  education:    ['childcare', 'kindergarten', 'school'],
   fitness:      ['gym'],
   community:    ['community'],
 };
