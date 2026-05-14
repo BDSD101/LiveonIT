@@ -27,7 +27,7 @@ function getOsmPool(): Pool {
     ssl:      process.env.OSM_DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
     max: 4,
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 10000,
+    connectionTimeoutMillis: 30000,
   });
 }
 
@@ -371,9 +371,16 @@ export async function scorePoint(
   const items = getLeaderboardItems();
 
   // 1. Fetch candidates from PostGIS for each type
-  const candidateArrays = await Promise.all(
-    items.map(item => findNearbyOsm(pool, lat, lon, item))
-  );
+  // const candidateArrays = await Promise.all(
+  //   items.map(item => findNearbyOsm(pool, lat, lon, item))
+  // );
+  const candidateArrays: Array<Array<{ name: string; lat: number; lon: number }>> = [];
+  const DB_BATCH = 5;
+  for (let i = 0; i < items.length; i += DB_BATCH) {
+    const batch = items.slice(i, i + DB_BATCH);
+    const results = await Promise.all(batch.map(item => findNearbyOsm(pool, lat, lon, item)));
+    candidateArrays.push(...results);
+  }
 
   // 2. Flatten all candidates with their item metadata
   type RawCandidate = { catId: string; type: string; key: string; name: string; lat: number; lon: number };
@@ -567,7 +574,7 @@ export async function generateLeaderboard(
 
       // Score each sample point — run concurrently but cap at 5 at a time
       // to avoid hammering OSRM/PostGIS
-      const CONCURRENCY = 5;
+      const CONCURRENCY = 2;
       const scores: number[] = [];
 
       for (let i = 0; i < points.length; i += CONCURRENCY) {
