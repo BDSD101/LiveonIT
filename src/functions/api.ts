@@ -1,5 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
+import { Pool } from 'pg';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 import {
   RequestedItem,
@@ -579,6 +582,16 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         return jsonResponse(200, { key: getGoogleMapsApiKey() });
       } catch {
         return jsonResponse(500, { error: 'Google Maps key not configured' });
+      }
+    }
+
+    if (routePath === '/api/ratings' && httpMethod === 'GET') {
+      try {
+        const { rows } = await pool.query('SELECT suburb as "Suburb", region as "Region", rating as "Rating" FROM suburb_ratings');
+        return jsonResponse(200, rows);
+      } catch (err) {
+        console.error('Failed to fetch ratings from DB:', err);
+        return jsonResponse(500, { error: 'Failed to fetch ratings' });
       }
     }
 

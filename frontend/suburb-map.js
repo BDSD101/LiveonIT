@@ -80,28 +80,27 @@ function initApp() {
     loadData();
 }
 
-function loadData() {
-    // 1. Load CSV
-    Papa.parse('suburb_regions_ratings_google_api_centre_final.csv', {
-        download: true,
-        header: true,
-        dynamicTyping: true,
-        complete: function (results) {
-            const data = results.data;
+async function loadData() {
+    try {
+        // 1. Fetch ratings from Postgres database
+        const response = await fetch('/api/ratings');
+        if (!response.ok) throw new Error('Failed to fetch ratings from database');
+        
+        const data = await response.json();
 
-            data.forEach(row => {
-                if (!row.Suburb || !row.Region) return;
+        data.forEach(row => {
+            if (!row.Suburb || !row.Region) return;
 
-                const suburbUpper = row.Suburb.toUpperCase();
-                csvData[suburbUpper] = {
-                    region: row.Region,
-                    rating: row.Rating || 0,
-                    name: row.Suburb
-                };
+            const suburbUpper = row.Suburb.toUpperCase();
+            csvData[suburbUpper] = {
+                region: row.Region,
+                rating: parseFloat(row.Rating) || 0,
+                name: row.Suburb
+            };
 
-                if (!regions[row.Region]) regions[row.Region] = [];
-                regions[row.Region].push(csvData[suburbUpper]);
-            });
+            if (!regions[row.Region]) regions[row.Region] = [];
+            regions[row.Region].push(csvData[suburbUpper]);
+        });
 
             // Load GeoJSON
             map.data.loadGeoJson('vic.geojson', null, function (features) {
@@ -116,10 +115,11 @@ function loadData() {
                     lucide.createIcons();
                 }
             });
-        }
-    });
+    } catch (err) {
+        console.error('Failed to load data:', err);
+        document.getElementById('map-loader').innerHTML = '<p class="text-rose-500 font-bold">Failed to load data</p>';
+    }
 }
-
 function renderTabs() {
     const container = document.getElementById('region-tabs');
     container.innerHTML = '';
