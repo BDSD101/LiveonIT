@@ -89,7 +89,7 @@ export type SeedAnalysis = SuburbSeedPoint & {
   index: number;
 };
 
-export const WALKABLE_THRESHOLD_METERS = 800;
+export const WALKABLE_THRESHOLD_METERS = 2000;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
 

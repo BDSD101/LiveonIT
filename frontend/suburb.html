@@ -23,12 +23,46 @@
     </nav>
   </header>
 
-  <main class="flex-1 max-w-7xl mx-auto px-6 py-16 md:py-20 w-full flex items-center justify-center text-center">
-    <div>
-      <h2 class="text-3xl font-extrabold mb-4 text-slate-900">Suburb Overview</h2>
-      <p class="text-[#536070] text-lg">Coming Soon</p>
+  <main id="view-home" class="flex-1 flex justify-center px-4 lg:px-6 py-5 lg:py-8 max-w-[1560px] mx-auto w-full">
+    <div id="dashboard-grid">
+
+      <!-- Left Column: Leaderboard -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow flex flex-col desktop-contain order-6 lg:col-start-1 lg:row-start-1 lg:row-span-3 min-h-[500px]">
+        <div class="flex items-center gap-2 mb-3 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter flex-shrink-0">
+          <i data-lucide="list" class="w-3.5 h-3.5"></i>
+          Region Leaderboards
+        </div>
+        <p class="text-[10px] text-slate-400 mt-1 font-inter mb-3 flex-shrink-0 uppercase tracking-wider font-bold">Top 10 rated 20-minute neighbourhoods</p>
+        
+        <!-- Region Filter Tabs -->
+        <div class="pb-3 border-b border-slate-100 flex-shrink-0">
+          <div class="flex flex-wrap gap-2" id="region-tabs">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Leaderboard List -->
+        <div class="flex-1 overflow-y-auto pt-3 space-y-3 pr-1" id="leaderboard-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Middle Column: Map (Expanded) -->
+      <div class="relative bg-white rounded-xl border border-slate-200 custom-shadow overflow-hidden order-2 h-[560px] lg:col-start-2 lg:col-span-2 lg:row-start-1 lg:row-span-3 lg:h-auto">
+        <div id="suburb-map" class="w-full h-full absolute inset-0 bg-slate-50"></div>
+        
+        <!-- Loading Overlay -->
+        <div id="map-loader" class="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center transition-opacity duration-300">
+          <div class="animate-spin rounded-full h-10 w-10 border-4 border-[#004071] border-t-transparent mb-4"></div>
+          <div class="text-sm font-bold text-slate-700 animate-pulse">Loading Map Data...</div>
+        </div>
+      </div>
+
     </div>
   </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <script src="suburb-map.js"></script>
 
   <footer class="bg-white py-10 px-6 border-t border-slate-200 mt-auto">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
