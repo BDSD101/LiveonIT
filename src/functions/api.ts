@@ -1,8 +1,18 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
+import https from 'https';
 import { Pool } from 'pg';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+const googleApi = axios.create({
+  httpsAgent: new https.Agent({
+    keepAlive: true,
+    maxSockets: 50,
+    keepAliveMsecs: 1000,
+  }),
+  timeout: 10000,
+});
 
 import {
   RequestedItem,
@@ -168,7 +178,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    const response = await axios.post(
+    const response = await googleApi.post(
       'https://places.googleapis.com/v1/places:searchNearby',
       {
         includedTypes: [item.type],
@@ -247,7 +257,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    const response = await axios.post(
+    const response = await googleApi.post(
       'https://places.googleapis.com/v1/places:searchText',
       {
         textQuery: item.textQuery,
@@ -344,7 +354,7 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     const destinations = batch.map(c => `${c.lat},${c.lon}`).join('|');
     try {
       trackApiCall('distanceMatrix');
-      const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
+      const response = await googleApi.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
         params: {
           origins: `${originLat},${originLon}`,
           destinations,
@@ -544,18 +554,19 @@ async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
   const cached = getCached<SeedAnalysis[]>(cacheKey);
   if (cached) return cached;
 
-  const analyses: SeedAnalysis[] = [];
-  for (const point of SUBURB_SEED_POINTS) {
+  const analyses = await Promise.all(SUBURB_SEED_POINTS.map(async (point) => {
     try {
       const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
-      analyses.push({ ...point, index: analysis.index });
+      return { ...point, index: analysis.index };
     } catch (err) {
       console.error(`Failed seed analysis for ${point.name}`, err);
+      return null;
     }
-  }
+  }));
 
-  setCached(cacheKey, analyses, CACHE_TTL_MS.seedAnalytics);
-  return analyses;
+  const results = analyses.filter((a): a is SeedAnalysis => a !== null);
+  setCached(cacheKey, results, CACHE_TTL_MS.seedAnalytics);
+  return results;
 }
 
 // --- Main Lambda Handler ---
@@ -587,8 +598,32 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     if (routePath === '/api/ratings' && httpMethod === 'GET') {
       try {
+        const cacheKey = 'api_ratings_all';
+        const cached = getCached<any[]>(cacheKey);
+        if (cached) {
+          return {
+            statusCode: 200,
+            headers: {
+              ...corsHeaders,
+              'Content-Type': 'application/json',
+              'Cache-Control': 'public, max-age=3600',
+            },
+            body: JSON.stringify(cached),
+          };
+        }
+
         const { rows } = await pool.query('SELECT suburb as "Suburb", region as "Region", rating as "Rating" FROM suburb_ratings');
-        return jsonResponse(200, rows);
+        setCached(cacheKey, rows, 1000 * 60 * 60); // 1 hour cache
+
+        return {
+          statusCode: 200,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=3600',
+          },
+          body: JSON.stringify(rows),
+        };
       } catch (err) {
         console.error('Failed to fetch ratings from DB:', err);
         return jsonResponse(500, { error: 'Failed to fetch ratings' });
@@ -607,7 +642,15 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     if (routePath === '/api/heatmap' && httpMethod === 'GET') {
       try {
         const analyses = await getSeedAnalyses();
-        return jsonResponse(200, buildHeatmap(analyses));
+        return {
+          statusCode: 200,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=3600',
+          },
+          body: JSON.stringify(buildHeatmap(analyses)),
+        };
       } catch {
         return jsonResponse(500, { error: 'Failed to derive heatmap data' });
       }
@@ -622,7 +665,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       if (cached) return jsonResponse(200, cached);
 
       trackApiCall('geocoding');
-      const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      const response = await googleApi.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: `${q}, Victoria, Australia`,
           key: getGoogleMapsApiKey(),
@@ -682,7 +725,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const cached = getCached<any>(routeCacheKey);
       if (cached) return jsonResponse(200, cached);
       trackApiCall('directions');
-      const response = await axios.get('https://maps.googleapis.com/maps/api/directions/json', {
+      const response = await googleApi.get('https://maps.googleapis.com/maps/api/directions/json', {
         params: {
           origin: `${sLat},${sLon}`,
           destination: `${eLat},${eLon}`,
@@ -729,7 +772,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
       let response;
       if (query) {
-        response = await axios.post(
+        response = await googleApi.post(
           'https://places.googleapis.com/v1/places:searchText',
           {
             textQuery: query,
@@ -744,7 +787,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           { headers }
         );
       } else {
-        response = await axios.post(
+        response = await googleApi.post(
           'https://places.googleapis.com/v1/places:searchNearby',
           {
             includedTypes: [type],
@@ -776,4 +819,4 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     console.error(err);
     return jsonResponse(500, { error: 'Internal Error' });
   }
-};
+};;
