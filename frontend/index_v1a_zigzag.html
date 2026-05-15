@@ -55,12 +55,6 @@
     .jv1-label { font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#004071; font-family:'Inter',sans-serif; margin-bottom:3px; }
     .jv1-title { font-size:15px; font-weight:700; color:#1a1a2e; margin-bottom:6px; font-family:'Public Sans',sans-serif; }
     .jv1-body  { font-size:13px; color:#536070; line-height:1.65; font-family:'Inter',sans-serif; }
-    .jv1-caption {
-      font-size: 10px; color: #94a3b8;
-      font-family: 'Inter', sans-serif;
-      text-align: center; line-height: 1.4;
-      margin-top: 6px; padding: 0 4px;
-    }
   </style>
 </head>
 <body class="bg-[#F8F9FA] text-slate-900 min-h-screen flex flex-col">
@@ -108,7 +102,69 @@
 
         <div class="journey-v1-container" id="v1-container">
           <svg class="journey-v1-svg" id="v1-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
-          <!-- Steps rendered by JS from the STEPS constant below -->
+
+          <!-- Step 1 left -->
+          <div class="journey-v1-step">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 1</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n1">1</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 1</div><div class="jv1-title">Discover your neighbourhood</div><div class="jv1-body">Enter your home address to begin. The tool locates your position within Melbourne and prepares a personalised walkability assessment aligned with the Victorian Government's 20-minute neighbourhood policy framework.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 2 right -->
+          <div class="journey-v1-step reverse">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 2</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n2">2</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 2</div><div class="jv1-title">Map your 800m radius</div><div class="jv1-body">An 800-metre walking radius is drawn around your address, representing a genuine 20-minute return walk. This defines the zone within which essential services are assessed and scored for your area.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 3 left -->
+          <div class="journey-v1-step">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 3</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n3">3</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 3</div><div class="jv1-title">Score essential services</div><div class="jv1-body">Each category — food, health, transit, parks, education, and community — is assessed for proximity. A weighted model produces an overall walkability score reflecting how well your neighbourhood meets daily needs.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 4 right -->
+          <div class="journey-v1-step reverse">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 4</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n4">4</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 4</div><div class="jv1-title">Explore the interactive map</div><div class="jv1-body">Dive into the dashboard with an interactive map. Toggle service layers, zoom into streets, and see exactly which facilities fall within your walking zone and which sit just beyond the boundary.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 5 left -->
+          <div class="journey-v1-step">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 5</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n5">5</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 5</div><div class="jv1-title">Compare by suburb</div><div class="jv1-body">Use the suburb leaderboard to see how your area ranks across Melbourne. Filter by city ring and service category to identify which suburbs lead in walkability and where yours stands.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 6 right -->
+          <div class="journey-v1-step reverse">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 6</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n6">6</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 6</div><div class="jv1-title">Identify service gaps</div><div class="jv1-body">Understand exactly what's missing within your walkable zone. The gap analysis highlights low-scoring categories, giving residents, planners, and councils clear insight into where improvements are most needed.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 7 left -->
+          <div class="journey-v1-step">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 7</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n7">7</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 7</div><div class="jv1-title">Review supporting data</div><div class="jv1-body">Explore the underlying datasets powering each score. Supporting data includes crime statistics, housing density, demographic overlays, and transit frequency maps from open Victorian Government and ABS sources.</div></div>
+          </div>
+          <div class="journey-v1-gap"></div>
+
+          <!-- Step 8 right -->
+          <div class="journey-v1-step reverse">
+            <div class="journey-v1-image"><div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image 8</span></div></div>
+            <div class="journey-v1-node-wrap"><div class="journey-v1-node" id="v1n8">8</div></div>
+            <div class="journey-v1-card"><div class="jv1-label">Step 8</div><div class="jv1-title">Take action locally</div><div class="jv1-body">Armed with your score and gap report, connect with council initiatives or share results with your community. The 20-minute neighbourhood vision becomes reality when residents and planners act on shared, transparent data.</div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -189,90 +245,6 @@
   </footer>
 
   <script>
-    // ══════════════════════════════════════════════════════════════'═
-    // STEPS — edit title and body text here for each step card
-    // ═══════════════════════════════════════════════════════════════
-    const STEPS = [
-      {
-        title:   'Want to find a place to live in Melbourne thats perfect for you? Start here!',
-        body:    'Everyone has different priorities when finding the right place to live.',
-        caption: 'Satellite Image of Melbourne with a house icon and a question mark above it',
-        img:     'images/melbourne_satellite.webp',
-      },
-      {
-        title:   'Benefits of Living Locally',
-        body:    'Imagine a life where everything you need is just a short stroll away. You save time and money not having to travel far for daily needs like groceries, health services, recreation and green spaces. There are many other benefits too like better health, stronger community connections, and a smaller carbon footprint. It is termed a 20-minute neighbourhood by the Victorian Goverenment which it includes in it\'s Plan Melbourne 2017–2050 strategy for creating inclusive, vibrant, and sustainable communities where people can live, work, and play locally. You can read more about the plan here: https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods',
-        caption: 'Features of a 20-minute neighbourhood',
-        img:     'images/features_of_a_20_minute_neighbourhood.png',
-      },
-      {
-        title:   'Research Melbourne\'s Suburbs for Walkability',
-        body:    'Learn more about the most walkable suburbs in Melbourne. Our suburb overview page ranks areas based on their walkability scores, highlighting the best places to live for those seeking a local lifestyle.',
-        caption: 'Suburb Leaderboard, Heatmap, Supporting Data',
-        img:     'images/support_data.webp',
-      },
-      {
-        title:   'Select Services',
-        body:    'Everyone has different priorities when it comes to what they want to access within a 20-minute neighbourhood. Select the services that matter most to you to see how your area scores and what\'s within reach. Adjust or stick to the default settings. It\'s up to you.',
-        caption: 'Checkboxes',
-        img:     'images/checkboxes.webp',
-      },
-      {
-        title:   'Enter a Melbourne Address',
-        body:    'When assessing an available housing opportunity, enter the address to see how many services are within a 20-minute walk from your location and how to get there. You will even get a score out of 10 to make it easier to compare different locations at a glance. The more services within reach, the higher the score.',
-        caption: 'Sample Map',
-        img:     'images/map.webp',
-      },
-      {
-        title:   'Compare a list of housing options',
-        body:    'Finding a place to live can be a time consuming and process. Searching multiple addresses will generate a ranked listing of the best options based on your selected services. This makes it easy to prioritise where you spend your valueable time and effort to get the best result for you',
-        caption: 'Time, Money and Effort Saved',
-      },
-      {
-        title:   'Changing Circumstances? Revisit',
-        body:    'Circumstances change over time whether it be a new job, a new baby, or a change in health. Melbourne\'s services and infrastructure are also changing faster than ever. There are many reasons to revisit us and continue to let us help you find your next great place to live',
-        caption: 'See you again soon!',
-      },
-    ];
-
-    // Render steps into the container from the STEPS constant above
-    (function renderSteps() {
-      const container = document.getElementById('v1-container');
-      const svg = document.getElementById('v1-svg');
-      STEPS.forEach((step, i) => {
-        const isReverse = i % 2 !== 0;
-        const stepEl = document.createElement('div');
-        stepEl.className = 'journey-v1-step' + (isReverse ? ' reverse' : '');
-        stepEl.innerHTML = `
-          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:150px;">
-            <div class="journey-v1-image" style="width:100%;">
-              ${step.img
-                ? `<img src="${step.img}" alt="${step.caption || step.title}" style="width:100%;height:100%;object-fit:cover;display:block;"/>`
-                : `<div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image ${i + 1}</span></div>`
-              }
-            </div>
-            ${step.caption ? `<p class="jv1-caption">${step.caption}</p>` : ''}
-          </div>
-          <div class="journey-v1-node-wrap">
-            <div class="journey-v1-node">${i + 1}</div>
-          </div>
-          <div class="journey-v1-card">
-            <div class="jv1-label">Step ${i + 1}</div>
-            <div class="jv1-title">${step.title}</div>
-            <div class="jv1-body">${step.body}</div>
-          </div>
-        `;
-        container.appendChild(stepEl);
-        // Add gap after every step except the last
-        if (i < STEPS.length - 1) {
-          const gap = document.createElement('div');
-          gap.className = 'journey-v1-gap';
-          container.appendChild(gap);
-        }
-      });
-      // Re-init Lucide icons for the newly inserted image placeholders
-      lucide.createIcons();
-    })();
     const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
       ? 'http://localhost:3000'
       : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
@@ -305,90 +277,59 @@
     }
     document.addEventListener('click',(e)=>{if(!e.target.closest('#landing-search-form'))document.getElementById('landing-results').classList.remove('show');});
 
+    // Draw a wide, soft snaking road as a background behind the nodes.
+    // Uses cubic bezier curves (C) with control points that swing hard left/right
+    // on alternating segments to create a genuine S-shape.
     function drawV1Path() {
       const container = document.getElementById('v1-container');
       const svg = document.getElementById('v1-svg');
       if (!container || !svg) return;
       const nodes = container.querySelectorAll('.journey-v1-node');
-      const gaps  = container.querySelectorAll('.journey-v1-gap');
       if (nodes.length < 2) return;
 
-      const W = container.offsetWidth;
-      const H = container.offsetHeight;
+      const cRect = container.getBoundingClientRect();
+      const W = cRect.width;
 
-      function centre(el) {
-        let x = 0, y = 0, cur = el;
-        while (cur && cur !== container) { x += cur.offsetLeft; y += cur.offsetTop; cur = cur.offsetParent; }
-        return { x: x + el.offsetWidth / 2, y: y + el.offsetHeight / 2 };
-      }
-
-      const pts = Array.from(nodes).map(centre);
-
-      const gapYs = Array.from(gaps).map(g => {
-        let y = 0, cur = g;
-        while (cur && cur !== container) { y += cur.offsetTop; cur = cur.offsetParent; }
-        return y + g.offsetHeight / 2;
+      // Collect each node's centre position relative to the container
+      const pts = Array.from(nodes).map(n => {
+        const r = n.getBoundingClientRect();
+        return { x: r.left - cRect.left + r.width / 2, y: r.top - cRect.top + r.height / 2 };
       });
 
-      // Rounded corner radius
-      const r = 12;
+      // Build a smooth cubic bezier path through all nodes.
+      // For each segment A→B, the two control points swing perpendicular to the
+      // direction of travel — one-third of the vertical span in from each end,
+      // displaced horizontally by `swing` px toward the centre of the page.
+      // Alternating which side the bulge goes on creates the S.
+      const swing = W * 0.38; // how far the road bows toward centre each bend
 
-      // Build path with quarter-circle arcs at each corner instead of sharp bends.
-      // Each segment has two corners: one where vertical meets horizontal (bottom of node col),
-      // and one where horizontal meets vertical again (entering next node col).
-      // Arc sweep flags: 0=counter-clockwise, 1=clockwise — chosen per corner geometry.
       let d = `M ${pts[0].x} ${pts[0].y}`;
-
       for (let i = 0; i < pts.length - 1; i++) {
-        const a  = pts[i];
-        const b  = pts[i + 1];
-        const gy = gapYs[i] !== undefined ? gapYs[i] : (a.y + b.y) / 2;
-
-        // Direction of horizontal travel: +1 = right (a is left of b), -1 = left
-        const hDir = b.x > a.x ? 1 : -1;
-
-        // Corner 1: turning from downward → horizontal at (a.x, gy)
-        // Sweep: going right → sweep=0 (left turn); going left → sweep=1 (right turn)
-        const sweep1 = hDir > 0 ? 0 : 1;
-        d += ` V ${gy - r}`;
-        d += ` A ${r} ${r} 0 0 ${sweep1} ${a.x + hDir * r} ${gy}`;
-
-        // Corner 2: turning from horizontal → downward at (b.x, gy)
-        // Sweep: going right then down → sweep=1; going left then down → sweep=0
-        const sweep2 = hDir > 0 ? 1 : 0;
-        d += ` H ${b.x - hDir * r}`;
-        d += ` A ${r} ${r} 0 0 ${sweep2} ${b.x} ${gy + r}`;
-
-        d += ` V ${b.y}`;
+        const a = pts[i];
+        const b = pts[i + 1];
+        const dy = b.y - a.y;
+        // cp1 leaves node A heading toward centre, cp2 arrives at B from centre
+        const cx = W / 2; // horizontal centre of the full container
+        // Pull strength: control points sit one-third of the way along the segment
+        const cp1x = a.x + (cx - a.x) * 0.7;
+        const cp1y = a.y + dy * 0.25;
+        const cp2x = b.x + (cx - b.x) * 0.7;
+        const cp2y = b.y - dy * 0.25;
+        d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${b.x} ${b.y}`;
       }
 
-      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-      svg.setAttribute('width', W);
-      svg.setAttribute('height', H);
+      const totalH = pts[pts.length - 1].y + 40;
+      svg.setAttribute('viewBox', `0 0 ${W} ${totalH}`);
+      svg.setAttribute('height', totalH);
 
-      // Stick figure on the horizontal leg of the first gap
-      const figX = (pts[0].x + pts[1].x) / 2;
-      const figY = gapYs[0];
-      const s = 14;
-
-      const stickFig = `
-        <g transform="translate(${figX}, ${figY})"
-           stroke="#004071" stroke-linecap="round" stroke-linejoin="round"
-           fill="none" opacity="0.6">
-          <circle cx="0" cy="${-s * 2.5}" r="${s * 0.42}" fill="#004071" stroke="none"/>
-          <line x1="0" y1="${-s * 2.08}" x2="0" y2="${-s * 1.1}"/>
-          <line x1="0" y1="${-s * 1.85}" x2="${-s * 0.6}" y2="${-s * 1.3}"/>
-          <line x1="0" y1="${-s * 1.85}" x2="${s * 0.55}" y2="${-s * 1.55}"/>
-          <line x1="0" y1="${-s * 1.1}" x2="${-s * 0.5}" y2="${-s * 0.1}"/>
-          <line x1="0" y1="${-s * 1.1}" x2="${s * 0.45}" y2="${-s * 0.15}"/>
-        </g>
-      `;
-
+      // Three layered strokes: a wide pale fill for the road body,
+      // a slightly narrower mid tone, and a hairline centre stripe —
+      // all very low opacity so content stays readable
       svg.innerHTML = `
-        <path d="${d}" fill="none" stroke="#004071"
-          stroke-width="1" stroke-dasharray="5 6"
-          stroke-linecap="round" opacity="0.18"/>
-        ${stickFig}
+        <path d="${d}" fill="none" stroke="#c8daea" stroke-width="52" stroke-linecap="round" opacity="0.55"/>
+        <path d="${d}" fill="none" stroke="#b8cedd" stroke-width="36" stroke-linecap="round" opacity="0.45"/>
+        <path d="${d}" fill="none" stroke="#a0bdd0" stroke-width="20" stroke-linecap="round" opacity="0.35"/>
+        <path d="${d}" fill="none" stroke="#7aaac4" stroke-width="3" stroke-linecap="round" stroke-dasharray="12 10" opacity="0.4"/>
       `;
     }
     window.addEventListener('load', drawV1Path);

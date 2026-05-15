@@ -189,49 +189,49 @@
   </footer>
 
   <script>
-    // ══════════════════════════════════════════════════════════════'═
+    // ═══════════════════════════════════════════════════════════════
     // STEPS — edit title and body text here for each step card
     // ═══════════════════════════════════════════════════════════════
     const STEPS = [
       {
-        title:   'Want to find a place to live in Melbourne thats perfect for you? Start here!',
-        body:    'Everyone has different priorities when finding the right place to live.',
-        caption: 'Satellite Image of Melbourne with a house icon and a question mark above it',
-        img:     'images/melbourne_satellite.webp',
+        title:   'Discover your neighbourhood',
+        body:    'Enter your home address to begin. The tool locates your position within Melbourne and prepares a personalised walkability assessment aligned with the Victorian Government\'s 20-minute neighbourhood policy framework.',
+        caption: 'Caption for image 1',
       },
       {
-        title:   'Benefits of Living Locally',
-        body:    'Imagine a life where everything you need is just a short stroll away. You save time and money not having to travel far for daily needs like groceries, health services, recreation and green spaces. There are many other benefits too like better health, stronger community connections, and a smaller carbon footprint. It is termed a 20-minute neighbourhood by the Victorian Goverenment which it includes in it\'s Plan Melbourne 2017–2050 strategy for creating inclusive, vibrant, and sustainable communities where people can live, work, and play locally. You can read more about the plan here: https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods',
-        caption: 'Features of a 20-minute neighbourhood',
-        img:     'images/features_of_a_20_minute_neighbourhood.png',
+        title:   'Map your 800m radius',
+        body:    'An 800-metre walking radius is drawn around your address, representing a genuine 20-minute return walk. This defines the zone within which essential services are assessed and scored for your area.',
+        caption: 'Caption for image 2',
       },
       {
-        title:   'Research Melbourne\'s Suburbs for Walkability',
-        body:    'Learn more about the most walkable suburbs in Melbourne. Our suburb overview page ranks areas based on their walkability scores, highlighting the best places to live for those seeking a local lifestyle.',
-        caption: 'Suburb Leaderboard, Heatmap, Supporting Data',
-        img:     'images/support_data.webp',
+        title:   'Score essential services',
+        body:    'Each category — food, health, transit, parks, education, and community — is assessed for proximity. A weighted model produces an overall walkability score reflecting how well your neighbourhood meets daily needs.',
+        caption: 'Caption for image 3',
       },
       {
-        title:   'Select Services',
-        body:    'Everyone has different priorities when it comes to what they want to access within a 20-minute neighbourhood. Select the services that matter most to you to see how your area scores and what\'s within reach. Adjust or stick to the default settings. It\'s up to you.',
-        caption: 'Checkboxes',
-        img:     'images/checkboxes.webp',
+        title:   'Explore the interactive map',
+        body:    'Dive into the dashboard with an interactive map. Toggle service layers, zoom into streets, and see exactly which facilities fall within your walking zone and which sit just beyond the boundary.',
+        caption: 'Caption for image 4',
       },
       {
-        title:   'Enter a Melbourne Address',
-        body:    'When assessing an available housing opportunity, enter the address to see how many services are within a 20-minute walk from your location and how to get there. You will even get a score out of 10 to make it easier to compare different locations at a glance. The more services within reach, the higher the score.',
-        caption: 'Sample Map',
-        img:     'images/map.webp',
+        title:   'Compare by suburb',
+        body:    'Use the suburb leaderboard to see how your area ranks across Melbourne. Filter by city ring and service category to identify which suburbs lead in walkability and where yours stands.',
+        caption: 'Caption for image 5',
       },
       {
-        title:   'Compare a list of housing options',
-        body:    'Finding a place to live can be a time consuming and process. Searching multiple addresses will generate a ranked listing of the best options based on your selected services. This makes it easy to prioritise where you spend your valueable time and effort to get the best result for you',
-        caption: 'Time, Money and Effort Saved',
+        title:   'Identify service gaps',
+        body:    'Understand exactly what\'s missing within your walkable zone. The gap analysis highlights low-scoring categories, giving residents, planners, and councils clear insight into where improvements are most needed.',
+        caption: 'Caption for image 6',
       },
       {
-        title:   'Changing Circumstances? Revisit',
-        body:    'Circumstances change over time whether it be a new job, a new baby, or a change in health. Melbourne\'s services and infrastructure are also changing faster than ever. There are many reasons to revisit us and continue to let us help you find your next great place to live',
-        caption: 'See you again soon!',
+        title:   'Review supporting data',
+        body:    'Explore the underlying datasets powering each score. Supporting data includes crime statistics, housing density, demographic overlays, and transit frequency maps from open Victorian Government and ABS sources.',
+        caption: 'Caption for image 7',
+      },
+      {
+        title:   'Take action locally',
+        body:    'Armed with your score and gap report, connect with council initiatives or share results with your community. The 20-minute neighbourhood vision becomes reality when residents and planners act on shared, transparent data.',
+        caption: 'Caption for image 8',
       },
     ];
 
@@ -246,10 +246,10 @@
         stepEl.innerHTML = `
           <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:150px;">
             <div class="journey-v1-image" style="width:100%;">
-              ${step.img
-                ? `<img src="${step.img}" alt="${step.caption || step.title}" style="width:100%;height:100%;object-fit:cover;display:block;"/>`
-                : `<div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image ${i + 1}</span></div>`
-              }
+              <div class="journey-v1-image-inner">
+                <i data-lucide="image" class="w-8 h-8 text-slate-300"></i>
+                <span>Image ${i + 1}</span>
+              </div>
             </div>
             ${step.caption ? `<p class="jv1-caption">${step.caption}</p>` : ''}
           </div>
