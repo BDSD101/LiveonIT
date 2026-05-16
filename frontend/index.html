@@ -61,6 +61,37 @@
       text-align: center; line-height: 1.4;
       margin-top: 6px; padding: 0 4px;
     }
+    .jv1-body p {
+    margin-bottom: 0.6rem;
+    }
+    @media (max-width: 640px) {
+      .journey-v1-step,
+      .journey-v1-step.reverse {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .journey-v1-image-wrap {
+        width: 100% !important;
+        order: 3;
+      }
+      .journey-v1-image {
+        width: 100% !important;
+        height: 200px !important;
+      }
+      .journey-v1-svg {
+        display: none;
+      }
+      .journey-v1-card {
+        width: 100%;
+        order: 2;
+      }
+      .journey-v1-node-wrap {
+        width: 100%;
+        justify-content: center;
+        order: 1;
+      }
+    }
   </style>
 </head>
 <body class="bg-[#F8F9FA] text-slate-900 min-h-screen flex flex-col">
@@ -112,7 +143,7 @@
       </div>
     </section>
 
-    <!-- LIVING LOCALLY -->
+    <!-- LIVING LOCALLY
     <section class="max-w-7xl mx-auto px-6 py-16 md:py-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
         <div class="space-y-8">
@@ -156,17 +187,17 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- STATS -->
-    <section class="py-14 border-b border-slate-200">
+    <!-- <section class="py-14 border-b border-slate-200">
       <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
         <div class="border-l-2 border-[#004071] pl-5"><div class="text-3xl font-extrabold text-slate-900 mb-1">20min</div><div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Return Walk Target</div></div>
         <div class="border-l-2 border-[#004071] pl-5"><div class="text-3xl font-extrabold text-slate-900 mb-1">800m</div><div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Walking Radius</div></div>
         <div class="border-l-2 border-[#2E7D32] pl-5"><div class="text-3xl font-extrabold text-slate-900 mb-1">7</div><div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Service Categories</div></div>
         <div class="border-l-2 border-[#2E7D32] pl-5"><div class="text-3xl font-extrabold text-slate-900 mb-1">25+</div><div class="text-[10px] uppercase tracking-[0.2em] font-bold text-[#536070] font-inter">Service Types</div></div>
       </div>
-    </section>
+    </section> -->
 
     <!-- CTA -->
     <section class="py-16 md:py-20">
@@ -179,67 +210,126 @@
   </main>
 
   <footer class="bg-white py-10 px-6 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="flex gap-6 text-sm font-medium text-[#536070] font-inter">
         <a class="hover:text-[#004071] transition-colors" href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods" target="_blank" rel="noopener">Vic Gov Policy</a>
         <a class="hover:text-[#004071] transition-colors" href="/dashboard.html">Dashboard</a>
       </div>
     </div>
+    <div class="max-w-3xl mx-auto mt-8 pt-6 border-t border-slate-100">
+      <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400 font-inter mb-3">Image Credits</p>
+      <ul id="image-credits" class="text-xs text-slate-400 font-inter space-y-1"></ul>
+    </div>
   </footer>
 
   <script>
+    const IMG_WIDTH  = 220;
+    const IMG_HEIGHT = 220;
     // ══════════════════════════════════════════════════════════════'═
     // STEPS — edit title and body text here for each step card
     // ═══════════════════════════════════════════════════════════════
     const STEPS = [
       {
-        title:   'Looking for a place to live in Melbourne thats perfect for you? Start here!',
-        body:    'Everyone has different priorities when finding the right place to live. This tool is designed to help you quickly evaluate any Melbourne address for accessibility to local services that matter most to you. Whether you are looking for a place to rent or buy, or just curious about your current location, we make it easy to understand your neighbourhood at a glance.',
-        caption: 'Satellite Image of Melbourne with a house icon and a question mark above it',
-        img:     'images/melbourne_satellite.webp',
+        title:   'Looking for a place to live in Melbourne thats perfect for you? Start here and save time!',
+        body:    'Finding a place to live can be a <strong>time consuming</strong> and <strong>complex process</strong>. \
+        This tool is designed to help you <strong>quickly evaluate</strong> any Melbourne address for accessibility to local services that matter most to you. \
+        Whether you are looking for a place to rent or buy, or just curious about your current location, we make it easy to understand your neighbourhood at a glance.',
+        // caption: 'Satellite Image of Melbourne with a house icon and a question mark above it',
         img:     'images/tom-rumble-7lvzopTxjOU-unsplash.jpg',
+        attribution: {
+          author:     'Tom Rumble',
+          authorUrl:  'https://unsplash.com/@tomrumble',
+          source:     'Unsplash',
+          sourceUrl:  'https://unsplash.com/photos/top-view-photography-of-houses-at-daytime-7lvzopTxjOU',
+          licence:    'Unsplash Licence',
+          licenceUrl: 'https://unsplash.com/license',
+        },
       },
       {
         title:   'Consider the benefits of Living Locally',
-        body:    'Imagine a life where everything you need is just a short stroll away. You save time and money not having to travel far for daily needs like groceries, health services, recreation and green spaces. There are many other benefits too like better health, stronger community connections, and a smaller carbon footprint.',
-        caption: 'Features of a 20-minute neighbourhood',
-        img:     'images/features_of_a_20_minute_neighbourhood.png',
+        body:    '<p>Imagine a life where everything you need is just a short stroll away. \
+        You <strong>save time and money</strong> not having to travel far for daily needs like groceries, health services, recreation and green spaces. \
+        There are many flow on benefits including <strong>better health</strong>, stronger <strong>community connections</strong>, and <strong>living sustainably</strong>.</p>\
+        <p><strong>20-minute neighbourhoods</strong> are are included in the Victorian Government\'s <strong>Plan Melbourne 2017–2050</strong> strategy for creating inclusive, vibrant, and sustainable communities where people can live, work, and play locally. \
+        <a class="inline-flex items-center text-[#004071] font-bold text-sm hover:underline font-inter" href="https://www.planning.vic.gov.au/guides-and-resources/strategies-and-initiatives/20-minute-neighbourhoods" target="_blank" rel="noopener">Read the Official Plan</a>.</p>',
+        caption: 'What is a 20-minute neighbourhood?',
+        // img:     'images/features_of_a_20_minute_neighbourhood.png',
+        youtube: '1oYvbrDVjcY',
+        attribution: {
+          author:    'Victorian Government-DEECA',
+          source:    'YouTube',
+          sourceUrl: 'https://www.youtube.com/watch?v=1oYvbrDVjcY',
+          licence:   'Standard YouTube Licence',
+          licenceUrl:'https://www.youtube.com/t/terms',
+        },
       },
       {
         title:   'Target your search: Start by reviewing our Suburb Overview',
-        body:    'Learn more about the most walkable suburbs in Melbourne. Our suburb overview page ranks areas based on their walkability scores, highlighting the best places to live for those seeking a local lifestyle.',
+        body:    'Learn more about the most walkable suburbs in Melbourne. \
+        Our suburb overview page <strong>ranks suburbs</strong> based on their walkability scores, highlighting the best places to live for those seeking a local lifestyle.',
         caption: 'Suburb Leaderboard, Heatmap, Supporting Data',
         img:     'images/support_data.webp',
       },
       {
         title:   'Select Services',
-        body:    'Everyone has different priorities for local services. Select those that matter most to you. Feel free to adjust from the default selections.',
+        body:    'Everyone has <strong>different priorities</strong> for local services. Select those that <strong>matter most to you</strong>. \
+        Feel free to adjust from the default selections.',
         caption: 'Checkboxes',
         img:     'images/checkboxes.webp',
       },
       {
         title:   'Enter a Melbourne Address',
-        body:    'So you have a housing opportunity to evaluate. Enter the address to see how many services are accessible within a 20-minute return walk from that location and how to get there. You will even get a score out of 10 to make it easier to compare different locations at a glance. The more services within reach, the higher the score.',
+        body:    'So you have a <strong>housing opportunity</strong> to evaluate. \
+        <strong>Enter the address to see how many services are accessible</strong> within a 20-minute return walk from that location and how to get there.',
         caption: 'Sample Map',
         img:     'images/map.webp',
       },
       {
-        title:   'Get the Score',
-        body:    'You will get a score out of 10 to make it easier to compare different locations at a glance. The more services within reach, the higher the score. Scores are comprised of a number of factors including............. You can learn more here:......',
+        title:   'Check the Score',
+        body:    'You will get a <strong>score out of 10</strong> to make it easier to compare different locations at a glance. \
+        The more services within reach, the higher the score. \
+        Scores are comprised of a number of factors including \
+        <strong>proximity</strong> to services, \
+        running an <strong>errand</strong> between services, \
+        <strong>variety and choice</strong> of service \
+        housing <strong>affordability</strong> and \
+        neighbourhood <strong>safety</strong>. \
+        You can learn more about how the scores are calculated on the about page.',
         caption: 'Sample Map',
         img:     'images/score.webp',
       },
       {
-        title:   'Save time. Choose the best housing opportunities to invest your time on',
-        body:    'Finding a place to live can be a time consuming and process. Searching multiple addresses will generate a ranked listing of the best options based on your selected services. This makes it easy to prioritise where you spend your valueable time and effort to get the best result for you',
-        caption: 'Time, Money and Effort Saved',
-        img:     'images/joan-tran-flpCsXSVgoo-unsplash.jpg'
+        title:   'Identify your best housing opportunities',
+        body:    'Searching multiple addresses will generate a <strong>ranked listing</strong> of the <strong>best options</strong> based on your selected services. \
+        This makes it easy to <strong>prioritise</strong> where you spend your valueable time and effort to get the best result for you',
+        caption: 'My best options',
+        // img:     'images/joan-tran-flpCsXSVgoo-unsplash.jpg'
+        // img:     'images/abdul-artega-CxRBtNe243k-unsplash.jpg',
+        // attribution: {
+        //   author:     'Abdul Artega',
+        //   authorUrl:  'https://unsplash.com/@abdulartega',
+        //   source:     'Unsplash',
+        //   sourceUrl:  'https://unsplash.com/photos/green-and-white-alarm-clock-CxRBtNe243k',
+        //   licence:    'Unsplash Licence',
+        //   licenceUrl: 'https://unsplash.com/license',
+        // }, 
       },
       {
         title:   'Come back again',
-        body:    'Circumstances change over time whether it be a new job, a new baby, or a change in health. Melbourne\'s services and infrastructure are also changing faster than ever. There are many reasons to revisit us and continue to let us help you find your next great place to live',
+        body:    '<strong>Circumstances change</strong> over time whether it be a new job, a new baby, or a change in health. \
+        Melbourne\'s services and infrastructure are also changing faster than ever. \
+        There are many reasons to <strong>revisit us</strong> and <strong>let us help you find your next great place to live</strong>',
         caption: 'See you again soon!',
         img:     'images/ken-s-vision-NIasXje2AWg-unsplash.jpg',
+        // Photo by <a href="https://unsplash.com/@kensvisionx?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ken's Vision</a> on <a href="https://unsplash.com/photos/two-women-walk-along-a-city-street-together-NIasXje2AWg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        attribution: {
+          author:     'Ken\'s Vision',
+          authorUrl:  'https://unsplash.com/@tomrumble',
+          source:     'Unsplash',
+          sourceUrl:  'https://unsplash.com/photos/two-women-walk-along-a-city-street-together-NIasXje2AWg',
+          licence:    'Unsplash Licence',
+          licenceUrl: 'https://unsplash.com/license',
+        },
       },
     ];
 
@@ -252,14 +342,31 @@
         const stepEl = document.createElement('div');
         stepEl.className = 'journey-v1-step' + (isReverse ? ' reverse' : '');
         stepEl.innerHTML = `
-          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:150px;">
-            <div class="journey-v1-image" style="width:100%;">
-              ${step.img
-                ? `<img src="${step.img}" alt="${step.caption || step.title}" style="width:100%;height:100%;object-fit:cover;display:block;"/>`
-                : `<div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image ${i + 1}</span></div>`
+          <div class="journey-v1-image-wrap" style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:${IMG_WIDTH}px;">
+            <div class="journey-v1-image" style="width:100%;height:${IMG_HEIGHT}px;">
+              ${step.youtube
+                ? `<iframe
+                    src="https://www.youtube.com/embed/${step.youtube}"
+                    style="width:100%;height:100%;border:none;display:block;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy"
+                    title="${step.caption || step.title}">
+                  </iframe>`
+                : step.img
+                  ? `<img src="${step.img}" alt="${step.caption || step.title}" style="width:100%;height:100%;object-fit:cover;display:block;"/>`
+                  : `<div class="journey-v1-image-inner"><i data-lucide="image" class="w-8 h-8 text-slate-300"></i><span>Image ${i + 1}</span></div>`
               }
             </div>
             ${step.caption ? `<p class="jv1-caption">${step.caption}</p>` : ''}
+            ${step.attribution ? `<p class="jv1-caption" style="color:#b0bec5;">
+              📷 ${step.attribution.authorUrl
+                ? `<a href="${step.attribution.authorUrl}" target="_blank" rel="noopener" style="color:#b0bec5;">${step.attribution.author}</a>`
+                : step.attribution.author}
+              ${step.attribution.source
+                ? ` / <a href="${step.attribution.sourceUrl || '#'}" target="_blank" rel="noopener" style="color:#b0bec5;">${step.attribution.source}</a>`
+                : ''}
+            </p>` : ''}
           </div>
           <div class="journey-v1-node-wrap">
             <div class="journey-v1-node">${i + 1}</div>
@@ -281,6 +388,32 @@
       // Re-init Lucide icons for the newly inserted image placeholders
       lucide.createIcons();
     })();
+
+    // Build image credits list in the footer
+    (function renderCredits() {
+      const list = document.getElementById('image-credits');
+      if (!list) return;
+      STEPS.forEach((step, i) => {
+        const a = step.attribution;
+        if (!a) return;
+        const li = document.createElement('li');
+        const author = a.authorUrl
+          ? `<a href="${a.authorUrl}" target="_blank" rel="noopener" class="underline hover:text-slate-600">${a.author}</a>`
+          : a.author;
+        const source = a.source
+          ? ` via <a href="${a.sourceUrl || '#'}" target="_blank" rel="noopener" class="underline hover:text-slate-600">${a.source}</a>`
+          : '';
+        const licence = a.licence
+          ? ` — <a href="${a.licenceUrl || '#'}" target="_blank" rel="noopener" class="underline hover:text-slate-600">${a.licence}</a>`
+          : '';
+        // li.innerHTML = `Step ${i + 1} image: Photo by ${author}${source}${licence}`;
+        const mediaType = step.youtube ? 'Video' : 'Photo';
+        li.innerHTML = `Step ${i + 1} ${mediaType.toLowerCase()}: ${mediaType} by ${author}${source}${licence}`;
+        list.appendChild(li);
+      });
+    })();
+
+
     const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
       ? 'http://localhost:3000'
       : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
@@ -375,28 +508,27 @@
       svg.setAttribute('height', H);
 
       // Stick figure on the horizontal leg of the first gap
-      const figX = (pts[0].x + pts[1].x) / 2;
-      const figY = gapYs[0];
-      const s = 14;
+      // const figX = (pts[0].x + pts[1].x) / 2;
+      // const figY = gapYs[0];
+      // const s = 14;
 
-      const stickFig = `
-        <g transform="translate(${figX}, ${figY})"
-           stroke="#004071" stroke-linecap="round" stroke-linejoin="round"
-           fill="none" opacity="0.6">
-          <circle cx="0" cy="${-s * 2.5}" r="${s * 0.42}" fill="#004071" stroke="none"/>
-          <line x1="0" y1="${-s * 2.08}" x2="0" y2="${-s * 1.1}"/>
-          <line x1="0" y1="${-s * 1.85}" x2="${-s * 0.6}" y2="${-s * 1.3}"/>
-          <line x1="0" y1="${-s * 1.85}" x2="${s * 0.55}" y2="${-s * 1.55}"/>
-          <line x1="0" y1="${-s * 1.1}" x2="${-s * 0.5}" y2="${-s * 0.1}"/>
-          <line x1="0" y1="${-s * 1.1}" x2="${s * 0.45}" y2="${-s * 0.15}"/>
-        </g>
-      `;
+      // const stickFig = `
+      //   <g transform="translate(${figX}, ${figY})"
+      //      stroke="#004071" stroke-linecap="round" stroke-linejoin="round"
+      //      fill="none" opacity="0.6">
+      //     <circle cx="0" cy="${-s * 2.5}" r="${s * 0.42}" fill="#004071" stroke="none"/>
+      //     <line x1="0" y1="${-s * 2.08}" x2="0" y2="${-s * 1.1}"/>
+      //     <line x1="0" y1="${-s * 1.85}" x2="${-s * 0.6}" y2="${-s * 1.3}"/>
+      //     <line x1="0" y1="${-s * 1.85}" x2="${s * 0.55}" y2="${-s * 1.55}"/>
+      //     <line x1="0" y1="${-s * 1.1}" x2="${-s * 0.5}" y2="${-s * 0.1}"/>
+      //     <line x1="0" y1="${-s * 1.1}" x2="${s * 0.45}" y2="${-s * 0.15}"/>
+      //   </g>
+      // `;
 
       svg.innerHTML = `
         <path d="${d}" fill="none" stroke="#004071"
           stroke-width="1" stroke-dasharray="5 6"
           stroke-linecap="round" opacity="0.18"/>
-        ${stickFig}
       `;
     }
     window.addEventListener('load', drawV1Path);
