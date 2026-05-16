@@ -9,6 +9,7 @@ Sources:
   - crime_by_lga.json                  — crime rate per 100k by LGA (CSA Victoria)
   - rent_by_suburb.json                — weekly rent by suburb group (DFFH Victoria)
   - house_unit_prices_by_suburb.json   — median house and unit sale prices (Land Vic)
+  - bcarr_ring_by_suburb.json          — Inner/Middle/Outer ring classification (BCARR)
 
 Output:
   melbourne_suburb_data.json       — combined suburb data keyed by suburb name
@@ -30,6 +31,9 @@ HOUSE_UNIT_PRICES_FILE = "housing_data/house_unit_prices_by_suburb.json"
 MELBOURNE_SUBURBS_BY_LGA_FILE = "suburb_data/melbourne_suburbs_by_lga.json"
 CRIME_BY_SUBURB_FILE = "crime_data/crime_by_suburb.json"
 CRIME_BY_LGA_FILE = "crime_data/crime_by_lga.json"
+# BCARR_RING_FILE   = "suburb_data/bcarr_ring_by_suburb.json"
+LGA_RING_FILE = "suburb_data/lga_bcarr_ring.csv"
+SUBURB_RING_FILE = "suburb_data/suburb_bcarr_ring.csv"
 OUTPUT_JSON_FILE = "melbourne_housing_crime_data.json"
 OUTPUT_CSV_FILE = "melbourne_housing_crime_data.csv"
 
@@ -44,6 +48,38 @@ with open(os.path.join(SCRIPT_DIR, CRIME_BY_LGA_FILE)) as f:
     crime_lga_data = json.load(f)
 with open(os.path.join(SCRIPT_DIR, HOUSE_UNIT_PRICES_FILE)) as f:
     house_unit_data = json.load(f)
+
+# # BCARR rings — optional; graceful fallback if not yet generated
+# bcarr_ring_path = os.path.join(SCRIPT_DIR, BCARR_RING_FILE)
+# if os.path.exists(bcarr_ring_path):
+#     with open(bcarr_ring_path) as f:
+#         bcarr_ring_by_suburb: dict = json.load(f)
+#     print(f"Loaded BCARR rings for {len(bcarr_ring_by_suburb)} suburbs")
+# else:
+#     bcarr_ring_by_suburb = {}
+#     print(f"Warning: {BCARR_RING_FILE} not found — bcarrRing will be null for all suburbs.")
+#     print(f"  Run extract_data.py (or manually place the xlsx) to generate it.")
+
+# Ring classification — LGA-level base, suburb-level overrides
+lga_ring_path    = os.path.join(SCRIPT_DIR, LGA_RING_FILE)
+suburb_ring_path = os.path.join(SCRIPT_DIR, SUBURB_RING_FILE)
+
+if os.path.exists(lga_ring_path):
+    import csv as _csv
+    with open(lga_ring_path, newline='') as f:
+        lga_ring_by_lga: dict = {row['lga']: row['ring'] for row in _csv.DictReader(f)}
+    print(f"Loaded LGA rings for {len(lga_ring_by_lga)} LGAs")
+else:
+    lga_ring_by_lga = {}
+    print(f"Warning: {LGA_RING_FILE} not found — bcarrRing will be null for all suburbs.")
+
+if os.path.exists(suburb_ring_path):
+    with open(suburb_ring_path, newline='') as f:
+        suburb_ring_overrides: dict = {row['suburb']: row['ring'] for row in _csv.DictReader(f)}
+    print(f"Loaded suburb ring overrides for {len(suburb_ring_overrides)} suburbs")
+else:
+    suburb_ring_overrides = {}
+    print(f"Warning: {SUBURB_RING_FILE} not found — no suburb-level overrides applied.")
 
 # =============================================================================
 # STEP 1 — Build lookups from master suburb list (Wikipedia)
@@ -240,13 +276,27 @@ for suburb_lower, wiki_info in wiki_suburb_lookup.items():
     else:
         stats["house_missing"] += 1
 
+    # # BCARR ring — try original casing then title case
+    # bcarr_ring = (
+    #     bcarr_ring_by_suburb.get(suburb)
+    #     or bcarr_ring_by_suburb.get(suburb.title())
+    #     or None
+    # )
+
+    # Ring classification — suburb override takes precedence over LGA default
+    # bcarrRing = suburb_ring_overrides.get(suburb) or lga_ring_by_lga.get(lga) or None
+
+    # Ring classification — suburb override takes precedence over LGA default, unknown LGAs default to Outer
+    bcarrRing = suburb_ring_overrides.get(suburb) or lga_ring_by_lga.get(lga) or "Outer"
+
     # suburb is the top-level key — not repeated inside
     combined[suburb] = {
-        "postcode": postcode,
-        "lga": lga,
+        "postcode":    postcode,
+        "lga":         lga,
+        "bcarrRing":   bcarrRing,   # "Inner" | "Middle" | "Outer" | null
         "crimeSuburb": crime_suburb_out,
-        "crimeLga": crime_lga_out,
-        "rent": rent_out,
+        "crimeLga":    crime_lga_out,
+        "rent":        rent_out,
         "housePrices": house_prices,
     }
 
@@ -371,7 +421,7 @@ print(f"  Re-saved: {json_path} (with scores)")
 RENT_CATS = ["1brFlat", "2brFlat", "3brFlat", "2brHouse", "3brHouse", "4brHouse", "all"]
 
 fieldnames = (
-    ["suburb", "postcode", "lga"]
+    ["suburb", "postcode", "lga", "bcarrRing"]
     + ["crime_totalIncidents", "crime_year"]
     # + ["crime_offence1", "crime_offence1_proportion",
     #    "crime_offence2", "crime_offence2_proportion",
@@ -397,6 +447,7 @@ for suburb, data in sorted(combined.items()):
         "suburb": suburb,
         "postcode": data["postcode"],
         "lga": data["lga"],
+        "bcarrRing": data.get("bcarrRing", ""),
     }
 
     # Crime suburb
