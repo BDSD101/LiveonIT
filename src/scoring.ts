@@ -681,6 +681,51 @@ export function scoreAbundance(
 }
 
 // ---------------------------------------------------------------------------
+// COMPONENT 2 — Abundance Score (0–10)
+// ALTERNATIVE - that has a proximity decay function and penalises options beyond the threshold instead of ignoring them entirely
+// ---------------------------------------------------------------------------
+// export function scoreAbundance(
+//   allCandidates: CandidateService[],
+//   thresholdMeters = WALKABLE_THRESHOLD_METERS,
+//   restrictToTypes?: Set<string>,
+// ): { score: number; totalWeightedOptions: number; referenceWeightedOptions: number } {
+//   const proximityDecay = (meters: number) => Math.max(0, 1 - meters / thresholdMeters);
+
+//   let totalWeightedOptions = 0;
+//   for (const c of allCandidates) {
+//     if (c.walkingDistanceMeters === null || c.walkingDistanceMeters > thresholdMeters) continue;
+//     const freq = SERVICE_FREQUENCY[c.type];
+//     if (!freq) continue;
+//     totalWeightedOptions += FREQUENCY_WEIGHTS[freq] * proximityDecay(c.walkingDistanceMeters);
+//   }
+
+//   const REFERENCE_CONFIG: Record<VisitFrequency, { count: number; distanceMeters: number }> = {
+//     high:   { count: 5, distanceMeters: 200 },
+//     medium: { count: 3, distanceMeters: 300 },
+//     low:    { count: 1, distanceMeters: 400 },
+//     rare:   { count: 1, distanceMeters: 400 },
+//   };
+
+//   // Only consider selected types for the reference benchmark when restrictToTypes is set
+//   const refTypes = restrictToTypes
+//     ? Array.from(restrictToTypes)
+//     : [...new Set(allCandidates.map(c => c.type))];
+
+//   let referenceWeightedOptions = 0;
+//   for (const type of refTypes) {
+//     const freq = SERVICE_FREQUENCY[type];
+//     if (!freq) continue;
+//     const ref = REFERENCE_CONFIG[freq];
+//     referenceWeightedOptions += ref.count * FREQUENCY_WEIGHTS[freq] * proximityDecay(ref.distanceMeters);
+//   }
+
+//   const score = referenceWeightedOptions > 0
+//     ? Math.min(10, Number(((totalWeightedOptions / referenceWeightedOptions) * 10).toFixed(1)))
+//     : 0;
+//   return { score, totalWeightedOptions, referenceWeightedOptions };
+// }
+
+// ---------------------------------------------------------------------------
 // COMPONENT 3 - Nearest Service Score (0–10)
 // Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
@@ -745,6 +790,62 @@ export function scoreNearestServices(
 
   return { score, perType };
 }
+
+// ---------------------------------------------------------------------------
+// COMPONENT 3 — Nearest Service Score (0–10)
+// ALTERNATIVE
+// ---------------------------------------------------------------------------
+// export function scoreNearestServices(
+//   allCandidates: CandidateService[],
+//   thresholdMeters = WALKABLE_THRESHOLD_METERS,
+//   restrictToTypes?: Set<string>,
+// ): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
+
+//   const nearestByType = new Map<string, CandidateService>();
+//   for (const c of allCandidates) {
+//     if (c.walkingDistanceMeters === null) continue;
+//     const existing = nearestByType.get(c.type);
+//     if (!existing || c.walkingDistanceMeters < (existing.walkingDistanceMeters ?? Infinity)) {
+//       nearestByType.set(c.type, c);
+//     }
+//   }
+
+//   // Only score against selected types when restrictToTypes is provided
+//   const allTypes = restrictToTypes
+//     ? Array.from(restrictToTypes)
+//     : [...new Set(allCandidates.map(c => c.type))];
+
+//   let weightedScore = 0;
+//   let maxPossibleScore = 0;
+//   const perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> = [];
+
+//   for (const type of allTypes) {
+//     const freq = SERVICE_FREQUENCY[type];
+//     if (!freq) continue;
+//     const weight = FREQUENCY_WEIGHTS[freq];
+//     maxPossibleScore += weight;
+
+//     const nearest = nearestByType.get(type);
+//     if (!nearest) {
+//       perType.push({ type, frequencyWeight: weight, distanceFactor: 0, contribution: 0 });
+//       continue;
+//     }
+
+//     const distanceFactor = nearest.walkingDurationMinutes !== null
+//       ? calculateDistanceFactor(nearest.walkingDurationMinutes)
+//       : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+
+//     const contribution = weight * distanceFactor;
+//     weightedScore += contribution;
+//     perType.push({ type, frequencyWeight: weight, distanceFactor, contribution });
+//   }
+
+//   const score = maxPossibleScore > 0
+//     ? Math.min(10, Number(((weightedScore / maxPossibleScore) * 10).toFixed(1)))
+//     : 0;
+
+//   return { score, perType };
+// }
 
 // ---------------------------------------------------------------------------
 // buildErrandCandidateMap
