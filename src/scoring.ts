@@ -107,7 +107,7 @@ export const IDEAL_WALKING_MINUTES = 5;
 // };
 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy', 'hospital','dentist'],
+  health: ['doctor', 'pharmacy','dentist'],
   food: ['supermarket', 'convenience_store'],
   connectivity: ['train_station', 'transit_station'],
   parks: ['park'],
@@ -170,7 +170,6 @@ export const SERVICE_FREQUENCY: Record<string, VisitFrequency> = {
   pharmacy:           'low',
   dentist:            'rare',
   doctor:             'rare',
-  hospital:           'rare',
 };
 
 export const FREQUENCY_WEIGHTS: Record<VisitFrequency, number> = {
@@ -222,7 +221,6 @@ export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefine
 }
 
 export const PLACE_TYPE_UPGRADE_COUNT: Record<string, number> = {
-  hospital: 20,
   doctor:   10,
   gym:      10,
   park:     20,
@@ -239,10 +237,10 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
       useTextSearch: true,
       textQuery: 'GP',
     } : {}),
-    ...(type === 'hospital' ? {
-      useTextSearch: true,
-      textQuery: 'hospital',
-    } : {}),
+    // ...(type === 'hospital' ? {
+    //   useTextSearch: true,
+    //   textQuery: 'hospital',
+    // } : {}),
     ...(type === 'post_office' ? {
       useTextSearch: true,
       textQuery: 'LPO',
