@@ -26,7 +26,9 @@ import {
   buildScoreBreakdown,
   buildLeaderboard,
   buildHeatmap,
+  SEARCH_RADIUS_METERS,
   WALKABLE_THRESHOLD_METERS,
+  ERRAND_TRIP_THRESHOLD_METERS,
   buildErrandCandidateMap,
   scoreErrandTripExact,
   scoreAbundance,
@@ -189,7 +191,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
         locationRestriction: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 5000.0,
+            radius: SEARCH_RADIUS_METERS,
           },
         },
       },
@@ -267,7 +269,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
         locationBias: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 5000.0,
+            radius: SEARCH_RADIUS_METERS,
           },
         },
       },
@@ -342,7 +344,7 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
   });
 
   const worthUpgrading = results.filter(c =>
-    (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 3
+    (c.walkingDistanceMeters ?? 0) <= SEARCH_RADIUS_METERS * 1.5
   );
   if (!worthUpgrading.length) return results;
 

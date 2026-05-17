@@ -89,7 +89,9 @@ export type SeedAnalysis = SuburbSeedPoint & {
   index: number;
 };
 
-export const WALKABLE_THRESHOLD_METERS = 2000;
+export const SEARCH_RADIUS_METERS = 2000;          
+export const WALKABLE_THRESHOLD_METERS = 800;
+export const ERRAND_TRIP_THRESHOLD_METERS = 2 * WALKABLE_THRESHOLD_METERS;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
 
@@ -465,7 +467,7 @@ export function scoreErrandTripGreedy(
   homeLat: number,
   homeLon: number,
   candidatesByCategory: Map<string, ErrandNode[]>,
-  walkableThresholdMeters = WALKABLE_THRESHOLD_METERS,
+  walkableThresholdMeters = ERRAND_TRIP_THRESHOLD_METERS,
   circuityFactor = 1.3,
 ): ErrandTripResult {
   const MISSING_PENALTY = 5000;
@@ -548,7 +550,7 @@ export function scoreErrandTripExact(
   homeLat: number,
   homeLon: number,
   candidatesByCategory: Map<string, ErrandNode[]>,
-  walkableThresholdMeters = WALKABLE_THRESHOLD_METERS,
+  walkableThresholdMeters = ERRAND_TRIP_THRESHOLD_METERS,
   circuityFactor = 1.3,
   complexityCap = 500_000,
 ): ErrandTripResult {
