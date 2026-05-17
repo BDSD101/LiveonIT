@@ -656,7 +656,8 @@ export function scoreAbundance(
 
   // Only consider selected types for the reference benchmark when restrictToTypes is set
   const refTypes = restrictToTypes
-    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    // ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    ? Array.from(restrictToTypes)
     : Object.values(CORE_CATEGORY_TYPES).flat();
 
   let referenceWeightedOptions = 0;
@@ -693,7 +694,8 @@ export function scoreNearestServices(
   }
 
   const allTypes = restrictToTypes
-    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    // ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    ? Array.from(restrictToTypes)
     : Object.values(CORE_CATEGORY_TYPES).flat();
 
   let weightedScore = 0;
