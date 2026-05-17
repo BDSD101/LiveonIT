@@ -19,7 +19,6 @@
       <a href="/" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Home</a>
       <a href="/dashboard.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Map</a>
       <a href="/suburb.html" class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5 transition-colors">Suburb Overview</a>
-      <a href="/supporting_data.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Supporting Data</a>
       <a href="/about.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">About</a>
     </nav>
   </header>
@@ -29,6 +28,16 @@
 
       <!-- Left Column: Leaderboard -->
       <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow flex flex-col desktop-contain order-6 lg:col-start-1 lg:row-start-1 lg:row-span-3 min-h-[500px]">
+        
+        <!-- Supporting Data Button -->
+        <button id="open-insights-btn" class="w-full flex items-center gap-3 mb-6 p-3.5 bg-white border border-slate-200 rounded-xl hover:border-[#004071] hover:bg-slate-50 transition-all group shadow-sm flex-shrink-0 text-left">
+          <div class="bg-slate-100 p-2 rounded-lg group-hover:bg-[#004071]/10 transition-colors">
+            <i data-lucide="bar-chart-2" class="w-4 h-4 text-slate-500 group-hover:text-[#004071]"></i>
+          </div>
+          <span class="text-[11px] font-bold text-slate-700 font-inter uppercase tracking-tight group-hover:text-[#004071]">View Supporting Data & Suburb Insights</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 ml-auto text-slate-300 group-hover:text-[#004071] group-hover:translate-x-0.5 transition-all"></i>
+        </button>
+
         <div class="flex items-center gap-2 mb-3 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter flex-shrink-0">
           <i data-lucide="list" class="w-3.5 h-3.5"></i>
           Region Leaderboards
@@ -74,8 +83,187 @@
     </div>
   </footer>
 
+  <!-- Supporting Data & Insights Modal -->
+  <div id="insights-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#F8F9FA] w-full max-w-6xl h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200 anim-up">
+      <!-- Modal Header -->
+      <div class="bg-[#004071] text-white px-6 py-4 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+          <h2 class="font-bold text-xs font-inter uppercase tracking-wider">Supporting Data & Suburb Insights</h2>
+        </div>
+        <button id="close-insights-btn" class="p-1 rounded-full hover:bg-white/10 transition-colors text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flex flex-1 overflow-hidden h-full">
+        <!-- Sidebar -->
+        <aside class="w-52 flex-shrink-0 bg-white border-r border-slate-200 overflow-y-auto flex flex-col">
+          <div class="px-4 pt-5 pb-2">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-inter">Select a map</p>
+          </div>
+          <nav class="px-3 pb-6 space-y-4 flex-1">
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-inter px-2 mb-1.5">Boundaries</p>
+              <div class="space-y-1">
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/a_map_lga.html"
+                  data-label="LGA Boundaries">LGA Boundaries</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/b_map_suburb.html"
+                  data-label="Suburb Boundaries">Suburb Boundaries</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/h_melbourne_suburbs_by_ring.html"
+                  data-label="Melbourne Ring Suburbs by BCARR Classification">BCARR Rings</button>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-inter px-2 mb-1.5">Crime</p>
+              <div class="space-y-1">
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/c_map_crime.html"
+                  data-label="Crime Score by LGA">Crime Score by LGA</button>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-inter px-2 mb-1.5">Housing Prices</p>
+              <div class="space-y-1">
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/d_map_house.html"
+                  data-label="Median House Price">Median House Price</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/e_map_unit.html"
+                  data-label="Median Unit Price">Median Unit Price</button>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 font-inter px-2 mb-1.5">Rent Scores</p>
+              <div class="space-y-1">
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/f_map_rentScoreAverage.html"
+                  data-label="Rent Score Average">Rent Score Average</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/g_map_rentScore_Unit_1BR.html"
+                  data-label="Rent Score - 1BR Flat">1BR Unit</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/g_map_rentScore_Unit_2BR.html"
+                  data-label="Rent Score - 2BR Flat">2BR Unit</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/g_map_rentScore_Unit_3BR.html"
+                  data-label="Rent Score - 3BR Flat">3BR Unit</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/g_map_rentScore_House_2BR.html"
+                  data-label="Rent Score - 2BR House">2BR House</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/g_map_rentScore_House_3BR.html"
+                  data-label="Rent Score - 3BR House">3BR House</button>
+                <button class="modal-map-btn w-full text-left text-xs font-medium font-inter px-3 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:border-[#004071] hover:text-[#004071] transition-all"
+                  data-src="map_visualisations/g_map_rentScore_House_4BR.html"
+                  data-label="Rent Score - 4BR House">4BR House</button>
+              </div>
+            </div>
+          </nav>
+        </aside>
+
+        <!-- Right Panel: Map Viewer -->
+        <div class="flex-1 flex flex-col min-w-0 bg-[#F8F9FA]">
+          <!-- Title bar -->
+          <div class="flex items-center justify-between px-5 py-2.5 bg-white border-b border-slate-200 flex-shrink-0 h-10">
+            <span id="modal-map-title" class="text-xs font-semibold text-slate-400 font-inter uppercase tracking-widest">Select a map from the panel</span>
+            <a id="modal-open-new-tab" href="#" target="_blank" rel="noopener noreferrer"
+              class="hidden items-center gap-1.5 text-[#004071] text-xs font-semibold font-inter hover:underline">
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              Open in new tab
+            </a>
+          </div>
+
+          <!-- Placeholder -->
+          <div id="modal-map-placeholder" class="flex-1 flex flex-col items-center justify-center text-slate-300 gap-3">
+            <i data-lucide="map" class="w-12 h-12 text-slate-300"></i>
+            <p class="text-xs font-inter text-slate-400">Choose a map from the left panel.</p>
+          </div>
+
+          <!-- iframe viewer -->
+          <iframe id="modal-map-frame" class="hidden flex-1 w-full border-0" src="" title="Map viewer"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .modal-map-btn.active {
+      background-color: #004071;
+      color: #ffffff;
+      border-color: #004071;
+    }
+    #modal-map-frame.loading {
+      opacity: 0.35;
+    }
+  </style>
+
   <script>
     lucide.createIcons();
+
+    // Modal triggers
+    const modal = document.getElementById('insights-modal');
+    const openBtn = document.getElementById('open-insights-btn');
+    const closeBtn = document.getElementById('close-insights-btn');
+
+    openBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    });
+
+    // Close when clicking overlay
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    });
+
+    // Handle Map selection within modal
+    const buttons = document.querySelectorAll('.modal-map-btn');
+    const frame = document.getElementById('modal-map-frame');
+    const placeholder = document.getElementById('modal-map-placeholder');
+    const titleEl = document.getElementById('modal-map-title');
+    const openLink = document.getElementById('modal-open-new-tab');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.src;
+        const label = btn.dataset.label;
+
+        // Active state
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update title bar
+        titleEl.textContent = label;
+        titleEl.classList.remove('text-slate-400');
+        titleEl.classList.add('text-slate-600');
+        openLink.href = '/' + src;
+        openLink.classList.remove('hidden');
+        openLink.classList.add('flex');
+
+        // Swap placeholder for iframe
+        placeholder.classList.add('hidden');
+        frame.classList.remove('hidden');
+        frame.classList.add('flex', 'loading');
+        frame.onload = () => frame.classList.remove('loading');
+        frame.src = '/' + src;
+      });
+    });
   </script>
 </body>
 </html>
