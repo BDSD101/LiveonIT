@@ -76,8 +76,6 @@ export type LocationAnalysis = {
 };
 
 
-
-
 // export type SuburbSeedPoint = {
 //   name: string;
 //   ring: 'inner' | 'middle' | 'outer';
