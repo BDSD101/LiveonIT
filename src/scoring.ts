@@ -91,8 +91,8 @@ export type LocationAnalysis = {
 // Added SEARCH_RADIUS_METERS to define the radius for searching nearby services, and 
 // adjusted WALKABLE_THRESHOLD_METERS from 2000 -> 800 and 
 // Added ERRAND_TRIP_THRESHOLD_METERS to define round trip threshold
-export const SEARCH_RADIUS_METERS = 2000;          
-export const WALKABLE_THRESHOLD_METERS = 800;
+export const SEARCH_RADIUS_METERS = 3000;          
+export const WALKABLE_THRESHOLD_METERS = 1500;
 // export const ERRAND_TRIP_THRESHOLD_METERS = 2 * WALKABLE_THRESHOLD_METERS;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
@@ -632,6 +632,7 @@ export function scoreErrandTripExact(
   const meanEdgeMeters = totalEdges > 0
     ? (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges
     : 0;
+
   const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
 
   return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
