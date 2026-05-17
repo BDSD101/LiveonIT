@@ -296,19 +296,25 @@
               <div id="acc-price" class="accordion-body">
                 <ul>
                   <Li>
-                    Sourced from the <strong>Victorian Property Sales Report – Median House by Suburb</strong>, published quarterly by 
-                    <a href="https://www.land.vic.gov.au" target="_blank" rel="noopener" class="underline">Land Victoria</a> and available via 
-                    <a href="https://discover.data.vic.gov.au" target="_blank" rel="noopener" class="underline">discover.data.vic.gov.au</a>.
-                    Data is resolved at suburb level, so all addresses within a suburb share the same housing affordability score.
+                    Sourced from the <strong>Victorian Property Sales Report – Median House Price by Suburb</strong>, published quarterly by the Victorian Government's Department of Environment, Land, Water and Planning (DELWP)
+                    and available via 
+                    <a href="https://discover.data.vic.gov.au/dataset/victorian-property-sales-report-median-house-by-suburb" target="_blank" rel="noopener" class="underline">discover.data.vic.gov.au</a>.
                   </Li>
+                  <Li>Data is resolved at suburb level, so all addresses within a suburb share the same housing affordability score.</Li>
                   <Li>This component is designed to reflect the general affordability of living in that area, not the specific price of the property being evaluated.</Li>
                   <Li>Median house price is used as a proxy for affordability, recognising that it does not capture the full complexity of housing costs but provides a consistent comparative metric across suburbs.</Li>
+                  <li>Higher price → lower score (inverted and normalised to 0–10)</li>
+                  <li>If no data is available this component is excluded and remaining weights scale up proportionally</li>
                   <Li>Go to the Suburb Overview page -> View Supporting Data and Suburb Insights 
                     <a href="/supporting_data.html" class="underline font-semibold">Supporting Data &amp; Suburb Insights</a> 
                     for a more detailed analysis of housing affordability across Suburbs for House, Unit and Rental Costs.
+                    Data sources for the supporting data can be found at <strong>discover.data.vic.gov.au</strong>:
+                    <ul>
+                      <Li><a href="https://discover.data.vic.gov.au/dataset/victorian-property-sales-report-median-house-by-suburb" target="_blank" rel="noopener" class="underline">VPSR Median House Price by Suburb</a>.</Li>
+                      <Li><a href="https://discover.data.vic.gov.au/dataset/victorian-property-sales-report-median-unit-by-suburb" target="_blank" rel="noopener" class="underline">VPSR Median Unit Price by Suburb</a>.</Li>
+                      <Li><a href="https://discover.data.vic.gov.au/dataset/rental-report-quarterly-moving-annual-rents-by-suburb" target="_blank" rel="noopener" class="underline">Homes Victoria Rental Report - Quarterly Moving Annual Rents by Suburb</a>.</Li>
+                    </ul>
                   </Li>
-                  <li>Higher price → lower score (inverted and normalised to 0–10)</li>
-                  <li>If no data is available this component is excluded and remaining weights scale up proportionally</li>
                 </ul>
               </div>
             </td>
@@ -326,12 +332,12 @@
               </button>
               <div id="acc-safety" class="accordion-body">
                 <ul>
-                  <li>Sourced from Victoria Police crime incidence data at <strong>Local Government Area (LGA) level</strong></li>
+                  <li>Sourced from <strong>Criminal Incidents by Local Government Area (LGA)</strong></li>
                   <Li>
-                    Sourced from <strong>Criminal Incidents by LGA and Suburb</strong>, published quarterly by 
+                    Published quarterly by
                     <a href="https://www.crimestatistics.vic.gov.au" target="_blank" rel="noopener" class="underline">Crime Statistics Agency Victoria</a> 
-                    and available via 
-                    <a href="https://discover.data.vic.gov.au" target="_blank" rel="noopener" class="underline">discover.data.vic.gov.au</a>. 
+                    and available via <strong>discover.data.vic.gov.au</strong>:
+                    <a href="https://discover.data.vic.gov.au/dataset/criminal-incident" target="_blank" rel="noopener" class="underline">Criminal Incident by LGA</a>. 
                   </Li>
                   <Li>Total crime incidents per per 100,000 residents is used as a proxy for Public Safety, measured at LGA level.</Li>
                   <li>Lower crime → higher score (normalised to 0–10)</li>
