@@ -23,7 +23,7 @@ import {
   // SeedAnalysis,
   CORE_ANALYSIS_ITEMS,
   // SUBURB_SEED_POINTS,
-  buildScoreBreakdown,
+  // buildScoreBreakdown,
   // buildLeaderboard,
   // buildHeatmap,
   SEARCH_RADIUS_METERS,
@@ -456,7 +456,7 @@ async function analyzeLocation(
     );
   }
 
-  const { breakdown, index } = buildScoreBreakdown(byKey);
+  // const { breakdown, index } = buildScoreBreakdown(byKey);
 
   // --- Walkability scores (zero extra API calls) ---
 
@@ -524,8 +524,8 @@ async function analyzeLocation(
 
   return {
     services,
-    index,
-    breakdown,
+    // index,
+    // breakdown,
     walkability: {
       neighbourhood: {
         score: neighbourhoodScore,

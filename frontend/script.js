@@ -541,7 +541,8 @@ async function _doRescoreHistory(types) {
       if (!r.ok || snap !== _loadSeq) return;
       const d = await r.json();
       if (snap !== _loadSeq) return;
-      const s = d.walkability?.selection?.score ?? Number(d.index || 0);
+      // const s = d.walkability?.selection?.score ?? Number(d.index || 0);
+      const s = d.walkability?.selection?.score ?? 0;
       const idx = history.findIndex(i => i.display_name === h.display_name);
       if (idx !== -1 && typeof s === 'number' && !isNaN(s)) history[idx].score = s;
     } catch { /* silent */ }
@@ -634,7 +635,8 @@ async function loadServices(lat, lon) {
     const walkability = data.walkability || null;
 
     // Use SELECTION score (personalised to user's chosen filters)
-    const score = walkability?.selection?.score ?? Number(data.index || 0);
+    // const score = walkability?.selection?.score ?? Number(data.index || 0);
+    const score = walkability?.selection?.score ?? 0;
     const colors = getScoreColor(score);
 
     document.getElementById('score-value').textContent = score.toFixed(1);

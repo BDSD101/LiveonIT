@@ -25,28 +25,28 @@ export type CandidateService = {
   withinThreshold: boolean;
 };
 
-export type CategoryBreakdown = {
-  id: string;
-  label: string;
-  weight: number;
-  status: 'met' | 'partial' | 'missing';
-  nearestService: { name: string; type: string } | null;
-  walkingDistanceMeters: number | null;
-  walkingDurationMinutes: number | null;
-  score: number;
-};
+// export type CategoryBreakdown = {
+//   id: string;
+//   label: string;
+//   weight: number;
+//   status: 'met' | 'partial' | 'missing';
+//   nearestService: { name: string; type: string } | null;
+//   walkingDistanceMeters: number | null;
+//   walkingDurationMinutes: number | null;
+//   score: number;
+// };
 
-export type ScoreBreakdown = {
-  walkableThresholdMeters: number;
-  methodology: string;
-  categories: CategoryBreakdown[];
-  summary: {
-    categoriesMetWithin800m: number;
-    totalCategories: number;
-    missingCategories: string[];
-    partialCategories: string[];
-  };
-};
+// export type ScoreBreakdown = {
+//   walkableThresholdMeters: number;
+//   methodology: string;
+//   categories: CategoryBreakdown[];
+//   summary: {
+//     categoriesMetWithin800m: number;
+//     totalCategories: number;
+//     missingCategories: string[];
+//     partialCategories: string[];
+//   };
+// };
 
 
 export type WalkabilityComponent = {
@@ -58,8 +58,8 @@ export type WalkabilityComponent = {
 
 export type LocationAnalysis = {
   services: CandidateService[];
-  index: number;
-  breakdown: ScoreBreakdown;
+  // index: number;
+  // breakdown: ScoreBreakdown;
   walkability?: {
     neighbourhood: WalkabilityComponent;
     selection: WalkabilityComponent;
@@ -95,16 +95,16 @@ export const ERRAND_TRIP_THRESHOLD_METERS = 2 * WALKABLE_THRESHOLD_METERS;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
 
-export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> = {
-  health: { label: 'Health Services', weight: 3 },
-  food: { label: 'Food and Essentials', weight: 3 },
-  connectivity: { label: 'Connectivity', weight: 2 },
-  parks: { label: 'Parks and Nature', weight: 2 },
-  dining: { label: 'Dining and Social', weight: 2 },
-  education: { label: 'Education and Learning', weight: 2 },
-  fitness: { label: 'Fitness and Recreation', weight: 1 },
-  community: { label: 'Community and Errands', weight: 1 },
-};
+// export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> = {
+//   health: { label: 'Health Services', weight: 3 },
+//   food: { label: 'Food and Essentials', weight: 3 },
+//   connectivity: { label: 'Connectivity', weight: 2 },
+//   parks: { label: 'Parks and Nature', weight: 2 },
+//   dining: { label: 'Dining and Social', weight: 2 },
+//   education: { label: 'Education and Learning', weight: 2 },
+//   fitness: { label: 'Fitness and Recreation', weight: 1 },
+//   community: { label: 'Community and Errands', weight: 1 },
+// };
 
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
   health: ['doctor', 'pharmacy', 'hospital','dentist'],
@@ -284,20 +284,20 @@ export function calculateDistanceFactor(minutes: number | null): number {
   return Number((1 - (minutes - IDEAL_WALKING_MINUTES) / (MAX_WALKING_MINUTES - IDEAL_WALKING_MINUTES)).toFixed(2));
 }
 
-export function calculateCategoryScore(candidates: CandidateService[], weight: number): number {
-  const sorted = candidates
-    .filter((c) => c.walkingDurationMinutes !== null)
-    .sort((a, b) => (a.walkingDurationMinutes as number) - (b.walkingDurationMinutes as number));
+// export function calculateCategoryScore(candidates: CandidateService[], weight: number): number {
+//   const sorted = candidates
+//     .filter((c) => c.walkingDurationMinutes !== null)
+//     .sort((a, b) => (a.walkingDurationMinutes as number) - (b.walkingDurationMinutes as number));
 
-  if (sorted.length === 0) return 0;
+//   if (sorted.length === 0) return 0;
 
-  const firstFactor = calculateDistanceFactor(sorted[0].walkingDurationMinutes);
-  const secondFactor = sorted[1] ? calculateDistanceFactor(sorted[1].walkingDurationMinutes) * 0.3 : 0;
-  const thirdFactor = sorted[2] ? calculateDistanceFactor(sorted[2].walkingDurationMinutes) * 0.1 : 0;
+//   const firstFactor = calculateDistanceFactor(sorted[0].walkingDurationMinutes);
+//   const secondFactor = sorted[1] ? calculateDistanceFactor(sorted[1].walkingDurationMinutes) * 0.3 : 0;
+//   const thirdFactor = sorted[2] ? calculateDistanceFactor(sorted[2].walkingDurationMinutes) * 0.1 : 0;
 
-  const rawScore = weight * (firstFactor + secondFactor + thirdFactor);
-  return Number(Math.min(weight * 1.4, rawScore).toFixed(2));
-}
+//   const rawScore = weight * (firstFactor + secondFactor + thirdFactor);
+//   return Number(Math.min(weight * 1.4, rawScore).toFixed(2));
+// }
 
 // --- Suburb & Housing/Crime Lookup Helpers ---
 
@@ -354,61 +354,61 @@ export function resolveHousePriceScore(suburbName: string): {
   return { score: null, resolvedFrom: null, resolvedSuburb: null };
 }
 
-export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { breakdown: ScoreBreakdown; index: number } {
-  const categories = Object.entries(CATEGORY_CONFIG).map(([catId, meta]) => {
-    const coreTypes = CORE_CATEGORY_TYPES[catId] || [];
-    const candidates = coreTypes
-      .flatMap((type) => byKey.get(`${catId}:${type}`) || [])
-      .filter((c): c is CandidateService => Boolean(c));
+// export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { breakdown: ScoreBreakdown; index: number } {
+//   const categories = Object.entries(CATEGORY_CONFIG).map(([catId, meta]) => {
+//     const coreTypes = CORE_CATEGORY_TYPES[catId] || [];
+//     const candidates = coreTypes
+//       .flatMap((type) => byKey.get(`${catId}:${type}`) || [])
+//       .filter((c): c is CandidateService => Boolean(c));
 
-    const withDistance = candidates
-      .filter((c) => c.walkingDistanceMeters !== null)
-      .sort((a, b) => (a.walkingDistanceMeters as number) - (b.walkingDistanceMeters as number));
+//     const withDistance = candidates
+//       .filter((c) => c.walkingDistanceMeters !== null)
+//       .sort((a, b) => (a.walkingDistanceMeters as number) - (b.walkingDistanceMeters as number));
 
-    const nearest = withDistance[0] || null;
-    const status: CategoryBreakdown['status'] = !nearest
-      ? 'missing'
-      : (nearest.walkingDistanceMeters || 0) <= WALKABLE_THRESHOLD_METERS
-      ? 'met'
-      : 'partial';
+//     const nearest = withDistance[0] || null;
+//     const status: CategoryBreakdown['status'] = !nearest
+//       ? 'missing'
+//       : (nearest.walkingDistanceMeters || 0) <= WALKABLE_THRESHOLD_METERS
+//       ? 'met'
+//       : 'partial';
 
-    const categoryScore = calculateCategoryScore(candidates, meta.weight);
+//     const categoryScore = calculateCategoryScore(candidates, meta.weight);
 
-    return {
-      id: catId,
-      label: meta.label,
-      weight: meta.weight,
-      status,
-      nearestService: nearest ? { name: nearest.name, type: nearest.type } : null,
-      walkingDistanceMeters: nearest?.walkingDistanceMeters ?? null,
-      walkingDurationMinutes: nearest?.walkingDurationMinutes ?? null,
-      score: categoryScore,
-    };
-  });
+//     return {
+//       id: catId,
+//       label: meta.label,
+//       weight: meta.weight,
+//       status,
+//       nearestService: nearest ? { name: nearest.name, type: nearest.type } : null,
+//       walkingDistanceMeters: nearest?.walkingDistanceMeters ?? null,
+//       walkingDurationMinutes: nearest?.walkingDurationMinutes ?? null,
+//       score: categoryScore,
+//     };
+//   });
 
-  const totalWeight = categories.reduce((sum, c) => sum + c.weight, 0);
-  const rawScore = categories.reduce((sum, c) => sum + c.score, 0);
-  const index = Math.min(10.0, Number(((rawScore / totalWeight) * 10).toFixed(1)));
+//   const totalWeight = categories.reduce((sum, c) => sum + c.weight, 0);
+//   const rawScore = categories.reduce((sum, c) => sum + c.score, 0);
+//   const index = Math.min(10.0, Number(((rawScore / totalWeight) * 10).toFixed(1)));
 
-  const missingCategories = categories.filter((c) => c.status === 'missing').map((c) => c.label);
-  const partialCategories = categories.filter((c) => c.status === 'partial').map((c) => c.label);
-  const metCount = categories.filter((c) => c.status === 'met').length;
+//   const missingCategories = categories.filter((c) => c.status === 'missing').map((c) => c.label);
+//   const partialCategories = categories.filter((c) => c.status === 'partial').map((c) => c.label);
+//   const metCount = categories.filter((c) => c.status === 'met').length;
 
-  const breakdown: ScoreBreakdown = {
-    walkableThresholdMeters: WALKABLE_THRESHOLD_METERS,
-    methodology:
-      'Liveability score based on a continuous decay model (ideal < 5m, decays to 0 at 20m) and density bonuses for multiple nearby services across 7 categories.',
-    categories,
-    summary: {
-      categoriesMetWithin800m: metCount,
-      totalCategories: categories.length,
-      missingCategories,
-      partialCategories,
-    },
-  };
+//   const breakdown: ScoreBreakdown = {
+//     walkableThresholdMeters: WALKABLE_THRESHOLD_METERS,
+//     methodology:
+//       'Liveability score based on a continuous decay model (ideal < 5m, decays to 0 at 20m) and density bonuses for multiple nearby services across 7 categories.',
+//     categories,
+//     summary: {
+//       categoriesMetWithin800m: metCount,
+//       totalCategories: categories.length,
+//       missingCategories,
+//       partialCategories,
+//     },
+//   };
 
-  return { breakdown, index };
-}
+//   return { breakdown, index };
+// }
 
 // export function buildLeaderboard(analyses: SeedAnalysis[]) {
 //   const rings: Array<'inner' | 'middle' | 'outer'> = ['inner', 'middle', 'outer'];
