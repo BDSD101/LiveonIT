@@ -1,3 +1,8 @@
+// Determine API URL based on environment
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000'
+  : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
+
 const root = getComputedStyle(document.body);
 
 const CONFIG = {
@@ -70,7 +75,7 @@ let lastTypes = [];
 // ── Google Maps bootstrap ──
 async function loadGoogleMaps() {
   try {
-    const res = await fetch('/api/config');
+    const res = await fetch(`${API_URL}/api/config`);
     if (!res.ok) throw new Error('Config unavailable');
     const { key } = await res.json();
     if (!key) throw new Error('Key missing');
@@ -431,7 +436,7 @@ async function search(q) {
   const list = document.getElementById('results');
   list.classList.remove('hidden');
   list.innerHTML = '<li class="p-4 text-slate-400 text-sm italic">Searching...</li>';
-  const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+  const res = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(q)}`);
   const data = await res.json();
   list.innerHTML = '';
   if (!data.length) { list.innerHTML = '<li class="p-4 text-slate-400 text-sm">No results found</li>'; return; }
@@ -537,7 +542,7 @@ async function _doRescoreHistory(types) {
   const snap = _loadSeq;
   await Promise.all(others.map(async (h) => {
     try {
-      const r = await fetch(`/api/nearby-services?lat=${h.lat}&lon=${h.lon}&types=${types.join(',')}&address=${encodeURIComponent(h.display_name)}`);
+      const r = await fetch(`${API_URL}/api/nearby-services?lat=${h.lat}&lon=${h.lon}&types=${types.join(',')}&address=${encodeURIComponent(h.display_name)}`);
       if (!r.ok || snap !== _loadSeq) return;
       const d = await r.json();
       if (snap !== _loadSeq) return;
@@ -627,7 +632,7 @@ async function loadServices(lat, lon) {
   }
 
   try {
-    const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
+    const res = await fetch(`${API_URL}/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
     if (!res.ok) throw new Error('Failed');
     if (seq !== _loadSeq) { _cancelProgress(); return; } // stale
     const data = await res.json();
@@ -692,7 +697,7 @@ async function loadServices(lat, lon) {
       serviceMarkers.push(m);
 
       try {
-        const rRes = await fetch(`/api/route?sLat=${lat}&sLon=${lon}&eLat=${s.lat}&eLon=${s.lon}`);
+        const rRes = await fetch(`${API_URL}/api/route?sLat=${lat}&sLon=${lon}&eLat=${s.lat}&eLon=${s.lon}`);
         if (!rRes.ok) return;
         const rData = await rRes.json();
         if (!rData.polyline) return;
