@@ -20,15 +20,14 @@ import {
   RequestedItem,
   CandidateService,
   LocationAnalysis,
-  SeedAnalysis,
+  // SeedAnalysis,
   CORE_ANALYSIS_ITEMS,
-  SUBURB_SEED_POINTS,
+  // SUBURB_SEED_POINTS,
   buildScoreBreakdown,
-  buildLeaderboard,
-  buildHeatmap,
+  // buildLeaderboard,
+  // buildHeatmap,
   SEARCH_RADIUS_METERS,
   WALKABLE_THRESHOLD_METERS,
-  ERRAND_TRIP_THRESHOLD_METERS,
   buildErrandCandidateMap,
   scoreErrandTripExact,
   scoreAbundance,
@@ -48,7 +47,7 @@ const CACHE_TTL_MS = {
   route: 1000 * 60 * 60 * 8,
   analysis: 1000 * 60 * 15,
   neighbourhood: 1000 * 60 * 60 * 8,
-  seedAnalytics: 1000 * 60 * 60 * 8,
+  // seedAnalytics: 1000 * 60 * 60 * 8,
 };
 
 type CacheEntry<T> = {
@@ -553,25 +552,25 @@ async function analyzeLocation(
   };
 }
 
-async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
-  const cacheKey = 'seed_analyses_v2';
-  const cached = getCached<SeedAnalysis[]>(cacheKey);
-  if (cached) return cached;
+// async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
+//   const cacheKey = 'seed_analyses_v2';
+//   const cached = getCached<SeedAnalysis[]>(cacheKey);
+//   if (cached) return cached;
 
-  const analyses = await Promise.all(SUBURB_SEED_POINTS.map(async (point) => {
-    try {
-      const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
-      return { ...point, index: analysis.index };
-    } catch (err) {
-      console.error(`Failed seed analysis for ${point.name}`, err);
-      return null;
-    }
-  }));
+//   const analyses = await Promise.all(SUBURB_SEED_POINTS.map(async (point) => {
+//     try {
+//       const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
+//       return { ...point, index: analysis.index };
+//     } catch (err) {
+//       console.error(`Failed seed analysis for ${point.name}`, err);
+//       return null;
+//     }
+//   }));
 
-  const results = analyses.filter((a): a is SeedAnalysis => a !== null);
-  setCached(cacheKey, results, CACHE_TTL_MS.seedAnalytics);
-  return results;
-}
+//   const results = analyses.filter((a): a is SeedAnalysis => a !== null);
+//   setCached(cacheKey, results, CACHE_TTL_MS.seedAnalytics);
+//   return results;
+// }
 
 // --- Main Lambda Handler ---
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -656,31 +655,31 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
-      try {
-        const analyses = await getSeedAnalyses();
-        return jsonResponse(200, buildLeaderboard(analyses));
-      } catch {
-        return jsonResponse(500, { error: 'Failed to derive leaderboard' });
-      }
-    }
+    // if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
+    //   try {
+    //     const analyses = await getSeedAnalyses();
+    //     return jsonResponse(200, buildLeaderboard(analyses));
+    //   } catch {
+    //     return jsonResponse(500, { error: 'Failed to derive leaderboard' });
+    //   }
+    // }
 
-    if (routePath === '/api/heatmap' && httpMethod === 'GET') {
-      try {
-        const analyses = await getSeedAnalyses();
-        return {
-          statusCode: 200,
-          headers: {
-            ...corsHeaders,
-            'Content-Type': 'application/json',
-            'Cache-Control': 'public, max-age=3600',
-          },
-          body: JSON.stringify(buildHeatmap(analyses)),
-        };
-      } catch {
-        return jsonResponse(500, { error: 'Failed to derive heatmap data' });
-      }
-    }
+    // if (routePath === '/api/heatmap' && httpMethod === 'GET') {
+    //   try {
+    //     const analyses = await getSeedAnalyses();
+    //     return {
+    //       statusCode: 200,
+    //       headers: {
+    //         ...corsHeaders,
+    //         'Content-Type': 'application/json',
+    //         'Cache-Control': 'public, max-age=3600',
+    //       },
+    //       body: JSON.stringify(buildHeatmap(analyses)),
+    //     };
+    //   } catch {
+    //     return jsonResponse(500, { error: 'Failed to derive heatmap data' });
+    //   }
+    // }
 
     if (routePath === '/api/search' && httpMethod === 'GET') {
       const q = (event.queryStringParameters?.q || '').trim();

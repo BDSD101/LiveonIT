@@ -78,16 +78,16 @@ export type LocationAnalysis = {
 
 
 
-export type SuburbSeedPoint = {
-  name: string;
-  ring: 'inner' | 'middle' | 'outer';
-  lat: number;
-  lng: number;
-};
+// export type SuburbSeedPoint = {
+//   name: string;
+//   ring: 'inner' | 'middle' | 'outer';
+//   lat: number;
+//   lng: number;
+// };
 
-export type SeedAnalysis = SuburbSeedPoint & {
-  index: number;
-};
+// export type SeedAnalysis = SuburbSeedPoint & {
+//   index: number;
+// };
 
 export const SEARCH_RADIUS_METERS = 2000;          
 export const WALKABLE_THRESHOLD_METERS = 800;
@@ -263,17 +263,17 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
 );
 
 
-export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
-  { name: 'Carlton', ring: 'inner', lat: -37.7983, lng: 144.9671 },
-  { name: 'Fitzroy', ring: 'inner', lat: -37.7980, lng: 144.9780 },
-  { name: 'South Yarra', ring: 'inner', lat: -37.8390, lng: 144.9920 },
-  { name: 'Camberwell', ring: 'middle', lat: -37.8260, lng: 145.0580 },
-  { name: 'Essendon', ring: 'middle', lat: -37.7560, lng: 144.9180 },
-  { name: 'Glen Iris', ring: 'middle', lat: -37.8580, lng: 145.0620 },
-  { name: 'Dandenong', ring: 'outer', lat: -37.9870, lng: 145.2140 },
-  { name: 'Cranbourne', ring: 'outer', lat: -38.1090, lng: 145.2830 },
-  { name: 'Craigieburn', ring: 'outer', lat: -37.6010, lng: 144.9430 },
-];
+// export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
+//   { name: 'Carlton', ring: 'inner', lat: -37.7983, lng: 144.9671 },
+//   { name: 'Fitzroy', ring: 'inner', lat: -37.7980, lng: 144.9780 },
+//   { name: 'South Yarra', ring: 'inner', lat: -37.8390, lng: 144.9920 },
+//   { name: 'Camberwell', ring: 'middle', lat: -37.8260, lng: 145.0580 },
+//   { name: 'Essendon', ring: 'middle', lat: -37.7560, lng: 144.9180 },
+//   { name: 'Glen Iris', ring: 'middle', lat: -37.8580, lng: 145.0620 },
+//   { name: 'Dandenong', ring: 'outer', lat: -37.9870, lng: 145.2140 },
+//   { name: 'Cranbourne', ring: 'outer', lat: -38.1090, lng: 145.2830 },
+//   { name: 'Craigieburn', ring: 'outer', lat: -37.6010, lng: 144.9430 },
+// ];
 
 // --- Improved Scoring Algorithms ---
 
@@ -410,41 +410,41 @@ export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { b
   return { breakdown, index };
 }
 
-export function buildLeaderboard(analyses: SeedAnalysis[]) {
-  const rings: Array<'inner' | 'middle' | 'outer'> = ['inner', 'middle', 'outer'];
-  const result: Record<'inner' | 'middle' | 'outer', Array<{ name: string; score: number; rank: number }>> = {
-    inner: [],
-    middle: [],
-    outer: [],
-  };
+// export function buildLeaderboard(analyses: SeedAnalysis[]) {
+//   const rings: Array<'inner' | 'middle' | 'outer'> = ['inner', 'middle', 'outer'];
+//   const result: Record<'inner' | 'middle' | 'outer', Array<{ name: string; score: number; rank: number }>> = {
+//     inner: [],
+//     middle: [],
+//     outer: [],
+//   };
 
-  for (const ring of rings) {
-    result[ring] = analyses
-      .filter((a) => a.ring === ring)
-      .sort((a, b) => b.index - a.index)
-      .slice(0, 3)
-      .map((a, idx) => ({
-        name: a.name,
-        score: a.index,
-        rank: idx + 1,
-      }));
-  }
+//   for (const ring of rings) {
+//     result[ring] = analyses
+//       .filter((a) => a.ring === ring)
+//       .sort((a, b) => b.index - a.index)
+//       .slice(0, 3)
+//       .map((a, idx) => ({
+//         name: a.name,
+//         score: a.index,
+//         rank: idx + 1,
+//       }));
+//   }
 
-  return {
-    ...result,
-    updatedAt: new Date().toISOString(),
-  };
-}
+//   return {
+//     ...result,
+//     updatedAt: new Date().toISOString(),
+//   };
+// }
 
-export function buildHeatmap(analyses: SeedAnalysis[]) {
-  return analyses.map((a) => ({
-    lat: a.lat,
-    lng: a.lng,
-    weight: Number(a.index.toFixed(1)),
-    name: a.name,
-    ring: a.ring,
-  }));
-}
+// export function buildHeatmap(analyses: SeedAnalysis[]) {
+//   return analyses.map((a) => ({
+//     lat: a.lat,
+//     lng: a.lng,
+//     weight: Number(a.index.toFixed(1)),
+//     name: a.name,
+//     ring: a.ring,
+//   }));
+// }
 
 // ---------------------------------------------------------------------------
 // Haversine distance (metres, crow-flies)
