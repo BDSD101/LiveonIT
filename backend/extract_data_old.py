@@ -7,10 +7,10 @@ Datasets:
   Housing:
     1. Victorian Property Sales Report - Median House by Suburb (quarterly)
        CKAN ID: victorian-property-sales-report-median-house-by-suburb
-       Source: land.vic.gov.au — may be blocked, manual download fallback provided
+       Source: land.vic.gov.au - may be blocked, manual download fallback provided
     2. Victorian Property Sales Report - Median Unit by Suburb (quarterly)
        CKAN ID: victorian-property-sales-report-median-unit-by-suburb
-       Source: land.vic.gov.au — may be blocked, manual download fallback provided
+       Source: land.vic.gov.au - may be blocked, manual download fallback provided
     3. Rental Report - Moving Annual Rents by Suburb (quarterly)
        CKAN ID: rental-report-quarterly-moving-annual-rents-by-suburb
        Source: dffh.vic.gov.au
@@ -25,11 +25,11 @@ Datasets:
        Source: Wikipedia API (en.wikipedia.org/wiki/List_of_Melbourne_suburbs)
 
 Output files:
-  housing_data/house_unit_prices_by_suburb.json — median sale prices per suburb
-  housing_data/rent_by_suburb.json              — median weekly rent per suburb group
-  crime_data/crime_by_lga.json                  — incidents + rate per 100k by LGA
-  crime_data/crime_by_suburb.json               — total incidents by suburb + postcode
-  suburb_data/melbourne_suburbs_by_lga.json     — suburb + postcode list per LGA
+  housing_data/house_unit_prices_by_suburb.json - median sale prices per suburb
+  housing_data/rent_by_suburb.json              - median weekly rent per suburb group
+  crime_data/crime_by_lga.json                  - incidents + rate per 100k by LGA
+  crime_data/crime_by_suburb.json               - total incidents by suburb + postcode
+  suburb_data/melbourne_suburbs_by_lga.json     - suburb + postcode list per LGA
 
 Raw files saved to ./housing_data/raw/ and ./crime_data/ for debugging.
 
@@ -168,7 +168,7 @@ def download_file(url: str, dest_path: str, extra_headers: dict | None = None) -
         print(f"  Saved: {size_mb:.1f} MB")
         return dest_path
     except urllib.error.HTTPError as e:
-        print(f"  HTTP {e.code} — download blocked.")
+        print(f"  HTTP {e.code} - download blocked.")
         return None
     except urllib.error.URLError as e:
         print(f"  URL error: {e}")
@@ -222,7 +222,7 @@ def find_sheet(sheet_names: list[str], keywords: list[str]) -> str:
 
 
 # =============================================================================
-# HOUSING — EXTRACT
+# HOUSING - EXTRACT
 # =============================================================================
 
 VPSR_SUBURB_SWAP = {"Hillside (Melton)": "Hillside", 
@@ -243,7 +243,7 @@ def extract_house_prices(filepath: str, engine: str, period_end: str) -> pd.Data
         - engine (str): Pandas engine to use.
         - period_end (str): Period end label (stored for reference).
     Returns:
-        - pd.DataFrame: Columns — suburb (title case), mean_price_for_period.
+        - pd.DataFrame: Columns - suburb (title case), mean_price_for_period.
     """
     print(f"\nExtracting house prices from: {os.path.basename(filepath)}")
 
@@ -348,7 +348,7 @@ def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
                 break
 
         if header_row2 is None:
-            print(f"    Could not find header rows — skipping")
+            print(f"    Could not find header rows - skipping")
             continue
 
         df = pd.read_excel(
@@ -436,12 +436,12 @@ def process_property_prices(dataset_id: str, raw_path: str) -> pd.DataFrame | No
     filepath = raw_path.replace(".xls", suffix)
 
     if os.path.exists(filepath):
-        print(f"  Raw file already exists — skipping download: {filepath}")
+        print(f"  Raw file already exists - skipping download: {filepath}")
     else:
         print(f"  Attempting download...")
         filepath = download_file(url, filepath, extra_headers={"Referer": "https://www.land.vic.gov.au/"})
         if not filepath:
-            print(f"\n  ACTION REQUIRED — automated download blocked.")
+            print(f"\n  ACTION REQUIRED - automated download blocked.")
             print(f"  1. Open this URL in your browser:\n     {url}")
             print(f"  2. Save the file as:\n     {raw_path.replace('.xls', suffix)}")
             print(f"  3. Re-run the script")
@@ -455,7 +455,7 @@ def process_property_prices(dataset_id: str, raw_path: str) -> pd.DataFrame | No
 
 
 # =============================================================================
-# CRIME — EXTRACT
+# CRIME - EXTRACT
 # =============================================================================
 
 def extract_lga_table(filepath: str, sheet_name: str, suburbs_by_lga: dict[str, list[dict]]) -> dict[str, dict]:
@@ -565,7 +565,7 @@ def extract_suburb_table(filepath: str, sheet_name: str) -> dict[str, dict]:
                 "lga":            lga,
                 "totalIncidents": 0,
                 "year":           str(int(latest_year)) if pd.notna(latest_year) else "unknown",
-                "note":           "Raw count — not population normalised. Use LGA ratePer100k for scoring.",
+                "note":           "Raw count - not population normalised. Use LGA ratePer100k for scoring.",
                 "_offenceSubgroups": {},
             }
 
@@ -597,14 +597,14 @@ def extract_suburb_table(filepath: str, sheet_name: str) -> dict[str, dict]:
 
 
 # =============================================================================
-# SUBURBS — EXTRACT
+# SUBURBS - EXTRACT
 # =============================================================================
 
 
 def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
     """
     Fetch Melbourne suburbs with postcodes grouped by LGA from the Wikipedia API.
-    Parses the wikitext of "List of Melbourne suburbs" — no HTML scraping required.
+    Parses the wikitext of "List of Melbourne suburbs" - no HTML scraping required.
     LGA names have "City of" / "Shire of" prefixes stripped to match MELBOURNE_LGAS.
     Returns:
         - dict[str, list[dict]]: LGA name → list of {suburb, postcode} dicts.
@@ -632,7 +632,7 @@ def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
     page = next(iter(pages.values()))
     wikitext = page["revisions"][0]["slots"]["main"]["*"]
     lines = wikitext.split("\n")
-    print(f"  Page fetched — {len(lines)} lines")
+    print(f"  Page fetched - {len(lines)} lines")
 
     # ===[[City of Melbourne]]=== or ===[[Shire of X|Shire of X]]===
     # lga_pattern    = re.compile(r"^===\[\[(?:[^\]|]+\|)?([^\]]+)\]\]===")
@@ -728,7 +728,7 @@ if __name__ == "__main__":
 
 
     # -------------------------------------------------------------------------
-    # HOUSING — House & Unit Prices
+    # HOUSING - House & Unit Prices
     # -------------------------------------------------------------------------
     for label, dataset_id, raw_path in [
         ("HOUSE PRICES", HOUSE_PRICES_DATASET, RAW_HOUSE),
@@ -775,7 +775,7 @@ if __name__ == "__main__":
 
     
     # -------------------------------------------------------------------------
-    # HOUSING — Rent
+    # HOUSING - Rent
     # -------------------------------------------------------------------------
     print("\n" + "=" * 60)
     print("RENTAL DATA")
@@ -786,7 +786,7 @@ if __name__ == "__main__":
         raw_path = RAW_RENT.replace(".xlsx", suffix)
 
         if os.path.exists(raw_path):
-            print(f"  Raw file already exists — skipping download: {raw_path}")
+            print(f"  Raw file already exists - skipping download: {raw_path}")
             filepath = raw_path
         else:
             print(f"  Attempting download...")
@@ -827,7 +827,7 @@ if __name__ == "__main__":
         )
 
         if os.path.exists(CRIME_EXCEL):
-            print(f"  Raw file already exists — skipping download: {CRIME_EXCEL}")
+            print(f"  Raw file already exists - skipping download: {CRIME_EXCEL}")
         else:
             filepath = download_file(url, CRIME_EXCEL)
             if not filepath:
@@ -854,13 +854,13 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------------
     print(f"\nOutput directories:")
     print(f"  {HOUSING_DIR}/")
-    print(f"    house_unit_prices_by_suburb.json — median sale prices by suburb")
-    print(f"    rent_by_suburb.json              — median weekly rent by suburb group")
-    print(f"    raw/                             — raw downloaded files")
+    print(f"    house_unit_prices_by_suburb.json - median sale prices by suburb")
+    print(f"    rent_by_suburb.json              - median weekly rent by suburb group")
+    print(f"    raw/                             - raw downloaded files")
     print(f"  {CRIME_DIR}/")
-    print(f"    crime_by_lga.json                — LGA incidents + rate per 100k")
-    print(f"    crime_by_suburb.json             — suburb incidents (raw count)")
+    print(f"    crime_by_lga.json                - LGA incidents + rate per 100k")
+    print(f"    crime_by_suburb.json             - suburb incidents (raw count)")
     print(f"  {SUBURB_DIR}/")
-    print(f"    melbourne_suburbs_by_lga.json    — suburb + postcode list per LGA")
+    print(f"    melbourne_suburbs_by_lga.json    - suburb + postcode list per LGA")
     print(f"\nNote: Data is published quarterly. Re-run each quarter for latest data.")
     print(f"      Delete raw files to force re-download.")

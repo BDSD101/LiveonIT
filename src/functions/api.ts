@@ -459,13 +459,13 @@ async function analyzeLocation(
 
   // --- Walkability scores (zero extra API calls) ---
 
-  // Full neighbourhood score — all service types
+  // Full neighbourhood score - all service types
   const { candidatesByCategory: allCategories } = buildErrandCandidateMap(enriched);
   const errandTripAll = scoreErrandTripExact(originLat, originLon, allCategories);
   const abundanceAll  = scoreAbundance(enriched);
   const nearestAll    = scoreNearestServices(enriched);
 
-  // Selected services score — only what the user picked
+  // Selected services score - only what the user picked
   // NOW passes selectedTypes so scoring only considers selected service types
   const selectedTypes = new Set(displayItems.map(i => i.type));
   const selectedCandidates = enriched.filter(c => selectedTypes.has(c.type));

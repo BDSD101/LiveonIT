@@ -4,17 +4,17 @@ Combines Melbourne suburb data from multiple sources into a single JSON file
 and a flattened CSV for analysis.
 
 Sources:
-  - melbourne_suburbs_by_lga.json      — master suburb list with postcodes (Wikipedia)
-  - crime_by_suburb.json               — crime incidents by suburb (CSA Victoria)
-  - crime_by_lga.json                  — crime rate per 100k by LGA (CSA Victoria)
-  - rent_by_suburb.json                — weekly rent by suburb group (DFFH Victoria)
-  - house_unit_prices_by_suburb.json   — median house and unit sale prices (Land Vic)
+  - melbourne_suburbs_by_lga.json      - master suburb list with postcodes (Wikipedia)
+  - crime_by_suburb.json               - crime incidents by suburb (CSA Victoria)
+  - crime_by_lga.json                  - crime rate per 100k by LGA (CSA Victoria)
+  - rent_by_suburb.json                - weekly rent by suburb group (DFFH Victoria)
+  - house_unit_prices_by_suburb.json   - median house and unit sale prices (Land Vic)
 
 Output:
-  melbourne_suburb_data.json       — combined suburb data keyed by suburb name
-  melbourne_suburb_data.csv        — flattened version for analysis
-  rent_by_suburb_ranked.json       — rent data enriched with rankings
-  1brFlat_rent_by_suburb.csv       — debug CSV for 1br flat rent ranking
+  melbourne_suburb_data.json       - combined suburb data keyed by suburb name
+  melbourne_suburb_data.csv        - flattened version for analysis
+  rent_by_suburb_ranked.json       - rent data enriched with rankings
+  1brFlat_rent_by_suburb.csv       - debug CSV for 1br flat rent ranking
 """
 
 import json
@@ -46,7 +46,7 @@ with open(os.path.join(SCRIPT_DIR, HOUSE_UNIT_PRICES_FILE)) as f:
     house_unit_data = json.load(f)
 
 # =============================================================================
-# STEP 1 — Build lookups from master suburb list (Wikipedia)
+# STEP 1 - Build lookups from master suburb list (Wikipedia)
 # =============================================================================
 
 wiki_suburb_lookup = {}
@@ -62,7 +62,7 @@ for lga, suburbs in mel_suburbs_raw.items():
 print(f"Master suburb list: {len(wiki_suburb_lookup)} suburbs across {len(mel_suburbs_raw)} LGAs")
 
 # =============================================================================
-# STEP 2 — Build house/unit price lookup
+# STEP 2 - Build house/unit price lookup
 # =============================================================================
 
 house_price_lookup = {
@@ -76,7 +76,7 @@ house_price_lookup = {
 print(f"House/unit price entries: {len(house_price_lookup)}")
 
 # =============================================================================
-# STEP 3 — Process crime suburb data
+# STEP 3 - Process crime suburb data
 # Merge duplicates: sum incidents, keep topFiveOffenceProportion from highest-incident entry
 # =============================================================================
 
@@ -109,7 +109,7 @@ for entry in crime_by_suburb_merged.values():
 print(f"Crime suburb entries (Melbourne): {len(crime_by_suburb_merged)}")
 
 # =============================================================================
-# STEP 4 — Process crime LGA data
+# STEP 4 - Process crime LGA data
 # =============================================================================
 
 def normalise_lga(name: str) -> str:
@@ -126,7 +126,7 @@ crime_lga_lookup = {normalise_lga(k): v for k, v in crime_lga_data.items()}
 print(f"Crime LGA entries: {len(crime_lga_lookup)}")
 
 # =============================================================================
-# STEP 5 — Process rent data with dense ranking per category
+# STEP 5 - Process rent data with dense ranking per category
 # =============================================================================
 
 melbourne_suburb_set = set(wiki_suburb_lookup.keys())
@@ -178,8 +178,8 @@ for entry in melbourne_rent_entries:
 # print(f"Saved: {ranked_path}")
 
 # =============================================================================
-# STEP 6 — Combine all data
-# Top-level key is suburb name — not repeated inside entry
+# STEP 6 - Combine all data
+# Top-level key is suburb name - not repeated inside entry
 # =============================================================================
 
 combined = {}
@@ -240,7 +240,7 @@ for suburb_lower, wiki_info in wiki_suburb_lookup.items():
     else:
         stats["house_missing"] += 1
 
-    # suburb is the top-level key — not repeated inside
+    # suburb is the top-level key - not repeated inside
     combined[suburb] = {
         "postcode": postcode,
         "lga": lga,
@@ -262,7 +262,7 @@ print(f"  Rent:          {stats['rent_found']} found, {stats['rent_missing']} mi
 print(f"  House prices:  {stats['house_found']} found, {stats['house_missing']} missing")
 
 # =============================================================================
-# STEP 7 — Robust z-scores (MAD) for house prices, rent, and crime
+# STEP 7 - Robust z-scores (MAD) for house prices, rent, and crime
 # All scores computed only over Greater Melbourne suburbs (wiki_suburb_lookup).
 # Formula: (value - median) / MAD  where MAD = median absolute deviation
 # Crime score is negated so that safer = higher score.
@@ -365,7 +365,7 @@ with open(json_path, "w") as f:
 print(f"  Re-saved: {json_path} (with scores)")
 
 # =============================================================================
-# STEP 8 — Flattened CSV for analysis
+# STEP 8 - Flattened CSV for analysis
 # =============================================================================
 
 RENT_CATS = ["1brFlat", "2brFlat", "3brFlat", "2brHouse", "3brHouse", "4brHouse", "all"]
@@ -453,7 +453,7 @@ with open(csv_path, "w", newline="", encoding="utf-8") as f:
 print(f"Saved: {csv_path} ({len(csv_rows)} suburbs, {len(fieldnames)} columns)")
 
 # =============================================================================
-# STEP 9 — Debug CSV for 1brFlat rent ranking
+# STEP 9 - Debug CSV for 1brFlat rent ranking
 # =============================================================================
 
 # CAT = "1brFlat"
@@ -489,6 +489,6 @@ print(f"Saved: {csv_path} ({len(csv_rows)} suburbs, {len(fieldnames)} columns)")
 #         r = data.get("rent") or {}
 #         weekly = r.get("weeklyRent") or {}
 #         ranks = r.get("weeklyRentRank") or {}
-#         print(f"  {suburb} ({data['postcode']}) — {data['lga']}")
+#         print(f"  {suburb} ({data['postcode']}) - {data['lga']}")
 #         print(f"    crime rate/100k: {cl.get('ratePer100k')} rank={cl.get('melbourneRank')}")
 #         print(f"    rent (all): ${weekly.get('all')} rank={ranks.get('all')}")

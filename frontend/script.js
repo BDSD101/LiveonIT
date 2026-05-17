@@ -142,7 +142,7 @@ function getScoreDescription(score, walkability) {
   if (suburb?.crimeScore !== null && suburb.crimeScore >= 7) parts.push('safe area');
   if (suburb?.housePriceScore !== null && suburb.housePriceScore >= 7) parts.push('affordable');
 
-  return `${getScoreLabel(score)} — ${parts.join(', ')}.`;
+  return `${getScoreLabel(score)} - ${parts.join(', ')}.`;
 }
 
 // ── Score breakdown ──
@@ -218,7 +218,7 @@ function renderWalkabilityBreakdown(walkability) {
     const sc = comp.score;
     const has = sc !== null && sc !== undefined;
     const c = has ? getScoreColor(sc) : { text: 'text-slate-400', barBg: 'bg-slate-200', light: 'bg-slate-50', border: 'border-slate-100' };
-    const display = has ? sc.toFixed(1) : '—';
+    const display = has ? sc.toFixed(1) : '-';
     const bar = has ? (sc * 10) : 0;
 
     const row = document.createElement('div');
@@ -288,7 +288,7 @@ function renderServicesFound(services) {
     const rows = group.items
       .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
       .map(s => {
-        const dist = typeof s.walkingDistanceMeters === 'number' ? formatDistance(s.walkingDistanceMeters) : '—';
+        const dist = typeof s.walkingDistanceMeters === 'number' ? formatDistance(s.walkingDistanceMeters) : '-';
         const dur = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
         const within = s.withinThreshold;
         const dotColor = within ? 'bg-emerald-400' : (typeof s.walkingDistanceMeters === 'number' ? 'bg-amber-400' : 'bg-slate-300');
@@ -662,7 +662,7 @@ async function loadServices(lat, lon) {
       }, {})
     );
 
-    // Render services found (only nearest per type — what's on the map)
+    // Render services found (only nearest per type - what's on the map)
     renderServicesFound(nearestPerType);
 
     nearestPerType.forEach(async (s) => {

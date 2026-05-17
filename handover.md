@@ -1,16 +1,16 @@
-# LiveonIT — Handover Document
+# LiveonIT - Handover Document
 ## 20-Minute Neighbourhood Explorer
 
 ---
 
 ## 1. Project Overview
 
-LiveonIT is a web application that helps users evaluate how liveable a location in Melbourne is, based on the **20-minute neighbourhood** concept — the idea that residents should be able to meet most of their daily needs within a 20-minute walk from home.
+LiveonIT is a web application that helps users evaluate how liveable a location in Melbourne is, based on the **20-minute neighbourhood** concept - the idea that residents should be able to meet most of their daily needs within a 20-minute walk from home.
 
 The application has two main features:
 
-1. **Address Search Dashboard** (`/dashboard.html`) — A user searches for a specific Melbourne address and receives a real-time liveability score based on nearby services (powered by live Google Maps API calls).
-2. **Suburb Overview Map** (`/suburb.html`) — A heatmap of all ~542 Melbourne suburbs, each pre-scored and stored in a PostgreSQL database (powered by a one-off batch script that should be re-run annually).
+1. **Address Search Dashboard** (`/dashboard.html`) - A user searches for a specific Melbourne address and receives a real-time liveability score based on nearby services (powered by live Google Maps API calls).
+2. **Suburb Overview Map** (`/suburb.html`) - A heatmap of all ~542 Melbourne suburbs, each pre-scored and stored in a PostgreSQL database (powered by a one-off batch script that should be re-run annually).
 
 ---
 
@@ -48,7 +48,7 @@ The application has two main features:
 | File | Purpose |
 |------|---------|
 | `src/server.ts` | HTTP server, static file serving, routes requests to handler |
-| `src/functions/api.ts` | Core API handler — all endpoints, Google Maps integration, scoring |
+| `src/functions/api.ts` | Core API handler - all endpoints, Google Maps integration, scoring |
 | `src/scoring.ts` | Scoring algorithms, category weights, service type definitions |
 | `frontend/suburb-map.js` | Frontend JS for the suburb overview heatmap |
 | `frontend/script.js` | Frontend JS for the address search dashboard |
@@ -64,10 +64,10 @@ When a user searches for a specific address on the **Dashboard**, the system cal
 
 ### Process Flow
 
-1. **Geocoding** — The user's search query is sent to the Google Maps Geocoding API to resolve it to latitude/longitude coordinates.
-2. **Service Discovery** — The Google Maps Places API (Nearby Search + Text Search) is used to find all essential services within a **2 km radius** of the address. Services are searched across **8 categories** containing **21 service types**.
-3. **Walking Distance Enrichment** — The Google Maps Distance Matrix API calculates actual walking distances and durations from the address to each discovered service.
-4. **Composite Scoring** — Three walkability sub-scores plus two suburb-level scores are calculated and combined into a final **weighted composite score out of 10**.
+1. **Geocoding** - The user's search query is sent to the Google Maps Geocoding API to resolve it to latitude/longitude coordinates.
+2. **Service Discovery** - The Google Maps Places API (Nearby Search + Text Search) is used to find all essential services within a **2 km radius** of the address. Services are searched across **8 categories** containing **21 service types**.
+3. **Walking Distance Enrichment** - The Google Maps Distance Matrix API calculates actual walking distances and durations from the address to each discovered service.
+4. **Composite Scoring** - Three walkability sub-scores plus two suburb-level scores are calculated and combined into a final **weighted composite score out of 10**.
 
 ### The 8 Service Categories
 
@@ -88,11 +88,11 @@ The final score is a **weighted average** of five components:
 
 ```typescript
 const WEIGHTS = {
-  errandTrip: 0.05,   // 5%   — shortest walking route through services
-  abundance:  0.05,   // 5%   — count of walkable options
-  nearest:    0.85,   // 85%  — how close the nearest of each type is
-  housePrice: 0.025,  // 2.5% — suburb affordability
-  crime:      0.025,  // 2.5% — suburb safety
+  errandTrip: 0.05,   // 5%   - shortest walking route through services
+  abundance:  0.05,   // 5%   - count of walkable options
+  nearest:    0.85,   // 85%  - how close the nearest of each type is
+  housePrice: 0.025,  // 2.5% - suburb affordability
+  crime:      0.025,  // 2.5% - suburb safety
 };
 ```
 
@@ -120,8 +120,8 @@ Services are weighted by how often a typical resident visits them:
 ### Two Scores Per Search
 
 Each search produces **two** scores:
-- **Neighbourhood Score** — scored against all 21 service types (full picture of the area).
-- **Selection Score** — scored only against the services the user selected in the dashboard filter.
+- **Neighbourhood Score** - scored against all 21 service types (full picture of the area).
+- **Selection Score** - scored only against the services the user selected in the dashboard filter.
 
 If house price or crime data is missing for the suburb, those weights are redistributed across the remaining components.
 
@@ -129,14 +129,14 @@ If house price or crime data is missing for the suburb, those weights are redist
 
 ## 4. How the Suburb Overview Rating is Calculated
 
-The **Suburb Overview** heatmap displays pre-calculated scores for all ~542 Melbourne suburbs. These scores are **not calculated in real-time** — they were generated via a batch script and stored in PostgreSQL.
+The **Suburb Overview** heatmap displays pre-calculated scores for all ~542 Melbourne suburbs. These scores are **not calculated in real-time** - they were generated via a batch script and stored in PostgreSQL.
 
 ### How the Suburb Scores Were Generated
 
-1. **Geocoding** — For each suburb, the script sends a query like `"Abbotsford, Victoria"` to the `/api/search` endpoint, which resolves the suburb's geographic centre via Google Maps Geocoding.
-2. **Service Analysis** — The script calls `/api/nearby-services` with those centre coordinates. This triggers the full analysis pipeline: Places API → Distance Matrix → composite scoring.
-3. **Score Extraction** — The `walkability.neighbourhood.score` value (the composite score using **all** service categories) is extracted as the suburb's rating.
-4. **Storage** — Ratings are saved to a CSV, then migrated into PostgreSQL.
+1. **Geocoding** - For each suburb, the script sends a query like `"Abbotsford, Victoria"` to the `/api/search` endpoint, which resolves the suburb's geographic centre via Google Maps Geocoding.
+2. **Service Analysis** - The script calls `/api/nearby-services` with those centre coordinates. This triggers the full analysis pipeline: Places API → Distance Matrix → composite scoring.
+3. **Score Extraction** - The `walkability.neighbourhood.score` value (the composite score using **all** service categories) is extracted as the suburb's rating.
+4. **Storage** - Ratings are saved to a CSV, then migrated into PostgreSQL.
 
 ### Key Difference from Address Search
 
@@ -173,9 +173,9 @@ CREATE TABLE suburb_ratings (
 );
 ```
 
-- **suburb** — The suburb name (e.g., `"Abbotsford"`), unique constraint.
-- **region** — The geographic region grouping (e.g., `"Inner Metro"`, `"Western"`, `"Eastern"`, `"Northern"`, `"Southern"`, `"Inner South East"`).
-- **rating** — The liveability score from 0.0 to 10.0.
+- **suburb** - The suburb name (e.g., `"Abbotsford"`), unique constraint.
+- **region** - The geographic region grouping (e.g., `"Inner Metro"`, `"Western"`, `"Eastern"`, `"Northern"`, `"Southern"`, `"Inner South East"`).
+- **rating** - The liveability score from 0.0 to 10.0.
 
 ### API Endpoint
 
@@ -197,7 +197,7 @@ GET /api/ratings
 
 ---
 
-## 6. Google Maps API — Usage & Monitoring
+## 6. Google Maps API - Usage & Monitoring
 
 > **⚠️ The Google Maps API is a paid service. Every address search by a user costs real money. Monitor usage carefully.**
 
@@ -206,7 +206,7 @@ GET /api/ratings
 | API | When Used | Cost Trigger |
 |-----|-----------|-------------|
 | **Geocoding API** | Every address search (`/api/search`) | Per request |
-| **Places API (Nearby Search)** | Every address search (`/api/nearby-services`) — multiple calls per search | Per request |
+| **Places API (Nearby Search)** | Every address search (`/api/nearby-services`) - multiple calls per search | Per request |
 | **Places API (Text Search)** | For specific service types (GP, hospital, kindergarten, etc.) | Per request |
 | **Distance Matrix API** | Walking distance calculations for discovered services | Per element (origin × destination) |
 
@@ -271,12 +271,12 @@ This script:
 - Geocodes each suburb to find its geographic centre coordinates.
 - Calls the local API to calculate a walkability score for each suburb.
 - Saves results incrementally (every 50 suburbs) to prevent data loss.
-- Has **resume logic** — if it crashes mid-way (due to memory or network issues), simply restart it and it will pick up where it left off.
+- Has **resume logic** - if it crashes mid-way (due to memory or network issues), simply restart it and it will pick up where it left off.
 - Includes a 200ms delay between suburbs to avoid rate limiting.
 
 > **⚠️ API Cost Warning:** This script makes ~21 Google Maps API calls per suburb × 542 suburbs ≈ **11,000+ API calls**. Budget approximately **$20–50 USD** in API credits per full run.
 
-> **⚠️ Memory Warning:** The local server may crash during long runs due to accumulated in-memory cache. If this happens, restart the server (`npm run dev`) and re-run the script — the resume logic will continue from where it left off.
+> **⚠️ Memory Warning:** The local server may crash during long runs due to accumulated in-memory cache. If this happens, restart the server (`npm run dev`) and re-run the script - the resume logic will continue from where it left off.
 
 #### Step 3: Review the Output CSV
 
@@ -372,7 +372,7 @@ The server will start at `http://localhost:3000`.
 
 | Endpoint | Description |
 |----------|-------------|
-| `GET /health` | Health check — returns `{ status: "ok" }` |
+| `GET /health` | Health check - returns `{ status: "ok" }` |
 | `GET /api/debug/stats` | Shows API call counts and cache size |
 | `GET /api/ratings` | Returns all suburb ratings from PostgreSQL |
 

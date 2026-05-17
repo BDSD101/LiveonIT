@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>20-Minute Neighbourhood Explorer — V1 Zigzag</title>
+  <title>20-Minute Neighbourhood Explorer - V1 Zigzag</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -227,7 +227,7 @@
     const IMG_WIDTH  = 220;
     const IMG_HEIGHT = 220;
     // ══════════════════════════════════════════════════════════════'═
-    // STEPS — edit title and body text here for each step card
+    // STEPS - edit title and body text here for each step card
     // ═══════════════════════════════════════════════════════════════
     const STEPS = [
       {
@@ -405,7 +405,7 @@
           ? ` via <a href="${a.sourceUrl || '#'}" target="_blank" rel="noopener" class="underline hover:text-slate-600">${a.source}</a>`
           : '';
         const licence = a.licence
-          ? ` — <a href="${a.licenceUrl || '#'}" target="_blank" rel="noopener" class="underline hover:text-slate-600">${a.licence}</a>`
+          ? ` - <a href="${a.licenceUrl || '#'}" target="_blank" rel="noopener" class="underline hover:text-slate-600">${a.licence}</a>`
           : '';
         // li.innerHTML = `Step ${i + 1} image: Photo by ${author}${source}${licence}`;
         const mediaType = step.youtube ? 'Video' : 'Photo';
@@ -478,7 +478,7 @@
       // Build path with quarter-circle arcs at each corner instead of sharp bends.
       // Each segment has two corners: one where vertical meets horizontal (bottom of node col),
       // and one where horizontal meets vertical again (entering next node col).
-      // Arc sweep flags: 0=counter-clockwise, 1=clockwise — chosen per corner geometry.
+      // Arc sweep flags: 0=counter-clockwise, 1=clockwise - chosen per corner geometry.
       let d = `M ${pts[0].x} ${pts[0].y}`;
 
       for (let i = 0; i < pts.length - 1; i++) {

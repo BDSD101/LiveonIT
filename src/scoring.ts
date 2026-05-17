@@ -459,7 +459,7 @@ export function haversineMeters(aLat: number, aLon: number, bLat: number, bLon: 
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 1 — Errand Trip Score (greedy, 0–10)
+// COMPONENT 1 - Errand Trip Score (greedy, 0–10)
 // ---------------------------------------------------------------------------
 export function scoreErrandTripGreedy(
   homeLat: number,
@@ -542,7 +542,7 @@ export function scoreErrandTripGreedy(
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 1 (alt) — Errand Trip Score (exact TSP, 0–10)
+// COMPONENT 1 (alt) - Errand Trip Score (exact TSP, 0–10)
 // ---------------------------------------------------------------------------
 export function scoreErrandTripExact(
   homeLat: number,
@@ -560,7 +560,7 @@ export function scoreErrandTripExact(
   const totalChecks = totalCombinations * factorial(scorableCategories.length);
 
   if (totalChecks > complexityCap) {
-    console.warn(`[TSP] ${totalChecks.toLocaleString()} checks exceeds cap — falling back to greedy`);
+    console.warn(`[TSP] ${totalChecks.toLocaleString()} checks exceeds cap - falling back to greedy`);
     return scoreErrandTripGreedy(homeLat, homeLon, candidatesByCategory, walkableThresholdMeters, circuityFactor);
   }
 
@@ -631,7 +631,7 @@ export function scoreErrandTripExact(
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 2 — Abundance Score (0–10)
+// COMPONENT 2 - Abundance Score (0–10)
 // Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
 export function scoreAbundance(
@@ -673,7 +673,7 @@ export function scoreAbundance(
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 3 — Nearest Service Score (0–10)
+// COMPONENT 3 - Nearest Service Score (0–10)
 // Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
 export function scoreNearestServices(
@@ -682,7 +682,7 @@ export function scoreNearestServices(
   restrictToTypes?: Set<string>,
 ): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
 
-  // Find nearest per type with no distance cutoff — we need location to award penalties too
+  // Find nearest per type with no distance cutoff - we need location to award penalties too
   const nearestByType = new Map<string, CandidateService>();
   for (const c of allCandidates) {
     if (c.walkingDistanceMeters === null) continue;
@@ -710,7 +710,7 @@ export function scoreNearestServices(
     let distanceFactor: number;
 
     if (!nearest) {
-      // Not found anywhere — maximum penalty
+      // Not found anywhere - maximum penalty
       distanceFactor = -1;
     } else if ((nearest.walkingDistanceMeters ?? Infinity) <= thresholdMeters) {
       // Within threshold: positive factor, 1 at 0 m decaying to 0 at threshold
