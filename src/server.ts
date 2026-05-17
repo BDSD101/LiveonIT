@@ -31,12 +31,9 @@ const server = http.createServer(async (req: IncomingMessage, res: ServerRespons
 
         const content = fs.readFileSync(filePath);
         const contentType = mimeTypes[ext] || 'text/plain';
-
-        // Compressible text types get gzip
         const compressible = ['.html', '.js', '.css', '.json', '.geojson', '.csv', '.svg'];
         const acceptsGzip = (req.headers['accept-encoding'] || '').includes('gzip');
 
-        // Cache static assets: 1 hour for HTML, 1 day for others
         const cacheControl = ext === '.html'
           ? 'no-cache, no-store, must-revalidate'
           : 'public, max-age=86400';

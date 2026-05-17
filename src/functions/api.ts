@@ -2,6 +2,8 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
 import https from 'https';
 import { Pool } from 'pg';
+import fs from 'fs';
+import path from 'path';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -612,7 +614,29 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           };
         }
 
-        const { rows } = await pool.query('SELECT suburb as "Suburb", region as "Region", rating as "Rating" FROM suburb_ratings');
+        let rows: any[] = [];
+        try {
+          const res = await pool.query('SELECT suburb as "Suburb", region as "Region", rating as "Rating" FROM suburb_ratings');
+          rows = res.rows;
+        } catch (dbErr: any) {
+          console.warn('Postgres query failed, falling back to local CSV:', dbErr.message);
+          const csvPath = path.join(__dirname, '../../frontend/suburb_regions_ratings_google_api_centre_final.csv');
+          if (fs.existsSync(csvPath)) {
+            const csvData = fs.readFileSync(csvPath, 'utf-8');
+            const lines = csvData.split('\n').filter(l => l.trim() !== '');
+            rows = lines.slice(1).map(line => {
+              const [suburb, region, ratingStr] = line.split(',');
+              return {
+                Suburb: suburb,
+                Region: region,
+                Rating: parseFloat(ratingStr) || 0
+              };
+            });
+          } else {
+            throw new Error('Database query failed and fallback CSV not found');
+          }
+        }
+
         setCached(cacheKey, rows, 1000 * 60 * 60); // 1 hour cache
 
         return {
@@ -625,7 +649,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           body: JSON.stringify(rows),
         };
       } catch (err) {
-        console.error('Failed to fetch ratings from DB:', err);
+        console.error('Failed to fetch ratings:', err);
         return jsonResponse(500, { error: 'Failed to fetch ratings' });
       }
     }

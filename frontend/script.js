@@ -75,7 +75,7 @@ async function loadGoogleMaps() {
     const { key } = await res.json();
     if (!key) throw new Error('Key missing');
     const s = document.createElement('script');
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization,marker&loading=async&callback=initApp`;
     s.async = true;
     s.defer = true;
     document.head.appendChild(s);
@@ -482,18 +482,18 @@ let _progressDone = false;
 function _startProgress() {
   _progressDone = false;
   _progressVal = 0;
-  const track  = document.getElementById('progress-track');
-  const bar    = document.getElementById('progress-bar');
+  const track = document.getElementById('progress-track');
+  const bar = document.getElementById('progress-bar');
   const walker = document.getElementById('progress-walker');
-  if (bar)    { bar.style.transition = 'none'; bar.style.width = '0%'; }
+  if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
   if (walker) { walker.style.transition = 'none'; walker.style.left = '0'; }
-  if (track)  track.style.opacity = '1';
+  if (track) track.style.opacity = '1';
   if (_progressRaf) cancelAnimationFrame(_progressRaf);
   function tick() {
     if (_progressDone) return;
     _progressVal += (99 - _progressVal) * 0.004;
     const pct = _progressVal;
-    if (bar)    bar.style.width = pct + '%';
+    if (bar) bar.style.width = pct + '%';
     if (walker) walker.style.left = pct + '%';
     _progressRaf = requestAnimationFrame(tick);
   }
@@ -503,15 +503,15 @@ function _startProgress() {
 function _finishProgress() {
   _progressDone = true;
   if (_progressRaf) { cancelAnimationFrame(_progressRaf); _progressRaf = null; }
-  const track  = document.getElementById('progress-track');
-  const bar    = document.getElementById('progress-bar');
+  const track = document.getElementById('progress-track');
+  const bar = document.getElementById('progress-bar');
   const walker = document.getElementById('progress-walker');
-  if (bar)    { bar.style.transition = 'width 0.35s ease'; bar.style.width = '100%'; }
+  if (bar) { bar.style.transition = 'width 0.35s ease'; bar.style.width = '100%'; }
   if (walker) { walker.style.transition = 'left 0.35s ease'; walker.style.left = '100%'; }
   setTimeout(() => {
     if (track) track.style.opacity = '0';
     setTimeout(() => {
-      if (bar)    { bar.style.transition = 'none'; bar.style.width = '0%'; }
+      if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
       if (walker) { walker.style.transition = 'none'; walker.style.left = '0%'; }
     }, 400);
   }, 450);
@@ -582,7 +582,7 @@ function clearAllServices() {
 function toggleMapFullscreen() {
   const container = document.getElementById('map').parentElement;
   if (!document.fullscreenElement) {
-    container.requestFullscreen().catch(() => {});
+    container.requestFullscreen().catch(() => { });
   } else {
     document.exitFullscreen();
   }
