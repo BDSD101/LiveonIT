@@ -20,12 +20,7 @@ import {
   RequestedItem,
   CandidateService,
   LocationAnalysis,
-  // SeedAnalysis,
   CORE_ANALYSIS_ITEMS,
-  // SUBURB_SEED_POINTS,
-  // buildScoreBreakdown,
-  // buildLeaderboard,
-  // buildHeatmap,
   SEARCH_RADIUS_METERS,
   WALKABLE_THRESHOLD_METERS,
   buildErrandCandidateMap,
@@ -456,8 +451,6 @@ async function analyzeLocation(
     );
   }
 
-  // const { breakdown, index } = buildScoreBreakdown(byKey);
-
   // --- Walkability scores (zero extra API calls) ---
 
   // Full neighbourhood score - all service types
@@ -552,25 +545,6 @@ async function analyzeLocation(
   };
 }
 
-// async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
-//   const cacheKey = 'seed_analyses_v2';
-//   const cached = getCached<SeedAnalysis[]>(cacheKey);
-//   if (cached) return cached;
-
-//   const analyses = await Promise.all(SUBURB_SEED_POINTS.map(async (point) => {
-//     try {
-//       const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
-//       return { ...point, index: analysis.index };
-//     } catch (err) {
-//       console.error(`Failed seed analysis for ${point.name}`, err);
-//       return null;
-//     }
-//   }));
-
-//   const results = analyses.filter((a): a is SeedAnalysis => a !== null);
-//   setCached(cacheKey, results, CACHE_TTL_MS.seedAnalytics);
-//   return results;
-// }
 
 // --- Main Lambda Handler ---
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -655,31 +629,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    // if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
-    //   try {
-    //     const analyses = await getSeedAnalyses();
-    //     return jsonResponse(200, buildLeaderboard(analyses));
-    //   } catch {
-    //     return jsonResponse(500, { error: 'Failed to derive leaderboard' });
-    //   }
-    // }
-
-    // if (routePath === '/api/heatmap' && httpMethod === 'GET') {
-    //   try {
-    //     const analyses = await getSeedAnalyses();
-    //     return {
-    //       statusCode: 200,
-    //       headers: {
-    //         ...corsHeaders,
-    //         'Content-Type': 'application/json',
-    //         'Cache-Control': 'public, max-age=3600',
-    //       },
-    //       body: JSON.stringify(buildHeatmap(analyses)),
-    //     };
-    //   } catch {
-    //     return jsonResponse(500, { error: 'Failed to derive heatmap data' });
-    //   }
-    // }
 
     if (routePath === '/api/search' && httpMethod === 'GET') {
       const q = (event.queryStringParameters?.q || '').trim();
