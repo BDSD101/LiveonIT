@@ -28,8 +28,8 @@ export type CandidateService = {
 export type WalkabilityComponent = {
   score: number;
   errandTrip: { score: number; totalDistanceMeters: number; meanEdgeMeters: number; optimalPath: ErrandNode[]; missingCategories: string[] };
-  abundance:  { score: number; totalWeightedOptions: number };
-  nearest:    { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
+  abundance: { score: number; totalWeightedOptions: number };
+  nearest: { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
 };
 
 export type LocationAnalysis = {
@@ -51,12 +51,12 @@ export type LocationAnalysis = {
   };
 };
 
-export const SEARCH_RADIUS_METERS = 3000;          
+export const SEARCH_RADIUS_METERS = 3000;
 export const WALKABLE_THRESHOLD_METERS = 1500;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy','dentist'],
+  health: ['doctor', 'pharmacy', 'dentist'],
   food: ['supermarket', 'convenience_store'],
   connectivity: ['train_station', 'transit_station'],
   parks: ['park'],
@@ -98,34 +98,34 @@ export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
 export type VisitFrequency = 'high' | 'medium' | 'low' | 'rare';
 
 export const SERVICE_FREQUENCY: Record<string, VisitFrequency> = {
-  supermarket:        'high',
-  convenience_store:  'high',
-  train_station:      'high',
-  transit_station:    'high',
-  atm:                'high',
-  cafe:               'high',
-  restaurant:         'medium',
-  bar:                'medium',
-  gym:                'medium',
-  park:               'medium',
-  community:          'medium',
-  library:            'low',
-  childcare:          'low',
-  kindergarten:       'low',
-  primary_school:     'low',
-  secondary_school:   'low',
-  post_office:        'low',
-  bank:               'low',
-  pharmacy:           'low',
-  dentist:            'rare',
-  doctor:             'rare',
+  supermarket: 'high',
+  convenience_store: 'high',
+  train_station: 'high',
+  transit_station: 'high',
+  atm: 'high',
+  cafe: 'high',
+  restaurant: 'medium',
+  bar: 'medium',
+  gym: 'medium',
+  park: 'medium',
+  community: 'medium',
+  library: 'low',
+  childcare: 'low',
+  kindergarten: 'low',
+  primary_school: 'low',
+  secondary_school: 'low',
+  post_office: 'low',
+  bank: 'low',
+  pharmacy: 'low',
+  dentist: 'rare',
+  doctor: 'rare',
 };
 
 export const FREQUENCY_WEIGHTS: Record<VisitFrequency, number> = {
-  high:   1.00,
+  high: 1.00,
   medium: 0.50,
-  low:    0.10,
-  rare:   0.02,
+  low: 0.10,
+  rare: 0.02,
 };
 
 export const TSP_FREQUENCY_THRESHOLD: Set<VisitFrequency> = new Set(['high', 'medium']);
@@ -170,9 +170,9 @@ export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefine
 }
 
 export const PLACE_TYPE_UPGRADE_COUNT: Record<string, number> = {
-  doctor:   10,
-  gym:      10,
-  park:     20,
+  doctor: 10,
+  gym: 10,
+  park: 20,
 };
 
 export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY_TYPES).flatMap(([catId, types]) =>
@@ -480,10 +480,10 @@ export function scoreAbundance(
   }
 
   const REFERENCE_COUNT: Record<VisitFrequency, number> = {
-    high:   3,
+    high: 3,
     medium: 3,
-    low:    3,
-    rare:   3,
+    low: 3,
+    rare: 3,
   };
 
   // Only consider selected types for the reference benchmark when restrictToTypes is set
@@ -684,11 +684,23 @@ export function buildErrandCandidateMap(
   )];
 
   const map = new Map<string, ErrandNode[]>();
+
+  // Group items by category to prevent combinatorial explosion on the CPU
+  const grouped = new Map<string, CandidateService[]>();
   for (const c of allCandidates) {
     const freq = SERVICE_FREQUENCY[c.type];
     if (!freq || !frequencyThreshold.has(freq)) continue;
-    if (!map.has(c.catId)) map.set(c.catId, []);
-    map.get(c.catId)!.push({ catId: c.catId, type: c.type, name: c.name, lat: c.lat, lon: c.lon });
+    if (!grouped.has(c.catId)) grouped.set(c.catId, []);
+    grouped.get(c.catId)!.push(c);
+  }
+
+  // Pick only the top 2 closest per category for the routing math
+  for (const [catId, candidates] of grouped.entries()) {
+    const topCandidates = candidates
+      .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
+      .slice(0, 2)
+      .map(c => ({ catId: c.catId, type: c.type, name: c.name, lat: c.lat, lon: c.lon }));
+    map.set(catId, topCandidates);
   }
 
   return { candidatesByCategory: map, excludedTypes: excluded };
