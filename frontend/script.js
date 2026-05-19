@@ -1,3 +1,8 @@
+// Determine API URL based on environment
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000'
+  : 'https://qchhoyc9a9.execute-api.ap-southeast-2.amazonaws.com/prod';
+
 const root = getComputedStyle(document.body);
 
 const CONFIG = {
@@ -22,9 +27,6 @@ const CONFIG = {
       id: 'connectivity', label: 'Connectivity', color: root.getPropertyValue('--colour-connectivity'), icon: 'bus-front', services: [
         { id: 'train', label: 'Train Station', type: 'train_station', icon: 'train-front' },
         { id: 'bus', label: 'Bus / Tram Stop', type: 'transit_station', icon: 'bus-front' },
-        { id: 'post', label: 'Post Office', type: 'post_office', icon: 'mail' },
-        { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' },
-        { id: 'atm', label: 'ATM', type: 'atm', icon: 'credit-card' },
       ]
     },
     {
@@ -51,28 +53,34 @@ const CONFIG = {
     {
       id: 'other', label: 'Other Services', color: root.getPropertyValue('--colour-other'), icon: 'users', services: [
         { id: 'community', label: 'Community Centre', type: 'community', icon: 'users' },
+        { id: 'post', label: 'Post Office', type: 'post_office', icon: 'mail' },
+        { id: 'bank', label: 'Bank', type: 'bank', icon: 'landmark' },
+        { id: 'atm', label: 'ATM', type: 'atm', icon: 'credit-card' },
       ]
     }
   ]
 };
 
 // ── State ──
-let map, marker, radiusCircle, debounceTimer, currentPos, currentAddress = '';
+let map, marker, radiusCircle, debounceTimer, serviceDebounce, currentPos, currentAddress = '';
 let serviceMarkers = [], servicePolylines = [];
 let selectedServices = new Set(['doctor', 'supermarket', 'train', 'bus', 'park']);
-let openCategories = new Set();
+let openCategories = new Set(['health', 'food', 'connectivity', 'parks']);
 let history = JSON.parse(sessionStorage.getItem('history') || '[]');
 let lastScore = null;
+let _loadSeq = 0; // incremented each call; stale responses are dropped
+let _rescoring = false;
+let lastTypes = [];
 
 // ── Google Maps bootstrap ──
 async function loadGoogleMaps() {
   try {
-    const res = await fetch('/api/config');
+    const res = await fetch(`${API_URL}/api/config`);
     if (!res.ok) throw new Error('Config unavailable');
     const { key } = await res.json();
     if (!key) throw new Error('Key missing');
     const s = document.createElement('script');
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization&loading=async&callback=initApp`;
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry,places,visualization,marker&loading=async&callback=initApp`;
     s.async = true;
     s.defer = true;
     document.head.appendChild(s);
@@ -92,6 +100,8 @@ function initApp() {
   });
   renderFilters();
   renderHistory();
+  document.getElementById('select-all-btn').addEventListener('click', selectAllServices);
+  document.getElementById('clear-all-btn').addEventListener('click', clearAllServices);
   lucide.createIcons();
   checkUrlParams();
 }
@@ -137,7 +147,7 @@ function getScoreDescription(score, walkability) {
   if (suburb?.crimeScore !== null && suburb.crimeScore >= 7) parts.push('safe area');
   if (suburb?.housePriceScore !== null && suburb.housePriceScore >= 7) parts.push('affordable');
 
-  return `${getScoreLabel(score)} — ${parts.join(', ')}.`;
+  return `${getScoreLabel(score)} - ${parts.join(', ')}.`;
 }
 
 // ── Score breakdown ──
@@ -169,7 +179,7 @@ function renderWalkabilityBreakdown(walkability) {
       score: s.nearest.score,
       weight: 85,
       tagText: tag(s.nearest.score, [[8, 'Almost everything nearby'], [6, 'Most essentials within reach'], [4, 'Some services nearby'], [2, 'Limited access'], [0, 'Most services too far']]),
-      tooltip: 'How close is the nearest of each service you selected? Services within a 5-minute walk score highest, decaying to zero at 20 minutes.',
+      tooltip: 'How close is the nearest of each selected service? Services within 800 m add to your score; services outside the circle subtract from it.',
     },
     {
       label: 'Errand Walk',
@@ -185,7 +195,7 @@ function renderWalkabilityBreakdown(walkability) {
       score: s.abundance.score,
       weight: 5,
       tagText: tag(s.abundance.score, [[8, 'Lots of choice'], [5, 'Decent variety'], [2, 'Limited options'], [0, 'Very few options']]),
-      tooltip: 'Are there multiple options for each service? More nearby supermarkets, cafes, and transport stops means better choice.',
+      tooltip: 'Are there multiple options nearby? Having 3 or more of a selected service within walking distance means great choice.',
     },
     {
       label: 'Housing Cost',
@@ -213,7 +223,7 @@ function renderWalkabilityBreakdown(walkability) {
     const sc = comp.score;
     const has = sc !== null && sc !== undefined;
     const c = has ? getScoreColor(sc) : { text: 'text-slate-400', barBg: 'bg-slate-200', light: 'bg-slate-50', border: 'border-slate-100' };
-    const display = has ? sc.toFixed(1) : '—';
+    const display = has ? sc.toFixed(1) : '-';
     const bar = has ? (sc * 10) : 0;
 
     const row = document.createElement('div');
@@ -261,7 +271,7 @@ function renderServicesFound(services) {
     const catColor = conf?.catColor || '#64748b';
     const catIcon = conf?.catIcon || 'circle';
     if (!grouped[catLabel]) grouped[catLabel] = { color: catColor, icon: catIcon, items: [] };
-    grouped[catLabel].items.push(s);
+    grouped[catLabel].items.push({ ...s, svcLabel: conf?.label });
   });
 
   container.innerHTML = '';
@@ -283,15 +293,16 @@ function renderServicesFound(services) {
     const rows = group.items
       .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
       .map(s => {
-        const dist = typeof s.walkingDistanceMeters === 'number' ? formatDistance(s.walkingDistanceMeters) : '—';
+        const dist = typeof s.walkingDistanceMeters === 'number' ? formatDistance(s.walkingDistanceMeters) : '-';
         const dur = typeof s.walkingDurationMinutes === 'number' ? `${s.walkingDurationMinutes} min` : '';
         const within = s.withinThreshold;
         const dotColor = within ? 'bg-emerald-400' : (typeof s.walkingDistanceMeters === 'number' ? 'bg-amber-400' : 'bg-slate-300');
+        const nameDisplay = s.svcLabel ? `${s.svcLabel} - ${s.name}` : s.name;
         return `
           <div class="flex items-center justify-between py-1.5 border-b border-slate-100 last:border-0">
             <div class="flex items-center gap-2 min-w-0">
               <span class="w-1.5 h-1.5 rounded-full ${dotColor} flex-shrink-0"></span>
-              <span class="text-[12px] font-medium text-slate-700 truncate">${s.name}</span>
+              <span class="text-[12px] font-medium text-slate-700 truncate">${nameDisplay}</span>
             </div>
             <span class="text-[10px] text-slate-400 font-inter flex-shrink-0 ml-3">${dist}${dur ? ' · ' + dur : ''}</span>
           </div>
@@ -371,7 +382,10 @@ function renderFilters() {
         if (selectedServices.has(svc.id)) selectedServices.delete(svc.id);
         else selectedServices.add(svc.id);
         renderFilters();
-        if (currentPos) loadServices(currentPos.lat, currentPos.lng);
+        clearTimeout(serviceDebounce);
+        serviceDebounce = setTimeout(() => {
+          if (currentPos) loadServices(currentPos.lat, currentPos.lng);
+        }, 150);
       };
       list.appendChild(item);
     });
@@ -422,7 +436,7 @@ async function search(q) {
   const list = document.getElementById('results');
   list.classList.remove('hidden');
   list.innerHTML = '<li class="p-4 text-slate-400 text-sm italic">Searching...</li>';
-  const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+  const res = await fetch(`${API_URL}/api/search?q=${encodeURIComponent(q)}`);
   const data = await res.json();
   list.innerHTML = '';
   if (!data.length) { list.innerHTML = '<li class="p-4 text-slate-400 text-sm">No results found</li>'; return; }
@@ -465,23 +479,146 @@ function select(item, updateHistory = true) {
   loadServices(currentPos.lat, currentPos.lng);
 }
 
+// ── Progress bar animation ──
+let _progressRaf = null;
+let _progressVal = 0;
+let _progressDone = false;
+
+function _startProgress() {
+  _progressDone = false;
+  _progressVal = 0;
+  const track = document.getElementById('progress-track');
+  const bar = document.getElementById('progress-bar');
+  const walker = document.getElementById('progress-walker');
+  if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
+  if (walker) { walker.style.transition = 'none'; walker.style.left = '0'; }
+  if (track) track.style.opacity = '1';
+  if (_progressRaf) cancelAnimationFrame(_progressRaf);
+  function tick() {
+    if (_progressDone) return;
+    _progressVal += (99 - _progressVal) * 0.004;
+    const pct = _progressVal;
+    if (bar) bar.style.width = pct + '%';
+    if (walker) walker.style.left = pct + '%';
+    _progressRaf = requestAnimationFrame(tick);
+  }
+  _progressRaf = requestAnimationFrame(tick);
+}
+
+function _finishProgress() {
+  _progressDone = true;
+  if (_progressRaf) { cancelAnimationFrame(_progressRaf); _progressRaf = null; }
+  const track = document.getElementById('progress-track');
+  const bar = document.getElementById('progress-bar');
+  const walker = document.getElementById('progress-walker');
+  if (bar) { bar.style.transition = 'width 0.35s ease'; bar.style.width = '100%'; }
+  if (walker) { walker.style.transition = 'left 0.35s ease'; walker.style.left = '100%'; }
+  setTimeout(() => {
+    if (track) track.style.opacity = '0';
+    setTimeout(() => {
+      if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
+      if (walker) { walker.style.transition = 'none'; walker.style.left = '0%'; }
+    }, 400);
+  }, 450);
+}
+
+function _cancelProgress() {
+  _progressDone = true;
+  if (_progressRaf) { cancelAnimationFrame(_progressRaf); _progressRaf = null; }
+  const track = document.getElementById('progress-track');
+  if (track) track.style.opacity = '0';
+}
+
+function clearHistory() {
+  history = [];
+  sessionStorage.removeItem('history');
+  renderHistory();
+}
+
+// ── Re-score other history entries (called manually via button) ──
+async function _doRescoreHistory(types) {
+  const others = history.filter(h => h.display_name !== currentAddress && h.lat && h.lon);
+  if (!others.length) return;
+  const snap = _loadSeq;
+  await Promise.all(others.map(async (h) => {
+    try {
+      const r = await fetch(`${API_URL}/api/nearby-services?lat=${h.lat}&lon=${h.lon}&types=${types.join(',')}&address=${encodeURIComponent(h.display_name)}`);
+      if (!r.ok || snap !== _loadSeq) return;
+      const d = await r.json();
+      if (snap !== _loadSeq) return;
+      // const s = d.walkability?.selection?.score ?? Number(d.index || 0);
+      const s = d.walkability?.selection?.score ?? 0;
+      const idx = history.findIndex(i => i.display_name === h.display_name);
+      if (idx !== -1 && typeof s === 'number' && !isNaN(s)) history[idx].score = s;
+    } catch { /* silent */ }
+  }));
+  if (snap === _loadSeq) { sessionStorage.setItem('history', JSON.stringify(history)); renderHistory(); }
+}
+
+async function manualRescoreHistory() {
+  if (_rescoring || !lastTypes.length) return;
+  _rescoring = true;
+  const btn = document.getElementById('history-rescore-btn');
+  const spinner = document.getElementById('history-spinner-wrap');
+  if (btn) btn.classList.add('hidden');
+  if (spinner) spinner.classList.remove('hidden');
+  await _doRescoreHistory(lastTypes);
+  _rescoring = false;
+  if (spinner) spinner.classList.add('hidden');
+  if (btn) btn.classList.remove('hidden');
+}
+
+// ── Select All / Clear All ──
+function selectAllServices() {
+  const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => s.id));
+  allSvc.forEach(id => selectedServices.add(id));
+  renderFilters();
+  clearTimeout(serviceDebounce);
+  serviceDebounce = setTimeout(() => { if (currentPos) loadServices(currentPos.lat, currentPos.lng); }, 150);
+}
+
+function clearAllServices() {
+  selectedServices.clear();
+  renderFilters();
+  clearTimeout(serviceDebounce);
+  serviceDebounce = setTimeout(() => { if (currentPos) loadServices(currentPos.lat, currentPos.lng); }, 150);
+}
+
+// ── Map fullscreen toggle ──
+function toggleMapFullscreen() {
+  const container = document.getElementById('map').parentElement;
+  if (!document.fullscreenElement) {
+    container.requestFullscreen().catch(() => { });
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+document.addEventListener('fullscreenchange', () => {
+  const icon = document.querySelector('#fullscreen-btn i');
+  if (!icon) return;
+  icon.setAttribute('data-lucide', document.fullscreenElement ? 'minimize' : 'maximize');
+  lucide.createIcons();
+});
+
 // ── Main analysis ──
 async function loadServices(lat, lon) {
+  const seq = ++_loadSeq;
+  const capturedAddress = currentAddress; // snapshot before any awaits
   serviceMarkers.forEach(m => m.setMap(null));
   servicePolylines.forEach(p => p.setMap(null));
   serviceMarkers = [];
   servicePolylines = [];
   document.getElementById('alert-container').innerHTML = '';
 
-  const bar = document.getElementById('progress-bar');
-  bar.style.opacity = '1';
-  bar.style.width = '30%';
+  _startProgress();
 
   const allSvc = CONFIG.categories.flatMap(c => c.services.map(s => ({ ...s, catColor: c.color, catId: c.id, catLabel: c.label })));
   const types = Array.from(selectedServices).map(id => {
     const s = allSvc.find(sv => sv.id === id);
     return s ? `${s.catId}:${s.type}` : null;
   }).filter(Boolean);
+  lastTypes = types;
 
   if (!types.length) {
     document.getElementById('score-value').textContent = '--';
@@ -490,37 +627,39 @@ async function loadServices(lat, lon) {
     document.getElementById('score-desc').textContent = 'Select at least one service to see your score.';
     renderWalkabilityBreakdown(null);
     renderServicesFound([]);
-    bar.style.opacity = '0';
+    _cancelProgress();
     return;
   }
 
   try {
-    const res = await fetch(`/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
+    const res = await fetch(`${API_URL}/api/nearby-services?lat=${lat}&lon=${lon}&types=${types.join(',')}&address=${encodeURIComponent(currentAddress)}`);
     if (!res.ok) throw new Error('Failed');
+    if (seq !== _loadSeq) { _cancelProgress(); return; } // stale
     const data = await res.json();
     const services = Array.isArray(data.services) ? data.services : [];
     const walkability = data.walkability || null;
 
     // Use SELECTION score (personalised to user's chosen filters)
-    const score = walkability?.selection?.score ?? Number(data.index || 0);
+    // const score = walkability?.selection?.score ?? Number(data.index || 0);
+    const score = walkability?.selection?.score ?? 0;
     const colors = getScoreColor(score);
 
     document.getElementById('score-value').textContent = score.toFixed(1);
-    document.getElementById('score-value').className = `text-6xl font-extrabold mb-1 ${colors.text}`;
+    document.getElementById('score-value').className = `text-5xl font-extrabold mb-1 ${colors.text}`;
     document.getElementById('score-bar').style.width = (score * 10) + '%';
     document.getElementById('score-bar').className = `h-full ${colors.barBg} rounded-full w-0 transition-all duration-1000`;
     document.getElementById('score-desc').textContent = getScoreDescription(score, walkability);
 
     renderWalkabilityBreakdown(walkability);
 
-    // Update history with score
-    if (currentAddress && history.length > 0 && history[0].display_name === currentAddress) {
-      history[0].score = score;
+    // Update the history entry for this address
+    const histIdx = history.findIndex(h => h.display_name === capturedAddress);
+    if (capturedAddress && histIdx !== -1) {
+      history[histIdx].score = score;
       sessionStorage.setItem('history', JSON.stringify(history));
       renderHistory();
     }
 
-    bar.style.width = '70%';
 
     // Draw routes to nearest per type
     const nearestPerType = Object.values(
@@ -530,7 +669,7 @@ async function loadServices(lat, lon) {
       }, {})
     );
 
-    // Render services found (only nearest per type — what's on the map)
+    // Render services found (only nearest per type - what's on the map)
     renderServicesFound(nearestPerType);
 
     nearestPerType.forEach(async (s) => {
@@ -558,7 +697,7 @@ async function loadServices(lat, lon) {
       serviceMarkers.push(m);
 
       try {
-        const rRes = await fetch(`/api/route?sLat=${lat}&sLon=${lon}&eLat=${s.lat}&eLon=${s.lon}`);
+        const rRes = await fetch(`${API_URL}/api/route?sLat=${lat}&sLon=${lon}&eLat=${s.lat}&eLon=${s.lon}`);
         if (!rRes.ok) return;
         const rData = await rRes.json();
         if (!rData.polyline) return;
@@ -575,12 +714,11 @@ async function loadServices(lat, lon) {
       } catch (e) { console.error('Route error', e); }
     });
 
-    bar.style.width = '100%';
-    setTimeout(() => { bar.style.opacity = '0'; bar.style.width = '0'; }, 600);
+    _finishProgress();
 
   } catch (e) {
     console.error(e);
-    bar.style.opacity = '0';
+    _cancelProgress();
     document.getElementById('score-desc').textContent = 'Analysis failed. Please try again.';
     renderWalkabilityBreakdown(null);
     renderServicesFound([]);

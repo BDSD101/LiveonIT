@@ -1,6 +1,6 @@
 # 20-Min Neighbourhood Tool
 
-A high-performance liveability assessment tool that evaluates how well a Melbourne address supports a 20-minute neighbourhood lifestyle — where essential services are accessible within an 800m walk.
+A high-performance liveability assessment tool that evaluates how well a Melbourne address supports a 20-minute neighbourhood lifestyle - where essential services are accessible within an 800m walk.
 
 ## Architecture
 

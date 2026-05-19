@@ -25,41 +25,17 @@ export type CandidateService = {
   withinThreshold: boolean;
 };
 
-export type CategoryBreakdown = {
-  id: string;
-  label: string;
-  weight: number;
-  status: 'met' | 'partial' | 'missing';
-  nearestService: { name: string; type: string } | null;
-  walkingDistanceMeters: number | null;
-  walkingDurationMinutes: number | null;
-  score: number;
-};
-
-export type ScoreBreakdown = {
-  walkableThresholdMeters: number;
-  methodology: string;
-  categories: CategoryBreakdown[];
-  summary: {
-    categoriesMetWithin800m: number;
-    totalCategories: number;
-    missingCategories: string[];
-    partialCategories: string[];
-  };
-};
-
-
 export type WalkabilityComponent = {
   score: number;
   errandTrip: { score: number; totalDistanceMeters: number; meanEdgeMeters: number; optimalPath: ErrandNode[]; missingCategories: string[] };
-  abundance:  { score: number; totalWeightedOptions: number };
-  nearest:    { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
+  abundance: { score: number; totalWeightedOptions: number };
+  nearest: { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> };
 };
 
 export type LocationAnalysis = {
   services: CandidateService[];
-  index: number;
-  breakdown: ScoreBreakdown;
+  // index: number;
+  // breakdown: ScoreBreakdown;
   walkability?: {
     neighbourhood: WalkabilityComponent;
     selection: WalkabilityComponent;
@@ -75,44 +51,19 @@ export type LocationAnalysis = {
   };
 };
 
-
-
-
-export type SuburbSeedPoint = {
-  name: string;
-  ring: 'inner' | 'middle' | 'outer';
-  lat: number;
-  lng: number;
-};
-
-export type SeedAnalysis = SuburbSeedPoint & {
-  index: number;
-};
-
-export const WALKABLE_THRESHOLD_METERS = 800;
+export const SEARCH_RADIUS_METERS = 3000;
+export const WALKABLE_THRESHOLD_METERS = 1500;
 export const MAX_WALKING_MINUTES = 20;
 export const IDEAL_WALKING_MINUTES = 5;
-
-export const CATEGORY_CONFIG: Record<string, { label: string; weight: number }> = {
-  health: { label: 'Health Services', weight: 3 },
-  food: { label: 'Food and Essentials', weight: 3 },
-  connectivity: { label: 'Connectivity', weight: 2 },
-  parks: { label: 'Parks and Nature', weight: 2 },
-  dining: { label: 'Dining and Social', weight: 2 },
-  education: { label: 'Education and Learning', weight: 2 },
-  fitness: { label: 'Fitness and Recreation', weight: 1 },
-  community: { label: 'Community Services', weight: 1 },
-};
-
 export const CORE_CATEGORY_TYPES: Record<string, string[]> = {
-  health: ['doctor', 'pharmacy', 'hospital','dentist'],
+  health: ['doctor', 'pharmacy', 'dentist'],
   food: ['supermarket', 'convenience_store'],
-  connectivity: ['train_station', 'transit_station', 'post_office', 'bank','atm'],
+  connectivity: ['train_station', 'transit_station'],
   parks: ['park'],
   dining: ['cafe', 'restaurant', 'bar'],
   education: ['childcare', 'kindergarten', 'primary_school', 'secondary_school', 'library'],
   fitness: ['gym'],
-  community: ['community'],
+  community: ['community', 'post_office', 'bank', 'atm'],
 };
 
 export const PLACE_TYPE_ICON_BLOCKLIST: Record<string, string[]> = {
@@ -147,35 +98,34 @@ export const PLACE_TYPE_NAME_ALLOWLIST: Record<string, string[]> = {
 export type VisitFrequency = 'high' | 'medium' | 'low' | 'rare';
 
 export const SERVICE_FREQUENCY: Record<string, VisitFrequency> = {
-  supermarket:        'high',
-  convenience_store:  'high',
-  train_station:      'high',
-  transit_station:    'high',
-  atm:                'high',
-  cafe:               'high',
-  restaurant:         'medium',
-  bar:                'medium',
-  gym:                'medium',
-  park:               'medium',
-  community:          'medium',
-  library:            'low',
-  childcare:          'low',
-  kindergarten:       'low',
-  primary_school:     'low',
-  secondary_school:   'low',
-  post_office:        'low',
-  bank:               'low',
-  pharmacy:           'low',
-  dentist:            'rare',
-  doctor:             'rare',
-  hospital:           'rare',
+  supermarket: 'high',
+  convenience_store: 'high',
+  train_station: 'high',
+  transit_station: 'high',
+  atm: 'high',
+  cafe: 'high',
+  restaurant: 'medium',
+  bar: 'medium',
+  gym: 'medium',
+  park: 'medium',
+  community: 'medium',
+  library: 'low',
+  childcare: 'low',
+  kindergarten: 'low',
+  primary_school: 'low',
+  secondary_school: 'low',
+  post_office: 'low',
+  bank: 'low',
+  pharmacy: 'low',
+  dentist: 'rare',
+  doctor: 'rare',
 };
 
 export const FREQUENCY_WEIGHTS: Record<VisitFrequency, number> = {
-  high:   1.00,
+  high: 1.00,
   medium: 0.50,
-  low:    0.10,
-  rare:   0.02,
+  low: 0.10,
+  rare: 0.02,
 };
 
 export const TSP_FREQUENCY_THRESHOLD: Set<VisitFrequency> = new Set(['high', 'medium']);
@@ -220,10 +170,9 @@ export function buildPlaceFilter(type: string): ((r: any) => boolean) | undefine
 }
 
 export const PLACE_TYPE_UPGRADE_COUNT: Record<string, number> = {
-  hospital: 20,
-  doctor:   10,
-  gym:      10,
-  park:     20,
+  doctor: 10,
+  gym: 10,
+  park: 20,
 };
 
 export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY_TYPES).flatMap(([catId, types]) =>
@@ -237,10 +186,10 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
       useTextSearch: true,
       textQuery: 'GP',
     } : {}),
-    ...(type === 'hospital' ? {
-      useTextSearch: true,
-      textQuery: 'hospital',
-    } : {}),
+    // ...(type === 'hospital' ? {
+    //   useTextSearch: true,
+    //   textQuery: 'hospital',
+    // } : {}),
     ...(type === 'post_office' ? {
       useTextSearch: true,
       textQuery: 'LPO',
@@ -260,19 +209,6 @@ export const CORE_ANALYSIS_ITEMS: RequestedItem[] = Object.entries(CORE_CATEGORY
   }))
 );
 
-
-export const SUBURB_SEED_POINTS: SuburbSeedPoint[] = [
-  { name: 'Carlton', ring: 'inner', lat: -37.7983, lng: 144.9671 },
-  { name: 'Fitzroy', ring: 'inner', lat: -37.7980, lng: 144.9780 },
-  { name: 'South Yarra', ring: 'inner', lat: -37.8390, lng: 144.9920 },
-  { name: 'Camberwell', ring: 'middle', lat: -37.8260, lng: 145.0580 },
-  { name: 'Essendon', ring: 'middle', lat: -37.7560, lng: 144.9180 },
-  { name: 'Glen Iris', ring: 'middle', lat: -37.8580, lng: 145.0620 },
-  { name: 'Dandenong', ring: 'outer', lat: -37.9870, lng: 145.2140 },
-  { name: 'Cranbourne', ring: 'outer', lat: -38.1090, lng: 145.2830 },
-  { name: 'Craigieburn', ring: 'outer', lat: -37.6010, lng: 144.9430 },
-];
-
 // --- Improved Scoring Algorithms ---
 
 export function calculateDistanceFactor(minutes: number | null): number {
@@ -282,20 +218,6 @@ export function calculateDistanceFactor(minutes: number | null): number {
   return Number((1 - (minutes - IDEAL_WALKING_MINUTES) / (MAX_WALKING_MINUTES - IDEAL_WALKING_MINUTES)).toFixed(2));
 }
 
-export function calculateCategoryScore(candidates: CandidateService[], weight: number): number {
-  const sorted = candidates
-    .filter((c) => c.walkingDurationMinutes !== null)
-    .sort((a, b) => (a.walkingDurationMinutes as number) - (b.walkingDurationMinutes as number));
-
-  if (sorted.length === 0) return 0;
-
-  const firstFactor = calculateDistanceFactor(sorted[0].walkingDurationMinutes);
-  const secondFactor = sorted[1] ? calculateDistanceFactor(sorted[1].walkingDurationMinutes) * 0.3 : 0;
-  const thirdFactor = sorted[2] ? calculateDistanceFactor(sorted[2].walkingDurationMinutes) * 0.1 : 0;
-
-  const rawScore = weight * (firstFactor + secondFactor + thirdFactor);
-  return Number(Math.min(weight * 1.4, rawScore).toFixed(2));
-}
 
 // --- Suburb & Housing/Crime Lookup Helpers ---
 
@@ -352,98 +274,6 @@ export function resolveHousePriceScore(suburbName: string): {
   return { score: null, resolvedFrom: null, resolvedSuburb: null };
 }
 
-export function buildScoreBreakdown(byKey: Map<string, CandidateService[]>): { breakdown: ScoreBreakdown; index: number } {
-  const categories = Object.entries(CATEGORY_CONFIG).map(([catId, meta]) => {
-    const coreTypes = CORE_CATEGORY_TYPES[catId] || [];
-    const candidates = coreTypes
-      .flatMap((type) => byKey.get(`${catId}:${type}`) || [])
-      .filter((c): c is CandidateService => Boolean(c));
-
-    const withDistance = candidates
-      .filter((c) => c.walkingDistanceMeters !== null)
-      .sort((a, b) => (a.walkingDistanceMeters as number) - (b.walkingDistanceMeters as number));
-
-    const nearest = withDistance[0] || null;
-    const status: CategoryBreakdown['status'] = !nearest
-      ? 'missing'
-      : (nearest.walkingDistanceMeters || 0) <= WALKABLE_THRESHOLD_METERS
-      ? 'met'
-      : 'partial';
-
-    const categoryScore = calculateCategoryScore(candidates, meta.weight);
-
-    return {
-      id: catId,
-      label: meta.label,
-      weight: meta.weight,
-      status,
-      nearestService: nearest ? { name: nearest.name, type: nearest.type } : null,
-      walkingDistanceMeters: nearest?.walkingDistanceMeters ?? null,
-      walkingDurationMinutes: nearest?.walkingDurationMinutes ?? null,
-      score: categoryScore,
-    };
-  });
-
-  const totalWeight = categories.reduce((sum, c) => sum + c.weight, 0);
-  const rawScore = categories.reduce((sum, c) => sum + c.score, 0);
-  const index = Math.min(10.0, Number(((rawScore / totalWeight) * 10).toFixed(1)));
-
-  const missingCategories = categories.filter((c) => c.status === 'missing').map((c) => c.label);
-  const partialCategories = categories.filter((c) => c.status === 'partial').map((c) => c.label);
-  const metCount = categories.filter((c) => c.status === 'met').length;
-
-  const breakdown: ScoreBreakdown = {
-    walkableThresholdMeters: WALKABLE_THRESHOLD_METERS,
-    methodology:
-      'Liveability score based on a continuous decay model (ideal < 5m, decays to 0 at 20m) and density bonuses for multiple nearby services across 7 categories.',
-    categories,
-    summary: {
-      categoriesMetWithin800m: metCount,
-      totalCategories: categories.length,
-      missingCategories,
-      partialCategories,
-    },
-  };
-
-  return { breakdown, index };
-}
-
-export function buildLeaderboard(analyses: SeedAnalysis[]) {
-  const rings: Array<'inner' | 'middle' | 'outer'> = ['inner', 'middle', 'outer'];
-  const result: Record<'inner' | 'middle' | 'outer', Array<{ name: string; score: number; rank: number }>> = {
-    inner: [],
-    middle: [],
-    outer: [],
-  };
-
-  for (const ring of rings) {
-    result[ring] = analyses
-      .filter((a) => a.ring === ring)
-      .sort((a, b) => b.index - a.index)
-      .slice(0, 3)
-      .map((a, idx) => ({
-        name: a.name,
-        score: a.index,
-        rank: idx + 1,
-      }));
-  }
-
-  return {
-    ...result,
-    updatedAt: new Date().toISOString(),
-  };
-}
-
-export function buildHeatmap(analyses: SeedAnalysis[]) {
-  return analyses.map((a) => ({
-    lat: a.lat,
-    lng: a.lng,
-    weight: Number(a.index.toFixed(1)),
-    name: a.name,
-    ring: a.ring,
-  }));
-}
-
 // ---------------------------------------------------------------------------
 // Haversine distance (metres, crow-flies)
 // ---------------------------------------------------------------------------
@@ -459,13 +289,14 @@ export function haversineMeters(aLat: number, aLon: number, bLat: number, bLon: 
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 1 — Errand Trip Score (greedy, 0–10)
+// COMPONENT 1 - Errand Trip Score (greedy, 0–10)
 // ---------------------------------------------------------------------------
+
 export function scoreErrandTripGreedy(
   homeLat: number,
   homeLon: number,
   candidatesByCategory: Map<string, ErrandNode[]>,
-  walkableThresholdMeters = WALKABLE_THRESHOLD_METERS,
+  walkableThresholdMeters = SEARCH_RADIUS_METERS,
   circuityFactor = 1.3,
 ): ErrandTripResult {
   const MISSING_PENALTY = 5000;
@@ -483,6 +314,14 @@ export function scoreErrandTripGreedy(
   const counts = candidateLists.map(l => l.length);
   const totalCombinations = counts.reduce((a, b) => a * b, 1);
 
+  // Single category requested → perfect score (just home to that one service)
+  if (categories.length === 1) {
+    const best = candidateLists[0].reduce((a, b) =>
+      haversineMeters(homeLat, homeLon, a.lat, a.lon) < haversineMeters(homeLat, homeLon, b.lat, b.lon) ? a : b
+    );
+    return { score: 10, totalDistanceMeters: 0, meanEdgeMeters: 0, optimalPath: [home, best], selectedCandidates: [best], missingCategories, excludedCategories: [] };
+  }
+
   let bestDistance = Infinity;
   let bestPath: ErrandNode[] = [];
   let bestSelection: ErrandNode[] = [];
@@ -495,46 +334,52 @@ export function scoreErrandTripGreedy(
       remaining = Math.floor(remaining / counts[i]);
     }
 
-    const unvisited = [...selected];
-    const path: ErrandNode[] = [home];
-    let current = home;
-    let totalDist = 0;
+    // Try each service as the starting node to find the best inter-service ordering
+    for (let startIdx = 0; startIdx < selected.length; startIdx++) {
+      const unvisited = selected.filter((_, i) => i !== startIdx);
+      const path: ErrandNode[] = [selected[startIdx]];
+      let current = selected[startIdx];
+      let interDist = 0;
 
-    while (unvisited.length > 0) {
-      let nearestIdx = 0;
-      let nearestDist = Infinity;
-      for (let i = 0; i < unvisited.length; i++) {
-        const d = haversineMeters(current.lat, current.lon, unvisited[i].lat, unvisited[i].lon);
-        if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
+      while (unvisited.length > 0) {
+        let nearestIdx = 0;
+        let nearestDist = Infinity;
+        for (let i = 0; i < unvisited.length; i++) {
+          const d = haversineMeters(current.lat, current.lon, unvisited[i].lat, unvisited[i].lon);
+          if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
+        }
+        current = unvisited.splice(nearestIdx, 1)[0];
+        path.push(current);
+        interDist += nearestDist;
       }
-      current = unvisited.splice(nearestIdx, 1)[0];
-      path.push(current);
-      totalDist += nearestDist;
-    }
 
-    if (totalDist < bestDistance) {
-      bestDistance = totalDist;
-      bestPath = path;
-      bestSelection = selected;
+      if (interDist < bestDistance) {
+        bestDistance = interDist;
+        bestPath = [home, ...path];
+        bestSelection = selected;
+      }
     }
   }
 
   const walkingDistance = bestDistance * circuityFactor;
-  const totalEdges = scorableCategories.length + missingCategories.length;
-  const meanEdgeMeters = (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges;
+  const interServiceEdges = scorableCategories.length - 1;
+  const totalEdges = interServiceEdges + missingCategories.length;
+  const meanEdgeMeters = totalEdges > 0
+    ? (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges
+    : 0;
   const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
 
   return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 1 (alt) — Errand Trip Score (exact TSP, 0–10)
+// COMPONENT 1 (alt) - Errand Trip Score (exact TSP, 0–10)
 // ---------------------------------------------------------------------------
 export function scoreErrandTripExact(
   homeLat: number,
   homeLon: number,
   candidatesByCategory: Map<string, ErrandNode[]>,
-  walkableThresholdMeters = WALKABLE_THRESHOLD_METERS,
+  walkableThresholdMeters = SEARCH_RADIUS_METERS,
   circuityFactor = 1.3,
   complexityCap = 500_000,
 ): ErrandTripResult {
@@ -546,7 +391,7 @@ export function scoreErrandTripExact(
   const totalChecks = totalCombinations * factorial(scorableCategories.length);
 
   if (totalChecks > complexityCap) {
-    console.warn(`[TSP] ${totalChecks.toLocaleString()} checks exceeds cap — falling back to greedy`);
+    console.warn(`[TSP] ${totalChecks.toLocaleString()} checks exceeds cap - falling back to greedy`);
     return scoreErrandTripGreedy(homeLat, homeLon, candidatesByCategory, walkableThresholdMeters, circuityFactor);
   }
 
@@ -559,6 +404,14 @@ export function scoreErrandTripExact(
   }
 
   const candidateLists = scorableCategories.map(c => candidatesByCategory.get(c)!);
+
+  // Single category requested → perfect score (just home to that one service)
+  if (categories.length === 1) {
+    const best = candidateLists[0].reduce((a, b) =>
+      haversineMeters(homeLat, homeLon, a.lat, a.lon) < haversineMeters(homeLat, homeLon, b.lat, b.lon) ? a : b
+    );
+    return { score: 10, totalDistanceMeters: 0, meanEdgeMeters: 0, optimalPath: [home, best], selectedCandidates: [best], missingCategories, excludedCategories: [] };
+  }
 
   function permutations<T>(arr: T[]): T[][] {
     if (arr.length <= 1) return [arr];
@@ -586,8 +439,9 @@ export function scoreErrandTripExact(
       selected.push(candidateLists[i][remaining % counts[i]]);
       remaining = Math.floor(remaining / counts[i]);
     }
+    // Score only inter-service distances (exclude home→first leg)
     for (const perm of permutations(selected)) {
-      const dist = pathDistance([home, ...perm]);
+      const dist = pathDistance([...perm]);
       if (dist < bestDistance) {
         bestDistance = dist;
         bestPath = [home, ...perm];
@@ -597,15 +451,19 @@ export function scoreErrandTripExact(
   }
 
   const walkingDistance = bestDistance * circuityFactor;
-  const totalEdges = scorableCategories.length + missingCategories.length;
-  const meanEdgeMeters = (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges;
+  const interServiceEdges = scorableCategories.length - 1;
+  const totalEdges = interServiceEdges + missingCategories.length;
+  const meanEdgeMeters = totalEdges > 0
+    ? (walkingDistance + missingCategories.length * MISSING_PENALTY) / totalEdges
+    : 0;
+
   const score = Math.max(0, Number((10 * (1 - meanEdgeMeters / walkableThresholdMeters)).toFixed(1)));
 
   return { score, totalDistanceMeters: Math.round(walkingDistance), meanEdgeMeters: Math.round(meanEdgeMeters), optimalPath: bestPath, selectedCandidates: bestSelection, missingCategories, excludedCategories: [] };
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 2 — Abundance Score (0–10)
+// COMPONENT 2 - Abundance Score (0–10)
 // Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
 export function scoreAbundance(
@@ -613,34 +471,31 @@ export function scoreAbundance(
   thresholdMeters = WALKABLE_THRESHOLD_METERS,
   restrictToTypes?: Set<string>,
 ): { score: number; totalWeightedOptions: number; referenceWeightedOptions: number } {
-  const proximityDecay = (meters: number) => Math.max(0, 1 - meters / thresholdMeters);
-
   let totalWeightedOptions = 0;
   for (const c of allCandidates) {
     if (c.walkingDistanceMeters === null || c.walkingDistanceMeters > thresholdMeters) continue;
     const freq = SERVICE_FREQUENCY[c.type];
     if (!freq) continue;
-    totalWeightedOptions += FREQUENCY_WEIGHTS[freq] * proximityDecay(c.walkingDistanceMeters);
+    totalWeightedOptions += FREQUENCY_WEIGHTS[freq];
   }
 
-  const REFERENCE_CONFIG: Record<VisitFrequency, { count: number; distanceMeters: number }> = {
-    high:   { count: 5, distanceMeters: 200 },
-    medium: { count: 3, distanceMeters: 300 },
-    low:    { count: 1, distanceMeters: 400 },
-    rare:   { count: 1, distanceMeters: 400 },
+  const REFERENCE_COUNT: Record<VisitFrequency, number> = {
+    high: 3,
+    medium: 3,
+    low: 3,
+    rare: 3,
   };
 
   // Only consider selected types for the reference benchmark when restrictToTypes is set
   const refTypes = restrictToTypes
-    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    ? Array.from(restrictToTypes)
     : Object.values(CORE_CATEGORY_TYPES).flat();
 
   let referenceWeightedOptions = 0;
   for (const type of refTypes) {
     const freq = SERVICE_FREQUENCY[type];
     if (!freq) continue;
-    const ref = REFERENCE_CONFIG[freq];
-    referenceWeightedOptions += ref.count * FREQUENCY_WEIGHTS[freq] * proximityDecay(ref.distanceMeters);
+    referenceWeightedOptions += REFERENCE_COUNT[freq] * FREQUENCY_WEIGHTS[freq];
   }
 
   const score = referenceWeightedOptions > 0
@@ -650,7 +505,52 @@ export function scoreAbundance(
 }
 
 // ---------------------------------------------------------------------------
-// COMPONENT 3 — Nearest Service Score (0–10)
+// COMPONENT 2 — Abundance Score (0–10)
+// ALTERNATIVE - that has a proximity decay function and penalises options beyond the threshold instead of ignoring them entirely
+// ---------------------------------------------------------------------------
+// export function scoreAbundance(
+//   allCandidates: CandidateService[],
+//   thresholdMeters = WALKABLE_THRESHOLD_METERS,
+//   restrictToTypes?: Set<string>,
+// ): { score: number; totalWeightedOptions: number; referenceWeightedOptions: number } {
+//   const proximityDecay = (meters: number) => Math.max(0, 1 - meters / thresholdMeters);
+
+//   let totalWeightedOptions = 0;
+//   for (const c of allCandidates) {
+//     if (c.walkingDistanceMeters === null || c.walkingDistanceMeters > thresholdMeters) continue;
+//     const freq = SERVICE_FREQUENCY[c.type];
+//     if (!freq) continue;
+//     totalWeightedOptions += FREQUENCY_WEIGHTS[freq] * proximityDecay(c.walkingDistanceMeters);
+//   }
+
+//   const REFERENCE_CONFIG: Record<VisitFrequency, { count: number; distanceMeters: number }> = {
+//     high:   { count: 5, distanceMeters: 200 },
+//     medium: { count: 3, distanceMeters: 300 },
+//     low:    { count: 1, distanceMeters: 400 },
+//     rare:   { count: 1, distanceMeters: 400 },
+//   };
+
+//   // Only consider selected types for the reference benchmark when restrictToTypes is set
+//   const refTypes = restrictToTypes
+//     ? Array.from(restrictToTypes)
+//     : [...new Set(allCandidates.map(c => c.type))];
+
+//   let referenceWeightedOptions = 0;
+//   for (const type of refTypes) {
+//     const freq = SERVICE_FREQUENCY[type];
+//     if (!freq) continue;
+//     const ref = REFERENCE_CONFIG[freq];
+//     referenceWeightedOptions += ref.count * FREQUENCY_WEIGHTS[freq] * proximityDecay(ref.distanceMeters);
+//   }
+
+//   const score = referenceWeightedOptions > 0
+//     ? Math.min(10, Number(((totalWeightedOptions / referenceWeightedOptions) * 10).toFixed(1)))
+//     : 0;
+//   return { score, totalWeightedOptions, referenceWeightedOptions };
+// }
+
+// ---------------------------------------------------------------------------
+// COMPONENT 3 - Nearest Service Score (0–10)
 // Now accepts optional restrictToTypes to only score against selected services
 // ---------------------------------------------------------------------------
 export function scoreNearestServices(
@@ -659,6 +559,7 @@ export function scoreNearestServices(
   restrictToTypes?: Set<string>,
 ): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
 
+  // Find nearest per type with no distance cutoff - we need location to award penalties too
   const nearestByType = new Map<string, CandidateService>();
   for (const c of allCandidates) {
     if (c.walkingDistanceMeters === null) continue;
@@ -668,9 +569,8 @@ export function scoreNearestServices(
     }
   }
 
-  // Only score against selected types when restrictToTypes is provided
   const allTypes = restrictToTypes
-    ? Object.values(CORE_CATEGORY_TYPES).flat().filter(t => restrictToTypes.has(t))
+    ? Array.from(restrictToTypes)
     : Object.values(CORE_CATEGORY_TYPES).flat();
 
   let weightedScore = 0;
@@ -684,26 +584,91 @@ export function scoreNearestServices(
     maxPossibleScore += weight;
 
     const nearest = nearestByType.get(type);
-    if (!nearest) {
-      perType.push({ type, frequencyWeight: weight, distanceFactor: 0, contribution: 0 });
-      continue;
-    }
+    let distanceFactor: number;
 
-    const distanceFactor = nearest.walkingDurationMinutes !== null
-      ? calculateDistanceFactor(nearest.walkingDurationMinutes)
-      : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+    if (!nearest) {
+      // Not found anywhere - maximum penalty
+      distanceFactor = -1;
+    } else if ((nearest.walkingDistanceMeters ?? Infinity) <= thresholdMeters) {
+      // Within threshold: positive factor, 1 at 0 m decaying to 0 at threshold
+      distanceFactor = nearest.walkingDurationMinutes !== null
+        ? calculateDistanceFactor(nearest.walkingDurationMinutes)
+        : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+    } else {
+      // Beyond threshold: negative penalty proportional to how far past the circle
+      const excess = Math.min(1, ((nearest.walkingDistanceMeters ?? thresholdMeters) - thresholdMeters) / thresholdMeters);
+      distanceFactor = -excess;
+    }
 
     const contribution = weight * distanceFactor;
     weightedScore += contribution;
     perType.push({ type, frequencyWeight: weight, distanceFactor, contribution });
   }
 
+  // Normalise from [-maxPossible, +maxPossible] → [0, 10]
+  // This ensures within-circle selections push the score up and outside-circle push it down
   const score = maxPossibleScore > 0
-    ? Math.min(10, Number(((weightedScore / maxPossibleScore) * 10).toFixed(1)))
+    ? Math.max(0, Math.min(10, Number((((weightedScore / maxPossibleScore) + 1) * 5).toFixed(1))))
     : 0;
 
   return { score, perType };
 }
+
+// ---------------------------------------------------------------------------
+// COMPONENT 3 — Nearest Service Score (0–10)
+// ALTERNATIVE
+// ---------------------------------------------------------------------------
+// export function scoreNearestServices(
+//   allCandidates: CandidateService[],
+//   thresholdMeters = WALKABLE_THRESHOLD_METERS,
+//   restrictToTypes?: Set<string>,
+// ): { score: number; perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> } {
+
+//   const nearestByType = new Map<string, CandidateService>();
+//   for (const c of allCandidates) {
+//     if (c.walkingDistanceMeters === null) continue;
+//     const existing = nearestByType.get(c.type);
+//     if (!existing || c.walkingDistanceMeters < (existing.walkingDistanceMeters ?? Infinity)) {
+//       nearestByType.set(c.type, c);
+//     }
+//   }
+
+//   // Only score against selected types when restrictToTypes is provided
+//   const allTypes = restrictToTypes
+//     ? Array.from(restrictToTypes)
+//     : [...new Set(allCandidates.map(c => c.type))];
+
+//   let weightedScore = 0;
+//   let maxPossibleScore = 0;
+//   const perType: Array<{ type: string; frequencyWeight: number; distanceFactor: number; contribution: number }> = [];
+
+//   for (const type of allTypes) {
+//     const freq = SERVICE_FREQUENCY[type];
+//     if (!freq) continue;
+//     const weight = FREQUENCY_WEIGHTS[freq];
+//     maxPossibleScore += weight;
+
+//     const nearest = nearestByType.get(type);
+//     if (!nearest) {
+//       perType.push({ type, frequencyWeight: weight, distanceFactor: 0, contribution: 0 });
+//       continue;
+//     }
+
+//     const distanceFactor = nearest.walkingDurationMinutes !== null
+//       ? calculateDistanceFactor(nearest.walkingDurationMinutes)
+//       : Math.max(0, 1 - (nearest.walkingDistanceMeters ?? thresholdMeters) / thresholdMeters);
+
+//     const contribution = weight * distanceFactor;
+//     weightedScore += contribution;
+//     perType.push({ type, frequencyWeight: weight, distanceFactor, contribution });
+//   }
+
+//   const score = maxPossibleScore > 0
+//     ? Math.min(10, Number(((weightedScore / maxPossibleScore) * 10).toFixed(1)))
+//     : 0;
+
+//   return { score, perType };
+// }
 
 // ---------------------------------------------------------------------------
 // buildErrandCandidateMap
@@ -719,11 +684,23 @@ export function buildErrandCandidateMap(
   )];
 
   const map = new Map<string, ErrandNode[]>();
+
+  // Group items by category to prevent combinatorial explosion on the CPU
+  const grouped = new Map<string, CandidateService[]>();
   for (const c of allCandidates) {
     const freq = SERVICE_FREQUENCY[c.type];
     if (!freq || !frequencyThreshold.has(freq)) continue;
-    if (!map.has(c.catId)) map.set(c.catId, []);
-    map.get(c.catId)!.push({ catId: c.catId, type: c.type, name: c.name, lat: c.lat, lon: c.lon });
+    if (!grouped.has(c.catId)) grouped.set(c.catId, []);
+    grouped.get(c.catId)!.push(c);
+  }
+
+  // Pick only the top 2 closest per category for the routing math
+  for (const [catId, candidates] of grouped.entries()) {
+    const topCandidates = candidates
+      .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
+      .slice(0, 2)
+      .map(c => ({ catId: c.catId, type: c.type, name: c.name, lat: c.lat, lon: c.lon }));
+    map.set(catId, topCandidates);
   }
 
   return { candidatesByCategory: map, excludedTypes: excluded };

@@ -7,10 +7,10 @@ Datasets:
   Housing:
     1. Victorian Property Sales Report - Median House by Suburb (quarterly)
        CKAN ID: victorian-property-sales-report-median-house-by-suburb
-       Source: land.vic.gov.au — may be blocked, manual download fallback provided
+       Source: land.vic.gov.au - may be blocked, manual download fallback provided
     2. Victorian Property Sales Report - Median Unit by Suburb (quarterly)
        CKAN ID: victorian-property-sales-report-median-unit-by-suburb
-       Source: land.vic.gov.au — may be blocked, manual download fallback provided
+       Source: land.vic.gov.au - may be blocked, manual download fallback provided
     3. Rental Report - Moving Annual Rents by Suburb (quarterly)
        CKAN ID: rental-report-quarterly-moving-annual-rents-by-suburb
        Source: dffh.vic.gov.au
@@ -24,14 +24,21 @@ Datasets:
     5. List of Melbourne suburbs with postcodes and LGAs
        Source: Wikipedia API (en.wikipedia.org/wiki/List_of_Melbourne_suburbs)
 
-Output files:
-  housing_data/house_unit_prices_by_suburb.json — median sale prices per suburb
-  housing_data/rent_by_suburb.json              — median weekly rent per suburb group
-  crime_data/crime_by_lga.json                  — incidents + rate per 100k by LGA
-  crime_data/crime_by_suburb.json               — total incidents by suburb + postcode
-  suburb_data/melbourne_suburbs_by_lga.json     — suburb + postcode list per LGA
+  City Rings:
+    6. BCARR City Rings Classification (SA2-level concordance)
+       Source: infrastructure.gov.au - attempted automatically, manual download fallback provided
+       URL: https://www.infrastructure.gov.au/department/media/publications/bcarr-city-rings-classification
+       File: suburb_data/bcarr-city-rings-classification-*.xlsx
 
-Raw files saved to ./housing_data/raw/ and ./crime_data/ for debugging.
+Output files:
+  housing_data/house_unit_prices_by_suburb.json - median sale prices per suburb
+  housing_data/rent_by_suburb.json              - median weekly rent per suburb group
+  crime_data/crime_by_lga.json                  - incidents + rate per 100k by LGA
+  crime_data/crime_by_suburb.json               - total incidents by suburb + postcode
+  suburb_data/melbourne_suburbs_by_lga.json     - suburb + postcode list per LGA
+  suburb_data/bcarr_ring_by_suburb.json         - Inner/Middle/Outer ring per suburb
+
+Raw files saved to ./housing_data/raw/ and ./crime_data/ and ./suburb_data/ for debugging.
 
 Source: https://discover.data.vic.gov.au
 License: Creative Commons Attribution 4.0 International
@@ -87,6 +94,13 @@ SUBURB_DIR            = os.path.join(SCRIPT_DIR, "suburb_data")
 WIKIPEDIA_API         = "https://en.wikipedia.org/w/api.php"
 OUTPUT_SUBURBS_BY_LGA = os.path.join(SUBURB_DIR, "melbourne_suburbs_by_lga.json")
 
+# # BCARR City Rings paths
+# # The URL may change when a new ABS concordance is released - check the publication
+# # page for the latest link. The glob pattern picks up any year-suffixed local file.
+# BCARR_PUBLICATION_PAGE = "https://www.infrastructure.gov.au/department/media/publications/bcarr-city-rings-classification"
+# BCARR_DOWNLOAD_URL     = "https://www.infrastructure.gov.au/sites/default/files/documents/bcarr-city-rings-classification.xlsx"
+# BCARR_RAW_GLOB         = "bcarr-city-rings-classification*.xlsx"   # matches any year suffix
+# OUTPUT_BCARR           = os.path.join(SUBURB_DIR, "bcarr_ring_by_suburb.json")
 
 for d in (HOUSING_DIR, HOUSING_RAW, CRIME_DIR, SUBURB_DIR):
     os.makedirs(d, exist_ok=True)
@@ -168,7 +182,7 @@ def download_file(url: str, dest_path: str, extra_headers: dict | None = None) -
         print(f"  Saved: {size_mb:.1f} MB")
         return dest_path
     except urllib.error.HTTPError as e:
-        print(f"  HTTP {e.code} — download blocked.")
+        print(f"  HTTP {e.code} - download blocked.")
         return None
     except urllib.error.URLError as e:
         print(f"  URL error: {e}")
@@ -222,7 +236,7 @@ def find_sheet(sheet_names: list[str], keywords: list[str]) -> str:
 
 
 # =============================================================================
-# HOUSING — EXTRACT
+# HOUSING - EXTRACT
 # =============================================================================
 
 VPSR_SUBURB_SWAP = {"Hillside (Melton)": "Hillside", 
@@ -243,7 +257,7 @@ def extract_house_prices(filepath: str, engine: str, period_end: str) -> pd.Data
         - engine (str): Pandas engine to use.
         - period_end (str): Period end label (stored for reference).
     Returns:
-        - pd.DataFrame: Columns — suburb (title case), mean_price_for_period.
+        - pd.DataFrame: Columns - suburb (title case), mean_price_for_period.
     """
     print(f"\nExtracting house prices from: {os.path.basename(filepath)}")
 
@@ -348,7 +362,7 @@ def extract_rent(filepath: str, engine: str, period_end: str) -> list[dict]:
                 break
 
         if header_row2 is None:
-            print(f"    Could not find header rows — skipping")
+            print(f"    Could not find header rows - skipping")
             continue
 
         df = pd.read_excel(
@@ -436,12 +450,12 @@ def process_property_prices(dataset_id: str, raw_path: str) -> pd.DataFrame | No
     filepath = raw_path.replace(".xls", suffix)
 
     if os.path.exists(filepath):
-        print(f"  Raw file already exists — skipping download: {filepath}")
+        print(f"  Raw file already exists - skipping download: {filepath}")
     else:
         print(f"  Attempting download...")
         filepath = download_file(url, filepath, extra_headers={"Referer": "https://www.land.vic.gov.au/"})
         if not filepath:
-            print(f"\n  ACTION REQUIRED — automated download blocked.")
+            print(f"\n  ACTION REQUIRED - automated download blocked.")
             print(f"  1. Open this URL in your browser:\n     {url}")
             print(f"  2. Save the file as:\n     {raw_path.replace('.xls', suffix)}")
             print(f"  3. Re-run the script")
@@ -455,7 +469,7 @@ def process_property_prices(dataset_id: str, raw_path: str) -> pd.DataFrame | No
 
 
 # =============================================================================
-# CRIME — EXTRACT
+# CRIME - EXTRACT
 # =============================================================================
 
 def extract_lga_table(filepath: str, sheet_name: str, suburbs_by_lga: dict[str, list[dict]]) -> dict[str, dict]:
@@ -565,7 +579,7 @@ def extract_suburb_table(filepath: str, sheet_name: str) -> dict[str, dict]:
                 "lga":            lga,
                 "totalIncidents": 0,
                 "year":           str(int(latest_year)) if pd.notna(latest_year) else "unknown",
-                "note":           "Raw count — not population normalised. Use LGA ratePer100k for scoring.",
+                "note":           "Raw count - not population normalised. Use LGA ratePer100k for scoring.",
                 "_offenceSubgroups": {},
             }
 
@@ -596,15 +610,177 @@ def extract_suburb_table(filepath: str, sheet_name: str) -> dict[str, dict]:
     return suburb_data
 
 
+# # =============================================================================
+# # BCARR CITY RINGS - EXTRACT
+# # =============================================================================
+
+# def extract_bcarr_rings(filepath: str) -> dict[str, str]:
+#     """
+#     Extract the BCARR Inner/Middle/Outer ring classification for Melbourne suburbs.
+
+#     The xlsx file has a sheet whose name starts with "SA2" (e.g. "SA2 2021 Concordances").
+#     Each row contains a RING_NAME like "MEL Inner", "MEL Middle", or "MEL Outer".
+#     SA2 names are mapped back to suburb names using the same logic as the notebook:
+#       - Strip " (Vic.)" suffixes.
+#       - Split on the last "-" where the suffix is a directional word (North, South …);
+#         the base name and suffix are both added as separate suburb aliases.
+#       - Filter to Melbourne rows (city prefix == "MEL").
+#       - Resolve ties (a suburb split across rings) by hardcoded overrides.
+
+#     The SA2 name column is year-stamped to match the ABS boundary vintage in the
+#     filename (e.g. "bcarr-...-2026.xlsx" → column "SA2_NAME_2026"). The year is
+#     parsed from the filename automatically; falls back to the first column matching
+#     "SA2_NAME_" if no year can be parsed or the expected column is absent.
+
+#     Args:
+#         - filepath (str): Path to the downloaded BCARR xlsx file.
+#     Returns:
+#         - dict[str, str]: suburb name → ring ("Inner" | "Middle" | "Outer").
+#     """
+#     try:
+#         import openpyxl
+#     except ImportError:
+#         print("  openpyxl not installed. Run: pip install openpyxl")
+#         return {}
+
+#     print(f"\nExtracting BCARR ring classifications from: {os.path.basename(filepath)}")
+
+#     wb = openpyxl.load_workbook(filepath, read_only=True)
+#     sheet_names = wb.sheetnames
+#     wb.close()
+#     print(f"  Sheets: {sheet_names}")
+
+#     sa2_sheet = next((n for n in sheet_names if n.startswith("SA2")), None)
+#     if sa2_sheet is None:
+#         print("  Warning: no SA2 sheet found - skipping BCARR extraction")
+#         return {}
+
+#     df = pd.read_excel(filepath, sheet_name=sa2_sheet)
+#     print(f"  Rows loaded: {len(df)}")
+
+#     # Derive the SA2_NAME column from the year embedded in the filename.
+#     # e.g. "bcarr-city-rings-classification-2026.xlsx" → "SA2_NAME_2026"
+#     year_match = re.search(r"(\d{4})", os.path.basename(filepath))
+#     if year_match:
+#         sa2_name_col = f"SA2_NAME_{year_match.group(1)}"
+#         print(f"  Using SA2 name column: {sa2_name_col} (year parsed from filename)")
+#     else:
+#         sa2_name_col = next((c for c in df.columns if str(c).startswith("SA2_NAME_")), None)
+#         if sa2_name_col is None:
+#             print("  Warning: could not identify SA2 name column - skipping BCARR extraction")
+#             return {}
+#         print(f"  Using SA2 name column: {sa2_name_col} (no year in filename, auto-detected)")
+
+#     # Fallback if the filename year doesn't match what's actually in the sheet
+#     if sa2_name_col not in df.columns:
+#         fallback = next((c for c in df.columns if str(c).startswith("SA2_NAME_")), None)
+#         if fallback is None:
+#             print(f"  Warning: column '{sa2_name_col}' not found and no fallback - skipping BCARR extraction")
+#             return {}
+#         print(f"  Warning: column '{sa2_name_col}' not found; falling back to '{fallback}'")
+#         sa2_name_col = fallback
+
+#     # Split "MEL Inner" → city="MEL", ring_name="Inner"
+#     df[["city", "ring_name"]] = df["RING_NAME"].str.split(" ", n=1, expand=True)
+#     df = df[df["city"] == "MEL"].copy().reset_index(drop=True)
+#     print(f"  Melbourne rows: {len(df)}")
+
+#     # Clean SA2 names
+#     df[sa2_name_col] = df[sa2_name_col].str.replace(r"\s*\(Vic\.\)", "", regex=True)
+
+#     # Split on last "-" to separate directional suffixes
+#     DIRECTIONAL_SUFFIXES = {
+#         # " North", " South", " East", " West", 
+#         " Central",
+#         " South East", " South West", " North East", " North West",
+#     }
+#     df[["SA2_BASE", "SA2_SUFFIX"]] = df[sa2_name_col].str.rsplit("-", n=1, expand=True)
+#     df["SA2_SUFFIX"] = df["SA2_SUFFIX"].apply(
+#         lambda x: None if x in DIRECTIONAL_SUFFIXES else x
+#     )
+
+#     # Strip residual bracket content from base name
+#     df["SA2_BASE"] = df["SA2_BASE"].str.replace(r"\s*\(.*\)", "", regex=True).str.strip()
+
+#     # Build two alias frames (base name + non-directional suffix), then concatenate
+#     df_base   = df[["SA2_BASE",   "ring_name"]].rename(columns={"SA2_BASE":   "suburb"})
+#     df_suffix = df[["SA2_SUFFIX", "ring_name"]].rename(columns={"SA2_SUFFIX": "suburb"})
+#     combined  = pd.concat([df_base, df_suffix], ignore_index=True)
+#     combined["suburb"] = combined["suburb"].str.strip()
+#     combined = combined.dropna(subset=["suburb"]).drop_duplicates()
+
+#     # Hardcoded overrides for suburbs that straddle ring boundaries
+#     OVERRIDES: dict[str, str] = {
+#         "Bundoora":   "Outer",
+#         "Alphington": "Middle",
+#     }
+#     for suburb, ring in OVERRIDES.items():
+#         combined.loc[combined["suburb"] == suburb, "ring_name"] = ring
+
+#     combined = combined.drop_duplicates(subset=["suburb"])
+#     result: dict[str, str] = dict(zip(combined["suburb"], combined["ring_name"]))
+
+#     print(f"  Suburbs mapped: {len(result)}")
+#     with open(OUTPUT_BCARR, "w") as f:
+#         json.dump(result, f, indent=2, ensure_ascii=False)
+#     print(f"  Saved: {OUTPUT_BCARR}")
+#     return result
+
+
+# def fetch_bcarr_rings() -> dict[str, str]:
+#     """
+#     Download (or reuse cached) the BCARR City Rings xlsx and extract Melbourne rings.
+
+#     Download strategy:
+#       1. Scan suburb_data/ for any existing bcarr-city-rings-classification*.xlsx -
+#          picks up whichever year was manually placed, regardless of filename.
+#       2. If none found, try the known direct URL on infrastructure.gov.au.
+#       3. If blocked, print a manual-download prompt (same pattern as Land Vic data).
+
+#     Returns:
+#         - dict[str, str]: suburb name → ring, or {} on failure.
+#     """
+#     import glob as _glob
+
+#     print("\n" + "=" * 60)
+#     print("BCARR CITY RINGS DATA")
+#     print("=" * 60)
+
+#     # Check for any already-downloaded file matching the glob pattern
+#     existing = sorted(_glob.glob(os.path.join(SUBURB_DIR, BCARR_RAW_GLOB)))
+#     if existing:
+#         filepath = existing[-1]   # latest year sorts last alphabetically
+#         print(f"  Raw file already exists - skipping download: {filepath}")
+#         return extract_bcarr_rings(filepath)
+
+#     # Attempt automatic download; save with a generic name so future updates
+#     # replace it rather than accumulate alongside old versions.
+#     download_dest = os.path.join(SUBURB_DIR, "bcarr-city-rings-classification.xlsx")
+#     print(f"  Attempting download from infrastructure.gov.au...")
+#     result = download_file(BCARR_DOWNLOAD_URL, download_dest, extra_headers={
+#         "Referer": BCARR_PUBLICATION_PAGE,
+#     })
+#     if not result:
+#         print(f"\n  ACTION REQUIRED - automated download blocked.")
+#         print(f"  1. Open this URL in your browser:")
+#         print(f"     {BCARR_PUBLICATION_PAGE}")
+#         print(f"  2. Download the xlsx concordance file and save it to:")
+#         print(f"     {SUBURB_DIR}/")
+#         print(f"  3. Re-run the script")
+#         return {}
+
+#     return extract_bcarr_rings(download_dest)
+
+
 # =============================================================================
-# SUBURBS — EXTRACT
+# SUBURBS - EXTRACT
 # =============================================================================
 
 
 def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
     """
     Fetch Melbourne suburbs with postcodes grouped by LGA from the Wikipedia API.
-    Parses the wikitext of "List of Melbourne suburbs" — no HTML scraping required.
+    Parses the wikitext of "List of Melbourne suburbs" - no HTML scraping required.
     LGA names have "City of" / "Shire of" prefixes stripped to match MELBOURNE_LGAS.
     Returns:
         - dict[str, list[dict]]: LGA name → list of {suburb, postcode} dicts.
@@ -632,7 +808,7 @@ def fetch_melbourne_suburbs_by_lga() -> dict[str, list[dict]]:
     page = next(iter(pages.values()))
     wikitext = page["revisions"][0]["slots"]["main"]["*"]
     lines = wikitext.split("\n")
-    print(f"  Page fetched — {len(lines)} lines")
+    print(f"  Page fetched - {len(lines)} lines")
 
     # ===[[City of Melbourne]]=== or ===[[Shire of X|Shire of X]]===
     # lga_pattern    = re.compile(r"^===\[\[(?:[^\]|]+\|)?([^\]]+)\]\]===")
@@ -727,8 +903,23 @@ if __name__ == "__main__":
         suburbs_by_lga = []
 
 
+    # # -------------------------------------------------------------------------
+    # # BCARR CITY RINGS
+    # # -------------------------------------------------------------------------
+    # try:
+    #     bcarr_rings = fetch_bcarr_rings()
+    #     if bcarr_rings:
+    #         print(f"  BCARR rings loaded for {len(bcarr_rings)} suburbs")
+    #     else:
+    #         print("  BCARR rings not available - skipping (manual download may be needed)")
+    # except Exception as e:
+    #     print(f"BCARR extraction failed: {e}")
+    #     import traceback; traceback.print_exc()
+    #     bcarr_rings = {}
+
+
     # -------------------------------------------------------------------------
-    # HOUSING — House & Unit Prices
+    # HOUSING - House & Unit Prices
     # -------------------------------------------------------------------------
     for label, dataset_id, raw_path in [
         ("HOUSE PRICES", HOUSE_PRICES_DATASET, RAW_HOUSE),
@@ -775,7 +966,7 @@ if __name__ == "__main__":
 
     
     # -------------------------------------------------------------------------
-    # HOUSING — Rent
+    # HOUSING - Rent
     # -------------------------------------------------------------------------
     print("\n" + "=" * 60)
     print("RENTAL DATA")
@@ -786,7 +977,7 @@ if __name__ == "__main__":
         raw_path = RAW_RENT.replace(".xlsx", suffix)
 
         if os.path.exists(raw_path):
-            print(f"  Raw file already exists — skipping download: {raw_path}")
+            print(f"  Raw file already exists - skipping download: {raw_path}")
             filepath = raw_path
         else:
             print(f"  Attempting download...")
@@ -827,7 +1018,7 @@ if __name__ == "__main__":
         )
 
         if os.path.exists(CRIME_EXCEL):
-            print(f"  Raw file already exists — skipping download: {CRIME_EXCEL}")
+            print(f"  Raw file already exists - skipping download: {CRIME_EXCEL}")
         else:
             filepath = download_file(url, CRIME_EXCEL)
             if not filepath:
@@ -854,13 +1045,16 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------------
     print(f"\nOutput directories:")
     print(f"  {HOUSING_DIR}/")
-    print(f"    house_unit_prices_by_suburb.json — median sale prices by suburb")
-    print(f"    rent_by_suburb.json              — median weekly rent by suburb group")
-    print(f"    raw/                             — raw downloaded files")
+    print(f"    house_unit_prices_by_suburb.json - median sale prices by suburb")
+    print(f"    rent_by_suburb.json              - median weekly rent by suburb group")
+    print(f"    raw/                             - raw downloaded files")
     print(f"  {CRIME_DIR}/")
-    print(f"    crime_by_lga.json                — LGA incidents + rate per 100k")
-    print(f"    crime_by_suburb.json             — suburb incidents (raw count)")
+    print(f"    crime_by_lga.json                - LGA incidents + rate per 100k")
+    print(f"    crime_by_suburb.json             - suburb incidents (raw count)")
     print(f"  {SUBURB_DIR}/")
-    print(f"    melbourne_suburbs_by_lga.json    — suburb + postcode list per LGA")
+    print(f"    melbourne_suburbs_by_lga.json    - suburb + postcode list per LGA")
+    # print(f"    bcarr_ring_by_suburb.json        - Inner/Middle/Outer ring per suburb")
     print(f"\nNote: Data is published quarterly. Re-run each quarter for latest data.")
     print(f"      Delete raw files to force re-download.")
+    # print(f"      BCARR: if download fails, manually save the xlsx from:")
+    # print(f"      {BCARR_PUBLICATION_PAGE}")

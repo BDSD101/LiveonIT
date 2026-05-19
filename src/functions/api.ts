@@ -1,16 +1,27 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import axios from 'axios';
+import https from 'https';
+import { Pool } from 'pg';
+import fs from 'fs';
+import path from 'path';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+const googleApi = axios.create({
+  httpsAgent: new https.Agent({
+    keepAlive: true,
+    maxSockets: 50,
+    keepAliveMsecs: 1000,
+  }),
+  timeout: 10000,
+});
 
 import {
   RequestedItem,
   CandidateService,
   LocationAnalysis,
-  SeedAnalysis,
   CORE_ANALYSIS_ITEMS,
-  SUBURB_SEED_POINTS,
-  buildScoreBreakdown,
-  buildLeaderboard,
-  buildHeatmap,
+  SEARCH_RADIUS_METERS,
   WALKABLE_THRESHOLD_METERS,
   buildErrandCandidateMap,
   scoreErrandTripExact,
@@ -30,7 +41,8 @@ const CACHE_TTL_MS = {
   place: 1000 * 60 * 60 * 8,
   route: 1000 * 60 * 60 * 8,
   analysis: 1000 * 60 * 15,
-  seedAnalytics: 1000 * 60 * 60 * 8,
+  neighbourhood: 1000 * 60 * 60 * 8,
+  // seedAnalytics: 1000 * 60 * 60 * 8,
 };
 
 type CacheEntry<T> = {
@@ -125,16 +137,16 @@ function parseRequestedItems(typesParam: string | undefined): RequestedItem[] {
     if (seen.has(key)) continue;
     seen.add(key);
     const existingItem = CORE_ANALYSIS_ITEMS.find(i => i.type === type);
-    parsed.push({ 
+    parsed.push({
       key: existingItem?.key ?? key,
-      catId: existingItem?.catId ?? catId, 
-      type, 
+      catId: existingItem?.catId ?? catId,
+      type,
       filter: existingItem?.filter,
       useTextSearch: existingItem?.useTextSearch,
       textQuery: existingItem?.textQuery,
-      upgradeCount: existingItem?.upgradeCount,  
+      upgradeCount: existingItem?.upgradeCount,
     });
-    
+
   }
 
   return parsed.length ? parsed : fallback;
@@ -164,7 +176,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    const response = await axios.post(
+    const response = await googleApi.post(
       'https://places.googleapis.com/v1/places:searchNearby',
       {
         includedTypes: [item.type],
@@ -173,7 +185,7 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
         locationRestriction: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: SEARCH_RADIUS_METERS,
           },
         },
       },
@@ -195,7 +207,6 @@ async function findPlacesByType(originLat: number, originLon: number, item: Requ
     }));
 
     const filtered = item.filter ? mapped.filter(item.filter) : mapped;
-    console.log(`[FILTER] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
     const results = filtered.slice(0, item.upgradeCount ?? 5);
 
     const seen = new Set<string>();
@@ -244,7 +255,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
 
   try {
     trackApiCall('places');
-    const response = await axios.post(
+    const response = await googleApi.post(
       'https://places.googleapis.com/v1/places:searchText',
       {
         textQuery: item.textQuery,
@@ -252,7 +263,7 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
         locationBias: {
           circle: {
             center: { latitude: originLat, longitude: originLon },
-            radius: 2000.0,
+            radius: SEARCH_RADIUS_METERS,
           },
         },
       },
@@ -274,7 +285,6 @@ async function findPlacesByText(originLat: number, originLon: number, item: Requ
     }));
 
     const filtered = item.filter ? mapped.filter(item.filter) : mapped;
-    console.log(`[TEXT SEARCH] ${item.type} raw:${rawResults.length} filtered:${filtered.length}`, filtered.map((r: any) => r.name));
 
     const seen = new Set<string>();
     const deduped = filtered
@@ -327,19 +337,34 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     };
   });
 
-  const worthUpgrading = results.filter(c =>
-    (c.walkingDistanceMeters ?? 0) <= WALKABLE_THRESHOLD_METERS * 3
-  );
+  // Group by type, sort by crow-flies distance, and ONLY check the top 3 with Distance Matrix
+  const groupedByType = new Map<string, CandidateService[]>();
+  for (const r of results) {
+    if (!groupedByType.has(r.type)) groupedByType.set(r.type, []);
+    groupedByType.get(r.type)!.push(r);
+  }
+
+  const worthUpgrading: CandidateService[] = [];
+  for (const candidates of groupedByType.values()) {
+    const closest = candidates
+      .sort((a, b) => (a.walkingDistanceMeters ?? 99999) - (b.walkingDistanceMeters ?? 99999))
+      .slice(0, 3);
+    worthUpgrading.push(...closest);
+  }
+
   if (!worthUpgrading.length) return results;
 
   const BATCH_SIZE = 25;
+  const batches: CandidateService[][] = [];
   for (let i = 0; i < worthUpgrading.length; i += BATCH_SIZE) {
-    const batch = worthUpgrading.slice(i, i + BATCH_SIZE);
-    const destinations = batch.map(c => `${c.lat},${c.lon}`).join('|');
+    batches.push(worthUpgrading.slice(i, i + BATCH_SIZE));
+  }
 
+  await Promise.all(batches.map(async (batch) => {
+    const destinations = batch.map(c => `${c.lat},${c.lon}`).join('|');
     try {
       trackApiCall('distanceMatrix');
-      const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
+      const response = await googleApi.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
         params: {
           origins: `${originLat},${originLon}`,
           destinations,
@@ -372,8 +397,38 @@ async function enrichWithWalkingMetrics(originLat: number, originLon: number, ca
     } catch (err) {
       console.error('[MATRIX ERROR]', err);
     }
-  }
+  }));
   return results;
+}
+
+// Fetch and enrich all CORE_ANALYSIS_ITEMS for a location, cached by (lat,lon).
+// This is the expensive step (Places API + Distance Matrix). Subsequent calls with
+// different service selections reuse the cached enriched candidates instead of
+// re-hitting the APIs.
+// Replace this function in api.ts
+async function getNeighbourhoodEnriched(originLat: number, originLon: number): Promise<CandidateService[]> {
+  const cacheKey = `nb_${toCoordKey(originLat)}_${toCoordKey(originLon)}`;
+  const cached = getCached<CandidateService[]>(cacheKey);
+  if (cached) return cached;
+
+  const allCandidates: CandidateService[] = [];
+  const CHUNK_SIZE = 4; // Process 4 categories at a time to prevent network tail-latency
+
+  for (let i = 0; i < CORE_ANALYSIS_ITEMS.length; i += CHUNK_SIZE) {
+    const chunk = CORE_ANALYSIS_ITEMS.slice(i, i + CHUNK_SIZE);
+    const foundArrays = await Promise.all(
+      chunk.map(item =>
+        item.useTextSearch
+          ? findPlacesByText(originLat, originLon, item)
+          : findPlacesByType(originLat, originLon, item)
+      )
+    );
+    allCandidates.push(...foundArrays.flat());
+  }
+
+  const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
+  setCached(cacheKey, enriched, CACHE_TTL_MS.neighbourhood);
+  return enriched;
 }
 
 async function analyzeLocation(
@@ -383,18 +438,26 @@ async function analyzeLocation(
   formattedAddress?: string,
 ): Promise<LocationAnalysis> {
   const displayItems = uniqueItems(requestedItems);
-  const lookupItems = uniqueItems([...displayItems, ...CORE_ANALYSIS_ITEMS]);
 
-  const foundArrays = await Promise.all(
-    lookupItems.map(item =>
-      item.useTextSearch
-        ? findPlacesByText(originLat, originLon, item)
-        : findPlacesByType(originLat, originLon, item)
-    )
-  );
+  // Reuse the location-level neighbourhood cache; only fetch extra types the
+  // user selected that aren't already in CORE_ANALYSIS_ITEMS (e.g. bakery).
+  const coreTypes = new Set(CORE_ANALYSIS_ITEMS.map(i => i.type));
+  const extraItems = displayItems.filter(di => !coreTypes.has(di.type));
 
-  const allCandidates = foundArrays.flat();
-  const enriched = await enrichWithWalkingMetrics(originLat, originLon, allCandidates);
+  const nbEnriched = await getNeighbourhoodEnriched(originLat, originLon);
+
+  let enriched = nbEnriched;
+  if (extraItems.length > 0) {
+    const extraArrays = await Promise.all(
+      extraItems.map(item =>
+        item.useTextSearch
+          ? findPlacesByText(originLat, originLon, item)
+          : findPlacesByType(originLat, originLon, item)
+      )
+    );
+    const extraEnriched = await enrichWithWalkingMetrics(originLat, originLon, extraArrays.flat());
+    enriched = [...nbEnriched, ...extraEnriched];
+  }
 
   const byKey = new Map<string, CandidateService[]>();
   for (const service of enriched) {
@@ -408,28 +471,22 @@ async function analyzeLocation(
     );
   }
 
-  for (const [key, candidates] of byKey.entries()) {
-    console.log(`[RERANKED] ${key}:`, candidates.map(c => `${c.name} (${c.walkingDistanceMeters}m)`));
-  }
-
-  const { breakdown, index } = buildScoreBreakdown(byKey);
-
   // --- Walkability scores (zero extra API calls) ---
 
-  // Full neighbourhood score — all service types
+  // Full neighbourhood score - all service types
   const { candidatesByCategory: allCategories } = buildErrandCandidateMap(enriched);
   const errandTripAll = scoreErrandTripExact(originLat, originLon, allCategories);
-  const abundanceAll  = scoreAbundance(enriched);
-  const nearestAll    = scoreNearestServices(enriched);
+  const abundanceAll = scoreAbundance(enriched);
+  const nearestAll = scoreNearestServices(enriched);
 
-  // Selected services score — only what the user picked
+  // Selected services score - only what the user picked
   // NOW passes selectedTypes so scoring only considers selected service types
   const selectedTypes = new Set(displayItems.map(i => i.type));
   const selectedCandidates = enriched.filter(c => selectedTypes.has(c.type));
   const { candidatesByCategory: selectedCategories } = buildErrandCandidateMap(selectedCandidates);
   const errandTripSel = scoreErrandTripExact(originLat, originLon, selectedCategories);
-  const abundanceSel  = scoreAbundance(selectedCandidates, WALKABLE_THRESHOLD_METERS, selectedTypes);
-  const nearestSel    = scoreNearestServices(selectedCandidates, WALKABLE_THRESHOLD_METERS, selectedTypes);
+  const abundanceSel = scoreAbundance(selectedCandidates, WALKABLE_THRESHOLD_METERS, selectedTypes);
+  const nearestSel = scoreNearestServices(selectedCandidates, WALKABLE_THRESHOLD_METERS, selectedTypes);
 
   // --- Housing & crime scores from static JSON (zero API calls) ---
   const suburbName = formattedAddress ? extractSuburbFromAddress(formattedAddress) : null;
@@ -446,19 +503,19 @@ async function analyzeLocation(
 
   const WEIGHTS = {
     errandTrip: 0.05,
-    abundance:  0.05,
-    nearest:    0.85,
+    abundance: 0.05,
+    nearest: 0.85,
     housePrice: 0.025,
-    crime:      0.025,
+    crime: 0.025,
   };
 
   function compositeScore(errand: number, abund: number, near: number): number {
     const components = [
-      { score: errand,          weight: WEIGHTS.errandTrip },
-      { score: abund,           weight: WEIGHTS.abundance  },
-      { score: near,            weight: WEIGHTS.nearest    },
+      { score: errand, weight: WEIGHTS.errandTrip },
+      { score: abund, weight: WEIGHTS.abundance },
+      { score: near, weight: WEIGHTS.nearest },
       { score: housePriceScore, weight: WEIGHTS.housePrice },
-      { score: crimeScore,      weight: WEIGHTS.crime      },
+      { score: crimeScore, weight: WEIGHTS.crime },
     ].filter(c => c.score !== null) as { score: number; weight: number }[];
 
     const totalWeight = components.reduce((sum, c) => sum + c.weight, 0);
@@ -466,7 +523,7 @@ async function analyzeLocation(
   }
 
   const neighbourhoodScore = compositeScore(errandTripAll.score, abundanceAll.score, nearestAll.score);
-  const selectionScore     = compositeScore(errandTripSel.score, abundanceSel.score, nearestSel.score);
+  const selectionScore = compositeScore(errandTripSel.score, abundanceSel.score, nearestSel.score);
 
   console.log(`[WALKABILITY_NEIGHOOD] errand:${errandTripAll.score} abundance:${abundanceAll.score} nearest:${nearestAll.score} crime:${crimeScore} housePrice:${housePriceScore} composite:${neighbourhoodScore}`);
   console.log(`[WALKABILITY_SELECTED] errand:${errandTripSel.score} abundance:${abundanceSel.score} nearest:${nearestSel.score} crime:${crimeScore} housePrice:${housePriceScore} composite:${selectionScore}`);
@@ -480,20 +537,20 @@ async function analyzeLocation(
 
   return {
     services,
-    index,
-    breakdown,
+    // index,
+    // breakdown,
     walkability: {
       neighbourhood: {
         score: neighbourhoodScore,
         errandTrip: { score: errandTripAll.score, totalDistanceMeters: errandTripAll.totalDistanceMeters, meanEdgeMeters: errandTripAll.meanEdgeMeters, optimalPath: errandTripAll.optimalPath, missingCategories: errandTripAll.missingCategories },
-        abundance:   { score: abundanceAll.score, totalWeightedOptions: abundanceAll.totalWeightedOptions },
-        nearest:     { score: nearestAll.score, perType: nearestAll.perType },
+        abundance: { score: abundanceAll.score, totalWeightedOptions: abundanceAll.totalWeightedOptions },
+        nearest: { score: nearestAll.score, perType: nearestAll.perType },
       },
       selection: {
         score: selectionScore,
         errandTrip: { score: errandTripSel.score, totalDistanceMeters: errandTripSel.totalDistanceMeters, meanEdgeMeters: errandTripSel.meanEdgeMeters, optimalPath: errandTripSel.optimalPath, missingCategories: errandTripSel.missingCategories },
-        abundance:   { score: abundanceSel.score, totalWeightedOptions: abundanceSel.totalWeightedOptions },
-        nearest:     { score: nearestSel.score, perType: nearestSel.perType },
+        abundance: { score: abundanceSel.score, totalWeightedOptions: abundanceSel.totalWeightedOptions },
+        nearest: { score: nearestSel.score, perType: nearestSel.perType },
       },
       suburb: {
         name: suburbName,
@@ -508,24 +565,6 @@ async function analyzeLocation(
   };
 }
 
-async function getSeedAnalyses(): Promise<SeedAnalysis[]> {
-  const cacheKey = 'seed_analyses_v2';
-  const cached = getCached<SeedAnalysis[]>(cacheKey);
-  if (cached) return cached;
-
-  const analyses: SeedAnalysis[] = [];
-  for (const point of SUBURB_SEED_POINTS) {
-    try {
-      const analysis = await analyzeLocation(point.lat, point.lng, CORE_ANALYSIS_ITEMS);
-      analyses.push({ ...point, index: analysis.index });
-    } catch (err) {
-      console.error(`Failed seed analysis for ${point.name}`, err);
-    }
-  }
-
-  setCached(cacheKey, analyses, CACHE_TTL_MS.seedAnalytics);
-  return analyses;
-}
 
 // --- Main Lambda Handler ---
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -554,23 +593,62 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }
     }
 
-    if (routePath === '/api/leaderboard' && httpMethod === 'GET') {
+    if (routePath === '/api/ratings' && httpMethod === 'GET') {
       try {
-        const analyses = await getSeedAnalyses();
-        return jsonResponse(200, buildLeaderboard(analyses));
-      } catch {
-        return jsonResponse(500, { error: 'Failed to derive leaderboard' });
+        const cacheKey = 'api_ratings_all';
+        const cached = getCached<any[]>(cacheKey);
+        if (cached) {
+          return {
+            statusCode: 200,
+            headers: {
+              ...corsHeaders,
+              'Content-Type': 'application/json',
+              'Cache-Control': 'public, max-age=3600',
+            },
+            body: JSON.stringify(cached),
+          };
+        }
+
+        let rows: any[] = [];
+        try {
+          const res = await pool.query('SELECT suburb as "Suburb", region as "Region", rating as "Rating" FROM suburb_ratings');
+          rows = res.rows;
+        } catch (dbErr: any) {
+          console.warn('Postgres query failed, falling back to local CSV:', dbErr.message);
+          const csvPath = path.join(__dirname, '../../frontend/suburb_regions_ratings_google_api_centre_final.csv');
+          if (fs.existsSync(csvPath)) {
+            const csvData = fs.readFileSync(csvPath, 'utf-8');
+            const lines = csvData.split('\n').filter(l => l.trim() !== '');
+            rows = lines.slice(1).map(line => {
+              const [suburb, region, ratingStr] = line.split(',');
+              return {
+                Suburb: suburb,
+                Region: region,
+                Rating: parseFloat(ratingStr) || 0
+              };
+            });
+          } else {
+            throw new Error('Database query failed and fallback CSV not found');
+          }
+        }
+
+        setCached(cacheKey, rows, 1000 * 60 * 60); // 1 hour cache
+
+        return {
+          statusCode: 200,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+            'Cache-Control': 'public, max-age=3600',
+          },
+          body: JSON.stringify(rows),
+        };
+      } catch (err) {
+        console.error('Failed to fetch ratings:', err);
+        return jsonResponse(500, { error: 'Failed to fetch ratings' });
       }
     }
 
-    if (routePath === '/api/heatmap' && httpMethod === 'GET') {
-      try {
-        const analyses = await getSeedAnalyses();
-        return jsonResponse(200, buildHeatmap(analyses));
-      } catch {
-        return jsonResponse(500, { error: 'Failed to derive heatmap data' });
-      }
-    }
 
     if (routePath === '/api/search' && httpMethod === 'GET') {
       const q = (event.queryStringParameters?.q || '').trim();
@@ -581,7 +659,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       if (cached) return jsonResponse(200, cached);
 
       trackApiCall('geocoding');
-      const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      const response = await googleApi.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: `${q}, Victoria, Australia`,
           key: getGoogleMapsApiKey(),
@@ -641,7 +719,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       const cached = getCached<any>(routeCacheKey);
       if (cached) return jsonResponse(200, cached);
       trackApiCall('directions');
-      const response = await axios.get('https://maps.googleapis.com/maps/api/directions/json', {
+      const response = await googleApi.get('https://maps.googleapis.com/maps/api/directions/json', {
         params: {
           origin: `${sLat},${sLon}`,
           destination: `${eLat},${eLon}`,
@@ -688,7 +766,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
       let response;
       if (query) {
-        response = await axios.post(
+        response = await googleApi.post(
           'https://places.googleapis.com/v1/places:searchText',
           {
             textQuery: query,
@@ -703,7 +781,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           { headers }
         );
       } else {
-        response = await axios.post(
+        response = await googleApi.post(
           'https://places.googleapis.com/v1/places:searchNearby',
           {
             includedTypes: [type],
@@ -735,4 +813,4 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     console.error(err);
     return jsonResponse(500, { error: 'Internal Error' });
   }
-};
+};;

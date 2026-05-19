@@ -4,16 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>20-Min Neighbourhood — Map</title>
+  <title>20-Min Neighbourhood - Map</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=2" />
   <style>
     .tip-wrap .tip-box { visibility: hidden; opacity: 0; transition: all 0.15s ease; }
     .tip-wrap:hover .tip-box { visibility: visible; opacity: 1; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #history-spinner { animation: spin 0.8s linear infinite; }
+    #progress-track { transition: opacity 0.4s ease; }
   </style>
 </head>
 
@@ -21,7 +24,7 @@
 
   <!-- Header -->
   <header class="bg-[#004071] text-white px-8 py-4 shadow-lg flex-shrink-0 flex items-center justify-center">
-    <nav class="flex items-center gap-6">
+    <nav class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
       <a href="/" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Home</a>
       <a href="/dashboard.html" class="text-sm font-bold font-inter uppercase tracking-widest border-b-2 border-white pb-0.5 transition-colors">Map</a>
       <a href="/suburb.html" class="text-sm font-bold font-inter uppercase tracking-widest opacity-80 hover:opacity-100 transition-opacity">Suburb Overview</a>
@@ -30,24 +33,24 @@
   </header>
 
   <!-- Dashboard -->
-  <div id="view-home" class="flex-1 flex justify-center gap-6 px-6 py-8 max-w-[1560px] mx-auto w-full">
+  <div id="view-home" class="flex-1 flex justify-center px-4 lg:px-6 py-5 lg:py-8 max-w-[1560px] mx-auto w-full">
+    <div id="dashboard-grid">
 
-    <!-- Left Sidebar -->
-    <aside class="w-[272px] flex-shrink-0 space-y-5 overflow-y-auto">
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
-        <div class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+      <!-- Service Filters (col 1, rows 1-3) - contain:size locks card size to grid area so expanded categories never affect other rows -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow flex flex-col desktop-contain order-6 lg:col-start-1 lg:row-start-1 lg:row-span-3">
+        <div class="flex items-center gap-2 mb-3 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter flex-shrink-0">
           <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
           Service Filters
         </div>
-        <div id="filter-container" class="space-y-1"></div>
+        <div class="flex gap-2 mb-3 flex-shrink-0">
+          <button id="select-all-btn" class="flex-1 text-[11px] font-semibold text-[#004071] bg-blue-50 hover:bg-blue-100 rounded-md py-1.5 transition-colors">Select All</button>
+          <button id="clear-all-btn" class="flex-1 text-[11px] font-semibold text-slate-500 bg-slate-50 hover:bg-slate-100 rounded-md py-1.5 transition-colors">Clear All</button>
+        </div>
+        <div id="filter-container" class="space-y-1 overflow-y-auto pr-1 lg:flex-1 lg:min-h-0"></div>
       </div>
-    </aside>
 
-    <!-- Centre Column -->
-    <div class="flex-1 min-w-0 max-w-[820px] flex flex-col gap-5">
-
-      <!-- Search -->
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow relative">
+      <!-- Search (col 2, row 1) -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow relative order-1 lg:col-start-2 lg:row-start-1">
         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-widest font-inter mb-3">Address Search</label>
         <div class="relative">
           <input id="query" type="text" placeholder="Start typing a Melbourne address..."
@@ -58,62 +61,108 @@
           class="hidden absolute left-5 right-5 z-[100] mt-1 border border-slate-200 rounded-lg shadow-2xl divide-y divide-slate-100 overflow-hidden bg-white max-h-60 overflow-y-auto"></ul>
       </div>
 
-      <!-- Map -->
-      <div class="relative bg-white rounded-xl border border-slate-200 custom-shadow overflow-hidden h-[560px] flex-shrink-0">
-        <div id="progress-bar" class="absolute top-0 left-0 h-1 bg-[#004071] z-50 transition-all duration-300 opacity-0 w-0"></div>
-        <div id="alert-container" class="absolute top-4 right-4 z-[100] flex flex-col gap-2 w-64 pointer-events-none"></div>
-        <div id="map" class="w-full h-full"></div>
-      </div>
-
-      <!-- Services Found -->
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
-        <div class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
-          <i data-lucide="list" class="w-3.5 h-3.5"></i>
-          Services Found
-        </div>
-        <div id="services-found-list">
-          <p class="text-center py-6 text-slate-400 text-xs font-inter">Search an address to see nearby services.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right Sidebar -->
-    <aside class="w-[272px] flex-shrink-0 space-y-5 overflow-y-auto">
-
-      <!-- My Score -->
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
-        <div class="flex items-center gap-2 mb-5 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+      <!-- My Score (col 3, rows 1–2) -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow overflow-hidden desktop-contain order-3 lg:col-start-3 lg:row-start-1 lg:row-span-2">
+        <div class="flex items-center gap-2 mb-3 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
           <i data-lucide="star" class="w-3.5 h-3.5"></i>
           My Score
         </div>
         <div class="text-center">
-          <div id="score-value" class="text-6xl font-extrabold text-[#004071] mb-1">--</div>
-          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] mb-4 uppercase font-inter">out of 10.0</div>
-          <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-4">
+          <div id="score-value" class="text-5xl font-extrabold text-[#004071] mb-1">--</div>
+          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] mb-3 uppercase font-inter">out of 10.0</div>
+          <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden mb-3">
             <div id="score-bar" class="h-full bg-emerald-500 rounded-full w-0 transition-all duration-1000"></div>
           </div>
           <p id="score-desc" class="text-xs text-[#536070] font-medium leading-relaxed italic">Search an address to see your personalised score.</p>
         </div>
-        <div class="mt-5 pt-4 border-t border-slate-100">
-          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase font-inter mb-3 text-center">Score Breakdown</div>
-          <div id="score-breakdown" class="space-y-2">
+        <div class="mt-3 pt-3 border-t border-slate-100">
+          <div class="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase font-inter mb-2 text-center">Score Breakdown</div>
+          <div id="score-breakdown" class="space-y-1.5">
             <p class="text-xs text-slate-400 text-center">Search an address to see breakdown.</p>
           </div>
-          <p id="score-threshold-note" class="mt-3 text-[10px] text-slate-400 text-center font-inter">Based on your selected services</p>
+          <p id="score-threshold-note" class="mt-2 text-[10px] text-slate-400 text-center font-inter">Based on your selected services</p>
         </div>
       </div>
 
-      <!-- Recent Searches -->
-      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow">
+      <!-- Map (col 2, row 2) -->
+      <div class="relative bg-white rounded-xl border border-slate-200 custom-shadow overflow-hidden order-2 h-[320px] lg:h-auto lg:col-start-2 lg:row-start-2">
+        <div id="progress-track" style="position:absolute;top:0;left:0;right:0;height:32px;z-index:50;opacity:0;pointer-events:none;">
+          <div id="progress-bar" style="position:absolute;top:0;left:0;width:0%;height:3px;background:#004071;border-radius:0 2px 2px 0;"></div>
+          <div id="progress-walker" class="select-none" style="position:absolute;top:3px;left:0%;width:18px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 28" width="18" height="25" style="display:block;">
+              <g>
+                <animateTransform attributeName="transform" type="translate" values="0,0;0,-1.2;0,0" dur="0.3s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1"/>
+                <circle cx="10" cy="3.5" r="3" fill="#004071"/>
+                <line x1="10" y1="6.5" x2="10" y2="17.5" stroke="#004071" stroke-width="2.2" stroke-linecap="round"/>
+                <line x1="10" y1="10" x2="5" y2="15.5" stroke="#004071" stroke-width="1.8" stroke-linecap="round">
+                  <animateTransform attributeName="transform" type="rotate" values="-28,10,10;28,10,10;-28,10,10" dur="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1"/>
+                </line>
+                <line x1="10" y1="10" x2="15" y2="15.5" stroke="#004071" stroke-width="1.8" stroke-linecap="round">
+                  <animateTransform attributeName="transform" type="rotate" values="28,10,10;-28,10,10;28,10,10" dur="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1"/>
+                </line>
+                <line x1="10" y1="17.5" x2="5" y2="26" stroke="#004071" stroke-width="2" stroke-linecap="round">
+                  <animateTransform attributeName="transform" type="rotate" values="32,10,17.5;-32,10,17.5;32,10,17.5" dur="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1"/>
+                </line>
+                <line x1="10" y1="17.5" x2="15" y2="26" stroke="#004071" stroke-width="2" stroke-linecap="round">
+                  <animateTransform attributeName="transform" type="rotate" values="-32,10,17.5;32,10,17.5;-32,10,17.5" dur="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" keyTimes="0;0.5;1"/>
+                </line>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div id="alert-container" class="absolute top-4 right-4 z-[100] flex flex-col gap-2 w-64 pointer-events-none"></div>
+        <button id="fullscreen-btn" onclick="toggleMapFullscreen()" class="absolute top-3 right-3 z-50 bg-white rounded-lg shadow-md p-1.5 hover:bg-slate-50 transition-colors tip-wrap" aria-label="Toggle fullscreen">
+          <i data-lucide="maximize" class="w-4 h-4 text-slate-500"></i>
+          <div class="tip-box absolute right-0 top-full mt-1 w-28 bg-slate-800 text-white text-[11px] rounded-lg px-3 py-2 shadow-xl z-50 font-inter font-normal normal-case tracking-normal leading-snug">
+            Toggle fullscreen
+          </div>
+        </button>
+        <div id="map" class="w-full h-full"></div>
+      </div>
+
+      <!-- Services Found (col 2, row 3) -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow order-4 lg:col-start-2 lg:row-start-3">
+        <div class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
+          <i data-lucide="list" class="w-3.5 h-3.5"></i>
+          Services Found
+        </div>
+        <div id="services-found-list" class="max-h-48 overflow-y-auto pr-1">
+          <p class="text-center py-6 text-slate-400 text-xs font-inter">Search an address to see nearby services.</p>
+        </div>
+      </div>
+      <!-- Recent Searches (col 3, row 3) -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 custom-shadow relative order-5 lg:col-start-3 lg:row-start-3">
         <div class="flex items-center gap-2 mb-4 text-slate-500 uppercase tracking-widest text-[11px] font-bold font-inter">
           <i data-lucide="history" class="w-3.5 h-3.5"></i>
-          Recent Searches
+          <span class="flex-1">Recent Searches</span>
+          <!-- Clear history button -->
+          <div class="tip-wrap cursor-pointer text-slate-400 hover:text-red-500 transition-colors" onclick="clearHistory()">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <div class="tip-box absolute right-0 mt-1 w-36 bg-slate-800 text-white text-[11px] rounded-lg px-3 py-2 shadow-xl z-50 font-inter font-normal normal-case tracking-normal leading-snug">
+              Clear all recent searches.
+            </div>
+          </div>
+          <!-- Manual rescore button -->
+          <div id="history-rescore-btn" class="tip-wrap cursor-pointer text-slate-400 hover:text-[#004071] transition-colors" onclick="manualRescoreHistory()">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            <div class="tip-box absolute right-0 mt-1 w-48 bg-slate-800 text-white text-[11px] rounded-lg px-3 py-2 shadow-xl z-50 font-inter font-normal normal-case tracking-normal leading-snug">
+              Re-score all saved addresses using your current service selection.
+            </div>
+          </div>
+          <!-- Spinner (shown while rescoring) -->
+          <div id="history-spinner-wrap" class="hidden">
+            <svg id="history-spinner" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-[#004071]" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"/>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+            </svg>
+          </div>
         </div>
         <div id="history-list" class="space-y-2">
           <p class="text-center py-4 text-slate-400 text-xs font-inter">No recent searches</p>
         </div>
       </div>
-    </aside>
+
+    </div>
   </div>
 
   <!-- Footer -->
@@ -126,7 +175,7 @@
     </div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script src="script.js?v=2" defer></script>
 </body>
 
 </html>
